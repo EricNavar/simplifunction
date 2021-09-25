@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import { AddForm } from './Forms/AddForm';
 import { AverageForm } from './Forms/AverageForm';
 import { DivideForm } from './Forms/DivideForm';
 import { MinForm } from './Forms/MinForm';
@@ -11,7 +10,6 @@ import { SummationForm } from './Forms/SummationForm';
 
 // treat this as an enum
 const functions = {
-  ADD: "add",
   SUBTRACT: "subtract",
   MULTIPLY: "multiply",
   DIVIDE: "divide",
@@ -21,55 +19,72 @@ const functions = {
   AVERAGE: "average"
 }
 
-const forms = {
-  "add": AddForm,
-  "subtract": SubtractForm,
-  "multiply": MultiplyForm,
-  "divide": DivideForm,
-  "min": MinForm,
-  "max": MaxForm,
-  "summation": SummationForm,
-  "average": AverageForm
-}
-
 function App() {
-  const [activeFunction, setActiveFunction] = React.useState(functions.ADD);
-  const [formComponent, setFormComponent] = React.useState(forms[functions.ADD]);
+  const [activeFunction, setActiveFunction] = React.useState(functions.SUMMATION);
+  // this is the end result, the formula that the user can type into Excel
+  const [formula, setFormula] = React.useState('');
 
   const handleFunctionClick = (f) => {
     setActiveFunction(f);
-    setFormComponent(forms[f]);
-  }
+  };
+
+  React.useEffect = (() => {
+    console.log("App.js use effect");
+  }, [activeFunction]);
+
+  const getForm = (f) => {
+    //there's weird behavior when I make this a hashtable, so I'm
+    //making it a big if-else chain instead
+    if (f === "subtract")
+      return <SubtractForm setFormula={setFormula} />;
+    else if (f === "multiply")
+      return <MultiplyForm setFormula={setFormula} />;
+    else if (f === "divide")
+      return <DivideForm setFormula={setFormula} />;
+    else if (f === "min")
+      return <MinForm setFormula={setFormula} />;
+    else if (f === "max")
+      return <MaxForm setFormula={setFormula} />;
+    else if (f === "summation")
+      return <SummationForm setFormula={setFormula} />
+    else if (f === "average")
+      return <AverageForm setFormula={setFormula} />
+    return <></>
+  };
 
   return (
-    <div>
+    <div className="App">
       <h1>Simplifunction</h1>
-      <button className="button" onClick={e => handleFunctionClick(functions.ADD)}>
-        Add
-      </button>
-      <button className="button" onClick={e => handleFunctionClick(functions.SUBTRACT)}>
-        Subtract
-      </button>
-      <button className="button" onClick={e => handleFunctionClick(functions.MULTIPLY)}>
-        Multiply
-      </button>
-      <button className="button" onClick={e => handleFunctionClick(functions.DIVIDE)}>
-        Divide
-      </button>
-      <button className="button" onClick={e => handleFunctionClick(functions.MIN)}>
-        Min
-      </button>
-      <button className="button" onClick={e => handleFunctionClick(functions.MAX)}>
-        Max
-      </button>
-      <button className="button" onClick={e => handleFunctionClick(functions.SUMMATION)}>
-        Summation
-      </button>
-      <button className="button" onClick={e => handleFunctionClick(functions.AVERAGE)}>
-        Average
-      </button>
+      <div className="function-button-container">
+        <button className="function-button button" onClick={e => handleFunctionClick(functions.SUMMATION)}>
+          + Summation
+        </button>
+        <button className="function-button button" onClick={e => handleFunctionClick(functions.SUBTRACT)}>
+          - Subtract
+        </button>
+        <button className="function-button button" onClick={e => handleFunctionClick(functions.MULTIPLY)}>
+          x Multiply
+        </button>
+        <button className="function-button button" onClick={e => handleFunctionClick(functions.DIVIDE)}>
+          ÷ Divide
+        </button>
+      </div>
+      <div className="function-button-container">
+        <button className="small-function-button button" onClick={e => handleFunctionClick(functions.MIN)}>
+          Min
+        </button>
+        <button className="small-function-button button" onClick={e => handleFunctionClick(functions.MAX)}>
+          Max
+        </button>
+        <button className="function-button button" onClick={e => handleFunctionClick(functions.AVERAGE)}>
+          Average
+        </button>
+      </div>
       <h2>Calculate {activeFunction}:</h2>
-      {formComponent}
+      {getForm(activeFunction)}
+
+      <p><b>Here is your formula:</b></p>
+      <p className="formula">{formula}</p>
     </div>
   );
 }
