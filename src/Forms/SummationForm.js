@@ -7,6 +7,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import '../Calculator.css';
 
 function SummationForm(props) {
   const [parameterCount, setParameterCount] = React.useState(2);
@@ -24,7 +25,6 @@ function SummationForm(props) {
 
   const onChangeParameter = (e, index) => {
     parameters[index] = e.target.value;
-    props.setFormula(createFormulaFromParameters());
   }
 
   const createFormulaFromRange = () => {
@@ -42,8 +42,6 @@ function SummationForm(props) {
     return formula;
   };
 
-  console.log(inputMode);
-
   const handleModeChange = (event, newMode) => {
     if (newMode !== null)
       setInputMode(newMode);
@@ -51,13 +49,22 @@ function SummationForm(props) {
 
   const onChangeStartCell = e => {
     setStartCell(e.target.value);
-    props.setFormula(createFormulaFromRange());
   };
 
   const onChangeEndCell = e => {
-    console.log("onChangeEndCell");
     setEndCell(e.target.value);
-    props.setFormula(createFormulaFromRange());
+  };
+
+  const handleDoneClick = () => {
+    const formula = inputMode === "range" ? createFormulaFromRange() : createFormulaFromParameters();
+    props.addToUserInput(formula);
+    props.onClose();
+  };
+
+  const onDeleteClick = (index) => {
+    parameters.splice(index,1);
+    setParameters(parameters);
+    setParameterCount(parameterCount - 1);
   };
 
   return (
@@ -71,11 +78,12 @@ function SummationForm(props) {
           exclusive
           onChange={handleModeChange}
           aria-label="text alignment"
+          className="button-group"
         >
-          <ToggleButton value="range">
+          <ToggleButton value="range" >
             Cell Range
           </ToggleButton>
-          <ToggleButton value="individual">
+          <ToggleButton value="individual" >
             Individual Parameters
           </ToggleButton>
         </ToggleButtonGroup>
@@ -89,10 +97,14 @@ function SummationForm(props) {
                   size="small"
                   type="text"
                   onChange={e => onChangeParameter(e, index)}
+                  className="text-field"
                 />
+                <Button onClick={e=>onDeleteClick(index)} size='small' color='info'>
+                  REMOVE
+                </Button>
               </div>
             )}
-            <Button onClick={addParameter} >
+            <Button onClick={addParameter}>
               + Add parameter
             </Button>
           </>
@@ -106,6 +118,7 @@ function SummationForm(props) {
                 type="text"
                 label="Start cell"
                 onChange={onChangeStartCell}
+                className="text-field"
               />
             </div>  
             <div style={{ display: 'flex' }}>
@@ -115,13 +128,14 @@ function SummationForm(props) {
                 type="text"
                 label="End cell"
                 onChange={onChangeEndCell}
+                className="text-field"
               />
             </div>
           </>
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.onClose} autoFocus>
+        <Button onClick={handleDoneClick} autoFocus>
           Done
         </Button>
         <Button onClick={props.onClose}>Cancel</Button>

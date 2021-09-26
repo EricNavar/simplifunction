@@ -58,3 +58,11 @@
   padding-top: 24px;
   margin-bottom: 12px;
 }
+
+.button-group {
+  margin-bottom: 24px;
+}
+
+.text-field {
+  margin-bottom: 6px !important;
+}

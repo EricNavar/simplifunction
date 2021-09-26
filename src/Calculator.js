@@ -17,9 +17,13 @@ function Calculator() {
   const [minimumFormOpen, setMinimumFormOpen] = React.useState(false);
   const [maximumFormOpen, setMaximumFormOpen] = React.useState(false);
 
-  const addToUserInput = (str) => {
-    console.log("addToUserInput");
-    setUserInput(userInput + str);
+  const addToUserInput = async (strToAdd) => {
+    const selectionStart = inputRef.selectionStart;
+    const selectionEnd = inputRef.selectionEnd;
+    const newUserInput = userInput.substring(0,selectionStart) + strToAdd + userInput.substring(selectionEnd);
+    inputRef.focus();
+
+    setUserInput(newUserInput);
   };
 
   const clearInput = () => {
@@ -32,14 +36,16 @@ function Calculator() {
 
   const onType = e => {
     setUserInput(e.target.value);
-    console.log(userInput);
+    console.log(inputRef);
   };
+
+  let inputRef = React.createRef();
 
   return (
     <div className="App" >
       <h1>Simplifunction</h1>
       <div className="inputContainer">
-        <TextField fullWidth type="text" onChange={onType} />
+        <TextField autoFocus fullWidth type="text" onChange={onType} inputRef={ref => { inputRef = ref; }} value={userInput} />
 
         <div>
           <Button className="function-button" variant='contained' onClick={e => setSummationFormOpen(true)}>
@@ -78,7 +84,7 @@ function Calculator() {
             to
           </Button>
           <Button className="small-button" variant="outlined" onClick={e => addToUserInput(" x ")}>
-            x
+            ×
           </Button>
           <Button className="small-button" variant="outlined" onClick={e => addToUserInput(" ÷ ")}>
             ÷
@@ -91,10 +97,10 @@ function Calculator() {
 
       <Typography>Here is your formula:</Typography>
       <Typography >{formula}</Typography>
-      <SummationForm open={summationFormOpen} onClose={e => setSummationFormOpen(false)} />
-      <AverageForm open={averageFormOpen} onClose={e => setAverageFormOpen(false)} />
-      <MinForm open={minimumFormOpen} onClose={e => setMinimumFormOpen(false)} />
-      <MaxForm open={maximumFormOpen} onClose={e => setMaximumFormOpen(false)} />
+      <SummationForm open={summationFormOpen} onClose={e => setSummationFormOpen(false)} addToUserInput={addToUserInput} />
+      <AverageForm open={averageFormOpen} onClose={e => setAverageFormOpen(false)} addToUserInput={addToUserInput} />
+      <MinForm open={minimumFormOpen} onClose={e => setMinimumFormOpen(false)} addToUserInput={addToUserInput} />
+      <MaxForm open={maximumFormOpen} onClose={e => setMaximumFormOpen(false)}  addToUserInput={addToUserInput} />
     </div>
   );
 };
