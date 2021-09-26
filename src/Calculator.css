@@ -36,6 +36,10 @@
   margin: 6px !important;
 }
 
+.big-font-size-button {
+  font-size: 1.25rem !important;
+}
+
 .from-to-button {
   color: cornflowerblue !important;
 }
@@ -45,7 +49,8 @@
 }
 
 .equals-button {
-  color: forestgreen !important;
+  background-color: mediumseagreen !important;
+  color: white !important;
 }
 
 .inputContainer {
@@ -65,4 +70,11 @@
 
 .text-field {
   margin-bottom: 6px !important;
+}
+
+.formula {
+  font-size: 1.5rem !important;
+  color: green;
+  font-family: "Source Code Pro", courier;
+  margin-top: 1rem;
 }

@@ -28,7 +28,7 @@ function SummationForm(props) {
   }
 
   const createFormulaFromRange = () => {
-    return `SUM(${startCell}:${endCell})`;
+    return `summation(from ${startCell} to ${endCell})`;
   }
 
   const createFormulaFromParameters = () => {

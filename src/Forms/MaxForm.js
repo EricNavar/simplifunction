@@ -28,7 +28,7 @@ function MaxForm(props) {
   }
 
   const createFormulaFromRange = () => {
-    return `MAX(${startCell}:${endCell})`;
+    return `maximum(from ${startCell} to ${endCell})`;
   }
 
   const createFormulaFromParameters = () => {

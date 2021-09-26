@@ -7,6 +7,7 @@ import { SummationForm } from './Forms/SummationForm.js';
 import { AverageForm } from './Forms/AverageForm.js';
 import { MinForm } from './Forms/MinForm.js';
 import { MaxForm } from './Forms/MaxForm.js';
+import { createFormula } from './createFormula';
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');
@@ -30,13 +31,12 @@ function Calculator() {
     setUserInput("");
   };
 
-  const createFormula = () => {
-    setFormula("");
-  }
+  const onEqualsClick = () => {
+    setFormula(createFormula(userInput));
+  };
 
   const onType = e => {
     setUserInput(e.target.value);
-    console.log(inputRef);
   };
 
   let inputRef = React.createRef();
@@ -62,16 +62,16 @@ function Calculator() {
           </Button>
         </div>
         <div className="small-button-container">
-          <Button className="small-button" variant="outlined" onClick={e => addToUserInput("( ")}>
+          <Button className="small-button big-font-size-button" variant="outlined" onClick={e => addToUserInput("( ")}>
             (
           </Button>
-          <Button className="small-button" variant="outlined" onClick={e => addToUserInput(" )")}>
+          <Button className="small-button big-font-size-button" variant="outlined" onClick={e => addToUserInput(" )")}>
             )
           </Button>
-          <Button className="small-button" variant="outlined" onClick={e => addToUserInput(" + ")}>
+          <Button className="small-button big-font-size-button" variant="outlined" onClick={e => addToUserInput(" + ")}>
             +
           </Button>
-          <Button className="small-button" variant="outlined" onClick={e => addToUserInput(" - ")}>
+          <Button className="small-button big-font-size-button" variant="outlined" onClick={e => addToUserInput(" - ")}>
             -
           </Button>
           <Button className="small-button clear-button" variant="outlined" onClick={clearInput}>
@@ -83,20 +83,20 @@ function Calculator() {
           <Button className="small-button from-to-button" variant="outlined" onClick={e => addToUserInput(" to ")}>
             to
           </Button>
-          <Button className="small-button" variant="outlined" onClick={e => addToUserInput(" x ")}>
+          <Button className="small-button big-font-size-button" variant="outlined" onClick={e => addToUserInput(" x ")}>
             ×
           </Button>
-          <Button className="small-button" variant="outlined" onClick={e => addToUserInput(" ÷ ")}>
+          <Button className="small-button big-font-size-button" variant="outlined" onClick={e => addToUserInput(" ÷ ")}>
             ÷
           </Button>
-          <Button className="small-button equals-button" variant="outlined" onClick={createFormula}>
+          <Button className="small-button equals-button big-font-size-button" variant="outlined" onClick={onEqualsClick}>
             =
           </Button>
         </div>
       </div>
 
       <Typography>Here is your formula:</Typography>
-      <Typography >{formula}</Typography>
+      <p className="formula">{formula}</p>
       <SummationForm open={summationFormOpen} onClose={e => setSummationFormOpen(false)} addToUserInput={addToUserInput} />
       <AverageForm open={averageFormOpen} onClose={e => setAverageFormOpen(false)} addToUserInput={addToUserInput} />
       <MinForm open={minimumFormOpen} onClose={e => setMinimumFormOpen(false)} addToUserInput={addToUserInput} />

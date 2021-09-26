@@ -28,7 +28,7 @@ function MinForm(props) {
   }
 
   const createFormulaFromRange = () => {
-    return `MIN(${startCell}:${endCell})`;
+    return `minimum(from ${startCell} to ${endCell})`;
   }
 
   const createFormulaFromParameters = () => {
