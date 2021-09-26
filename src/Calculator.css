@@ -1,0 +1,49 @@
+.App {
+  margin-top: 32px;
+  margin-bottom: 48px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.function-button-container {
+  width: 600px;
+  max-width: 600px;
+  display: flex;
+  flex-flow: wrap;
+  margin-bottom: 8px;
+}
+
+.function-button {
+  margin: 6px !important;
+}
+
+.formula {
+  color: #055;
+  margin-left: 12px;
+}
+
+.small-button-container {
+  width: 380px;
+}
+
+.small-button {
+  width: 64px;
+  height: 64px;
+  text-align: center;
+  align-items: center;
+  border-color: black !important;
+  color: black !important;
+  margin: 6px !important;
+}
+
+.from-to-button {
+  color: cornflowerblue !important;
+}
+
+.clear-button {
+  color: crimson !important;
+}
+
+.equals-button {
+  color: forestgreen !important;
+}

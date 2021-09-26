@@ -1,4 +1,12 @@
 import React from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import './Forms.css';
 
 function SummationForm(props) {
@@ -7,9 +15,6 @@ function SummationForm(props) {
   const [inputMode, setInputMode] = React.useState("range");
   const [startCell, setStartCell] = React.useState("A1");
   const [endCell, setEndCell] = React.useState("A2");
-
-  React.useEffect = (() => {
-  }, [parameterCount, inputMode, startCell, endCell]);
 
   const addParameter = () => {
     let newParameters = parameters;
@@ -31,20 +36,19 @@ function SummationForm(props) {
     let formula = "=SUM(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
-      formula = formula + ",";
+        formula = formula + ",";
       formula = formula + parameter
     });
     formula = formula + ")";
     return formula;
   };
 
-  const switchInputMode = (e) => {
-    setInputMode(e.target.value);
-  };
+  console.log(inputMode);
 
-  const onRadioLabelClick = (inputMode) => {
-    setInputMode(inputMode);
-  }
+  const handleModeChange = (event, newMode) => {
+    if (newMode !== null)
+      setInputMode(newMode);
+  };
 
   const onChangeStartCell = e => {
     setStartCell(e.target.value);
@@ -58,40 +62,72 @@ function SummationForm(props) {
   };
 
   return (
-    <div>
-      <div >
-        <input type="radio" name="drone" onChange={switchInputMode} value="individual" checked={inputMode === "individual"} />
-        <label onClick={e => onRadioLabelClick("individual")}>Individual Cells</label>
-      </div>
+    <Dialog open={props.open} onClose={props.onClose}>
+      <DialogTitle id="alert-dialog-title">
+        Summation
+      </DialogTitle>
+      <DialogContent>
+        <ToggleButtonGroup
+          value={inputMode}
+          exclusive
+          onChange={handleModeChange}
+          aria-label="text alignment"
+        >
+          <ToggleButton value="individual" aria-label="left aligned">
+            Individual Parameters
+          </ToggleButton>
+          <ToggleButton value="range" aria-label="centered">
+            Cell Range
+          </ToggleButton>
+        </ToggleButtonGroup>
 
-      <div value="range" className="bottom-radio">
-        <input type="radio" name="drone" onChange={switchInputMode} value="range" checked={inputMode === "range"} />
-        <label onClick={e => onRadioLabelClick("range")}>Range</label>
-      </div>
-
-      {inputMode === "individual" && 
-        <>
-          {parameters.map((parameter, index) =>
-            <div key={`summation-form-${index}`}>
-              <label className="label">{`Parameter ${index + 1}`}</label>
-              <input type="text" id="fname" name="fname" onChange={e => onChangeParameter(e, index)} />
+        {inputMode === "individual" &&
+          <>
+            {parameters.map((parameter, index) =>
+              <div key={`summation-form-${index}`}>
+                <TextField
+                  label={`Parameter ${index + 1}`}
+                  size="small"
+                  type="text"
+                  onChange={e => onChangeParameter(e, index)}
+                />
+              </div>
+            )}
+            <Button onClick={addParameter} className="add-parameter-button">
+              + Add parameter
+            </Button>
+          </>
+        }
+        {inputMode === "range" && (
+          <>
+            <div style={{ display: 'flex' }}>
+              <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>From</span>
+              <TextField
+                size="small"
+                type="text"
+                label="Start cell"
+                onChange={onChangeStartCell}
+              />
+            </div>  
+            <div style={{ display: 'flex' }}>
+              <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>to</span>
+              <TextField
+                size="small"
+                type="text"
+                label="End cell"
+                onChange={onChangeEndCell}
+              />
             </div>
-          )}
-          <button onClick={addParameter} className="add-parameter-button">
-            + Add parameter
-          </button>
-        </>
-      }
-      {inputMode === "range" && (
-        <div >
-          <label className="label">Start cell</label>
-          <input type="text" id="fname" name="fname" onChange={onChangeStartCell} />
-          <br />
-          <label className="label">End cell</label>
-          <input type="text" id="fname" name="fname" onChange={onChangeEndCell} />
-        </div>
-      )}
-    </div>
+          </>
+        )}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={props.onClose} autoFocus>
+          Done
+        </Button>
+        <Button onClick={props.onClose}>Cancel</Button>
+      </DialogActions>
+    </Dialog>
   );
 }
 
