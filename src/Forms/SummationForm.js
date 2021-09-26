@@ -7,7 +7,6 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import './Forms.css';
 
 function SummationForm(props) {
   const [parameterCount, setParameterCount] = React.useState(2);
@@ -73,11 +72,11 @@ function SummationForm(props) {
           onChange={handleModeChange}
           aria-label="text alignment"
         >
-          <ToggleButton value="individual" aria-label="left aligned">
-            Individual Parameters
-          </ToggleButton>
-          <ToggleButton value="range" aria-label="centered">
+          <ToggleButton value="range">
             Cell Range
+          </ToggleButton>
+          <ToggleButton value="individual">
+            Individual Parameters
           </ToggleButton>
         </ToggleButtonGroup>
 
@@ -93,7 +92,7 @@ function SummationForm(props) {
                 />
               </div>
             )}
-            <Button onClick={addParameter} className="add-parameter-button">
+            <Button onClick={addParameter} >
               + Add parameter
             </Button>
           </>
