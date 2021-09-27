@@ -23,7 +23,8 @@
 }
 
 .small-button-container {
-  width: 380px;
+  margin-top: 16px;
+  width: 304px;
 }
 
 .small-button {
@@ -49,8 +50,7 @@
 }
 
 .equals-button {
-  background-color: mediumseagreen !important;
-  color: white !important;
+  color: mediumseagreen !important;
 }
 
 .inputContainer {
@@ -58,7 +58,7 @@
   border-color: black;
   border-style: solid;
   padding-left: 12px;
-  padding-left: 12px;
+  padding-right: 12px;
   padding-bottom: 16px;
   padding-top: 24px;
   margin-bottom: 12px;
@@ -77,4 +77,8 @@
   color: green;
   font-family: "Source Code Pro", courier;
   margin-top: 1rem;
+}
+
+.user-input-text-field {
+  margin-bottom: 18px !important;
 }

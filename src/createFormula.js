@@ -1,6 +1,7 @@
 // TODO: look at the user input in the text field and turn it into valid
 // Visual Basic code for Excel. This is a very basic parser that has a 
-// lot of room for improvement
+// lot of room for improvement. There's a lot of error handling that can
+// be done here
 
 const functions = {
   "summation": "SUM(",
@@ -9,15 +10,13 @@ const functions = {
   "maximum": "MAX"
 };
 
-const keywords = ["+", "-", "×", "÷", "(", ")"];
-
 const createFormula = (userInput) => {
   userInput = formatUserInput(userInput);
   if (userInput === "") {
     return "No input";
   }
   let userInputIndex = 0;
-  let formula = "";
+  let formula = "=";
   while (userInputIndex < userInput.length) {
     // eslint-disable-next-line no-loop-func
     Object.keys(functions).forEach(f => {
@@ -98,14 +97,20 @@ const parseWhitespace = (index, userInput) => {
   return index;
 };
 
-const formatUserInput = (userInput) => {
-  userInput = userInput.trim();
-  keywords.forEach(keyword => {
-    userInput = userInput.replace(keyword, " " + keyword + " ");
-  });
-  return userInput;
+const keywords = {
+  "+": " + ",
+  "-": " - ",
+  "×": " * ",
+  "÷": " / ",
+  "(": "( ",
+  ")": " )"
 };
 
-
+const formatUserInput = (userInput) => {
+  Object.keys(keywords).forEach(keyword => {
+    userInput = userInput.replace(keyword, " " + keywords[keyword] + " ");
+  });
+  return userInput.trim();
+};
 
 export { createFormula }
