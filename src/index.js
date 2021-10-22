@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FullStory from 'react-fullstory';
 import './index.css';
 import { Calculator } from './Calculator';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <FullStory org={process.env.REACT_APP_ORG_ID} />
     <Calculator />
   </React.StrictMode>,
   document.getElementById('root')
