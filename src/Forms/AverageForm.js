@@ -28,7 +28,7 @@ function AverageForm(props) {
   }
 
   const createFormulaFromRange = () => {
-    return `averge(from ${startCell} to ${endCell})`;
+    return `average(${startCell}:${endCell})`;
   }
 
   const createFormulaFromParameters = () => {
