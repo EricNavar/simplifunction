@@ -14,12 +14,25 @@
 }
 
 .function-button {
-  margin: 6px !important;
+  margin-top: 12px !important;
+  margin-right: 12px !important;
+  width: 120px;
 }
 
 .formula {
   color: #055;
   margin-left: 12px;
+}
+
+button {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  text-align: center;
+  align-items: center;
+  border-color: black !important;
+}
+
+.button :active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset, rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
 }
 
 .small-button-container {
@@ -30,15 +43,21 @@
 .small-button {
   width: 64px;
   height: 64px;
-  text-align: center;
-  align-items: center;
-  border-color: black !important;
-  color: black !important;
   margin: 6px !important;
+  color: black !important;
+  font-size: 1.25rem !important;
 }
 
-.big-font-size-button {
+.utility-button {
+  width: 128px;
+  height: 48px;
+  color: black !important;
   font-size: 1.25rem !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-top: 18px !important;
+  margin-bottom: 6px !important;
+  margin-right: 6px !important;
+  margin-left: 6px !important;
 }
 
 .from-to-button {
@@ -53,15 +72,17 @@
   color: mediumseagreen !important;
 }
 
-.inputContainer {
+.input-container {
   border-radius: 8px;
   border-color: black;
   border-style: solid;
+  border-width: 1px;
   padding-left: 12px;
   padding-right: 12px;
   padding-bottom: 16px;
   padding-top: 24px;
   margin-bottom: 12px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .button-group {

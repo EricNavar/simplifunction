@@ -1,6 +1,7 @@
 import './Calculator.css';
 import React from 'react';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { SummationForm } from './Forms/SummationForm.js';
@@ -8,6 +9,19 @@ import { AverageForm } from './Forms/AverageForm.js';
 import { MinForm } from './Forms/MinForm.js';
 import { MaxForm } from './Forms/MaxForm.js';
 import { createFormula } from './createFormula';
+
+function FunctionButton(props) {
+  return (
+    <Button
+      className="function-button"
+      variant='contained'
+      onClick={props.onClick}
+      aria-label={props.label}
+    >
+      {props.label}
+    </Button>
+  );
+}
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');
@@ -41,10 +55,24 @@ function Calculator() {
 
   let inputRef = React.createRef();
 
+  function InputButton(props) {
+    return (
+      <Button
+        className="button small-button"
+        variant="outlined"
+        onClick={e => addToUserInput(props.input)}
+        aria-label="open parentheses"
+        disableRipple
+      >
+        {props.input}
+      </Button>
+    );
+  } 
+
   return (
     <div className="App" >
       <h1>SimpliFunction</h1>
-      <div className="inputContainer">
+      <Grid container className="input-container">
         <TextField
           autoFocus
           fullWidth
@@ -56,107 +84,100 @@ function Calculator() {
           className="user-input-text-field"
         />
 
-        <div>
-          <Button
-            className="function-button"
-            variant='contained'
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography component="p" variant="h5">
+            Math
+          </Typography>
+          <FunctionButton
+            label="summation"
             onClick={e => setSummationFormOpen(true)}
-            aria-label="summation"
-          >
-            summation
-          </Button>
-          <Button
-            className="function-button"
-            variant='contained'
-            onClick={e => setAverageFormOpen(true)}
-            aria-label="average"
-          >
-            average
-          </Button>
-          <Button
-            className="function-button"
-            variant='contained'
-            onClick={e => setMinimumFormOpen(true)}
-            aria-label="minimum"
-          >
-            minimum
-          </Button>
-          <Button
-            className="function-button"
-            variant='contained'
+          />
+          <FunctionButton
+            label="geometric product"
             onClick={e => setMaximumFormOpen(true)}
-            aria-label="maximum"
-          >
-            maximum
-          </Button>
+          />
+          <FunctionButton
+            label="minimum"
+            onClick={e => setMinimumFormOpen(true)}
+          />
+          <FunctionButton
+            label="maximum"
+            onClick={e => setMaximumFormOpen(true)}
+          />
+          <FunctionButton
+            label="absolute value"
+            onClick={e => setMaximumFormOpen(true)}
+          />
+
+          <Typography component="p" variant="h5">
+            Geometry
+          </Typography>
+          <FunctionButton
+            label="sin"
+            onClick={e => setMaximumFormOpen(true)}
+          />
+          <FunctionButton
+            label="cos"
+            onClick={e => setMaximumFormOpen(true)}
+          />
+          <FunctionButton
+            label="tan"
+            onClick={e => setMaximumFormOpen(true)}
+          />
+
+          <Typography component="p" variant="h5">
+            Statistics
+          </Typography>
+          <FunctionButton
+            label="average"
+            onClick={e => setAverageFormOpen(true)}
+          />
+          <FunctionButton
+            label="mean"
+            onClick={e => setMinimumFormOpen(true)}
+          />
+          <FunctionButton
+            label="median"
+            onClick={e => setMaximumFormOpen(true)}
+          />
+          <FunctionButton
+            label="mode"
+            onClick={e => setAverageFormOpen(true)}
+          />
+          <FunctionButton
+            label="standard deviation"
+            onClick={e => setMinimumFormOpen(true)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={8} className="button small-button-container">
+          <InputButton input=" + "/>
+          <InputButton input=" - "/>
+          <InputButton input="( "/>
+          <InputButton input=" )"/>
+          <InputButton input=" × "/>
+          <InputButton input=" ÷ "/>
+          <div>
+            <Button
+              className="button utility-button clear-button"
+              variant="outlined"
+              onClick={clearInput}
+              aria-label="clear input"
+              disableRipple
+            >
+              clear
+            </Button>
+            <Button
+              className="button utility-button equals-button"
+              variant="outlined"
+              onClick={onEqualsClick}
+              aria-label="equals"
+              disableRipple
+            >
+              equals
+            </Button>
         </div>
-        <div className="small-button-container">
-          <Button
-            className="small-button big-font-size-button"
-            variant="outlined"
-            onClick={e => addToUserInput(" + ")}
-            aria-label="add"
-          >
-            +
-          </Button>
-          <Button
-            className="small-button big-font-size-button"
-            variant="outlined"
-            onClick={e => addToUserInput(" - ")}
-            aria-label="subtract"
-          >
-            -
-          </Button>
-          <Button
-            className="small-button big-font-size-button"
-            variant="outlined"
-            onClick={e => addToUserInput("( ")}
-            aria-label="open parentheses"
-          >
-            (
-          </Button>
-          <Button
-            className="small-button big-font-size-button"
-            variant="outlined"
-            onClick={e => addToUserInput(" )")}
-            aria-label="close parentheses"
-          >
-            )
-          </Button>
-          <Button
-            className="small-button big-font-size-button"
-            variant="outlined"
-            onClick={e => addToUserInput(" × ")}
-            aria-label="multiply"
-          >
-            ×
-          </Button>
-          <Button
-            className="small-button big-font-size-button"
-            variant="outlined"
-            onClick={e => addToUserInput(" ÷ ")}
-            aria-label="divide"
-          >
-            ÷
-          </Button>
-          <Button
-            className="small-button clear-button"
-            variant="outlined"
-            onClick={clearInput}
-            aria-label="clear input"
-          >
-            clear
-          </Button>
-          <Button
-            className="small-button equals-button big-font-size-button"
-            variant="outlined"
-            onClick={onEqualsClick}
-            aria-label="equals"
-          >
-            =
-          </Button>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
 
       {formula && <Typography>Here is your formula:</Typography>}
       <p className="formula">{formula}</p>
