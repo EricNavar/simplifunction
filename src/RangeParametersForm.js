@@ -1,5 +1,4 @@
 import React from 'react';
-import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -7,9 +6,9 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import '../Calculator.css';
+import './Calculator.css';
 
-function SummationForm(props) {
+function RangeParametersForm(props) {
   const [parameterCount, setParameterCount] = React.useState(2);
   const [parameters, setParameters] = React.useState(["", ""]);
   const [inputMode, setInputMode] = React.useState("range");
@@ -28,11 +27,11 @@ function SummationForm(props) {
   }
 
   const createFormulaFromRange = () => {
-    return `summation(from ${startCell} to ${endCell})`;
+    return `${props.commonName}(${startCell}:${endCell})`;
   }
 
   const createFormulaFromParameters = () => {
-    let formula = "=SUM(";
+    let formula = "=" + props.syntacticalName + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
         formula = formula + ",";
@@ -62,15 +61,15 @@ function SummationForm(props) {
   };
 
   const onDeleteClick = (index) => {
-    parameters.splice(index,1);
+    parameters.splice(index, 1);
     setParameters(parameters);
     setParameterCount(parameterCount - 1);
   };
 
   return (
-    <Dialog open={props.open} onClose={props.onClose}>
+    <>
       <DialogTitle id="alert-dialog-title">
-        Summation
+        {props.commonName}
       </DialogTitle>
       <DialogContent>
         <ToggleButtonGroup
@@ -91,7 +90,7 @@ function SummationForm(props) {
         {inputMode === "individual" &&
           <>
             {parameters.map((parameter, index) =>
-              <div key={`summation-form-${index}`}>
+              <div key={`${props.commonName}-form-${index}`}>
                 <TextField
                   label={`Parameter ${index + 1}`}
                   size="small"
@@ -140,8 +139,8 @@ function SummationForm(props) {
         </Button>
         <Button onClick={props.onClose}>Cancel</Button>
       </DialogActions>
-    </Dialog>
+    </>
   );
 }
 
-export { SummationForm };
+export { RangeParametersForm };

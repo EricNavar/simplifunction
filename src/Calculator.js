@@ -1,36 +1,21 @@
 import './Calculator.css';
 import React from 'react';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import { SummationForm } from './Forms/SummationForm.js';
-import { AverageForm } from './Forms/AverageForm.js';
-import { MinForm } from './Forms/MinForm.js';
-import { MaxForm } from './Forms/MaxForm.js';
+import { Typography, Grid, Button, TextField } from '@mui/material';
+import { RangeParametersForm } from './RangeParametersForm.js';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { MyDialog } from './MyDialog.js';
 import { createFormula } from './createFormula';
-
-function FunctionButton(props) {
-  return (
-    <Button
-      className="function-button"
-      variant='contained'
-      onClick={props.onClick}
-      aria-label={props.label}
-    >
-      {props.label}
-    </Button>
-  );
-}
+import { useTheme } from '@mui/material/styles';
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');
   const [userInput, setUserInput] = React.useState('');
 
-  const [summationFormOpen, setSummationFormOpen] = React.useState(false);
-  const [averageFormOpen, setAverageFormOpen] = React.useState(false);
-  const [minimumFormOpen, setMinimumFormOpen] = React.useState(false);
-  const [maximumFormOpen, setMaximumFormOpen] = React.useState(false);
+  const [form, setForm] = React.useState(null);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+
+  const theme = useTheme();
+  const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
   const addToUserInput = async (strToAdd) => {
     const selectionStart = inputRef.selectionStart;
@@ -67,7 +52,28 @@ function Calculator() {
         {props.input}
       </Button>
     );
-  } 
+  }
+
+  function FunctionButton(props) {
+    const onClick = e => {
+      setForm(props.form);
+      setDialogOpen(true);
+    }
+    return (
+      <Button
+        className="function-button"
+        variant='contained'
+        onClick={onClick}
+        aria-label={props.label}
+      >
+        {props.label.trim()}
+      </Button>
+    );
+  };
+
+  function closeDialog() {
+    setDialogOpen(false);
+  }
 
   return (
     <div className="App" >
@@ -85,78 +91,158 @@ function Calculator() {
         />
 
         <Grid item xs={12} sm={6} md={4}>
-          <Typography component="p" variant="h5">
+          <Typography component="p" variant="h5" className="sectionHeader">
             Math
           </Typography>
           <FunctionButton
             label="summation"
-            onClick={e => setSummationFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="summation"
+              syntacticalName="SUM"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="geometric product"
-            onClick={e => setMaximumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="Geometric_mean"
+              syntacticalName="GEOMEAN"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="minimum"
-            onClick={e => setMinimumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="minimum"
+              syntacticalName="MIN"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="maximum"
-            onClick={e => setMaximumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="maximum"
+              syntacticalName="MAX"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="absolute value"
-            onClick={e => setMaximumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="Absolute_value"
+              syntacticalName="ABS"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
 
-          <Typography component="p" variant="h5">
+          <Typography component="p" variant="h5" className="sectionHeader">
             Geometry
           </Typography>
           <FunctionButton
             label="sin"
-            onClick={e => setMaximumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="sin"
+              syntacticalName="SIN"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="cos"
-            onClick={e => setMaximumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="cos"
+              syntacticalName="COS"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="tan"
-            onClick={e => setMaximumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="tan"
+              syntacticalName="TAN"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
 
-          <Typography component="p" variant="h5">
+          <Typography component="p" variant="h5" className="sectionHeader">
             Statistics
           </Typography>
           <FunctionButton
             label="average"
-            onClick={e => setAverageFormOpen(true)}
-          />
-          <FunctionButton
-            label="mean"
-            onClick={e => setMinimumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="average"
+              syntacticalName="AVG"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="median"
-            onClick={e => setMaximumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="median"
+              syntacticalName="MEDIAN"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="mode"
-            onClick={e => setAverageFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="mode"
+              syntacticalName="MODE"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
           <FunctionButton
             label="standard deviation"
-            onClick={e => setMinimumFormOpen(true)}
+            form={<RangeParametersForm
+              commonName="standard_deviation"
+              syntacticalName="STDEV"
+              addToUserInput={addToUserInput}
+              onClose={closeDialog}
+            />
+            }
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={8} className="button small-button-container">
-          <InputButton input=" + "/>
-          <InputButton input=" - "/>
-          <InputButton input="( "/>
-          <InputButton input=" )"/>
-          <InputButton input=" × "/>
-          <InputButton input=" ÷ "/>
-          <div>
+        <Grid item container xs={12} sm={6} md={8} className="small-button-container">
+          <Grid item xs={12}>
+            <InputButton input="( " />
+            <InputButton input=" )" />
+          </Grid>
+          {mobile &&
+            <Grid item xs={9} spacing={0}>
+              {[...Array(10).keys()].reverse().map((num) => // number buttons
+                <InputButton input={num} key={num} />
+              )}
+              <InputButton input="." />
+            </Grid>
+          }
+          <Grid item xs={3} sm={12} spacing={0}>
+            <InputButton input=" + " />
+            <InputButton input=" - " />
+            <InputButton input=" × " />
+            <InputButton input=" ÷ " />
+          </Grid>
+          <Grid xs={12}>
             <Button
               className="button utility-button clear-button"
               variant="outlined"
@@ -175,16 +261,13 @@ function Calculator() {
             >
               equals
             </Button>
-        </div>
+          </Grid>
         </Grid>
       </Grid>
 
       {formula && <Typography>Here is your formula:</Typography>}
       <p className="formula">{formula}</p>
-      <SummationForm open={summationFormOpen} onClose={e => setSummationFormOpen(false)} addToUserInput={addToUserInput} />
-      <AverageForm open={averageFormOpen} onClose={e => setAverageFormOpen(false)} addToUserInput={addToUserInput} />
-      <MinForm open={minimumFormOpen} onClose={e => setMinimumFormOpen(false)} addToUserInput={addToUserInput} />
-      <MaxForm open={maximumFormOpen} onClose={e => setMaximumFormOpen(false)} addToUserInput={addToUserInput} />
+      <MyDialog open={dialogOpen} onClose={e => setDialogOpen(false)} form={form} />
     </div>
   );
 };

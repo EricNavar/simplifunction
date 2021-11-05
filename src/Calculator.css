@@ -38,6 +38,7 @@ button {
 .small-button-container {
   margin-top: 16px;
   width: 304px;
+  align-content: start;
 }
 
 .small-button {
@@ -102,4 +103,9 @@ button {
 
 .user-input-text-field {
   margin-bottom: 18px !important;
+}
+
+.sectionHeader {
+  margin-top: 16px;
+  margin-bottom: 4px;
 }
