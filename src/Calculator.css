@@ -14,9 +14,7 @@
 }
 
 .function-button {
-  margin-top: 12px !important;
-  margin-right: 12px !important;
-  width: 120px;
+  width: 100%;
 }
 
 .formula {
@@ -31,8 +29,8 @@ button {
   border-color: black !important;
 }
 
-.button :active {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset, rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
+.button:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
 }
 
 .small-button-container {
@@ -108,4 +106,8 @@ button {
 .sectionHeader {
   margin-top: 16px;
   margin-bottom: 4px;
+}
+
+.function-button-container {
+  margin-bottom: 20px;
 }

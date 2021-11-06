@@ -1,7 +1,7 @@
 import './Calculator.css';
 import React from 'react';
 import { Typography, Grid, Button, TextField } from '@mui/material';
-import { RangeParametersForm } from './RangeParametersForm.js';
+import { FunctionButtons } from './FunctionButtons.js';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { MyDialog } from './MyDialog.js';
 import { createFormula } from './createFormula';
@@ -54,22 +54,23 @@ function Calculator() {
     );
   }
 
-  function FunctionButton(props) {
-    const onClick = e => {
-      setForm(props.form);
-      setDialogOpen(true);
-    }
+  function backspace() {
+    setUserInput(userInput.substring(0, userInput.substring - 2));
+  }
+
+  function BackspaceButton(props) {
     return (
       <Button
-        className="function-button"
-        variant='contained'
-        onClick={onClick}
-        aria-label={props.label}
+        className="button small-button"
+        variant="outlined"
+        onClick={e => backspace()}
+        aria-label="backspace"
+        disableRipple
       >
-        {props.label.trim()}
+        ⌫
       </Button>
     );
-  };
+  }
 
   function closeDialog() {
     setDialogOpen(false);
@@ -78,7 +79,7 @@ function Calculator() {
   return (
     <div className="App" >
       <h1>SimpliFunction</h1>
-      <Grid container className="input-container">
+      <Grid container className={mobile ? "" : "input-containers"}>
         <TextField
           autoFocus
           fullWidth
@@ -88,141 +89,15 @@ function Calculator() {
           value={userInput}
           for="calculation"
           className="user-input-text-field"
+          placeholder="Enter your calculation"
         />
-
-        <Grid item xs={12} sm={6} md={4}>
-          <Typography component="p" variant="h5" className="sectionHeader">
-            Math
-          </Typography>
-          <FunctionButton
-            label="summation"
-            form={<RangeParametersForm
-              commonName="summation"
-              syntacticalName="SUM"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="geometric product"
-            form={<RangeParametersForm
-              commonName="Geometric_mean"
-              syntacticalName="GEOMEAN"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="minimum"
-            form={<RangeParametersForm
-              commonName="minimum"
-              syntacticalName="MIN"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="maximum"
-            form={<RangeParametersForm
-              commonName="maximum"
-              syntacticalName="MAX"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="absolute value"
-            form={<RangeParametersForm
-              commonName="Absolute_value"
-              syntacticalName="ABS"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-
-          <Typography component="p" variant="h5" className="sectionHeader">
-            Geometry
-          </Typography>
-          <FunctionButton
-            label="sin"
-            form={<RangeParametersForm
-              commonName="sin"
-              syntacticalName="SIN"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="cos"
-            form={<RangeParametersForm
-              commonName="cos"
-              syntacticalName="COS"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="tan"
-            form={<RangeParametersForm
-              commonName="tan"
-              syntacticalName="TAN"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-
-          <Typography component="p" variant="h5" className="sectionHeader">
-            Statistics
-          </Typography>
-          <FunctionButton
-            label="average"
-            form={<RangeParametersForm
-              commonName="average"
-              syntacticalName="AVG"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="median"
-            form={<RangeParametersForm
-              commonName="median"
-              syntacticalName="MEDIAN"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="mode"
-            form={<RangeParametersForm
-              commonName="mode"
-              syntacticalName="MODE"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-          <FunctionButton
-            label="standard deviation"
-            form={<RangeParametersForm
-              commonName="standard_deviation"
-              syntacticalName="STDEV"
-              addToUserInput={addToUserInput}
-              onClose={closeDialog}
-            />
-            }
-          />
-        </Grid>
+        <FunctionButtons
+          closeDialog={closeDialog}
+          setForm={setForm}
+          openDialog={e => setDialogOpen(true)}
+          addToUserInput={addToUserInput}
+          mobile={mobile}
+        />
         <Grid item container xs={12} sm={6} md={8} className="small-button-container">
           <Grid item xs={12}>
             <InputButton input="( " />
@@ -230,10 +105,11 @@ function Calculator() {
           </Grid>
           {mobile &&
             <Grid item xs={9} spacing={0}>
-              {[...Array(10).keys()].reverse().map((num) => // number buttons
+              {[0,3,2,1,6,5,4,9,8,7].reverse().map((num) => // number buttons
                 <InputButton input={num} key={num} />
               )}
-              <InputButton input="." />
+              <InputButton input='.' />
+              <BackspaceButton />
             </Grid>
           }
           <Grid item xs={3} sm={12} spacing={0}>
