@@ -110,3 +110,15 @@ button {
 .function-button-container {
   margin-bottom: 20px;
 }
+
+.functions-header-container {
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.functions-header {
+  display: inline;
+  margin-right: 12px;
+}

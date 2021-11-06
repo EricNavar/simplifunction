@@ -47,6 +47,7 @@ function NParameterForm(props) {
               className="text-field"
               helperText={props.parameterSchema[index].description}
               value={parameter}
+              required={props.parameterSchema[index].required}
             />
           </div>
         )}

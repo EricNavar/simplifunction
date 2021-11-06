@@ -12,6 +12,7 @@ function Calculator() {
   const [userInput, setUserInput] = React.useState('');
 
   const [form, setForm] = React.useState(null);
+  const [inputRef, setInputRef] = React.useState(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const theme = useTheme();
@@ -21,7 +22,6 @@ function Calculator() {
     const selectionStart = inputRef.selectionStart;
     const selectionEnd = inputRef.selectionEnd;
     const newUserInput = userInput.substring(0, selectionStart) + strToAdd + userInput.substring(selectionEnd);
-    console.log(inputRef);
     inputRef.focus();
 
     setUserInput(newUserInput);
@@ -38,9 +38,6 @@ function Calculator() {
   const onType = e => {
     setUserInput(e.target.value);
   };
-
-  let inputRef = React.createRef();
-  console.log(inputRef);
 
   function InputButton(props) {
     return (
@@ -87,10 +84,12 @@ function Calculator() {
           fullWidth
           type="text"
           onChange={onType}
-          inputRef={ref => { inputRef = ref; }}
+          inputRef={ref => { setInputRef(ref); }}
           value={userInput}
           className="user-input-text-field"
           placeholder="Enter your calculation"
+          label="input"
+          variant='filled'
         />
         <FunctionButtons
           closeDialog={closeDialog}

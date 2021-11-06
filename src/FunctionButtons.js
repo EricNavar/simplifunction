@@ -1,89 +1,145 @@
 import React from 'react';
-import { Typography, Grid, Button, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import {
+  Typography,
+  Grid,
+  Button,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  TextField,
+  InputAdornment
+} from '@mui/material';
 import { ListParameteredForm } from './ListParameteredForm.js';
 import { SingleParameterForm } from './SingleParameterForm.js';
 import { NParameterForm } from './NParameterForm.js';
 import './Calculator.css';
 import { functions, functionTypes } from './functions';
+import { SearchIcon } from './SearchIcon.js';
 
-function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mobile, inputRef }) {
-  function FunctionButton(props) {
-    const onClick = e => {
-      setForm(props.form);
-      openDialog();
-    }
-    return (
-      <Grid item xs={6}>
-        <Button
-          className="button function-button"
-          variant='contained'
-          onClick={onClick}
-          aria-label={props.label}
-          disableRipple
-        >
-          {props.label.trim()}
-        </Button>
-      </Grid>
-    );
-  };
+function FunctionButton(props) {
+  const onClick = e => {
+    props.setForm(props.form);
+    props.openDialog();
+  }
+  return (
+    <Grid item xs={6}>
+      <Button
+        className="button function-button"
+        variant='contained'
+        onClick={onClick}
+        aria-label={props.label}
+        disableRipple
+      >
+        {props.label.trim()}
+      </Button>
+    </Grid>
+  );
+};
 
-  // these functions take in a list as parameter. Either as a 
-  // range or a comma separated list
-  function ListParameteredFunctionButton(props) {
-    return <FunctionButton label={props.label} form={
+// these functions take in a list as parameter. Either as a 
+// range or a comma separated list
+function ListParameteredFunctionButton(props) {
+  return <FunctionButton
+    label={props.label}
+    setForm={props.setForm}
+    openDialog={props.openDialog}
+    form={
       <ListParameteredForm
         commonName={props.label}
         syntacticalName={props.syntacticalName}
         description={props.description}
-        addToUserInput={addToUserInput}
-        onClose={closeDialog}
-        inputRef={inputRef}
+        addToUserInput={props.addToUserInput}
+        onClose={props.closeDialog}
+        inputRef={props.inputRef}
       />
-    } />
-  }
+    }
+  />
+}
 
-  function SingleParameterFunctionButton(props) {
-    return <FunctionButton label={props.label} form={
+function SingleParameterFunctionButton(props) {
+  return <FunctionButton
+    label={props.label}
+    setForm={props.setForm}
+    form={
       <SingleParameterForm
         commonName={props.label}
         syntacticalName={props.syntacticalName}
         description={props.description}
-        addToUserInput={addToUserInput}
-        onClose={closeDialog}
-        inputRef={inputRef}
+        addToUserInput={props.addToUserInput}
+        onClose={props.closeDialog}
+        inputRef={props.inputRef}
       />
-    } />
-  }
+    }
+  />
+}
 
-  function NParameterFunctionButton(props) {
-    return <FunctionButton label={props.label} form={
+function NParameterFunctionButton(props) {
+  return <FunctionButton
+    label={props.label}
+    setForm={props.setForm}
+    form={
       <NParameterForm
         commonName={props.label}
         syntacticalName={props.syntacticalName}
         description={props.description}
-        addToUserInput={addToUserInput}
-        onClose={closeDialog}
+        addToUserInput={props.addToUserInput}
+        onClose={props.closeDialog}
         parameterSchema={props.parameterSchema}
-        inputRef={inputRef}
+        inputRef={props.inputRef}
       />
-    } />
-  }
+    }
+  />
+}
 
-  function SectionHeader(props) {
-    return (
-      <Grid item xs={12}>
-        <Typography component="p" variant="h5" className="sectionHeader">
-          {props.children}
+function FunctionButtonContainer(props) {
+  const [searchInput, setSearchInput] = React.useState('');
+  const [filteredFunctions, setFilteredFunctions] = React.useState(functions);
+  const [userInput, setUserInput] = React.useState('');
+
+  const onChangeSearchInput = e => {
+    setSearchInput(e.target.value);
+    //setFilteredFunctions(functions.filter(f => f.commonName.toLowerCase().includes(e.target.value)));
+  };
+
+  const onType = e => {
+    setUserInput(e.target.value);
+  };
+
+  return (
+    <>
+      <div className="functions-header-container" >
+        <Typography component="h2" variant='h4'>
+          Functions
         </Typography>
-      </Grid>
-    );
-  }
-
-  function FunctionButtonContainer() {
-    return (
+        <TextField
+          id="function-search"
+          placeholder="Search function"
+          value={searchInput}
+          onChange={onChangeSearchInput}
+          variant="standard"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            )
+          }}
+        />
+        <TextField
+          autoFocus
+          fullWidth
+          type="text"
+          onChange={onType}
+          value={userInput}
+          className="user-input-text-field"
+          placeholder="Enter your calculation"
+          label="input"
+          variant='filled'
+        />
+      </div>
       <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-button-container">
-        {functionTypes.map(functionType =>
-          <>
+        {functionTypes.map((functionType, index) =>
+          <React.Fragment key={index}>
             <SectionHeader>
               {functionType}
             </SectionHeader>
@@ -94,7 +150,11 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
                   syntacticalName={obj.syntacticalName}
                   description={obj.description}
                   key={index}
-                  inputRef={inputRef}
+                  inputRef={props.inputRef}
+                  addToUserInput={props.addToUserInput}
+                  setForm={props.setForm}
+                  openDialog={props.openDialog}
+                  closeDialog={props.closeDialog}
                 />)
               }
               else if (obj.parameterType === "single") {
@@ -103,7 +163,9 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
                   syntacticalName={obj.syntacticalName}
                   description={obj.description}
                   key={index}
-                  inputRef={inputRef}
+                  inputRef={props.inputRef}
+                  addToUserInput={props.addToUserInput}
+                  closeDialog={props.closeDialog}
                 />)
               }
               else {
@@ -113,18 +175,33 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
                   description={obj.description}
                   key={index}
                   parameterSchema={obj.parameterSchema}
-                  inputRef={inputRef}
-                />) 
+                  inputRef={props.inputRef}
+                  addToUserInput={props.addToUserInput}
+                  closeDialog={props.closeDialog}
+                />)
               }
             }
             )}
-          </>
+          </React.Fragment>
         )}
       </Grid>
-    );
-  }
+    </>
+  );
+}
 
+function SectionHeader(props) {
+  return (
+    <Grid item xs={12}>
+      <Typography component="p" variant="h5" className="sectionHeader">
+        {props.children}
+      </Typography>
+    </Grid>
+  );
+}
+
+function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mobile, inputRef }) {
   const [expanded, setExpanded] = React.useState(false);
+
 
   const handleChange = () => {
     setExpanded(!expanded);
@@ -143,7 +220,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FunctionButtonContainer />
+          <FunctionButtonContainer inputRef={inputRef} />
         </AccordionDetails>
       </Accordion>
     )
