@@ -1,11 +1,5 @@
 import React from 'react';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { DialogActions, DialogContent, DialogTitle, ToggleButton, ToggleButtonGroup, Button, TextField, DialogContentText } from '@mui/material';
 import './Calculator.css';
 
 function ListParameteredForm(props) {
@@ -68,10 +62,13 @@ function ListParameteredForm(props) {
 
   return (
     <>
-      <DialogTitle id="alert-dialog-title">
+      <DialogTitle id={`${props.syntacticalName}-title`}>
         {props.commonName}
       </DialogTitle>
       <DialogContent>
+        <DialogContentText id={`${props.syntacticalName}-description`}>
+          {props.description}
+        </DialogContentText>
         <ToggleButtonGroup
           value={inputMode}
           exclusive
@@ -98,7 +95,7 @@ function ListParameteredForm(props) {
                   onChange={e => onChangeParameter(e, index)}
                   className="text-field"
                 />
-                <Button onClick={e=>onDeleteClick(index)} size='small' color='info'>
+                <Button onClick={e => onDeleteClick(index)} size='small' color='info'>
                   REMOVE
                 </Button>
               </div>
@@ -119,7 +116,7 @@ function ListParameteredForm(props) {
                 onChange={onChangeStartCell}
                 className="text-field"
               />
-            </div>  
+            </div>
             <div style={{ display: 'flex' }}>
               <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>to</span>
               <TextField

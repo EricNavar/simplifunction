@@ -1,9 +1,5 @@
 import React from 'react';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
 import './Calculator.css';
 
 function SingleParameterForm(props) {
@@ -25,6 +21,9 @@ function SingleParameterForm(props) {
         {props.commonName}
       </DialogTitle>
       <DialogContent>
+        <DialogContentText id={`${props.syntacticalName}-description`}>
+          {props.description}
+        </DialogContentText>
         <TextField
           size="small"
           type="text"

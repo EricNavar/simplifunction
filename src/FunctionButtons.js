@@ -2,8 +2,9 @@ import React from 'react';
 import { Typography, Grid, Button, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { ListParameteredForm } from './ListParameteredForm.js';
 import { SingleParameterForm } from './SingleParameterForm.js';
+import { NParameterForm } from './NParameterForm.js';
 import './Calculator.css';
-import { functions } from './functions';
+import { functions, functionTypes } from './functions';
 
 function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mobile }) {
   function FunctionButton(props) {
@@ -33,6 +34,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
       <ListParameteredForm
         commonName={props.label}
         syntacticalName={props.syntacticalName}
+        description={props.description}
         addToUserInput={addToUserInput}
         onClose={closeDialog}
       />
@@ -44,8 +46,22 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
       <SingleParameterForm
         commonName={props.label}
         syntacticalName={props.syntacticalName}
+        description={props.description}
         addToUserInput={addToUserInput}
         onClose={closeDialog}
+      />
+    } />
+  }
+
+  function NParameterFunctionButton(props) {
+    return <FunctionButton label={props.label} form={
+      <NParameterForm
+        commonName={props.label}
+        syntacticalName={props.syntacticalName}
+        description={props.description}
+        addToUserInput={addToUserInput}
+        onClose={closeDialog}
+        parameterSchema={props.parameterSchema}
       />
     } />
   }
@@ -60,8 +76,6 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
     );
   }
 
-  const functionTypes = ["Math", "Trigonometry", "Statistics"];
-
   function FunctionButtonContainer() {
     return (
       <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-button-container">
@@ -73,16 +87,28 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
             {functions.filter(f => f.type === functionType).map((obj, index) => {
               if (obj.parameterType === "list") {
                 return (<ListParameteredFunctionButton
-                  label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
+                  label={obj.commonName}
+                  syntacticalName={obj.syntacticalName}
+                  description={obj.description}
+                  key={index}
                 />)
               }
               else if (obj.parameterType === "single") {
                 return (<SingleParameterFunctionButton
-                  label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
+                  label={obj.commonName}
+                  syntacticalName={obj.syntacticalName}
+                  description={obj.description}
+                  key={index}
                 />)
               }
               else {
-                return null; //TODO
+                return (<NParameterFunctionButton
+                  label={obj.commonName}
+                  syntacticalName={obj.syntacticalName}
+                  description={obj.description}
+                  key={index}
+                  parameterSchema={obj.parameterSchema}
+                />)
               }
             }
             )}
