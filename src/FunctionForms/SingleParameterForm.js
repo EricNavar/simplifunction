@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
-import './Calculator.css';
+import '../Calculator.css';
 
 function SingleParameterForm(props) {
   const [parameter, setParameter] = React.useState(["", ""]);

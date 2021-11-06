@@ -1,11 +1,11 @@
-import './Calculator.css';
 import React from 'react';
 import { Typography, Grid, Button, TextField } from '@mui/material';
-import { FunctionButtons } from './FunctionButtons.js';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { MyDialog } from './MyDialog.js';
-import { createFormula } from './createFormula';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { FunctionButtons } from './FunctionButtons/FunctionButtons.js';
+import { createFormula } from './createFormula';
+import { MyDialog } from './MyDialog.js';
+import './Calculator.css';
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');

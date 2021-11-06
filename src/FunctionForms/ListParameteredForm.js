@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, ToggleButton, ToggleButtonGroup, Button, TextField, DialogContentText } from '@mui/material';
-import './Calculator.css';
+import '../Calculator.css';
 
 function ListParameteredForm(props) {
   const [parameterCount, setParameterCount] = React.useState(2);

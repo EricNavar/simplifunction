@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
-import './Calculator.css';
+import '../Calculator.css';
 
 function NParameterForm(props) {
   const [parameters, setParameters] = React.useState(new Array(props.parameterSchema.length).fill(""));
