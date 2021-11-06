@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './Calculator.css';
 
-function RangeParametersForm(props) {
+function ListParameteredForm(props) {
   const [parameterCount, setParameterCount] = React.useState(2);
   const [parameters, setParameters] = React.useState(["", ""]);
   const [inputMode, setInputMode] = React.useState("range");
@@ -143,4 +143,4 @@ function RangeParametersForm(props) {
   );
 }
 
-export { RangeParametersForm };
+export { ListParameteredForm };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Grid, Button, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { RangeParametersForm } from './RangeParametersForm.js';
+import { ListParameteredForm } from './ListParameteredForm.js';
+import { SingleParameterForm } from './SingleParameterForm.js';
 import './Calculator.css';
 import { functions } from './functions';
 
@@ -29,7 +30,18 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
   // range or a comma separated list
   function ListParameteredFunctionButton(props) {
     return <FunctionButton label={props.label} form={
-      <RangeParametersForm
+      <ListParameteredForm
+        commonName={props.label}
+        syntacticalName={props.syntacticalName}
+        addToUserInput={addToUserInput}
+        onClose={closeDialog}
+      />
+    } />
+  }
+
+  function SingleParameterFunctionButton(props) {
+    return <FunctionButton label={props.label} form={
+      <SingleParameterForm
         commonName={props.label}
         syntacticalName={props.syntacticalName}
         addToUserInput={addToUserInput}
@@ -48,36 +60,33 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
     );
   }
 
+  const functionTypes = ["Math", "Trigonometry", "Statistics"];
+
   function FunctionButtonContainer() {
     return (
       <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-button-container">
-        <SectionHeader>
-          Math
-        </SectionHeader>
-        {functions.filter(f => f.type === "math").map((obj, index) =>
-          obj.parameterType === "list" ?
-            <ListParameteredFunctionButton
-              label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
-            /> : null
-        )
-        }
-        <SectionHeader>
-          Trigonometry
-        </SectionHeader>
-        {functions.filter(f => f.type === "trigonometry").map((obj, index) =>
-          obj.parameterType === "list" ?
-            <ListParameteredFunctionButton
-              label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
-            /> : null
-        )}
-        <SectionHeader>
-          Statistics
-        </SectionHeader>
-        {functions.filter(f => f.type === "statistics").map((obj, index) =>
-          obj.parameterType === "list" ?
-            <ListParameteredFunctionButton
-              label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
-            /> : null
+        {functionTypes.map(functionType =>
+          <>
+            <SectionHeader>
+              {functionType}
+            </SectionHeader>
+            {functions.filter(f => f.type === functionType).map((obj, index) => {
+              if (obj.parameterType === "list") {
+                return (<ListParameteredFunctionButton
+                  label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
+                />)
+              }
+              else if (obj.parameterType === "single") {
+                return (<SingleParameterFunctionButton
+                  label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
+                />)
+              }
+              else {
+                return null; //TODO
+              }
+            }
+            )}
+          </>
         )}
       </Grid>
     );

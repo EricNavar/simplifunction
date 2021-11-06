@@ -2,121 +2,121 @@ const functions = [
   {
     commonName: "Summation",
     syntacticalName: "SUM",
-    type: "math",
+    type: "Math",
     parameterType: "list"
   },
   {
     commonName: "Geometric mean",
     syntacticalName: "GEOMEAN",
-    type: "math",
+    type: "Math",
     parameterType: "list"
   },
   {
     commonName: "Minimum",
     syntacticalName: "MIN",
-    type: "math",
+    type: "Math",
     parameterType: "list"
   },
   {
     commonName: "Maximum",
     syntacticalName: "MAX",
-    type: "math",
+    type: "Math",
     parameterType: "list"
   },
   {
     commonName: "Absolute value",
     syntacticalName: "ABS",
-    type: "math"
+    type: "Math"
   },
   {
     commonName: "Round up",
     syntacticalName: "CEILING",
-    type: "math"
+    type: "Math"
   },
   {
     commonName: "Round down",
     syntacticalName: "FLOOR",
-    type: "math"
+    type: "Math"
   },
   {
     commonName: "Modulo",
     syntacticalName: "MOD",
-    type: "math"
+    type: "Math"
   },
   {
     commonName: "Sin",
     syntacticalName: "SIN",
-    type: "trigonometry",
+    type: "Trigonometry",
     parameterType: "single"
   },
   {
     commonName: "Cos",
     syntacticalName: "COS",
-    type: "trigonometry",
+    type: "Trigonometry",
     parameterType: "single"
   },
   {
     commonName: "Tan",
     syntacticalName: "TAN",
-    type: "trigonometry",
+    type: "Trigonometry",
     parameterType: "single"
   },
   {
     commonName: "Sin⁻¹",
     syntacticalName: "ASIN",
-    type: "trigonometry",
+    type: "Trigonometry",
     parameterType: "single"
   },
   {
     commonName: "Cos⁻¹",
     syntacticalName: "ACOS",
-    type: "trigonometry",
+    type: "Trigonometry",
     parameterType: "single"
   },
   {
     commonName: "Tan⁻¹",
     syntacticalName: "ATAN",
-    type: "trigonometry",
+    type: "Trigonometry",
     parameterType: "single"
   },
   {
     commonName: "Average",
     syntacticalName: "AVG",
-    type: "statistics",
+    type: "Statistics",
     parameterType: "list"
   },
   {
     commonName: "Harmonic mean",
     syntacticalName: "HARMEAN",
-    type: "statistics",
+    type: "Statistics",
     parameterType: "list"
   },
   {
     commonName: "Nth highest",
     syntacticalName: "LARGE",
-    type: "statistics"
+    type: "Statistics"
   },
   {
     commonName: "Nth lowest",
     syntacticalName: "SMALL",
-    type: "statistics"
+    type: "Statistics"
   },
   {
     commonName: "Median",
     syntacticalName: "MEDIAN",
-    type: "statistics",
+    type: "Statistics",
     parameterType: "list"
   },
   {
     commonName: "Mode",
     syntacticalName: "MODE",
-    type: "statistics",
+    type: "Statistics",
     parameterType: "list"
   },
   {
     commonName: "Standard deviation",
     syntacticalName: "STDEV",
-    type: "statistics",
+    type: "Statistics",
     parameterType: "list"
   }
 ]
