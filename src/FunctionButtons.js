@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Grid, Button, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { RangeParametersForm } from './RangeParametersForm.js';
 import './Calculator.css';
-import { mathFunctions, trigFunctions, statFunctions } from './functions';
+import { functions } from './functions';
 
 function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mobile }) {
   function FunctionButton(props) {
@@ -25,7 +25,9 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
     );
   };
 
-  function RangeParameterFunctionButton(props) {
+  // these functions take in a list as parameter. Either as a 
+  // range or a comma separated list
+  function ListParameteredFunctionButton(props) {
     return <FunctionButton label={props.label} form={
       <RangeParametersForm
         commonName={props.label}
@@ -52,20 +54,30 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
         <SectionHeader>
           Math
         </SectionHeader>
-        {Object.keys(mathFunctions).map(commonName =>
-          <RangeParameterFunctionButton label={commonName} syntacticalName={mathFunctions[commonName]} />
-        )}
+        {functions.filter(f => f.type === "math").map((obj, index) =>
+          obj.parameterType === "list" ?
+            <ListParameteredFunctionButton
+              label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
+            /> : null
+        )
+        }
         <SectionHeader>
           Trigonometry
         </SectionHeader>
-        {Object.keys(trigFunctions).map(commonName =>
-          <RangeParameterFunctionButton label={commonName} syntacticalName={trigFunctions[commonName]} />
+        {functions.filter(f => f.type === "trigonometry").map((obj, index) =>
+          obj.parameterType === "list" ?
+            <ListParameteredFunctionButton
+              label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
+            /> : null
         )}
         <SectionHeader>
           Statistics
         </SectionHeader>
-        {Object.keys(statFunctions).map(commonName =>
-          <RangeParameterFunctionButton label={commonName} syntacticalName={statFunctions[commonName]} />
+        {functions.filter(f => f.type === "statistics").map((obj, index) =>
+          obj.parameterType === "list" ?
+            <ListParameteredFunctionButton
+              label={obj.commonName} syntacticalName={obj.syntacticalName} key={index}
+            /> : null
         )}
       </Grid>
     );
@@ -81,7 +93,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
     return (
       <Accordion expanded={expanded} onChange={handleChange} >
         <AccordionSummary
-          expandIcon={<div>{expanded?"-":"+"}</div>}
+          expandIcon={<div>{expanded ? "-" : "+"}</div>}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >

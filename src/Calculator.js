@@ -87,7 +87,6 @@ function Calculator() {
           onChange={onType}
           inputRef={ref => { inputRef = ref; }}
           value={userInput}
-          for="calculation"
           className="user-input-text-field"
           placeholder="Enter your calculation"
         />
@@ -104,7 +103,7 @@ function Calculator() {
             <InputButton input=" )" />
           </Grid>
           {mobile &&
-            <Grid item xs={9} spacing={0}>
+            <Grid item xs={9}>
               {[0,3,2,1,6,5,4,9,8,7].reverse().map((num) => // number buttons
                 <InputButton input={num} key={num} />
               )}
@@ -112,13 +111,13 @@ function Calculator() {
               <BackspaceButton />
             </Grid>
           }
-          <Grid item xs={3} sm={12} spacing={0}>
+          <Grid item xs={3} sm={12}>
             <InputButton input=" + " />
             <InputButton input=" - " />
             <InputButton input=" × " />
             <InputButton input=" ÷ " />
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <Button
               className="button utility-button clear-button"
               variant="outlined"
