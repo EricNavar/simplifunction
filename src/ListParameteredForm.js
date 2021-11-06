@@ -50,7 +50,7 @@ function ListParameteredForm(props) {
 
   const handleDoneClick = () => {
     const formula = inputMode === "range" ? createFormulaFromRange() : createFormulaFromParameters();
-    props.addToUserInput(formula);
+    props.addToUserInput(formula, props.inputRef);
     props.onClose();
   };
 

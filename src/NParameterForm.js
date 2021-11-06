@@ -24,11 +24,9 @@ function NParameterForm(props) {
 
   const handleDoneClick = () => {
     const formula = createFormulaFromParameters();
-    props.addToUserInput(formula);
+    props.addToUserInput(formula, props.inputRef);
     props.onClose();
   };
-
-  console.log(parameters)
 
   return (
     <>

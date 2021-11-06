@@ -17,10 +17,11 @@ function Calculator() {
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
-  const addToUserInput = async (strToAdd) => {
+  const addToUserInput = async (strToAdd, inputRef) => {
     const selectionStart = inputRef.selectionStart;
     const selectionEnd = inputRef.selectionEnd;
     const newUserInput = userInput.substring(0, selectionStart) + strToAdd + userInput.substring(selectionEnd);
+    console.log(inputRef);
     inputRef.focus();
 
     setUserInput(newUserInput);
@@ -39,13 +40,14 @@ function Calculator() {
   };
 
   let inputRef = React.createRef();
+  console.log(inputRef);
 
   function InputButton(props) {
     return (
       <Button
         className="button small-button"
         variant="outlined"
-        onClick={e => addToUserInput(props.input)}
+        onClick={e => addToUserInput(props.input, inputRef)}
         aria-label="open parentheses"
         disableRipple
       >
@@ -96,6 +98,7 @@ function Calculator() {
           openDialog={e => setDialogOpen(true)}
           addToUserInput={addToUserInput}
           mobile={mobile}
+          inputRef={inputRef}
         />
         <Grid item container xs={12} sm={6} md={8} className="small-button-container">
           <Grid item xs={12}>

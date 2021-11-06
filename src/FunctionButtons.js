@@ -6,7 +6,7 @@ import { NParameterForm } from './NParameterForm.js';
 import './Calculator.css';
 import { functions, functionTypes } from './functions';
 
-function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mobile }) {
+function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mobile, inputRef }) {
   function FunctionButton(props) {
     const onClick = e => {
       setForm(props.form);
@@ -37,6 +37,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
         description={props.description}
         addToUserInput={addToUserInput}
         onClose={closeDialog}
+        inputRef={inputRef}
       />
     } />
   }
@@ -49,6 +50,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
         description={props.description}
         addToUserInput={addToUserInput}
         onClose={closeDialog}
+        inputRef={inputRef}
       />
     } />
   }
@@ -62,6 +64,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
         addToUserInput={addToUserInput}
         onClose={closeDialog}
         parameterSchema={props.parameterSchema}
+        inputRef={inputRef}
       />
     } />
   }
@@ -91,6 +94,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
                   syntacticalName={obj.syntacticalName}
                   description={obj.description}
                   key={index}
+                  inputRef={inputRef}
                 />)
               }
               else if (obj.parameterType === "single") {
@@ -99,6 +103,7 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
                   syntacticalName={obj.syntacticalName}
                   description={obj.description}
                   key={index}
+                  inputRef={inputRef}
                 />)
               }
               else {
@@ -108,7 +113,8 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
                   description={obj.description}
                   key={index}
                   parameterSchema={obj.parameterSchema}
-                />)
+                  inputRef={inputRef}
+                />) 
               }
             }
             )}

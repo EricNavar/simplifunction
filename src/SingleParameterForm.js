@@ -7,7 +7,7 @@ function SingleParameterForm(props) {
 
   const handleDoneClick = () => {
     const formula = `${props.commonName}(${parameter})`;
-    props.addToUserInput(formula);
+    props.addToUserInput(formula, props.inputRef);
     props.onClose();
   };
 
