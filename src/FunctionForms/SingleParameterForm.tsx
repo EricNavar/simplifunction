@@ -2,18 +2,30 @@ import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
 import '../Calculator.css';
 
-function SingleParameterForm(props) {
+type SingleParameterFormProps = {
+  commonName: string,
+  syntacticalName: string,
+  description: string,
+  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  setDialogOpen: (value: boolean) => void,
+  inputRef: HTMLInputElement,
+}
+function SingleParameterForm(props: SingleParameterFormProps) {
   const [parameter, setParameter] = React.useState(["", ""]);
 
   const handleDoneClick = () => {
     const formula = `${props.commonName}(${parameter})`;
     props.addToUserInput(formula, props.inputRef);
-    props.onClose();
+    closeDialog();
   };
 
-  const onChangeParameter = e => {
+  const onChangeParameter = (e: any) => {
     setParameter(e.target.value);
   };
+
+  const closeDialog = () => {
+    props.setDialogOpen(false);
+  }
 
   return (
     <>
@@ -35,7 +47,7 @@ function SingleParameterForm(props) {
         <Button onClick={handleDoneClick} autoFocus>
           Done
         </Button>
-        <Button onClick={props.onClose}>Cancel</Button>
+        <Button onClick={closeDialog}>Cancel</Button>
       </DialogActions>
     </>
   );

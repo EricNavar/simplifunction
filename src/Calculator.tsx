@@ -10,7 +10,7 @@ import './Calculator.css';
 function Calculator() {
   const [formula, setFormula] = React.useState('');
   const [userInput, setUserInput] = React.useState('');
-  let element:JSX.Element = <Grid></Grid>;
+  let element: JSX.Element = <Grid></Grid>;
   const [form, setForm] = React.useState(element);
   const [inputRef, setInputRef] = React.useState(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -18,7 +18,7 @@ function Calculator() {
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
-  const addToUserInput = async (strToAdd:string, inputRef:HTMLInputElement) => {
+  const addToUserInput = async (strToAdd: string, inputRef: HTMLInputElement) => {
     const selectionStart = inputRef.selectionStart ? inputRef.selectionStart : inputRef.size;
     const selectionEnd = inputRef.selectionEnd ? inputRef.selectionEnd : inputRef.size;
     const newUserInput = userInput.substring(0, selectionStart!) + strToAdd + userInput.substring(selectionEnd!);
@@ -35,7 +35,7 @@ function Calculator() {
     setFormula(createFormula(userInput));
   };
 
-  const onType = (event:any) => {
+  const onType = (event: any) => {
     setUserInput(event.target.value);
   };
 
@@ -43,7 +43,7 @@ function Calculator() {
     input: string
   }
 
-  function InputButton(props:InputButtonProps) {
+  function InputButton(props: InputButtonProps) {
     return (
       <Button
         className="button small-button"
@@ -105,7 +105,7 @@ function Calculator() {
           </Grid>
           {mobile &&
             <Grid item xs={9}>
-              {[0,3,2,1,6,5,4,9,8,7].reverse().map((num) => // number buttons
+              {[0, 3, 2, 1, 6, 5, 4, 9, 8, 7].reverse().map((num) => // number buttons
                 <InputButton input={num.toString()} key={num} />
               )}
               <InputButton input='.' />
@@ -143,7 +143,7 @@ function Calculator() {
 
       {formula && <Typography>Here is your formula:</Typography>}
       <p className="formula">{formula}</p>
-      <MyDialog open={dialogOpen} onClose={(e:any) => setDialogOpen(false)} form={form} />
+      <MyDialog open={dialogOpen} setDialogOpen={setDialogOpen} form={form} />
     </div>
   );
 };

@@ -1,13 +1,4 @@
-const functionTypes = [
-  "Math",
-  "Trigonometry",
-  "Statistics",
-  "Bitwise",
-  "Conversion",
-  "Text",
-  "Date",
-  "Lookup"
-];
+import { ExcelFunction, ExcelFunctionType, ParameterType } from '../commonTypes';
 
 /* functions to add
 
@@ -25,49 +16,49 @@ random (choose)
 today
 */
 
-const functions = [
-  // ==== MATH ====
+const functions:Array<ExcelFunction> = [
+  // ==== Math ====
   {
     commonName: "Summation",
     syntacticalName: "SUM",
     description: "Use this function to add the values in cells.",
-    type: "Math",
-    parameterType: "list"
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.LIST,
   },
   {
     commonName: "Geometric mean",
     syntacticalName: "GEOMEAN",
     description: "Returns the geometric mean",
-    type: "Math",
-    parameterType: "list"
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.LIST,
   },
   {
     commonName: "Minimum",
     syntacticalName: "MIN",
     description: "Returns the minimum value in a list of arguments",
-    type: "Math",
-    parameterType: "list"
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.LIST,
   },
   {
     commonName: "Maximum",
     syntacticalName: "MAX",
     description: "Returns the maximum value in a list of arguments",
-    type: "Math",
-    parameterType: "list"
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.LIST,
   },
   {
     commonName: "Absolute value",
     syntacticalName: "ABS",
     description: "Returns the absolute value of a number",
-    type: "Math",
-    parameterType: "single"
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.SINGLE,
   },
   {
     commonName: "Round up",
     syntacticalName: "CEILING",
     description: "Rounds a number to the nearest integer or to the nearest multiple of significance",
-    type: "Math",
-    parameterType: "n",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "number to round",
@@ -83,8 +74,8 @@ const functions = [
     commonName: "Power",
     syntacticalName: "POWER",
     description: "Returns the result of a number raised to a power",
-    type: "Math",
-    parameterType: "n",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Base",
@@ -100,29 +91,29 @@ const functions = [
     commonName: "Square root",
     syntacticalName: "SQRT",
     description: "Returns a positive square root",
-    type: "Math",
-    parameterType: "single",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.SINGLE,
   },
   {
     commonName: "Choose random number",
     syntacticalName: "CHOOSE",
     description: "Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.",
-    type: "Math",
-    parameterType: "single",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.SINGLE,
   },
   {
     commonName: "Log₁₀",
     syntacticalName: "LOG10",
     description: "Returns the base-10 logarithm of a number",
-    type: "Math",
-    parameterType: "single",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.SINGLE,
   },
   {
     commonName: "Log",
     syntacticalName: "LOG",
     description: "Returns the logarithm of a number to a specified base",
-    type: "Math",
-    parameterType: "n",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Number",
@@ -138,8 +129,8 @@ const functions = [
     commonName: "Round down",
     syntacticalName: "FLOOR",
     description: "Rounds a number down, toward zero",
-    type: "Math",
-    parameterType: "n",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "number to round",
@@ -155,8 +146,8 @@ const functions = [
     commonName: "Modulo",
     syntacticalName: "MOD",
     description: "Returns the remainder from division",
-    type: "Math",
-    parameterType: "n",
+    type: ExcelFunctionType.Math,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "",
@@ -173,55 +164,55 @@ const functions = [
     commonName: "Sin",
     syntacticalName: "SIN",
     description: "Returns the sine of the given angle",
-    type: "Trigonometry",
-    parameterType: "single"
+    type: ExcelFunctionType.Trigonometry,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "Cos",
     syntacticalName: "COS",
     description: "Returns the cosine of a number",
-    type: "Trigonometry",
-    parameterType: "single"
+    type: ExcelFunctionType.Trigonometry,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "Tan",
     syntacticalName: "TAN",
     description: "Returns the tangent of a number",
-    type: "Trigonometry",
-    parameterType: "single"
+    type: ExcelFunctionType.Trigonometry,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "Sin⁻¹",
     syntacticalName: "ASIN",
     description: "Returns the arcsine of a number",
-    type: "Trigonometry",
-    parameterType: "single"
+    type: ExcelFunctionType.Trigonometry,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "Cos⁻¹",
     syntacticalName: "ACOS",
     description: "Returns the arccosine of a number",
-    type: "Trigonometry",
-    parameterType: "single"
+    type: ExcelFunctionType.Trigonometry,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "Tan⁻¹",
     syntacticalName: "ATAN",
     description: "Returns the arctangent of a number",
-    type: "Trigonometry",
-    parameterType: "single"
+    type: ExcelFunctionType.Trigonometry,
+    parameterType: ParameterType.SINGLE
   },
-  // STATISTICS
+  // Statistics
   {
     commonName: "Normal distribution",
     syntacticalName: "NORM.DIST",
     description: "Returns the normal cumulative distribution",
-    type: "Statistics",
-    parameterType: "n",
+    type: ExcelFunctionType.Statistics,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "X",
-        description: "The value for which you want the distribution.",
+        helperText: "The value for which you want the distribution.",
         required: true
       },
       {
@@ -242,51 +233,51 @@ const functions = [
     commonName: "Average",
     syntacticalName: "AVG",
     description: "Returns the average of its arguments",
-    type: "Statistics",
-    parameterType: "list"
+    type: ExcelFunctionType.Statistics,
+    parameterType: ParameterType.LIST
   },
   {
     commonName: "Harmonic mean",
     syntacticalName: "HARMEAN",
     description: "Returns the harmonic mean",
-    type: "Statistics",
-    parameterType: "list"
+    type: ExcelFunctionType.Statistics,
+    parameterType: ParameterType.LIST
   },
   {
     commonName: "Median",
     syntacticalName: "MEDIAN",
     description: "Returns the median of the given numbers",
-    type: "Statistics",
-    parameterType: "list"
+    type: ExcelFunctionType.Statistics,
+    parameterType: ParameterType.LIST
   },
   {
     commonName: "Mode",
     syntacticalName: "MODE",
     description: "Returns the most common value in a data set",
-    type: "Statistics",
-    parameterType: "list"
+    type: ExcelFunctionType.Statistics,
+    parameterType: ParameterType.LIST
   },
   {
     commonName: "Standard deviation",
     syntacticalName: "STDEV",
     description: "Estimates standard deviation based on a sample",
-    type: "Statistics",
-    parameterType: "list"
+    type: ExcelFunctionType.Statistics,
+    parameterType: ParameterType.LIST
   },
   {
     commonName: "Binomial distribution",
     syntacticalName: "BINOM.DIST",
     description: "Returns the individual term binomial distribution probability",
-    type: "Statistics",
-    parameterType: "list"
+    type: ExcelFunctionType.Statistics,
+    parameterType: ParameterType.LIST
   },
   // Bitwise operations
   {
     commonName: "Left shift",
     syntacticalName: "BITLSHIFT",
     description: "Returns a value number shifted left by shift_amount bits",
-    type: "Bitwise",
-    parameterType: "n",
+    type: ExcelFunctionType.Bitwise,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Number",
@@ -302,8 +293,8 @@ const functions = [
     commonName: "Right shift",
     syntacticalName: "BITRSHIFT",
     description: "Returns a value number shifted left by shift_amount bits",
-    type: "Bitwise",
-    parameterType: "n",
+    type: ExcelFunctionType.Bitwise,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Number",
@@ -318,9 +309,9 @@ const functions = [
   {
     commonName: "Bitwise OR",
     syntacticalName: "BITOR",
-    description: "Returns a bitwise OR of 2 numbers",
-    type: "Bitwise",
-    parameterType: "n",
+    description: "Returns a Bitwise OR of 2 numbers",
+    type: ExcelFunctionType.Bitwise,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Operand 1",
@@ -335,9 +326,9 @@ const functions = [
   {
     commonName: "Bitwise OR",
     syntacticalName: "BITOR",
-    description: "Returns a bitwise OR of 2 numbers",
-    type: "Bitwise",
-    parameterType: "n",
+    description: "Returns a Bitwise OR of 2 numbers",
+    type: ExcelFunctionType.Bitwise,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Operand 1",
@@ -352,9 +343,9 @@ const functions = [
   {
     commonName: "Bitwise AND",
     syntacticalName: "BITOR",
-    description: "Returns a bitwise AND of 2 numbers",
-    type: "Bitwise",
-    parameterType: "n",
+    description: "Returns a Bitwise AND of 2 numbers",
+    type: ExcelFunctionType.Bitwise,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Operand 1",
@@ -369,9 +360,9 @@ const functions = [
   {
     commonName: "Bitwise XOR",
     syntacticalName: "BITXOR",
-    description: "Returns a bitwise AND of 2 numbers",
-    type: "Bitwise",
-    parameterType: "n",
+    description: "Returns a Bitwise AND of 2 numbers",
+    type: ExcelFunctionType.Bitwise,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Operand 1",
@@ -383,28 +374,28 @@ const functions = [
       }
     ]
   },
-  // ==== CONVERSION ====
+  // ==== Conversion ====
   {
     commonName: "Binary to decimal",
     syntacticalName: "BIN2DEC",
     description: "Converts a binary number to decimal",
-    type: "Conversion",
-    parameterType: "single"
+    type: ExcelFunctionType.Conversion,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "Decimal to binary",
     syntacticalName: "DEC2BIN",
     description: "Converts a decimal number to binary",
-    type: "Conversion",
-    parameterType: "single"
+    type: ExcelFunctionType.Conversion,
+    parameterType: ParameterType.SINGLE
   },
-  // ==== TEXT ====
+  // ==== Text ====
   {
     commonName: "Text concatenation",
     syntacticalName: "CONCAT",
-    description: "Combines the text from multiple ranges and/or strings, but it doesn't provide the delimiter or IgnoreEmpty arguments.",
-    type: "Text",
-    parameterType: "n",
+    description: "Combines the Text from multiple ranges and/or strings, but it doesn't provide the delimiter or IgnoreEmpty arguments.",
+    type: ExcelFunctionType.Text,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Number",
@@ -420,23 +411,23 @@ const functions = [
   {
     commonName: "To lowercase",
     syntacticalName: "LOWER",
-    description: "Converts text to lowercase",
-    type: "Text",
-    parameterType: "single"
+    description: "Converts Text to lowercase",
+    type: ExcelFunctionType.Text,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "To uppercase",
     syntacticalName: "UPPER",
-    description: "Converts text to uppercase",
-    type: "Text",
-    parameterType: "single"
+    description: "Converts Text to uppercase",
+    type: ExcelFunctionType.Text,
+    parameterType: ParameterType.SINGLE
   },
   {
     commonName: "Price format",
     syntacticalName: "DOLLAR",
-    description: "Converts a number to text, using the $ (dollar) currency format",
-    type: "Text",
-    parameterType: "n",
+    description: "Converts a number to Text, using the $ (dollar) currency format",
+    type: ExcelFunctionType.Text,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Number",
@@ -449,17 +440,17 @@ const functions = [
       },
     ]
   },
-  // ==== DATE ====
+  // ==== Date ====
   {
     commonName: "Date",
     syntacticalName: "DATE",
-    description: "Converts a number to text, using the $ (dollar) currency format",
-    type: "Date",
-    parameterType: "n",
+    description: "",
+    type: ExcelFunctionType.Date,
+    parameterType: ParameterType.N,
     parameterSchema: [
       {
         name: "Year",
-        description: "4 digits",
+        helperText: "4 digits",
         required: true
       },
       {
@@ -477,9 +468,9 @@ const functions = [
     commonName: "Sort",
     syntacticalName: "SORT",
     description: "Sorts the contents of a range or array",
-    type: "Lookup",
-    parameterType: "list"
+    type: ExcelFunctionType.Lookup,
+    parameterType: ParameterType.LIST
   },
 ]
 
-export { functions, functionTypes };
+export { functions };

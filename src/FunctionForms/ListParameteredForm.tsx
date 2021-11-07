@@ -2,7 +2,15 @@ import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, ToggleButton, ToggleButtonGroup, Button, TextField, DialogContentText } from '@mui/material';
 import '../Calculator.css';
 
-function ListParameteredForm(props) {
+type ListParameteredFormProps = {
+  commonName: string,
+  syntacticalName: string,
+  description: string,
+  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  setDialogOpen: (value: boolean) => void,
+  inputRef: HTMLInputElement,
+}
+function ListParameteredForm(props: ListParameteredFormProps) {
   const [parameterCount, setParameterCount] = React.useState(2);
   const [parameters, setParameters] = React.useState(["", ""]);
   const [inputMode, setInputMode] = React.useState("range");
@@ -16,8 +24,8 @@ function ListParameteredForm(props) {
     setParameterCount(parameterCount + 1);
   }
 
-  const onChangeParameter = (e, index) => {
-    parameters[index] = e.target.value;
+  const onChangeParameter = (event: any, index: number) => {
+    parameters[index] = event.target.value;
   }
 
   const createFormulaFromRange = () => {
@@ -35,29 +43,33 @@ function ListParameteredForm(props) {
     return formula;
   };
 
-  const handleModeChange = (event, newMode) => {
+  const handleModeChange = (event: any, newMode: string) => {
     if (newMode !== null)
       setInputMode(newMode);
   };
 
-  const onChangeStartCell = e => {
-    setStartCell(e.target.value);
+  const onChangeStartCell = (event: any) => {
+    setStartCell(event.target.value);
   };
 
-  const onChangeEndCell = e => {
-    setEndCell(e.target.value);
+  const onChangeEndCell = (event: any) => {
+    setEndCell(event.target.value);
   };
 
   const handleDoneClick = () => {
     const formula = inputMode === "range" ? createFormulaFromRange() : createFormulaFromParameters();
     props.addToUserInput(formula, props.inputRef);
-    props.onClose();
+    closeDialog();
   };
 
-  const onDeleteClick = (index) => {
+  const onDeleteClick = (index: number) => {
     parameters.splice(index, 1);
     setParameters(parameters);
     setParameterCount(parameterCount - 1);
+  };
+
+  const closeDialog = () => {
+    props.setDialogOpen(false);
   };
 
   return (
@@ -134,7 +146,7 @@ function ListParameteredForm(props) {
         <Button onClick={handleDoneClick} autoFocus>
           Done
         </Button>
-        <Button onClick={props.onClose}>Cancel</Button>
+        <Button onClick={closeDialog}>Cancel</Button>
       </DialogActions>
     </>
   );

@@ -9,11 +9,12 @@ import {
   InputAdornment
 } from '@mui/material';
 import '../Calculator.css';
-import { functions, functionTypes } from './functions';
-import { SearchIcon } from '../SearchIcon.js';
+import { functions } from './functions';
+import { SearchIcon } from '../SearchIcon';
 import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';
 import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
 import { NParameterFunctionButton } from './NParameterFunctionButton';
+import { ParameterType, ExcelFunctionType } from '../commonTypes';
 
 type FunctionButtonContainerProps = {
   inputRef: HTMLInputElement,
@@ -30,6 +31,17 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     setSearchInput(e.target.value);
     setFilteredFunctions(functions.filter(f => f.commonName.toLowerCase().includes(e.target.value)));
   };
+
+  const ExcelFunctionTypeArray = [
+    ExcelFunctionType.Math,
+    ExcelFunctionType.Trigonometry,
+    ExcelFunctionType.Statistics,
+    ExcelFunctionType.Bitwise,
+    ExcelFunctionType.Conversion,
+    ExcelFunctionType.Text,
+    ExcelFunctionType.Date,
+    ExcelFunctionType.Lookup
+  ];
 
   return (
     <>
@@ -53,13 +65,13 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
         />
       </div>
       <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-button-container">
-        {functionTypes.map((functionType, index) =>
+        {ExcelFunctionTypeArray.map((functionType:any, index:number) =>
           <React.Fragment key={index}>
             <SectionHeader>
               {functionType}
             </SectionHeader>
             {filteredFunctions.filter(f => f.type === functionType).map((obj, index) => {
-              if (obj.parameterType === "list") {
+              if (obj.parameterType === ParameterType.LIST) {
                 return (<ListParameteredFunctionButton
                   label={obj.commonName}
                   syntacticalName={obj.syntacticalName}
@@ -71,7 +83,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
                   setDialogOpen={props.setDialogOpen}
                 />)
               }
-              else if (obj.parameterType === "single") {
+              else if (obj.parameterType === ParameterType.SINGLE) {
                 return (<SingleParameterFunctionButton
                   label={obj.commonName}
                   syntacticalName={obj.syntacticalName}
@@ -89,10 +101,11 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
                   syntacticalName={obj.syntacticalName}
                   description={obj.description}
                   key={index}
-                  parameterSchema={obj.parameterSchema}
+                  parameterSchema={obj.parameterSchema!}
                   inputRef={props.inputRef}
                   addToUserInput={props.addToUserInput}
                   setDialogOpen={props.setDialogOpen}
+                  setForm={props.setForm}
                 />)
               }
             }

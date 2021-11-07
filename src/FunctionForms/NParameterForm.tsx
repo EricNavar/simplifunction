@@ -1,13 +1,23 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
 import '../Calculator.css';
+import { Parameter } from '../commonTypes';
 
-function NParameterForm(props) {
+type NParameterFormProps = {
+  commonName: string,
+  syntacticalName: string,
+  description: string,
+  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  setDialogOpen: (value: boolean) => void,
+  inputRef: HTMLInputElement,
+  parameterSchema: Array<Parameter>
+};
+function NParameterForm(props: NParameterFormProps) {
   const [parameters, setParameters] = React.useState(new Array(props.parameterSchema.length).fill(""));
 
-  const onChangeParameter = (e, index) => {
+  const onChangeParameter = (event: any, index: number) => {
     let parametersCopy = parameters;
-    parametersCopy[index] = e.target.value;
+    parametersCopy[index] = event.target.value;
     setParameters(parametersCopy);
   }
 
@@ -25,7 +35,11 @@ function NParameterForm(props) {
   const handleDoneClick = () => {
     const formula = createFormulaFromParameters();
     props.addToUserInput(formula, props.inputRef);
-    props.onClose();
+    closeDialog();
+  };
+
+  const closeDialog = () => {
+    props.setDialogOpen(false);
   };
 
   return (
@@ -45,7 +59,7 @@ function NParameterForm(props) {
               type="text"
               onChange={e => onChangeParameter(e, index)}
               className="text-field"
-              helperText={props.parameterSchema[index].description}
+              helperText={props.parameterSchema[index].helperText}
               value={parameter}
               required={props.parameterSchema[index].required}
             />
@@ -56,7 +70,7 @@ function NParameterForm(props) {
         <Button onClick={handleDoneClick} autoFocus>
           Done
         </Button>
-        <Button onClick={props.onClose}>Cancel</Button>
+        <Button onClick={closeDialog}>Cancel</Button>
       </DialogActions>
     </>
   );
