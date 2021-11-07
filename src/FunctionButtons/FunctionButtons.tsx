@@ -11,15 +11,22 @@ import {
 import '../Calculator.css';
 import { functions, functionTypes } from './functions';
 import { SearchIcon } from '../SearchIcon.js';
-import { ListParameteredFunctionButton } from './ListParameteredFunctionButton.js';
-import { SingleParameterFunctionButton } from './SingleParameterFunctionButton.js';
-import { NParameterFunctionButton } from './NParameterFunctionButton.js';
+import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';
+import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
+import { NParameterFunctionButton } from './NParameterFunctionButton';
 
-function FunctionButtonContainer(props) {
+type FunctionButtonContainerProps = {
+  inputRef: HTMLInputElement,
+  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  setDialogOpen: (value: boolean) => void,
+  setForm: (form: React.SetStateAction<JSX.Element>) => void,
+}
+
+function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   const [searchInput, setSearchInput] = React.useState('');
   const [filteredFunctions, setFilteredFunctions] = React.useState(functions);
 
-  const onChangeSearchInput = e => {
+  const onChangeSearchInput = (e: any) => {
     setSearchInput(e.target.value);
     setFilteredFunctions(functions.filter(f => f.commonName.toLowerCase().includes(e.target.value)));
   };
@@ -61,8 +68,7 @@ function FunctionButtonContainer(props) {
                   inputRef={props.inputRef}
                   addToUserInput={props.addToUserInput}
                   setForm={props.setForm}
-                  openDialog={props.openDialog}
-                  closeDialog={props.closeDialog}
+                  setDialogOpen={props.setDialogOpen}
                 />)
               }
               else if (obj.parameterType === "single") {
@@ -73,7 +79,8 @@ function FunctionButtonContainer(props) {
                   key={index}
                   inputRef={props.inputRef}
                   addToUserInput={props.addToUserInput}
-                  closeDialog={props.closeDialog}
+                  setDialogOpen={props.setDialogOpen}
+                  setForm={props.setForm}
                 />)
               }
               else {
@@ -85,7 +92,7 @@ function FunctionButtonContainer(props) {
                   parameterSchema={obj.parameterSchema}
                   inputRef={props.inputRef}
                   addToUserInput={props.addToUserInput}
-                  closeDialog={props.closeDialog}
+                  setDialogOpen={props.setDialogOpen}
                 />)
               }
             }
@@ -97,7 +104,10 @@ function FunctionButtonContainer(props) {
   );
 }
 
-function SectionHeader(props) {
+type SectionHeaderProps = {
+  children: React.ReactNode,
+}
+function SectionHeader(props: SectionHeaderProps) {
   return (
     <Grid item xs={12}>
       <Typography component="p" variant="h5" className="sectionHeader">
@@ -107,9 +117,16 @@ function SectionHeader(props) {
   );
 }
 
-function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mobile, inputRef }) {
+type FunctionButtonsProps = {
+  mobile: boolean,
+  inputRef: HTMLInputElement,
+  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  setDialogOpen: (open: boolean) => void,
+  setForm: (form: React.SetStateAction<JSX.Element>) => void,
+}
+function FunctionButtons(props: FunctionButtonsProps) {
+  const { mobile, inputRef, addToUserInput, setDialogOpen, setForm } = props;
   const [expanded, setExpanded] = React.useState(false);
-
 
   const handleChange = () => {
     setExpanded(!expanded);
@@ -128,13 +145,13 @@ function FunctionButtons({ setForm, openDialog, closeDialog, addToUserInput, mob
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FunctionButtonContainer inputRef={inputRef} />
+          <FunctionButtonContainer setDialogOpen={setDialogOpen} inputRef={inputRef} addToUserInput={addToUserInput} setForm={setForm} />
         </AccordionDetails>
       </Accordion>
     )
   }
   else {
-    return <FunctionButtonContainer />
+    return <FunctionButtonContainer setDialogOpen={setDialogOpen} inputRef={inputRef} addToUserInput={addToUserInput} setForm={setForm} />
   }
 };
 

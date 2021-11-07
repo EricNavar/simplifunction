@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListParameteredForm } from '../FunctionForms/ListParameteredForm.js';
 import '../Calculator.css';
-import { FunctionButton } from './FunctionButton.js';
+import { FunctionButton } from './FunctionButton';
 
 // these functions take in a list as parameter. Either as a 
 // range or a comma separated list
@@ -16,8 +16,8 @@ function ListParameteredFunctionButton(props) {
         syntacticalName={props.syntacticalName}
         description={props.description}
         addToUserInput={props.addToUserInput}
-        onClose={props.closeDialog}
         inputRef={props.inputRef}
+        setDialogOpen={props.setDialogOpen}
       />
     }
   />

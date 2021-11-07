@@ -2,26 +2,26 @@ import React from 'react';
 import { Typography, Grid, Button, TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { FunctionButtons } from './FunctionButtons/FunctionButtons.js';
+import { FunctionButtons } from './FunctionButtons/FunctionButtons';
 import { createFormula } from './createFormula';
-import { MyDialog } from './MyDialog.js';
+import { MyDialog } from './MyDialog';
 import './Calculator.css';
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');
   const [userInput, setUserInput] = React.useState('');
-
-  const [form, setForm] = React.useState(null);
+  let element:JSX.Element = <Grid></Grid>;
+  const [form, setForm] = React.useState(element);
   const [inputRef, setInputRef] = React.useState(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
-  const addToUserInput = async (strToAdd, inputRef) => {
-    const selectionStart = inputRef.selectionStart;
-    const selectionEnd = inputRef.selectionEnd;
-    const newUserInput = userInput.substring(0, selectionStart) + strToAdd + userInput.substring(selectionEnd);
+  const addToUserInput = async (strToAdd:string, inputRef:HTMLInputElement) => {
+    const selectionStart = inputRef.selectionStart ? inputRef.selectionStart : inputRef.size;
+    const selectionEnd = inputRef.selectionEnd ? inputRef.selectionEnd : inputRef.size;
+    const newUserInput = userInput.substring(0, selectionStart!) + strToAdd + userInput.substring(selectionEnd!);
     inputRef.focus();
 
     setUserInput(newUserInput);
@@ -35,16 +35,20 @@ function Calculator() {
     setFormula(createFormula(userInput));
   };
 
-  const onType = e => {
-    setUserInput(e.target.value);
+  const onType = (event:any) => {
+    setUserInput(event.target.value);
   };
 
-  function InputButton(props) {
+  type InputButtonProps = {
+    input: string
+  }
+
+  function InputButton(props:InputButtonProps) {
     return (
       <Button
         className="button small-button"
         variant="outlined"
-        onClick={e => addToUserInput(props.input, inputRef)}
+        onClick={e => addToUserInput(props.input, inputRef!)}
         aria-label="open parentheses"
         disableRipple
       >
@@ -54,10 +58,10 @@ function Calculator() {
   }
 
   function backspace() {
-    setUserInput(userInput.substring(0, userInput.substring - 2));
+    setUserInput(userInput.substring(0, userInput.length - 2));
   }
 
-  function BackspaceButton(props) {
+  function BackspaceButton() {
     return (
       <Button
         className="button small-button"
@@ -69,10 +73,6 @@ function Calculator() {
         ⌫
       </Button>
     );
-  }
-
-  function closeDialog() {
-    setDialogOpen(false);
   }
 
   return (
@@ -92,12 +92,11 @@ function Calculator() {
           variant='filled'
         />
         <FunctionButtons
-          closeDialog={closeDialog}
+          setDialogOpen={setDialogOpen}
           setForm={setForm}
-          openDialog={e => setDialogOpen(true)}
           addToUserInput={addToUserInput}
           mobile={mobile}
-          inputRef={inputRef}
+          inputRef={inputRef!}
         />
         <Grid item container xs={12} sm={6} md={8} className="small-button-container">
           <Grid item xs={12}>
@@ -107,7 +106,7 @@ function Calculator() {
           {mobile &&
             <Grid item xs={9}>
               {[0,3,2,1,6,5,4,9,8,7].reverse().map((num) => // number buttons
-                <InputButton input={num} key={num} />
+                <InputButton input={num.toString()} key={num} />
               )}
               <InputButton input='.' />
               <BackspaceButton />
@@ -144,7 +143,7 @@ function Calculator() {
 
       {formula && <Typography>Here is your formula:</Typography>}
       <p className="formula">{formula}</p>
-      <MyDialog open={dialogOpen} onClose={e => setDialogOpen(false)} form={form} />
+      <MyDialog open={dialogOpen} onClose={(e:any) => setDialogOpen(false)} form={form} />
     </div>
   );
 };

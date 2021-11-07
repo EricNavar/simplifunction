@@ -1,7 +1,7 @@
 import React from 'react';
 import { NParameterForm } from '../FunctionForms/NParameterForm.js';
 import '../Calculator.css';
-import { FunctionButton } from './FunctionButton.js';
+import { FunctionButton } from './FunctionButton';
 
 function NParameterFunctionButton(props) {
   return <FunctionButton
@@ -13,9 +13,9 @@ function NParameterFunctionButton(props) {
         syntacticalName={props.syntacticalName}
         description={props.description}
         addToUserInput={props.addToUserInput}
-        onClose={props.closeDialog}
         parameterSchema={props.parameterSchema}
         inputRef={props.inputRef}
+        setDialogOpen={props.setDialogOpen}
       />
     }
   />

@@ -2,12 +2,31 @@ const functionTypes = [
   "Math",
   "Trigonometry",
   "Statistics",
-  "Engineering",
+  "Bitwise",
+  "Conversion",
   "Text",
-  "Date"
+  "Date",
+  "Lookup"
 ];
 
+/* functions to add
+
+all the web functions
+concatenate
+subsitute
+trim
+csc
+cot
+cos
+pi
+degrees to radians
+radians to degrees
+random (choose)
+today
+*/
+
 const functions = [
+  // ==== MATH ====
   {
     commonName: "Summation",
     syntacticalName: "SUM",
@@ -49,7 +68,6 @@ const functions = [
     description: "Rounds a number to the nearest integer or to the nearest multiple of significance",
     type: "Math",
     parameterType: "n",
-    n: 2,
     parameterSchema: [
       {
         name: "number to round",
@@ -58,6 +76,61 @@ const functions = [
       {
         name: "step",
         required: false
+      },
+    ]
+  },
+  {
+    commonName: "Power",
+    syntacticalName: "POWER",
+    description: "Returns the result of a number raised to a power",
+    type: "Math",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Base",
+        required: true
+      },
+      {
+        name: "Exponent",
+        required: true
+      },
+    ]
+  },
+  {
+    commonName: "Square root",
+    syntacticalName: "SQRT",
+    description: "Returns a positive square root",
+    type: "Math",
+    parameterType: "single",
+  },
+  {
+    commonName: "Choose random number",
+    syntacticalName: "CHOOSE",
+    description: "Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.",
+    type: "Math",
+    parameterType: "single",
+  },
+  {
+    commonName: "Log₁₀",
+    syntacticalName: "LOG10",
+    description: "Returns the base-10 logarithm of a number",
+    type: "Math",
+    parameterType: "single",
+  },
+  {
+    commonName: "Log",
+    syntacticalName: "LOG",
+    description: "Returns the logarithm of a number to a specified base",
+    type: "Math",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Number",
+        required: true
+      },
+      {
+        name: "Base",
+        required: true
       },
     ]
   },
@@ -95,6 +168,7 @@ const functions = [
       },
     ]
   },
+  // ==== Trigonometry ====
   {
     commonName: "Sin",
     syntacticalName: "SIN",
@@ -136,6 +210,33 @@ const functions = [
     description: "Returns the arctangent of a number",
     type: "Trigonometry",
     parameterType: "single"
+  },
+  // STATISTICS
+  {
+    commonName: "Normal distribution",
+    syntacticalName: "NORM.DIST",
+    description: "Returns the normal cumulative distribution",
+    type: "Statistics",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "X",
+        description: "The value for which you want the distribution.",
+        required: true
+      },
+      {
+        name: "Mean",
+        required: false
+      },
+      {
+        name: "Standard dev",
+        required: true
+      },
+      {
+        name: "Cumulative",
+        required: true
+      }
+    ]
   },
   {
     commonName: "Average",
@@ -179,19 +280,142 @@ const functions = [
     type: "Statistics",
     parameterType: "list"
   },
+  // Bitwise operations
+  {
+    commonName: "Left shift",
+    syntacticalName: "BITLSHIFT",
+    description: "Returns a value number shifted left by shift_amount bits",
+    type: "Bitwise",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Number",
+        required: true
+      },
+      {
+        name: "Places to shift",
+        required: true
+      }
+    ]
+  },
+  {
+    commonName: "Right shift",
+    syntacticalName: "BITRSHIFT",
+    description: "Returns a value number shifted left by shift_amount bits",
+    type: "Bitwise",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Number",
+        required: true
+      },
+      {
+        name: "Places to shift",
+        required: true
+      }
+    ]
+  },
+  {
+    commonName: "Bitwise OR",
+    syntacticalName: "BITOR",
+    description: "Returns a bitwise OR of 2 numbers",
+    type: "Bitwise",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Operand 1",
+        required: true
+      },
+      {
+        name: "Operand 2",
+        required: true
+      }
+    ]
+  },
+  {
+    commonName: "Bitwise OR",
+    syntacticalName: "BITOR",
+    description: "Returns a bitwise OR of 2 numbers",
+    type: "Bitwise",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Operand 1",
+        required: true
+      },
+      {
+        name: "Operand 2",
+        required: true
+      }
+    ]
+  },
+  {
+    commonName: "Bitwise AND",
+    syntacticalName: "BITOR",
+    description: "Returns a bitwise AND of 2 numbers",
+    type: "Bitwise",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Operand 1",
+        required: true
+      },
+      {
+        name: "Operand 2",
+        required: true
+      }
+    ]
+  },
+  {
+    commonName: "Bitwise XOR",
+    syntacticalName: "BITXOR",
+    description: "Returns a bitwise AND of 2 numbers",
+    type: "Bitwise",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Operand 1",
+        required: true
+      },
+      {
+        name: "Operand 2",
+        required: true
+      }
+    ]
+  },
+  // ==== CONVERSION ====
   {
     commonName: "Binary to decimal",
     syntacticalName: "BIN2DEC",
     description: "Converts a binary number to decimal",
-    type: "Engineering",
+    type: "Conversion",
     parameterType: "single"
   },
   {
     commonName: "Decimal to binary",
     syntacticalName: "DEC2BIN",
     description: "Converts a decimal number to binary",
-    type: "Engineering",
+    type: "Conversion",
     parameterType: "single"
+  },
+  // ==== TEXT ====
+  {
+    commonName: "Text concatenation",
+    syntacticalName: "CONCAT",
+    description: "Combines the text from multiple ranges and/or strings, but it doesn't provide the delimiter or IgnoreEmpty arguments.",
+    type: "Text",
+    parameterType: "n",
+    parameterSchema: [
+      {
+        name: "Number",
+        required: true
+      },
+      {
+        name: "Decimals",
+        helperText: "The number of digits to the right of the decimal point. If this is negative, the number is rounded to the left of the decimal point. If you omit decimals, it is assumed to be 2.",
+        required: true
+      },
+    ]
   },
   {
     commonName: "To lowercase",
@@ -225,6 +449,7 @@ const functions = [
       },
     ]
   },
+  // ==== DATE ====
   {
     commonName: "Date",
     syntacticalName: "DATE",
@@ -246,6 +471,14 @@ const functions = [
         required: true
       }
     ]
+  },
+  // ==== LOOKUP AND REFERENCE ====
+  {
+    commonName: "Sort",
+    syntacticalName: "SORT",
+    description: "Sorts the contents of a range or array",
+    type: "Lookup",
+    parameterType: "list"
   },
 ]
 
