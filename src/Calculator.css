@@ -113,7 +113,7 @@ button {
 }
 
 .function-buttons-grid-container {
-  max-height: 70vh;
+  max-height: 60vh;
   overflow-y: scroll;
 }
 
