@@ -14,7 +14,7 @@ function SingleParameterForm(props: SingleParameterFormProps) {
   const [parameter, setParameter] = React.useState(["", ""]);
 
   const handleDoneClick = () => {
-    const formula = `${props.commonName}(${parameter})`;
+    const formula = `${props.commonName.replace(" ","_")}(${parameter})`;
     props.addToUserInput(formula, props.inputRef);
     closeDialog();
   };

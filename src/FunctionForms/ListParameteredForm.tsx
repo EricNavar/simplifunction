@@ -29,7 +29,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   }
 
   const createFormulaFromRange = () => {
-    return `${props.commonName}(${startCell}:${endCell})`;
+    return `${props.commonName.replace(" ","_")}(${startCell}:${endCell})`;
   }
 
   const createFormulaFromParameters = () => {

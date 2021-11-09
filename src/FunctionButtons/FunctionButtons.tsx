@@ -6,7 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   TextField,
-  InputAdornment
+  IconButton
 } from '@mui/material';
 import '../Calculator.css';
 import { functions } from './functions';
@@ -26,6 +26,7 @@ type FunctionButtonContainerProps = {
 function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   const [searchInput, setSearchInput] = React.useState('');
   const [filteredFunctions, setFilteredFunctions] = React.useState(functions);
+  const [searchBarExpanded, setSearchBarExpanded] = React.useState(false);
 
   const onChangeSearchInput = (e: any) => {
     setSearchInput(e.target.value);
@@ -43,29 +44,32 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     ExcelFunctionType.Lookup
   ];
 
+  const toggleSearchBarExpanded = () => {
+    setSearchBarExpanded(!searchBarExpanded);
+  };
+
   return (
-    <>
-      <div className="functions-header-container" >
-        <Typography component="h2" variant='h4'>
-          Functions
-        </Typography>
-        <TextField
-          id="function-search"
-          placeholder="Search function"
-          value={searchInput}
-          onChange={onChangeSearchInput}
-          variant="standard"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            )
-          }}
-        />
+    <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-buttons">
+      <Typography component="h2" variant='h4' style={{ width: '100%' }}>
+        Functions
+      </Typography>
+      <div style={{ display: 'flex', marginBottom:20 }}>
+        <IconButton disableRipple={searchBarExpanded} onClick={toggleSearchBarExpanded}>
+          <SearchIcon />
+        </IconButton>
+        <div className={'function-textfield' + (searchBarExpanded ? "" : " not-expanded-textfield")}>
+          <TextField
+            id="function-search"
+            placeholder="Search function"
+            value={searchInput}
+            onChange={onChangeSearchInput}
+            variant="outlined"
+            size='small'
+          />
+        </div>
       </div>
-      <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-button-container">
-        {ExcelFunctionTypeArray.map((functionType:any, index:number) =>
+      <Grid item container spacing={2} className="function-buttons-grid-container">
+        {ExcelFunctionTypeArray.map((functionType: any, index: number) =>
           <React.Fragment key={index}>
             <SectionHeader>
               {functionType}
@@ -113,7 +117,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           </React.Fragment>
         )}
       </Grid>
-    </>
+    </Grid>
   );
 }
 

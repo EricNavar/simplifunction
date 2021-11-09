@@ -16,13 +16,11 @@ function NParameterForm(props: NParameterFormProps) {
   const [parameters, setParameters] = React.useState(new Array(props.parameterSchema.length).fill(""));
 
   const onChangeParameter = (event: any, index: number) => {
-    let parametersCopy = parameters;
-    parametersCopy[index] = event.target.value;
-    setParameters(parametersCopy);
+    setParameters((param) => param.map((el, iter) => (iter !== index ? el : event.target.value)));
   }
 
   const createFormulaFromParameters = () => {
-    let formula = "=" + props.syntacticalName + "(";
+    let formula = "=" + props.commonName.replace(" ","_") + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
         formula = formula + ",";
@@ -52,7 +50,7 @@ function NParameterForm(props: NParameterFormProps) {
           {props.description}
         </DialogContentText>
         {parameters.map((parameter, index) =>
-          <div key={`${props.commonName}-form-${index}`}>
+          <div key={`${props.commonName.replace(" ","_")}-form-${index}`}>
             <TextField
               label={props.parameterSchema[index].name}
               size="small"

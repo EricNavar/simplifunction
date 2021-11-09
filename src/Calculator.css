@@ -100,6 +100,7 @@ button {
 
 .user-input-text-field {
   margin-bottom: 18px !important;
+  margin-top: 18px !important;
 }
 
 .sectionHeader {
@@ -107,8 +108,18 @@ button {
   margin-bottom: 4px;
 }
 
-.function-button-container {
+.function-buttons {
   margin-bottom: 20px;
+}
+
+.function-buttons-grid-container {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+
+.function-buttons-grid-item {
+  padding-right: 8px;
+  padding-left: 8px !important;
 }
 
 .functions-header-container {
@@ -121,4 +132,20 @@ button {
 .functions-header {
   display: inline;
   margin-right: 12px;
+}
+
+.function-textfield {
+  transition: all 0.3s ease-in-out;
+  width: 180px;
+  overflow: hidden;
+}
+
+.not-expanded-textfield {
+  display: flex;
+  width: 0;
+}
+
+.not-expanded-textfield > div > * {
+  padding-left: 0px;
+  padding-right: 0px;
 }
