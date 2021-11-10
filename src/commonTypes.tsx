@@ -1,4 +1,4 @@
-export enum ExcelFunctionType {
+export enum ExcelFunctionCategory {
   Math = "Math",
   Trigonometry = "Trigonometry",
   Statistics = "Statistics",
@@ -25,7 +25,7 @@ export type ExcelFunction = {
   commonName: string,
   syntacticalName: string,
   description:  string,
-  type: ExcelFunctionType,
-  parameterType: ParameterType,
+  category: ExcelFunctionCategory,
+  parameterFormat: ParameterType,
   parameterSchema?: Array<Parameter>
 }

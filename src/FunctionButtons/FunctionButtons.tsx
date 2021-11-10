@@ -9,12 +9,12 @@ import {
   IconButton
 } from '@mui/material';
 import '../Calculator.css';
-import { functions } from './functions';
-import { SearchIcon } from '../SearchIcon';
+import { functions } from '../functions';
+import { SearchIcon } from '../assets/SearchIcon';
 import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';
 import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
 import { NParameterFunctionButton } from './NParameterFunctionButton';
-import { ParameterType, ExcelFunctionType } from '../commonTypes';
+import { ParameterType, ExcelFunctionCategory, ExcelFunction } from '../commonTypes';
 
 type FunctionButtonContainerProps = {
   inputRef: HTMLInputElement,
@@ -30,18 +30,18 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
 
   const onChangeSearchInput = (e: any) => {
     setSearchInput(e.target.value);
-    setFilteredFunctions(functions.filter(f => f.commonName.toLowerCase().includes(e.target.value)));
+    setFilteredFunctions(functions.filter((f:ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value)));
   };
 
   const ExcelFunctionTypeArray = [
-    ExcelFunctionType.Math,
-    ExcelFunctionType.Trigonometry,
-    ExcelFunctionType.Statistics,
-    ExcelFunctionType.Bitwise,
-    ExcelFunctionType.Conversion,
-    ExcelFunctionType.Text,
-    ExcelFunctionType.Date,
-    ExcelFunctionType.Lookup
+    ExcelFunctionCategory.Math,
+    ExcelFunctionCategory.Trigonometry,
+    ExcelFunctionCategory.Statistics,
+    ExcelFunctionCategory.Bitwise,
+    ExcelFunctionCategory.Conversion,
+    ExcelFunctionCategory.Text,
+    ExcelFunctionCategory.Date,
+    ExcelFunctionCategory.Lookup
   ];
 
   const toggleSearchBarExpanded = () => {
@@ -74,8 +74,8 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
             <SectionHeader>
               {functionType}
             </SectionHeader>
-            {filteredFunctions.filter(f => f.type === functionType).map((obj, index) => {
-              if (obj.parameterType === ParameterType.LIST) {
+            {filteredFunctions.filter((f:ExcelFunction) => f.category === functionType).map((obj:ExcelFunction, index:number) => {
+              if (obj.parameterFormat === ParameterType.LIST) {
                 return (<ListParameteredFunctionButton
                   label={obj.commonName}
                   syntacticalName={obj.syntacticalName}
@@ -87,7 +87,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
                   setDialogOpen={props.setDialogOpen}
                 />)
               }
-              else if (obj.parameterType === ParameterType.SINGLE) {
+              else if (obj.parameterFormat === ParameterType.SINGLE) {
                 return (<SingleParameterFunctionButton
                   label={obj.commonName}
                   syntacticalName={obj.syntacticalName}

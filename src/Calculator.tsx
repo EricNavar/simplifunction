@@ -3,7 +3,7 @@ import { Typography, Grid, Button, TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { FunctionButtons } from './FunctionButtons/FunctionButtons';
-import { createFormula } from './createFormula';
+import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
 import './Calculator.css';
 
