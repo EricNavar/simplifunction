@@ -1,11 +1,11 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, ToggleButton, ToggleButtonGroup, Button, TextField, DialogContentText } from '@mui/material';
 import '../Calculator.css';
+import { isCell, validateList } from '../util/validator';
+import { ExcelFunction } from '../commonTypes';
 
 type ListParameteredFormProps = {
-  commonName: string,
-  syntacticalName: string,
-  description: string,
+  excelFunction: ExcelFunction,
   addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   inputRef: HTMLInputElement,
@@ -13,6 +13,8 @@ type ListParameteredFormProps = {
 function ListParameteredForm(props: ListParameteredFormProps) {
   const [parameterCount, setParameterCount] = React.useState(2);
   const [parameters, setParameters] = React.useState(["", ""]);
+  // valids is an array with element n being a boolean indicating if parameter n is valid or not.
+  const [valids, setValids] = React.useState([true, true]);
   const [inputMode, setInputMode] = React.useState("range");
   const [startCell, setStartCell] = React.useState("A1");
   const [endCell, setEndCell] = React.useState("A2");
@@ -22,18 +24,24 @@ function ListParameteredForm(props: ListParameteredFormProps) {
     newParameters.push("");
     setParameters(newParameters);
     setParameterCount(parameterCount + 1);
+
+    let newValids = valids;
+    newValids.push(false);
+    setValids(newValids);
   }
 
   const onChangeParameter = (event: any, index: number) => {
-    parameters[index] = event.target.value;
+    setParameters(parameters.map((param: string, iter: number) => 
+      (iter !== index ? param : event.target.value)
+    ));
   }
 
   const createFormulaFromRange = () => {
-    return `${props.commonName.replace(" ","_")}(${startCell}:${endCell})`;
+    return `${props.excelFunction.commonName.replace(" ", "_")}(${startCell}:${endCell})`;
   }
 
   const createFormulaFromParameters = () => {
-    let formula = "=" + props.syntacticalName + "(";
+    let formula = "=" + props.excelFunction.syntacticalName + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
         formula = formula + ",";
@@ -57,15 +65,29 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   };
 
   const handleDoneClick = () => {
-    const formula = inputMode === "range" ? createFormulaFromRange() : createFormulaFromParameters();
-    props.addToUserInput(formula, props.inputRef);
-    closeDialog();
+    if (inputMode === "range") {
+      const newValids = [isCell(startCell), isCell(endCell)];
+      setValids(newValids);
+      if (!newValids.includes(false)) {
+        props.addToUserInput(createFormulaFromRange(), props.inputRef);
+        closeDialog();
+      }
+    }
+    else {
+      setValids(validateList(parameters, props.excelFunction.parameterType!));
+      props.addToUserInput(createFormulaFromParameters(), props.inputRef);
+      closeDialog();
+    }
   };
 
+  // TODO: this is a terrible way of changing an array state. Fix this.
   const onDeleteClick = (index: number) => {
     parameters.splice(index, 1);
     setParameters(parameters);
     setParameterCount(parameterCount - 1);
+
+    valids.splice(index, 1);
+    setValids(valids);
   };
 
   const closeDialog = () => {
@@ -74,12 +96,12 @@ function ListParameteredForm(props: ListParameteredFormProps) {
 
   return (
     <>
-      <DialogTitle id={`${props.syntacticalName}-title`}>
-        {props.commonName}
+      <DialogTitle id={`${props.excelFunction.syntacticalName}-title`}>
+        {props.excelFunction.commonName}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id={`${props.syntacticalName}-description`}>
-          {props.description}
+        <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
+          {props.excelFunction.description}
         </DialogContentText>
         <ToggleButtonGroup
           value={inputMode}
@@ -98,14 +120,15 @@ function ListParameteredForm(props: ListParameteredFormProps) {
 
         {inputMode === "individual" &&
           <>
-            {parameters.map((parameter, index) =>
-              <div key={`${props.commonName}-form-${index}`}>
+            {parameters.map((parameter: string, index: number) =>
+              <div key={`${props.excelFunction.commonName}-form-${index}`}>
                 <TextField
                   label={`Parameter ${index + 1}`}
                   size="small"
                   type="text"
                   onChange={e => onChangeParameter(e, index)}
                   className="text-field"
+                  error={!valids[index]}
                 />
                 <Button onClick={e => onDeleteClick(index)} size='small' color='info'>
                   REMOVE
@@ -127,16 +150,18 @@ function ListParameteredForm(props: ListParameteredFormProps) {
                 label="Start cell"
                 onChange={onChangeStartCell}
                 className="text-field"
+                error={!valids[0]}
               />
             </div>
             <div style={{ display: 'flex' }}>
-              <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>to</span>
+              <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>To</span>
               <TextField
                 size="small"
                 type="text"
                 label="End cell"
                 onChange={onChangeEndCell}
                 className="text-field"
+                error={!valids[1]}
               />
             </div>
           </>

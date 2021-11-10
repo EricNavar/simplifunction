@@ -1,26 +1,29 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
 import '../Calculator.css';
-import { Parameter } from '../commonTypes';
+import { ExcelFunction } from '../commonTypes';
+import { validateNParameters } from '../util/validator';
 
 type NParameterFormProps = {
-  commonName: string,
-  syntacticalName: string,
-  description: string,
   addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   inputRef: HTMLInputElement,
-  parameterSchema: Array<Parameter>
+  excelFunction: ExcelFunction
 };
 function NParameterForm(props: NParameterFormProps) {
-  const [parameters, setParameters] = React.useState(new Array(props.parameterSchema.length).fill(""));
+  const [parameters, setParameters] = React.useState(
+    new Array(props.excelFunction.parameterSchema!.length).fill("")
+  );
+  const [valids, setValids] = React.useState(
+    new Array(props.excelFunction.parameterSchema!.length).fill(true)
+  );
 
   const onChangeParameter = (event: any, index: number) => {
-    setParameters((param) => param.map((el, iter) => (iter !== index ? el : event.target.value)));
+    setParameters(parameters.map((param: string, iter: number) => (iter !== index ? param : event.target.value)));
   }
 
   const createFormulaFromParameters = () => {
-    let formula = "=" + props.commonName.replace(" ","_") + "(";
+    let formula = "=" + props.excelFunction.commonName.replace(" ", "_") + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
         formula = formula + ",";
@@ -31,9 +34,13 @@ function NParameterForm(props: NParameterFormProps) {
   };
 
   const handleDoneClick = () => {
-    const formula = createFormulaFromParameters();
-    props.addToUserInput(formula, props.inputRef);
-    closeDialog();
+    const newValids = validateNParameters(parameters, props.excelFunction.parameterSchema!);
+    setValids(newValids);
+    if (!newValids.includes(false)) {
+      const formula = createFormulaFromParameters();
+      props.addToUserInput(formula, props.inputRef);
+      closeDialog();
+    }
   };
 
   const closeDialog = () => {
@@ -42,24 +49,25 @@ function NParameterForm(props: NParameterFormProps) {
 
   return (
     <>
-      <DialogTitle id={`${props.syntacticalName}-title`}>
-        {props.commonName}
+      <DialogTitle id={`${props.excelFunction.syntacticalName}-title`}>
+        {props.excelFunction.commonName}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id={`${props.syntacticalName}-description`}>
-          {props.description}
+        <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
+          {props.excelFunction.description}
         </DialogContentText>
         {parameters.map((parameter, index) =>
-          <div key={`${props.commonName.replace(" ","_")}-form-${index}`}>
+          <div key={`${props.excelFunction.commonName.replace(" ", "_")}-form-${index}`}>
             <TextField
-              label={props.parameterSchema[index].name}
+              label={props.excelFunction.parameterSchema![index].name}
               size="small"
               type="text"
               onChange={e => onChangeParameter(e, index)}
               className="text-field"
-              helperText={props.parameterSchema[index].helperText}
+              helperText={props.excelFunction.parameterSchema![index].helperText}
               value={parameter}
-              required={props.parameterSchema[index].required}
+              required={props.excelFunction.parameterSchema![index].required}
+              error={!valids[index]}
             />
           </div>
         )}

@@ -14,7 +14,7 @@ import { SearchIcon } from '../assets/SearchIcon';
 import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';
 import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
 import { NParameterFunctionButton } from './NParameterFunctionButton';
-import { ParameterType, ExcelFunctionCategory, ExcelFunction } from '../commonTypes';
+import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
 
 type FunctionButtonContainerProps = {
   inputRef: HTMLInputElement,
@@ -30,7 +30,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
 
   const onChangeSearchInput = (e: any) => {
     setSearchInput(e.target.value);
-    setFilteredFunctions(functions.filter((f:ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value)));
+    setFilteredFunctions(functions.filter((f: ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value)));
   };
 
   const ExcelFunctionTypeArray = [
@@ -53,7 +53,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
       <Typography component="h2" variant='h4' style={{ width: '100%' }}>
         Functions
       </Typography>
-      <div style={{ display: 'flex', marginBottom:20 }}>
+      <div style={{ display: 'flex', marginBottom: 20 }}>
         <IconButton disableRipple={searchBarExpanded} onClick={toggleSearchBarExpanded}>
           <SearchIcon />
         </IconButton>
@@ -74,42 +74,35 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
             <SectionHeader>
               {functionType}
             </SectionHeader>
-            {filteredFunctions.filter((f:ExcelFunction) => f.category === functionType).map((obj:ExcelFunction, index:number) => {
-              if (obj.parameterFormat === ParameterType.LIST) {
+            {filteredFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
+              if (obj.parameterFormat === ParameterFormat.LIST) {
                 return (<ListParameteredFunctionButton
-                  label={obj.commonName}
-                  syntacticalName={obj.syntacticalName}
-                  description={obj.description}
                   key={index}
                   inputRef={props.inputRef}
                   addToUserInput={props.addToUserInput}
                   setForm={props.setForm}
                   setDialogOpen={props.setDialogOpen}
+                  excelFunction={obj}
                 />)
               }
-              else if (obj.parameterFormat === ParameterType.SINGLE) {
+              else if (obj.parameterFormat === ParameterFormat.SINGLE) {
                 return (<SingleParameterFunctionButton
-                  label={obj.commonName}
-                  syntacticalName={obj.syntacticalName}
-                  description={obj.description}
                   key={index}
                   inputRef={props.inputRef}
                   addToUserInput={props.addToUserInput}
                   setDialogOpen={props.setDialogOpen}
                   setForm={props.setForm}
+                  excelFunction={obj}
                 />)
               }
               else {
                 return (<NParameterFunctionButton
-                  label={obj.commonName}
-                  syntacticalName={obj.syntacticalName}
-                  description={obj.description}
                   key={index}
-                  parameterSchema={obj.parameterSchema!}
                   inputRef={props.inputRef}
                   addToUserInput={props.addToUserInput}
                   setDialogOpen={props.setDialogOpen}
                   setForm={props.setForm}
+                  excelFunction={obj}
                 />)
               }
             }

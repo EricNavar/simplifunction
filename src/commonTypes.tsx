@@ -9,16 +9,23 @@ export enum ExcelFunctionCategory {
   Lookup = "Lookup"
 }
 
-export enum ParameterType {
+export enum ParameterFormat {
   SINGLE,
   N,
   LIST
+}
+
+export enum ParameterType {
+  string,
+  number,
+  date
 }
 
 export type Parameter = {
   name: string,
   helperText?: string,
   required: boolean,
+  type: ParameterType
 };
 
 export type ExcelFunction = {
@@ -26,6 +33,8 @@ export type ExcelFunction = {
   syntacticalName: string,
   description:  string,
   category: ExcelFunctionCategory,
-  parameterFormat: ParameterType,
-  parameterSchema?: Array<Parameter>
+  parameterFormat: ParameterFormat,
+  parameterSchema?: Array<Parameter>,
+  // this is for single parameter and list parameters because all they all have parameters of the same type
+  parameterType?: ParameterType
 }
