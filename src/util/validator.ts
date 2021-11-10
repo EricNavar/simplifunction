@@ -1,6 +1,7 @@
 import { ParameterType, Parameter } from '../commonTypes';
 
 export function validateList(parameters: Array<string>, type: ParameterType): Array<boolean> {
+  console.log('validate list of type ' + type);
   return parameters.map((parameter: string) => validateParameter(parameter, type));
 }
 
@@ -24,7 +25,6 @@ function validateSingleStringParameter(parameter: string): boolean {
 }
 
 function validateNumberParameter(parameter: string):boolean {
-  console.log('isCell(parameter) =' + isCell(parameter))
   return isNumber(parameter) || isCell(parameter);
 }
 

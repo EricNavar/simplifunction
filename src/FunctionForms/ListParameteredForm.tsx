@@ -31,7 +31,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   }
 
   const onChangeParameter = (event: any, index: number) => {
-    setParameters(parameters.map((param: string, iter: number) => 
+    setParameters(parameters.map((param: string, iter: number) =>
       (iter !== index ? param : event.target.value)
     ));
   }
@@ -41,7 +41,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   }
 
   const createFormulaFromParameters = () => {
-    let formula = "=" + props.excelFunction.syntacticalName + "(";
+    let formula = props.excelFunction.syntacticalName + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
         formula = formula + ",";
@@ -74,9 +74,12 @@ function ListParameteredForm(props: ListParameteredFormProps) {
       }
     }
     else {
-      setValids(validateList(parameters, props.excelFunction.parameterType!));
-      props.addToUserInput(createFormulaFromParameters(), props.inputRef);
-      closeDialog();
+      const newValids = validateList(parameters, props.excelFunction.parameterType!);
+      setValids(newValids);
+      if (!newValids.includes(false)) {
+        props.addToUserInput(createFormulaFromParameters(), props.inputRef);
+        closeDialog();
+      }
     }
   };
 

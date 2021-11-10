@@ -23,7 +23,7 @@ function NParameterForm(props: NParameterFormProps) {
   }
 
   const createFormulaFromParameters = () => {
-    let formula = "=" + props.excelFunction.commonName.replace(" ", "_") + "(";
+    let formula = props.excelFunction.commonName.replace(" ", "_") + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
         formula = formula + ",";
