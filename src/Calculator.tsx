@@ -78,7 +78,7 @@ function Calculator() {
   return (
     <div className="App" >
       <h1>SimpliFunction</h1>
-      <Grid container spacing={4} className={mobile ? "" : "input-containers"}>
+      <Grid container spacing={2} className={mobile ? "" : "input-containers"}>
         <TextField
           autoFocus
           fullWidth
@@ -90,7 +90,7 @@ function Calculator() {
           placeholder="Enter your calculation"
           variant='filled'
         />
-        <div style={{ width: '100%' }}>
+        <div className="formula-container">
           {formula && <Typography component="span">Here is your formula:</Typography>}
           <span className="formula">{formula}</span>
         </div>
@@ -107,7 +107,7 @@ function Calculator() {
           item container
           xs={12} sm={6} md={8}
         >
-          <Grid item xs={9}>
+          <Grid item xs={12}>
             <InputButton input="( " />
             <InputButton input=" )" />
           </Grid>

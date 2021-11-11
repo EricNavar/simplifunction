@@ -1,6 +1,5 @@
 .App {
   margin-top: 32px;
-  margin-bottom: 48px;
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -101,11 +100,13 @@ button {
 .user-input-text-field {
   margin-bottom: 18px !important;
   margin-top: 18px !important;
+  margin-left: 16px !important;
 }
 
 .sectionHeader {
   margin-top: 16px;
   margin-bottom: 4px;
+  margin-left: 4px;
 }
 
 .function-buttons {
@@ -115,6 +116,12 @@ button {
 .function-buttons-grid-container {
   max-height: 60vh;
   overflow-y: scroll;
+  border-top-color: gray;
+  border-top-width: 1px;
+  border-top-style: solid;
+  padding: 0px !important;
+  margin-top: 16px;
+  margin-left: 16px;
 }
 
 .function-buttons-grid-item {
@@ -152,5 +159,15 @@ button {
 
 .number-button-container {
   max-width: 304px !important;
-  align-items: start;
+  align-content: start;
+}
+
+.formula-container {
+  width: 100%;
+  margin-bottom: 12px;
+  margin-left: 16px;
+}
+
+.accordion {
+  margin-left: 16px !important;
 }

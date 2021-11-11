@@ -21,6 +21,7 @@ type FunctionButtonContainerProps = {
   addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
+  mobile: boolean
 }
 
 function FunctionButtonContainer(props: FunctionButtonContainerProps) {
@@ -50,9 +51,11 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
 
   return (
     <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-buttons">
-      <Typography component="h2" variant='h4' style={{ width: '100%' }}>
-        Functions
-      </Typography>
+      {!props.mobile &&
+        <Typography component="h2" variant='h4' style={{ width: '100%' }}>
+          Functions
+        </Typography>
+      }
       <div style={{ display: 'flex', marginBottom: 20 }}>
         <IconButton disableRipple={searchBarExpanded} onClick={toggleSearchBarExpanded}>
           <SearchIcon />
@@ -107,6 +110,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
               }
             }
             )}
+            <div style={{ height: 16, width: '100%' }} />
           </React.Fragment>
         )}
       </Grid>
@@ -119,11 +123,9 @@ type SectionHeaderProps = {
 }
 function SectionHeader(props: SectionHeaderProps) {
   return (
-    <Grid item xs={12}>
-      <Typography component="p" variant="h5" className="sectionHeader">
-        {props.children}
-      </Typography>
-    </Grid>
+    <Typography component="p" variant="h5" className="sectionHeader" style={{ width: '100%' }}>
+      {props.children}
+    </Typography>
   );
 }
 
@@ -144,24 +146,38 @@ function FunctionButtons(props: FunctionButtonsProps) {
 
   if (mobile) {
     return (
-      <Accordion expanded={expanded} onChange={handleChange} >
+      <Accordion expanded={expanded} onChange={handleChange} className="accordion" >
         <AccordionSummary
           expandIcon={<div>{expanded ? "-" : "+"}</div>}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
+          <Typography component='h2' variant='body1' sx={{ width: '33%', flexShrink: 0 }}>
             Functions
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FunctionButtonContainer setDialogOpen={setDialogOpen} inputRef={inputRef} addToUserInput={addToUserInput} setForm={setForm} />
+          <FunctionButtonContainer
+            mobile={mobile}
+            setDialogOpen={setDialogOpen}
+            inputRef={inputRef}
+            addToUserInput={addToUserInput}
+            setForm={setForm}
+          />
         </AccordionDetails>
       </Accordion>
     )
   }
   else {
-    return <FunctionButtonContainer setDialogOpen={setDialogOpen} inputRef={inputRef} addToUserInput={addToUserInput} setForm={setForm} />
+    return (
+      <FunctionButtonContainer
+        mobile={mobile}
+        setDialogOpen={setDialogOpen}
+        inputRef={inputRef}
+        addToUserInput={addToUserInput}
+        setForm={setForm}
+      />
+    )
   }
 };
 
