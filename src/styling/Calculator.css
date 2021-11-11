@@ -149,3 +149,8 @@ button {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+.number-button-container {
+  max-width: 304px !important;
+  align-items: start;
+}

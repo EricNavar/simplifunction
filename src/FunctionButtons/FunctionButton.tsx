@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Button } from '@mui/material';
-import '../Calculator.css';
+import '../styling/Calculator.css';
 
 type FunctionButtonProps = {
   form: JSX.Element,

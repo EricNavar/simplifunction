@@ -1,7 +1,7 @@
 import React from 'react';
 import { SingleParameterForm } from '../FunctionForms/SingleParameterForm';
 import { FunctionButton } from './FunctionButton';
-import '../Calculator.css';
+import '../styling/Calculator.css';
 import { ExcelFunction } from '../commonTypes';
 
 type SingleParameterFunctionButtonProps = {

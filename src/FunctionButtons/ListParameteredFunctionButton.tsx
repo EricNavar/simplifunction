@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListParameteredForm } from '../FunctionForms/ListParameteredForm';
-import '../Calculator.css';
+import '../styling/Calculator.css';
 import { FunctionButton } from './FunctionButton';
 import { ExcelFunction } from '../commonTypes';
 

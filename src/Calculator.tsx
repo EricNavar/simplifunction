@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { FunctionButtons } from './FunctionButtons/FunctionButtons';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
-import './Calculator.css';
+import './styling/Calculator.css';
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');
@@ -90,7 +90,7 @@ function Calculator() {
           placeholder="Enter your calculation"
           variant='filled'
         />
-        <div style={{width:'100%'}}>
+        <div style={{ width: '100%' }}>
           {formula && <Typography component="span">Here is your formula:</Typography>}
           <span className="formula">{formula}</span>
         </div>
@@ -107,13 +107,13 @@ function Calculator() {
           item container
           xs={12} sm={6} md={8}
         >
-          <Grid item xs={12}>
+          <Grid item xs={9}>
             <InputButton input="( " />
             <InputButton input=" )" />
           </Grid>
           {mobile &&
-            <Grid item xs={9}>
-              {[0, 3, 2, 1, 6, 5, 4, 9, 8, 7].reverse().map((num) => // number buttons
+            <Grid item container xs={9} className="number-button-container">
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].reverse().map((num) => // number buttons
                 <InputButton input={num.toString()} key={num} />
               )}
               <InputButton input='.' />

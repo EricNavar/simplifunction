@@ -8,7 +8,7 @@ import {
   TextField,
   IconButton
 } from '@mui/material';
-import '../Calculator.css';
+import '../styling/Calculator.css';
 import { functions } from '../functions';
 import { SearchIcon } from '../assets/SearchIcon';
 import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';

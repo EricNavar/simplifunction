@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FullStory from 'react-fullstory';
-import './index.css';
+import './styling/index.css';
 import { Calculator } from './Calculator';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, createMuiTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 //https://reacttraining.com/react-router/web/guides/quick-start
 
 
 //https://coolors.co/f2dfd7-fef9ff-d4c1ec-9f9fed-736ced
-const myTheme = createMuiTheme({
+const myTheme = createTheme({
   palette: {
     type: 'light',
     primary: {

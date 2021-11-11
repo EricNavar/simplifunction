@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle, ToggleButton, ToggleButtonGroup, Button, TextField, DialogContentText } from '@mui/material';
-import '../Calculator.css';
+import '../styling/Calculator.css';
 import { isCell, validateList } from '../util/validator';
 import { ExcelFunction } from '../commonTypes';
 

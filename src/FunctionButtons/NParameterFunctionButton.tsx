@@ -1,6 +1,6 @@
 import React from 'react';
 import { NParameterForm } from '../FunctionForms/NParameterForm';
-import '../Calculator.css';
+import '../styling/Calculator.css';
 import { FunctionButton } from './FunctionButton';
 import { ExcelFunction } from '../commonTypes';
 

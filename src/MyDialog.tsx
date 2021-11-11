@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
-import './Calculator.css';
+import './styling/Calculator.css';
 
 type MyDialogProps = {
   setDialogOpen: any,
