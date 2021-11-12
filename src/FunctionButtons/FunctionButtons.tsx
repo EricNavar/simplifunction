@@ -52,7 +52,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-buttons">
       {!props.mobile &&
         <Typography component="h2" variant='h4' style={{ width: '100%' }}>
-          Functions
+          Excel Functions
         </Typography>
       }
       <div style={{ display: 'flex', marginBottom: 20 }}>
@@ -164,7 +164,7 @@ function FunctionButtons(props: FunctionButtonsProps) {
           id="panel1bh-header"
         >
           <Typography component='h2' variant='body1' sx={{ width: '33%', flexShrink: 0 }}>
-            Functions
+            Excel Functions
           </Typography>
         </AccordionSummary>
         <AccordionDetails>

@@ -1,5 +1,15 @@
 import React from 'react';
-import { DialogActions, DialogContent, DialogTitle, ToggleButton, ToggleButtonGroup, Button, TextField, DialogContentText } from '@mui/material';
+import {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  ToggleButton,
+  ToggleButtonGroup,
+  Button,
+  TextField,
+  DialogContentText,
+  Link
+} from '@mui/material';
 import '../styling/Calculator.css';
 import { isCell, validateList } from '../util/validator';
 import { ExcelFunction } from '../commonTypes';
@@ -106,6 +116,15 @@ function ListParameteredForm(props: ListParameteredFormProps) {
         <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
+        <Link
+          variant='overline'
+          href={props.excelFunction.documentationLink}
+          className="docs-link"
+          color='textSecondary'
+          target='_blank'
+        >
+          DOCS
+        </Link>
         <ToggleButtonGroup
           value={inputMode}
           exclusive
@@ -117,7 +136,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
             Cell Range
           </ToggleButton>
           <ToggleButton value="individual" >
-            Individual Parameters
+            Individual Values
           </ToggleButton>
         </ToggleButtonGroup>
 
@@ -126,7 +145,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
             {parameters.map((parameter: string, index: number) =>
               <div key={`${props.excelFunction.commonName}-form-${index}`}>
                 <TextField
-                  label={`Parameter ${index + 1}`}
+                  label={`Value ${index + 1}`}
                   size="small"
                   type="text"
                   onChange={e => onChangeParameter(e, index)}
@@ -139,7 +158,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
               </div>
             )}
             <Button onClick={addParameter}>
-              + Add parameter
+              + Add value
             </Button>
           </>
         }

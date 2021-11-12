@@ -167,5 +167,10 @@
   display: inline-flex;
   align-items: center;
   margin-right: 8px;
-  width: 46px;
+  width: 56px;
+}
+
+.docs-link {
+  width: 100%;
+  display: inline-block;
 }
