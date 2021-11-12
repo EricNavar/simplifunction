@@ -42,7 +42,8 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     ExcelFunctionCategory.Conversion,
     ExcelFunctionCategory.Text,
     ExcelFunctionCategory.Date,
-    ExcelFunctionCategory.Lookup
+    ExcelFunctionCategory.Lookup,
+    ExcelFunctionCategory.Web
   ];
 
   const toggleSearchBarExpanded = () => {

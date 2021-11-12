@@ -29,6 +29,7 @@ function Calculator() {
 
   const clearInput = () => {
     setUserInput("");
+    setFormula("");
   };
 
   const onEqualsClick = () => {
@@ -91,7 +92,7 @@ function Calculator() {
           variant='filled'
         />
         <div className="formula-container">
-          {formula && <Typography component="span">Here is your formula:</Typography>}
+          {formula && <Typography component="span" variant='overline'>Result:</Typography>}
           <span className="formula">{formula}</span>
         </div>
         <FunctionButtons

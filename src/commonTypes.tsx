@@ -6,7 +6,8 @@ export enum ExcelFunctionCategory {
   Conversion = "Conversion",
   Text = "Text",
   Date = "Date",
-  Lookup = "Lookup"
+  Lookup = "Lookup",
+  Web = "Web"
 }
 
 export enum ParameterFormat {
@@ -36,5 +37,7 @@ export type ExcelFunction = {
   parameterFormat: ParameterFormat,
   parameterSchema?: Array<Parameter>,
   // this is for single parameter and list parameters because all they all have parameters of the same type
-  parameterType?: ParameterType
+  parameterType?: ParameterType,
+  remarks?: Array<string>,
+  documentationLink: string
 }

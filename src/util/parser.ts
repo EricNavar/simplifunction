@@ -1,30 +1,42 @@
 import { ExcelFunction } from '../commonTypes';
+import { functions } from '../functions';
 
-function parse(userInput: string, userInputIndex: number, formula: string, functions: Record<string, string>) {
-  Object.keys(functions).forEach((f: string) => {
-    const substr = userInput.substr(userInputIndex, f.length);
-    if (substr === f) {
-      userInputIndex = userInputIndex + f.length;
-      formula = formula + functions[f];
-      userInputIndex = parseWhitespace(userInputIndex, userInput);
-      if (userInput.charAt(userInputIndex) !== "(") {
-        return "";
+function parse(userInput: string):string {
+  let userInputIndex = 0;
+  //every function starts with an equals sign
+  let formula: string = "=";
+  while (userInputIndex < userInput.length) {
+    // eslint-disable-next-line no-loop-func
+    functions.forEach((excelFunction: ExcelFunction) => {
+      const f = excelFunction.commonName;
+      const substr = userInput.substr(userInputIndex, f.length);
+      if (substr === f) {
+        userInputIndex = userInputIndex + f.length
+        formula = formula + excelFunction.syntacticalName + "( ";
+        userInputIndex = parseWhitespace(userInputIndex, userInput);
+        if (userInput.charAt(userInputIndex) !== "(") {
+          userInput = "";
+          return;
+        }
+        else {
+          userInputIndex = userInputIndex + 1;
+        }
+        userInputIndex = parseWhitespace(userInputIndex, userInput);
+        if (userInput.substr(userInputIndex, 4) === "from") {
+          userInputIndex = userInputIndex + 4;
+          const parseRangeResult = parseRange(userInputIndex, userInput, formula);
+          formula = parseRangeResult.formula;
+          userInputIndex = parseRangeResult.index;
+        }
+        else {
+          //parseIndividualParameters(); //TODO
+        }
       }
-      else {
-        userInputIndex = userInputIndex + 1;
-      }
-      userInputIndex = parseWhitespace(userInputIndex, userInput);
-      if (userInput.substr(userInputIndex, 4) === "from") {
-        userInputIndex = userInputIndex + 4;
-        const parseRangeResult = parseRange(userInputIndex, userInput, formula);
-        formula = parseRangeResult.formula;
-        userInputIndex = parseRangeResult.index;
-      }
-      else {
-        //parseIndividualParameters(); //TODO
-      }
-    }
-  });
+    });
+    formula = formula + userInput.substr(userInputIndex, 1);
+    userInputIndex = userInputIndex + 1;
+  };
+  return formula;
 }
 
 //the index is right after the "from"
@@ -78,9 +90,5 @@ const parseWhitespace = (index: number, userInput: string) => {
   }
   return index;
 };
-
-function convertCommonNameToSyntactical(commonName:string, functions:Array<ExcelFunction>): string {
-  return functions.filter((f:ExcelFunction) => f.commonName === commonName)[0].syntacticalName;
-}
 
 export { parse };

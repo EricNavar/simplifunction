@@ -114,7 +114,7 @@ button {
 }
 
 .function-buttons-grid-container {
-  max-height: 60vh;
+  max-height: calc(100vh - 306px);
   overflow-y: scroll;
   border-top-color: gray;
   border-top-width: 1px;
@@ -142,7 +142,7 @@ button {
 }
 
 .function-textfield {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
   width: 180px;
   overflow: hidden;
 }
