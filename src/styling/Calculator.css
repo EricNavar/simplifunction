@@ -21,7 +21,7 @@
   margin-left: 12px;
 }
 
-button {
+.button {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   text-align: center;
   align-items: center;
@@ -46,7 +46,7 @@ button {
 }
 
 .utility-button {
-  width: 128px;
+  width: 140px;
   height: 48px;
   color: black !important;
   font-size: 1.25rem !important;
@@ -103,10 +103,9 @@ button {
   margin-left: 16px !important;
 }
 
-.sectionHeader {
-  margin-top: 16px;
-  margin-bottom: 4px;
-  margin-left: 4px;
+.section-header {
+  margin: 4px 4px 0px 16px !important;
+  width: 100%;
 }
 
 .function-buttons {
@@ -114,7 +113,7 @@ button {
 }
 
 .function-buttons-grid-container {
-  max-height: calc(100vh - 306px);
+  max-height: calc(100vh - 322px);
   overflow-y: scroll;
   border-top-color: gray;
   border-top-width: 1px;
@@ -143,18 +142,10 @@ button {
 
 .function-textfield {
   transition: all 0.1s ease-in-out;
-  width: 180px;
+  width: 300px;
   overflow: hidden;
-}
-
-.not-expanded-textfield {
-  display: flex;
-  width: 0;
-}
-
-.not-expanded-textfield > div > * {
-  padding-left: 0px;
-  padding-right: 0px;
+  margin-bottom: 12px;
+  margin-top: 4px;
 }
 
 .number-button-container {
@@ -170,4 +161,11 @@ button {
 
 .accordion {
   margin-left: 16px !important;
+}
+
+.from-to-button {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  width: 46px;
 }

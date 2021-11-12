@@ -26,7 +26,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
     setParameterCount(parameterCount + 1);
 
     let newValids = valids;
-    newValids.push(false);
+    newValids.push(true);
     setValids(newValids);
   }
 
@@ -146,7 +146,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
         {inputMode === "range" && (
           <>
             <div style={{ display: 'flex' }}>
-              <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>From</span>
+              <span className="from-to-button">From</span>
               <TextField
                 size="small"
                 type="text"
@@ -157,7 +157,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
               />
             </div>
             <div style={{ display: 'flex' }}>
-              <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>To</span>
+              <span className="from-to-button">To</span>
               <TextField
                 size="small"
                 type="text"

@@ -9,7 +9,7 @@ type MyDialogProps = {
 }
 function MyDialog(props: MyDialogProps) {
   return (
-    <Dialog open={props.open} onClose={(e: any) => { props.setDialogOpen(false) }}>
+    <Dialog keepMounted open={props.open} onClose={(e: any) => { props.setDialogOpen(false) }}>
       {props.form ? props.form : null}
     </Dialog>
   );

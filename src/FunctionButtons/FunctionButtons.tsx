@@ -6,7 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   TextField,
-  IconButton
+  InputAdornment
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { functions } from '../functions';
@@ -26,12 +26,14 @@ type FunctionButtonContainerProps = {
 
 function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   const [searchInput, setSearchInput] = React.useState('');
-  const [filteredFunctions, setFilteredFunctions] = React.useState(functions);
-  const [searchBarExpanded, setSearchBarExpanded] = React.useState(false);
+  const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
 
   const onChangeSearchInput = (e: any) => {
     setSearchInput(e.target.value);
-    setFilteredFunctions(functions.filter((f: ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value)));
+    if (e.target.value === '') {
+      setSearchedFunctions(functions);
+    }
+    setSearchedFunctions(functions.filter((f: ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value)));
   };
 
   const ExcelFunctionTypeArray = [
@@ -46,10 +48,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     ExcelFunctionCategory.Web
   ];
 
-  const toggleSearchBarExpanded = () => {
-    setSearchBarExpanded(!searchBarExpanded);
-  };
-
   return (
     <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-buttons">
       {!props.mobile &&
@@ -58,10 +56,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
         </Typography>
       }
       <div style={{ display: 'flex', marginBottom: 20 }}>
-        <IconButton disableRipple={searchBarExpanded} onClick={toggleSearchBarExpanded}>
-          <SearchIcon />
-        </IconButton>
-        <div className={'function-textfield' + (searchBarExpanded ? "" : " not-expanded-textfield")}>
+        <div className='function-textfield'>
           <TextField
             id="function-search"
             placeholder="Search function"
@@ -69,51 +64,66 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
             onChange={onChangeSearchInput}
             variant="outlined"
             size='small'
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              style: {
+                borderRadius: 20
+              }
+            }}
           />
         </div>
       </div>
       <Grid item container spacing={2} className="function-buttons-grid-container">
-        {ExcelFunctionTypeArray.map((functionType: any, index: number) =>
-          <React.Fragment key={index}>
-            <SectionHeader>
-              {functionType}
-            </SectionHeader>
-            {filteredFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
-              if (obj.parameterFormat === ParameterFormat.LIST) {
-                return (<ListParameteredFunctionButton
-                  key={index}
-                  inputRef={props.inputRef}
-                  addToUserInput={props.addToUserInput}
-                  setForm={props.setForm}
-                  setDialogOpen={props.setDialogOpen}
-                  excelFunction={obj}
-                />)
+        {ExcelFunctionTypeArray.map((functionType: any, index: number) => {
+          const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) => func.category === functionType);
+          if (categorizedFunctions.length === 0) {
+            return <></>
+          }
+          return (
+            <React.Fragment key={index}>
+              <SectionHeader>
+                {functionType}
+              </SectionHeader>
+              {categorizedFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
+                if (obj.parameterFormat === ParameterFormat.LIST) {
+                  return (<ListParameteredFunctionButton
+                    key={index}
+                    inputRef={props.inputRef}
+                    addToUserInput={props.addToUserInput}
+                    setForm={props.setForm}
+                    setDialogOpen={props.setDialogOpen}
+                    excelFunction={obj}
+                  />)
+                }
+                else if (obj.parameterFormat === ParameterFormat.SINGLE) {
+                  return (<SingleParameterFunctionButton
+                    key={index}
+                    inputRef={props.inputRef}
+                    addToUserInput={props.addToUserInput}
+                    setDialogOpen={props.setDialogOpen}
+                    setForm={props.setForm}
+                    excelFunction={obj}
+                  />)
+                }
+                else {
+                  return (<NParameterFunctionButton
+                    key={index}
+                    inputRef={props.inputRef}
+                    addToUserInput={props.addToUserInput}
+                    setDialogOpen={props.setDialogOpen}
+                    setForm={props.setForm}
+                    excelFunction={obj}
+                  />)
+                }
               }
-              else if (obj.parameterFormat === ParameterFormat.SINGLE) {
-                return (<SingleParameterFunctionButton
-                  key={index}
-                  inputRef={props.inputRef}
-                  addToUserInput={props.addToUserInput}
-                  setDialogOpen={props.setDialogOpen}
-                  setForm={props.setForm}
-                  excelFunction={obj}
-                />)
-              }
-              else {
-                return (<NParameterFunctionButton
-                  key={index}
-                  inputRef={props.inputRef}
-                  addToUserInput={props.addToUserInput}
-                  setDialogOpen={props.setDialogOpen}
-                  setForm={props.setForm}
-                  excelFunction={obj}
-                />)
-              }
-            }
-            )}
-            <div style={{ height: 16, width: '100%' }} />
-          </React.Fragment>
-        )}
+              )}
+            </React.Fragment>
+          )
+        })}
       </Grid>
     </Grid>
   );
@@ -124,7 +134,7 @@ type SectionHeaderProps = {
 }
 function SectionHeader(props: SectionHeaderProps) {
   return (
-    <Typography component="p" variant="h5" className="sectionHeader" style={{ width: '100%' }}>
+    <Typography component="p" variant="h5" className="section-header">
       {props.children}
     </Typography>
   );
