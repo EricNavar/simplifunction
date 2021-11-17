@@ -50,7 +50,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   ];
 
   return (
-    <Grid item container xs={12} sm={6} spacing={props.mobile?0:2} className="function-buttons">
+    <Grid item container xs={12} sm={6} spacing={props.mobile?0:2} className="function-buttons" component='section'>
       {!props.mobile &&
         <Typography component="h2" variant='h4' style={{ width: '100%' }}>
           Excel Functions

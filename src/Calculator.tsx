@@ -78,8 +78,10 @@ function Calculator() {
 
   return (
     <div className="App" >
-      <h1>SimpliFunction</h1>
-      <Grid container spacing={2} className={mobile ? "" : "input-containers"}>
+      <header>
+        <h1>SimpliFunction</h1>
+      </header>
+      <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
         <TextField
           autoFocus
           fullWidth
@@ -107,6 +109,7 @@ function Calculator() {
           className="small-button-container"
           item container
           xs={12} sm={6}
+          component='section'
         >
           <Grid item xs={12}>
             <InputButton input="( " />

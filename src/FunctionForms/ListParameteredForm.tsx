@@ -153,9 +153,11 @@ function ListParameteredForm(props: ListParameteredFormProps) {
                   error={!valids[index]}
                   placeholder="Enter cell or number"
                 />
-                <Button onClick={e => onDeleteClick(index)} size='small' color='info'>
-                  REMOVE
-                </Button>
+                {parameters.length > 1 &&
+                  <Button onClick={e => onDeleteClick(index)} size='small' color='info'>
+                    REMOVE
+                  </Button>
+                }
               </div>
             )}
             <Button onClick={addParameter}>
