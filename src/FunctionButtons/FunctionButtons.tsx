@@ -20,8 +20,8 @@ type FunctionButtonContainerProps = {
   inputRef: HTMLInputElement,
   addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
+  mobile: boolean,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
-  mobile: boolean
 }
 
 function FunctionButtonContainer(props: FunctionButtonContainerProps) {
@@ -128,6 +128,17 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     </Grid>
   );
 }
+
+/*        <SectionHeader>
+          Number Base Conversion
+        </SectionHeader>
+        <ConversionButton
+          inputRef={props.inputRef}
+          addToUserInput={props.addToUserInput}
+          setDialogOpen={props.setDialogOpen}
+          setForm={props.setForm}
+        />
+        */
 
 type SectionHeaderProps = {
   children: React.ReactNode,

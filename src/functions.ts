@@ -504,24 +504,24 @@ const functions:Array<ExcelFunction> = [
     ]
   },
   // ==== Conversion ====
-  {
-    commonName: "Binary to decimal",
-    syntacticalName: "BIN2DEC",
-    description: "Converts a binary number to decimal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Decimal to binary",
-    syntacticalName: "DEC2BIN",
-    description: "Converts a decimal number to binary",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
-  },
+  // {
+  //   commonName: "Binary to decimal",
+  //   syntacticalName: "BIN2DEC",
+  //   description: "Converts a binary number to decimal",
+  //   category: ExcelFunctionCategory.Conversion,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  // },
+  // {
+  //   commonName: "Decimal to binary",
+  //   syntacticalName: "DEC2BIN",
+  //   description: "Converts a decimal number to binary",
+  //   category: ExcelFunctionCategory.Conversion,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
+  // },
   // ==== Text ====
   {
     commonName: "Text concatenation",
