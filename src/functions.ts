@@ -12,13 +12,24 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89'
   },
   {
-    commonName: "Geometric mean",
-    syntacticalName: "GEOMEAN",
-    description: "Returns the geometric mean",
+    commonName: "Power",
+    syntacticalName: "POWER",
+    description: "Returns the result of a number raised to a power",
     category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.LIST,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/geomean-function-db1ac48d-25a5-40a0-ab83-0b38980e40d5'
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/power-function-d3f2908b-56f4-4c3f-895a-07fb519c362a',
+    parameterSchema: [
+      {
+        name: "Base",
+        type: ParameterType.number,
+        required: true
+      },
+      {
+        name: "Exponent",
+        type: ParameterType.number,
+        required: true
+      },
+    ]
   },
   {
     commonName: "Minimum",
@@ -37,6 +48,15 @@ const functions:Array<ExcelFunction> = [
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/max-function-e0012414-9ac8-4b34-9a47-73e662c08098'
+  },
+  {
+    commonName: "Geometric mean",
+    syntacticalName: "GEOMEAN",
+    description: "Returns the geometric mean",
+    category: ExcelFunctionCategory.Math,
+    parameterFormat: ParameterFormat.LIST,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/geomean-function-db1ac48d-25a5-40a0-ab83-0b38980e40d5'
   },
   {
     commonName: "Absolute value",
@@ -96,26 +116,6 @@ const functions:Array<ExcelFunction> = [
     ]
   },
   {
-    commonName: "Power",
-    syntacticalName: "POWER",
-    description: "Returns the result of a number raised to a power",
-    category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.N,
-    documentationLink: 'https://support.microsoft.com/en-us/office/power-function-d3f2908b-56f4-4c3f-895a-07fb519c362a',
-    parameterSchema: [
-      {
-        name: "Base",
-        type: ParameterType.number,
-        required: true
-      },
-      {
-        name: "Exponent",
-        type: ParameterType.number,
-        required: true
-      },
-    ]
-  },
-  {
     commonName: "Square root",
     syntacticalName: "SQRT",
     description: "Returns a positive square root",
@@ -125,13 +125,24 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/sqrt-function-654975c2-05c4-4831-9a24-2c65e4040fdf',
   },
   {
-    commonName: "Choose random number",
-    syntacticalName: "CHOOSE",
-    description: "Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.",
+    commonName: "Modulo",
+    syntacticalName: "MOD",
+    description: "Returns the remainder from division",
     category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3',
+    parameterSchema: [
+      {
+        name: "",
+        type: ParameterType.number,
+        required: true
+      },
+      {
+        name: "",
+        type: ParameterType.number,
+        required: true
+      },
+    ]
   },
   {
     commonName: "Log₁₀",
@@ -163,24 +174,13 @@ const functions:Array<ExcelFunction> = [
     ]
   },
   {
-    commonName: "Modulo",
-    syntacticalName: "MOD",
-    description: "Returns the remainder from division",
+    commonName: "Choose random number",
+    syntacticalName: "CHOOSE",
+    description: "Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.",
     category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.N,
-    documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3',
-    parameterSchema: [
-      {
-        name: "",
-        type: ParameterType.number,
-        required: true
-      },
-      {
-        name: "",
-        type: ParameterType.number,
-        required: true
-      },
-    ]
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
   },
   // ==== Trigonometry ====
   {
@@ -193,27 +193,18 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   {
-    commonName: "Cos",
-    syntacticalName: "COS",
-    description: "Returns the cosine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Tan",
-    syntacticalName: "TAN",
-    description: "Returns the tangent of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
     commonName: "Sin⁻¹",
     syntacticalName: "ASIN",
     description: "Returns the arcsine of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {  
+    commonName: "Cos",
+    syntacticalName: "COS",
+    description: "Returns the cosine of a number",
     category: ExcelFunctionCategory.Trigonometry,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
@@ -229,6 +220,15 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3'
   },
   {
+    commonName: "Tan",
+    syntacticalName: "TAN",
+    description: "Returns the tangent of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
     commonName: "Tan⁻¹",
     syntacticalName: "ATAN",
     description: "Returns the arctangent of a number",
@@ -237,61 +237,80 @@ const functions:Array<ExcelFunction> = [
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
-  {
-    commonName: "Sinh",
-    syntacticalName: "SINH",
-    description: "Returns the hyperbolic sine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Cosh",
-    syntacticalName: "COSH",
-    description: "Returns the hyperbolic cosine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Tanh",
-    syntacticalName: "TANH",
-    description: "Returns the hyperbolic tangent of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Csc",
-    syntacticalName: "CSC",
-    description: "Returns the cosecant of an angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/csc-function-07379361-219a-4398-8675-07ddc4f135c1'
-  },
-  {
-    commonName: "Cot",
-    syntacticalName: "COT",
-    description: "Returns the cotangent of an angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/cot-function-c446f34d-6fe4-40dc-84f8-cf59e5f5e31a'
-  },
-  {
-    commonName: "Acot",
-    syntacticalName: "ACOT",
-    description: "Returns the cotangent of an angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/acot-function-dc7e5008-fe6b-402e-bdd6-2eea8383d905'
-  },
+  // {
+  //   commonName: "Sinh",
+  //   syntacticalName: "SINH",
+  //   description: "Returns the hyperbolic sine of a number",
+  //   category: ExcelFunctionCategory.Trigonometry,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  // },
+  // {
+  //   commonName: "Cosh",
+  //   syntacticalName: "COSH",
+  //   description: "Returns the hyperbolic cosine of a number",
+  //   category: ExcelFunctionCategory.Trigonometry,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  // },
+  // {
+  //   commonName: "Tanh",
+  //   syntacticalName: "TANH",
+  //   description: "Returns the hyperbolic tangent of a number",
+  //   category: ExcelFunctionCategory.Trigonometry,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  // },
+  // {
+  //   commonName: "Csc",
+  //   syntacticalName: "CSC",
+  //   description: "Returns the cosecant of an angle",
+  //   category: ExcelFunctionCategory.Trigonometry,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/csc-function-07379361-219a-4398-8675-07ddc4f135c1'
+  // },
+  // {
+  //   commonName: "Cot",
+  //   syntacticalName: "COT",
+  //   description: "Returns the cotangent of an angle",
+  //   category: ExcelFunctionCategory.Trigonometry,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/cot-function-c446f34d-6fe4-40dc-84f8-cf59e5f5e31a'
+  // },
+  // {
+  //   commonName: "Acot",
+  //   syntacticalName: "ACOT",
+  //   description: "Returns the cotangent of an angle",
+  //   category: ExcelFunctionCategory.Trigonometry,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.number,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/acot-function-dc7e5008-fe6b-402e-bdd6-2eea8383d905'
+  // },
   // Statistics
+  {
+    commonName: "Average",
+    syntacticalName: "AVG",
+    description: "Returns the average of its arguments",
+    category: ExcelFunctionCategory.Statistics,
+    parameterFormat: ParameterFormat.LIST,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/average-function-047bac88-d466-426c-a32b-8f33eb960cf6c',
+    remarks: ['Arguments that are error values or text that cannot be translated into numbers cause errors.']
+  },
+  {
+    commonName: "Median",
+    syntacticalName: "MEDIAN",
+    description: "Returns the median of the given numbers",
+    category: ExcelFunctionCategory.Statistics,
+    parameterFormat: ParameterFormat.LIST,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/median-function-d0916313-4753-414c-8537-ce85bdd967d2'
+  },
   {
     commonName: "Normal distribution",
     syntacticalName: "NORMDIST",
@@ -324,16 +343,6 @@ const functions:Array<ExcelFunction> = [
     ]
   },
   {
-    commonName: "Average",
-    syntacticalName: "AVG",
-    description: "Returns the average of its arguments",
-    category: ExcelFunctionCategory.Statistics,
-    parameterFormat: ParameterFormat.LIST,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/average-function-047bac88-d466-426c-a32b-8f33eb960cf6c',
-    remarks: ['Arguments that are error values or text that cannot be translated into numbers cause errors.']
-  },
-  {
     commonName: "Harmonic mean",
     syntacticalName: "HARMEAN",
     description: "Returns the harmonic mean",
@@ -341,24 +350,6 @@ const functions:Array<ExcelFunction> = [
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/harmean-function-5efd9184-fab5-42f9-b1d3-57883a1d3bc6'
-  },
-  {
-    commonName: "Median",
-    syntacticalName: "MEDIAN",
-    description: "Returns the median of the given numbers",
-    category: ExcelFunctionCategory.Statistics,
-    parameterFormat: ParameterFormat.LIST,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/median-function-d0916313-4753-414c-8537-ce85bdd967d2'
-  },
-  {
-    commonName: "Mode",
-    syntacticalName: "MODE.SNGL",
-    description: "Returns the most common value in a data set",
-    category: ExcelFunctionCategory.Statistics,
-    parameterFormat: ParameterFormat.LIST,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/mode-sngl-function-f1267c16-66c6-4386-959f-8fba5f8bb7f8'
   },
   {
     commonName: "Standard deviation",
@@ -381,6 +372,15 @@ const functions:Array<ExcelFunction> = [
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/binomdist-function-506a663e-c4ca-428d-b9a8-05583d68789c'
+  },
+  {
+    commonName: "Mode",
+    syntacticalName: "MODE.SNGL",
+    description: "Returns the most common value in a data set",
+    category: ExcelFunctionCategory.Statistics,
+    parameterFormat: ParameterFormat.LIST,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/mode-sngl-function-f1267c16-66c6-4386-959f-8fba5f8bb7f8'
   },
   // Bitwise operations
   {
@@ -418,26 +418,6 @@ const functions:Array<ExcelFunction> = [
       },
       {
         name: "Places to shift",
-        type: ParameterType.number,
-        required: true
-      }
-    ]
-  },
-  {
-    commonName: "Bitwise OR",
-    syntacticalName: "BITOR",
-    description: "Returns a Bitwise OR of 2 numbers",
-    category: ExcelFunctionCategory.Bitwise,
-    parameterFormat: ParameterFormat.N,
-    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838',
-    parameterSchema: [
-      {
-        name: "Operand 1",
-        type: ParameterType.number,
-        required: true
-      },
-      {
-        name: "Operand 2",
         type: ParameterType.number,
         required: true
       }
@@ -523,165 +503,165 @@ const functions:Array<ExcelFunction> = [
   //   documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
   // },
   // ==== Text ====
-  {
-    commonName: "Text concatenation",
-    syntacticalName: "CONCAT",
-    description: "Combines the Text from multiple ranges and/or strings, but it doesn't provide the delimiter or IgnoreEmpty arguments.",
-    category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.N,
-    documentationLink: 'https://support.microsoft.com/en-us/office/concatenate-function-8f8ae884-2ca8-4f7a-b093-75d702bea31d',
-    parameterSchema: [
-      {
-        name: "Text 1",
-        type: ParameterType.string,
-        required: true
-      },
-      {
-        name: "Text 2",
-        type: ParameterType.string,
-        required: true
-      },
-    ]
-  },
-  {
-    commonName: "Text Substitution",
-    syntacticalName: "SUBSTITUTE",
-    description: "Substitutes new text for old text in a text string",
-    category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.N,
-    documentationLink: 'https://support.microsoft.com/en-us/office/substitute-function-6434944e-a904-4336-a9b0-1e58df3bc332',
-    parameterSchema: [
-      {
-        name: "Text",
-        type: ParameterType.string,
-        required: true
-      },
-      {
-        name: "Old text",
-        type: ParameterType.string,
-        required: true
-      },
-      {
-        name: "New text",
-        type: ParameterType.string,
-        required: true
-      },
-    ]
-  },
-  {
-    commonName: "To lowercase",
-    syntacticalName: "LOWER",
-    description: "Converts Text to lowercase",
-    category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
-    documentationLink: 'https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4'
-  },
-  {
-    commonName: "To uppercase",
-    syntacticalName: "UPPER",
-    description: "Converts Text to uppercase",
-    category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
-    documentationLink: 'https://support.microsoft.com/en-us/office/upper-function-c11f29b3-d1a3-4537-8df6-04d0049963d6',
-  },
-  {
-    commonName: "Trim",
-    syntacticalName: "TRIM",
-    description: "Removes spaces from text",
-    category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
-    documentationLink: 'https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9',
-  },
-  {
-    commonName: "Price format",
-    syntacticalName: "DOLLAR",
-    description: "Converts a number to Text, using the $ (dollar) currency format",
-    category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.N,
-    documentationLink: 'https://support.microsoft.com/en-us/office/dollar-function-a6cd05d9-9740-4ad3-a469-8109d18ff611',
-    remarks: ['Generally, you should use the Format Cells dialog (Ctrl+1) or Home > Number > Accounting Number Format option to apply a currency formatting to a cell. This is because the DOLLAR function returns the number provided as text. Numbers stored as text are a common cause of spreadsheet errors, because many functions ignore them, such as SUM, AVERAGE, MIN, MAX, etc.'],
-    parameterSchema: [
-      {
-        name: "Number",
-        type: ParameterType.number,
-        required: true
-      },
-      {
-        name: "Decimals",
-        helperText: "The number of digits to the right of the decimal point. If this is negative, the number is rounded to the left of the decimal point. If you omit decimals, it is assumed to be 2.",
-        type: ParameterType.number,
-        required: true
-      },
-    ]
-  },
-  // ==== Date ====
-  {
-    commonName: "Date",
-    syntacticalName: "DATE",
-    description: "",
-    category: ExcelFunctionCategory.Date,
-    parameterFormat: ParameterFormat.N,
-    documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
-    parameterSchema: [
-      {
-        name: "Year",
-        helperText: "4 digits",
-        type: ParameterType.string,
-        required: true
-      },
-      {
-        name: "Month",
-        type: ParameterType.string,
-        required: true
-      },
-      {
-        name: "Day",
-        type: ParameterType.string,
-        required: true
-      }
-    ]
-  },
-  // ==== LOOKUP AND REFERENCE ====
-  {
-    commonName: "Sort",
-    syntacticalName: "SORT",
-    description: "Sorts the contents of a range or array",
-    category: ExcelFunctionCategory.Lookup,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
-    documentationLink: 'https://support.microsoft.com/en-us/office/sort-function-22f63bd0-ccc8-492f-953d-c20e8e44b86c'
-  },
-  // ==== WEB ====
-  {
-    commonName: "Use web service",
-    syntacticalName: "WEBSERVICE",
-    description: "Returns data from a web service",
-    category: ExcelFunctionCategory.Web,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
-    documentationLink: 'https://support.microsoft.com/en-us/office/webservice-function-0546a35a-ecc6-4739-aed7-c0b7ce1562c4'
-  },
-  {
-    commonName: "Filter XML",
-    syntacticalName: "FILTERXML",
-    description: "Returns specific data from the XML content by using the specified XPath",
-    category: ExcelFunctionCategory.Web,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
-    documentationLink: 'https://support.microsoft.com/en-us/office/filterxml-function-4df72efc-11ec-4951-86f5-c1374812f5b7'
-  },
-  {
-    commonName: "Encode string as URL",
-    syntacticalName: "ENCODEURL",
-    description: "Returns specific data ",
-    category: ExcelFunctionCategory.Web,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
-    documentationLink: 'https://support.microsoft.com/en-us/office/encodeurl-function-07c7fb90-7c60-4bff-8687-fac50fe33d0e'
-  }
+  // {
+  //   commonName: "Text concatenation",
+  //   syntacticalName: "CONCAT",
+  //   description: "Combines the Text from multiple ranges and/or strings, but it doesn't provide the delimiter or IgnoreEmpty arguments.",
+  //   category: ExcelFunctionCategory.Text,
+  //   parameterFormat: ParameterFormat.N,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/concatenate-function-8f8ae884-2ca8-4f7a-b093-75d702bea31d',
+  //   parameterSchema: [
+  //     {
+  //       name: "Text 1",
+  //       type: ParameterType.string,
+  //       required: true
+  //     },
+  //     {
+  //       name: "Text 2",
+  //       type: ParameterType.string,
+  //       required: true
+  //     },
+  //   ]
+  // },
+  // {
+  //   commonName: "Text Substitution",
+  //   syntacticalName: "SUBSTITUTE",
+  //   description: "Substitutes new text for old text in a text string",
+  //   category: ExcelFunctionCategory.Text,
+  //   parameterFormat: ParameterFormat.N,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/substitute-function-6434944e-a904-4336-a9b0-1e58df3bc332',
+  //   parameterSchema: [
+  //     {
+  //       name: "Text",
+  //       type: ParameterType.string,
+  //       required: true
+  //     },
+  //     {
+  //       name: "Old text",
+  //       type: ParameterType.string,
+  //       required: true
+  //     },
+  //     {
+  //       name: "New text",
+  //       type: ParameterType.string,
+  //       required: true
+  //     },
+  //   ]
+  // },
+  // {
+  //   commonName: "To lowercase",
+  //   syntacticalName: "LOWER",
+  //   description: "Converts Text to lowercase",
+  //   category: ExcelFunctionCategory.Text,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.string,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4'
+  // },
+  // {
+  //   commonName: "To uppercase",
+  //   syntacticalName: "UPPER",
+  //   description: "Converts Text to uppercase",
+  //   category: ExcelFunctionCategory.Text,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.string,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/upper-function-c11f29b3-d1a3-4537-8df6-04d0049963d6',
+  // },
+  // {
+  //   commonName: "Trim",
+  //   syntacticalName: "TRIM",
+  //   description: "Removes spaces from text",
+  //   category: ExcelFunctionCategory.Text,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.string,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9',
+  // },
+  // {
+  //   commonName: "Price format",
+  //   syntacticalName: "DOLLAR",
+  //   description: "Converts a number to Text, using the $ (dollar) currency format",
+  //   category: ExcelFunctionCategory.Text,
+  //   parameterFormat: ParameterFormat.N,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/dollar-function-a6cd05d9-9740-4ad3-a469-8109d18ff611',
+  //   remarks: ['Generally, you should use the Format Cells dialog (Ctrl+1) or Home > Number > Accounting Number Format option to apply a currency formatting to a cell. This is because the DOLLAR function returns the number provided as text. Numbers stored as text are a common cause of spreadsheet errors, because many functions ignore them, such as SUM, AVERAGE, MIN, MAX, etc.'],
+  //   parameterSchema: [
+  //     {
+  //       name: "Number",
+  //       type: ParameterType.number,
+  //       required: true
+  //     },
+  //     {
+  //       name: "Decimals",
+  //       helperText: "The number of digits to the right of the decimal point. If this is negative, the number is rounded to the left of the decimal point. If you omit decimals, it is assumed to be 2.",
+  //       type: ParameterType.number,
+  //       required: true
+  //     },
+  //   ]
+  // },
+  // // ==== Date ====
+  // {
+  //   commonName: "Date",
+  //   syntacticalName: "DATE",
+  //   description: "",
+  //   category: ExcelFunctionCategory.Date,
+  //   parameterFormat: ParameterFormat.N,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
+  //   parameterSchema: [
+  //     {
+  //       name: "Year",
+  //       helperText: "4 digits",
+  //       type: ParameterType.string,
+  //       required: true
+  //     },
+  //     {
+  //       name: "Month",
+  //       type: ParameterType.string,
+  //       required: true
+  //     },
+  //     {
+  //       name: "Day",
+  //       type: ParameterType.string,
+  //       required: true
+  //     }
+  //   ]
+  // },
+  // // ==== LOOKUP AND REFERENCE ====
+  // {
+  //   commonName: "Sort",
+  //   syntacticalName: "SORT",
+  //   description: "Sorts the contents of a range or array",
+  //   category: ExcelFunctionCategory.Lookup,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.string,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/sort-function-22f63bd0-ccc8-492f-953d-c20e8e44b86c'
+  // },
+  // // ==== WEB ====
+  // {
+  //   commonName: "Use web service",
+  //   syntacticalName: "WEBSERVICE",
+  //   description: "Returns data from a web service",
+  //   category: ExcelFunctionCategory.Web,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.string,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/webservice-function-0546a35a-ecc6-4739-aed7-c0b7ce1562c4'
+  // },
+  // {
+  //   commonName: "Filter XML",
+  //   syntacticalName: "FILTERXML",
+  //   description: "Returns specific data from the XML content by using the specified XPath",
+  //   category: ExcelFunctionCategory.Web,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.string,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/filterxml-function-4df72efc-11ec-4951-86f5-c1374812f5b7'
+  // },
+  // {
+  //   commonName: "Encode string as URL",
+  //   syntacticalName: "ENCODEURL",
+  //   description: "Returns specific data ",
+  //   category: ExcelFunctionCategory.Web,
+  //   parameterFormat: ParameterFormat.SINGLE,
+  //   parameterType: ParameterType.string,
+  //   documentationLink: 'https://support.microsoft.com/en-us/office/encodeurl-function-07c7fb90-7c60-4bff-8687-fac50fe33d0e'
+  // }
 ]
 
 export { functions };

@@ -110,17 +110,17 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   return (
     <>
       <DialogTitle id={`${props.excelFunction.syntacticalName}-title`}>
-        {props.excelFunction.commonName}
+        <span>{props.excelFunction.commonName}</span>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
+        <DialogContentText style={{color:"rgba(0,0,0,.8)"}} id={`${props.excelFunction.syntacticalName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
         <Link
           variant='overline'
           href={props.excelFunction.documentationLink}
           className="docs-link"
-          color='textSecondary'
+          color='primary'
           target='_blank'
         >
           DOCS
@@ -151,6 +151,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
                   onChange={e => onChangeParameter(e, index)}
                   className="text-field"
                   error={!valids[index]}
+                  placeholder="Enter cell or number"
                 />
                 <Button onClick={e => onDeleteClick(index)} size='small' color='info'>
                   REMOVE

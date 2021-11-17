@@ -106,7 +106,7 @@ function Calculator() {
           id="small-button-container"
           className="small-button-container"
           item container
-          xs={12} sm={6} md={8}
+          xs={12} sm={6}
         >
           <Grid item xs={12}>
             <InputButton input="( " />

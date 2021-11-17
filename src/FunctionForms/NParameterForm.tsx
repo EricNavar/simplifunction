@@ -1,5 +1,13 @@
 import React from 'react';
-import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
+import {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  TextField,
+  DialogContentText,
+  Link
+} from '@mui/material';
 import '../styling/Calculator.css';
 import { ExcelFunction } from '../commonTypes';
 import { validateNParameters } from '../util/validator';
@@ -56,6 +64,15 @@ function NParameterForm(props: NParameterFormProps) {
         <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
+        <Link
+          variant='overline'
+          href={props.excelFunction.documentationLink}
+          className="docs-link"
+          color='primary'
+          target='_blank'
+        >
+          DOCS
+        </Link>
         {parameters.map((parameter, index) =>
           <div key={`${props.excelFunction.commonName.replace(" ", "_")}-form-${index}`}>
             <TextField
@@ -68,6 +85,7 @@ function NParameterForm(props: NParameterFormProps) {
               value={parameter}
               required={props.excelFunction.parameterSchema![index].required}
               error={!valids[index]}
+              placeholder="Enter cell or number"
             />
           </div>
         )}

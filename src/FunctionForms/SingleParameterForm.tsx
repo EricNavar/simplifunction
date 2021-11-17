@@ -1,5 +1,13 @@
 import React from 'react';
-import { DialogActions, DialogContent, DialogTitle, Button, TextField, DialogContentText } from '@mui/material';
+import {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  TextField,
+  DialogContentText,
+  Link
+} from '@mui/material';
 import '../styling/Calculator.css';
 import { ExcelFunction } from '../commonTypes';
 import { validateParameter } from '../util/validator';
@@ -42,12 +50,22 @@ function SingleParameterForm(props: SingleParameterFormProps) {
         <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
+        <Link
+          variant='overline'
+          href={props.excelFunction.documentationLink}
+          className="docs-link"
+          color='primary'
+          target='_blank'
+        >
+          DOCS
+        </Link>
         <TextField
           size="small"
           type="text"
           onChange={onChangeParameter}
           className="text-field"
           error={!valid}
+          placeholder="Enter cell or number"
         />
       </DialogContent>
       <DialogActions>

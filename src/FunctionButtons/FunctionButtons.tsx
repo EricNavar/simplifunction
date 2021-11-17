@@ -6,7 +6,8 @@ import {
   AccordionDetails,
   AccordionSummary,
   TextField,
-  InputAdornment
+  InputAdornment,
+  ListSubheader
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { functions } from '../functions';
@@ -49,7 +50,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   ];
 
   return (
-    <Grid item container xs={12} sm={6} md={4} spacing={2} className="function-buttons">
+    <Grid item container xs={12} sm={6} spacing={props.mobile?0:2} className="function-buttons">
       {!props.mobile &&
         <Typography component="h2" variant='h4' style={{ width: '100%' }}>
           Excel Functions
@@ -145,9 +146,11 @@ type SectionHeaderProps = {
 }
 function SectionHeader(props: SectionHeaderProps) {
   return (
-    <Typography component="p" variant="h5" className="section-header">
-      {props.children}
-    </Typography>
+    <ListSubheader className="section-header">
+      <Typography component="p" variant="h5">
+        {props.children}
+      </Typography>
+    </ListSubheader>
   );
 }
 
@@ -174,7 +177,7 @@ function FunctionButtons(props: FunctionButtonsProps) {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography component='h2' variant='body1' sx={{ width: '33%', flexShrink: 0 }}>
+          <Typography component='h2' variant='body1' sx={{ width: '100%', flexShrink: 0 }}>
             Excel Functions
           </Typography>
         </AccordionSummary>

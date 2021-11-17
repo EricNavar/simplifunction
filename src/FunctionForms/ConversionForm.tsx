@@ -43,16 +43,16 @@ function ConversionForm(props: ConversionFormProps) {
   }
 
   const onClickDone = (e:any) => {
-    let formula = `${from}2${to}( ${number}`;
-    if (places)
-      formula = formula + ', ' + places;
-    formula = formula + ' )';
+    // let formula = `${from}2${to}( ${number}`;
+    // if (places)
+    //   formula = formula + ', ' + places;
+    // formula = formula + ' )';
   }
 
   return (
     <>
       <DialogTitle id="alert-dialog-title">
-        Number Base Comversion
+        Number Base Conversion
       </DialogTitle>
       <DialogContent>
         <DialogContentText id={`conversion-description`} style={{marginBottom:20}}>
@@ -94,6 +94,7 @@ function ConversionForm(props: ConversionFormProps) {
           className="text-field"
           value={number}
           onChange={onChangeNumber}
+          placeholder="Enter cell or number"
         />
         <TextField
           size="small"

@@ -104,7 +104,9 @@
 }
 
 .section-header {
-  margin: 4px 4px 0px 16px !important;
+  margin: 0px !important;
+  padding-top: 14px;
+  padding-bottom: 14px;
   width: 100%;
 }
 
