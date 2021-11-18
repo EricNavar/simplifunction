@@ -484,24 +484,87 @@ const functions:Array<ExcelFunction> = [
     ]
   },
   // ==== Conversion ====
-  // {
-  //   commonName: "Binary to decimal",
-  //   syntacticalName: "BIN2DEC",
-  //   description: "Converts a binary number to decimal",
-  //   category: ExcelFunctionCategory.Conversion,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  // },
-  // {
-  //   commonName: "Decimal to binary",
-  //   syntacticalName: "DEC2BIN",
-  //   description: "Converts a decimal number to binary",
-  //   category: ExcelFunctionCategory.Conversion,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
-  // },
+  {
+    commonName: "Binary to octal",
+    syntacticalName: "BIN2OCT",
+    description: "Converts a binary number to octal",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Binary to decimal",
+    syntacticalName: "BIN2DEC",
+    description: "Converts a binary number to decimal",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
+  },
+  {
+    commonName: "Binary to hexcadecimal",
+    syntacticalName: "BIN2HEX",
+    description: "Converts a binary number to hexadecimal",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Octal to bin",
+    syntacticalName: "OCT2BIN",
+    description: "Converts an octal number to binary",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Octal to decimal",
+    syntacticalName: "OCT2DEC",
+    description: "Converts an octal number to decimal",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
+  },
+  {
+    commonName: "Octal to hexcadecimal",
+    syntacticalName: "OCT2HEX",
+    description: "Converts an octal number to hexadecimal",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Hexadecimal to binary",
+    syntacticalName: "HEX2BIN",
+    description: "Converts a hexadecimal number to binary",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Hexadecimal to octal",
+    syntacticalName: "HEX2OCT",
+    description: "Converts a hexadecimal number to octal",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
+  },
+  {
+    commonName: "Hexadecimal to decimal",
+    syntacticalName: "HEX2DEC",
+    description: "Converts a hexadecimal number to decimal",
+    category: ExcelFunctionCategory.Conversion,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
   // ==== Text ====
   // {
   //   commonName: "Text concatenation",
@@ -665,3 +728,9 @@ const functions:Array<ExcelFunction> = [
 ]
 
 export { functions };
+
+//sin    asin     sinh    asinh
+//cos    acos     cosh    acosh
+//tan    atan     tanh    atahnh
+//cot    acot     coth    acoth
+//csc             csch    

@@ -26,8 +26,11 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   // valids is an array with element n being a boolean indicating if parameter n is valid or not.
   const [valids, setValids] = React.useState([true, true]);
   const [inputMode, setInputMode] = React.useState("range");
+
   const [startCell, setStartCell] = React.useState("A1");
+  const [startCellValid, setStartCellValid] = React.useState(true);
   const [endCell, setEndCell] = React.useState("A2");
+  const [endCellValid, setEndCellValid] = React.useState(true);
 
   const addParameter = () => {
     let newParameters = parameters;
@@ -76,15 +79,18 @@ function ListParameteredForm(props: ListParameteredFormProps) {
 
   const handleDoneClick = () => {
     if (inputMode === "range") {
-      const newValids = [isCell(startCell), isCell(endCell)];
-      setValids(newValids);
-      if (!newValids.includes(false)) {
+      const startCellValid_ = isCell(startCell);
+      setStartCellValid(startCellValid_);
+      const endCellValid_ = isCell(startCell);
+      setEndCellValid(endCellValid_);
+      if (startCellValid_ && endCellValid_) {
         props.addToUserInput(createFormulaFromRange(), props.inputRef);
         closeDialog();
       }
     }
-    else {
+    else { // inputMode === "individual"
       const newValids = validateList(parameters, props.excelFunction.parameterType!);
+      console.log(newValids);
       setValids(newValids);
       if (!newValids.includes(false)) {
         props.addToUserInput(createFormulaFromParameters(), props.inputRef);
@@ -152,6 +158,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
                   className="text-field"
                   error={!valids[index]}
                   placeholder="Enter cell or number"
+                  helperText={valids[index] ? "" : "Enter cell or number"}
                 />
                 {parameters.length > 1 &&
                   <Button onClick={e => onDeleteClick(index)} size='small' color='info'>
@@ -175,7 +182,8 @@ function ListParameteredForm(props: ListParameteredFormProps) {
                 label="Start cell"
                 onChange={onChangeStartCell}
                 className="text-field"
-                error={!valids[0]}
+                error={!startCellValid}
+                helperText={startCellValid ? "" : "Enter cell"}
               />
             </div>
             <div style={{ display: 'flex' }}>
@@ -186,7 +194,8 @@ function ListParameteredForm(props: ListParameteredFormProps) {
                 label="End cell"
                 onChange={onChangeEndCell}
                 className="text-field"
-                error={!valids[1]}
+                error={!endCellValid}
+                helperText={endCellValid ? "" : "Enter cell"}
               />
             </div>
           </>

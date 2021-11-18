@@ -1,7 +1,6 @@
 import { ParameterType, Parameter } from '../commonTypes';
 
 export function validateList(parameters: Array<string>, type: ParameterType): Array<boolean> {
-  console.log('validate list of type ' + type);
   return parameters.map((parameter: string) => validateParameter(parameter, type));
 }
 
@@ -9,7 +8,10 @@ export function validateList(parameters: Array<string>, type: ParameterType): Ar
 // This website can't tell if the cell would be of the correct type, so there's
 // that uncertainty.
 export function validateParameter(parameter: string, type: ParameterType): boolean {
-  if (type === ParameterType.string) {
+  if (parameter === "") {
+    return false;
+  }
+  else if (type === ParameterType.string) {
     return validateSingleStringParameter(parameter);
   }
   else if (type === ParameterType.number) {

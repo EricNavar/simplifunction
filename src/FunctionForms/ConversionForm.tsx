@@ -21,10 +21,12 @@ type ConversionFormProps = {
   inputRef: HTMLInputElement,
 }
 function ConversionForm(props: ConversionFormProps) {
-  const [to, setTo] = React.useState("DEC");
-  const [from, setFrom] = React.useState("BIN");
-  const [number, setNumber] = React.useState("BIN");
-  const [places, setPlaces] = React.useState("BIN");
+  const [to, setTo] = React.useState("");
+  const [from, setFrom] = React.useState("");
+  const [number, setNumber] = React.useState("");
+  const [places, setPlaces] = React.useState("");
+  const [valid, setValid] = React.useState(true);
+  const [helperText, setHelperText] = React.useState("");
 
   const onChangeTo = (e:any) => {
     setTo(e.target.value);
@@ -42,12 +44,33 @@ function ConversionForm(props: ConversionFormProps) {
     setPlaces(e.target.value);
   }
 
-  const onClickDone = (e:any) => {
-    // let formula = `${from}2${to}( ${number}`;
-    // if (places)
-    //   formula = formula + ', ' + places;
-    // formula = formula + ' )';
+  const handleDoneClick = () => {
+    if (number === "") {
+      setValid(false);
+      setHelperText("Input number to convert");
+    }
+    else if (from === "" || to === "") {
+      setValid(false);
+      setHelperText("Select base converting both TO and FROM");
+    }
+    else if (from === to) {
+      setValid(false);
+      setHelperText("Base converting TO and FROM must be different");
+    }
+    else {
+      let formula = `${from}_to_${to}( ${number}`;
+      if (places)
+      formula = formula + ', ' + places;
+      formula = formula + ' )';
+      props.addToUserInput(formula, props.inputRef);
+      closeDialog();
+    }
   }
+
+  const closeDialog = () => {
+    console.log("should be closing the dialog right about now...")
+    props.setDialogOpen(false);
+  };
 
   return (
     <>
@@ -56,10 +79,10 @@ function ConversionForm(props: ConversionFormProps) {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id={`conversion-description`} style={{marginBottom:20}}>
-          description here
+          Convert a number to a different base
         </DialogContentText>
         <FormControl component="fieldset" style={{marginRight:50}}>
-          <FormLabel component="legend">Converting from</FormLabel>
+          <FormLabel component="legend" style={{color:'rgb(95, 87, 242)'}}>Converting from</FormLabel>
           <RadioGroup
             aria-label="convert from"
             defaultValue="decimal"
@@ -74,7 +97,7 @@ function ConversionForm(props: ConversionFormProps) {
           </RadioGroup>
         </FormControl>
         <FormControl component="fieldset">
-          <FormLabel component="legend">Converting to</FormLabel>
+          <FormLabel component="legend" style={{color:'rgb(95, 87, 242)'}}>Converting to</FormLabel>
           <RadioGroup
             aria-label="convert to"
             defaultValue="binary"
@@ -94,7 +117,9 @@ function ConversionForm(props: ConversionFormProps) {
           className="text-field"
           value={number}
           onChange={onChangeNumber}
-          placeholder="Enter cell or number"
+          placeholder="Enter number or cell to convert"
+          error={!valid}
+          helperText={valid?null:helperText}
         />
         <TextField
           size="small"
@@ -102,13 +127,14 @@ function ConversionForm(props: ConversionFormProps) {
           className="text-field"
           value={number}
           onChange={onChangePlaces}
+          placeholder="Decimal places"
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClickDone}>
+        <Button onClick={handleDoneClick}>
           Done
         </Button>
-        <Button onChange={(e:any) => props.setDialogOpen(false)}>Cancel</Button>
+        <Button id='close-button' onClick={closeDialog}>Cancel</Button>
       </DialogActions>
     </>
   );

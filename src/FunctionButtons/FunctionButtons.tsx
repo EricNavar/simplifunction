@@ -16,6 +16,7 @@ import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';
 import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
 import { NParameterFunctionButton } from './NParameterFunctionButton';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
+import { ConversionButton } from './ConversionButton';
 
 type FunctionButtonContainerProps = {
   inputRef: HTMLInputElement,
@@ -42,7 +43,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     ExcelFunctionCategory.Trigonometry,
     ExcelFunctionCategory.Statistics,
     ExcelFunctionCategory.Bitwise,
-    ExcelFunctionCategory.Conversion,
     ExcelFunctionCategory.Text,
     ExcelFunctionCategory.Date,
     ExcelFunctionCategory.Lookup,
@@ -50,7 +50,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   ];
 
   return (
-    <Grid item container xs={12} sm={6} spacing={props.mobile?0:2} className="function-buttons" component='section'>
+    <Grid item container xs={12} sm={6} spacing={props.mobile ? 0 : 2} className="function-buttons" component='section'>
       {!props.mobile &&
         <Typography component="h2" variant='h4' style={{ width: '100%' }}>
           Excel Functions
@@ -125,12 +125,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
             </React.Fragment>
           )
         })}
-      </Grid>
-    </Grid>
-  );
-}
-
-/*        <SectionHeader>
+        <SectionHeader>
           Number Base Conversion
         </SectionHeader>
         <ConversionButton
@@ -139,6 +134,12 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           setDialogOpen={props.setDialogOpen}
           setForm={props.setForm}
         />
+      </Grid>
+    </Grid>
+  );
+}
+
+/*        
         */
 
 type SectionHeaderProps = {
