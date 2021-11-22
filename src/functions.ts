@@ -2,7 +2,7 @@ import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } 
 
 const functions:Array<ExcelFunction> = [
   // ==== Math ====
-  {
+  { // add IMSUM
     commonName: "Summation",
     syntacticalName: "SUM",
     description: "Use this function to add the values in cells.",
@@ -11,7 +11,7 @@ const functions:Array<ExcelFunction> = [
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89'
   },
-  {
+  { // add IMPOWER
     commonName: "Power",
     syntacticalName: "POWER",
     description: "Returns the result of a number raised to a power",
@@ -31,7 +31,7 @@ const functions:Array<ExcelFunction> = [
       },
     ]
   },
-  {
+  { 
     commonName: "Minimum",
     syntacticalName: "MIN",
     description: "Returns the minimum value in a list of arguments",
@@ -51,6 +51,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Geometric mean",
+    commonNameNoSpaces: "Geometric_mean",
     syntacticalName: "GEOMEAN",
     description: "Returns the geometric mean",
     category: ExcelFunctionCategory.Math,
@@ -60,6 +61,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Absolute value",
+    commonNameNoSpaces: "Absolute_value",
     syntacticalName: "ABS",
     description: "Returns the absolute value of a number",
     category: ExcelFunctionCategory.Math,
@@ -69,6 +71,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Round up",
+    commonNameNoSpaces: "Round_up",
     syntacticalName: "CEILING",
     description: "Rounds a number to the nearest integer or to the nearest multiple of significance",
     category: ExcelFunctionCategory.Math,
@@ -90,6 +93,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Round down",
+    commonNameNoSpaces: "Round_down",
     syntacticalName: "FLOOR",
     description: "Rounds a number down, toward zero",
     category: ExcelFunctionCategory.Math,
@@ -117,6 +121,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Square root",
+    commonNameNoSpaces: "Square_root",
     syntacticalName: "SQRT",
     description: "Returns a positive square root",
     category: ExcelFunctionCategory.Math,
@@ -175,6 +180,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Choose random number",
+    commonNameNoSpaces: "Choose_random_number",
     syntacticalName: "CHOOSE",
     description: "Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.",
     category: ExcelFunctionCategory.Math,
@@ -313,6 +319,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Normal distribution",
+    commonNameNoSpaces: "Normal distribution",
     syntacticalName: "NORMDIST",
     description: "Returns the normal cumulative distribution",
     category: ExcelFunctionCategory.Statistics,
@@ -344,6 +351,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Harmonic mean",
+    commonNameNoSpaces: "Harmonic_mean",
     syntacticalName: "HARMEAN",
     description: "Returns the harmonic mean",
     category: ExcelFunctionCategory.Statistics,
@@ -353,6 +361,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Standard deviation",
+    commonNameNoSpaces: "Standard_deviation",
     syntacticalName: "STDEV",
     description: "Estimates standard deviation based on a sample",
     category: ExcelFunctionCategory.Statistics,
@@ -366,6 +375,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Binomial distribution",
+    commonNameNoSpaces: "Binomial_distribution",
     syntacticalName: "BINOMDIST",
     description: "Returns the individual term binomial distribution probability",
     category: ExcelFunctionCategory.Statistics,
@@ -385,6 +395,7 @@ const functions:Array<ExcelFunction> = [
   // Bitwise operations
   {
     commonName: "Left shift",
+    commonNameNoSpaces: "Left_shift",
     syntacticalName: "BITLSHIFT",
     description: "Returns a value number shifted left by shift_amount bits",
     category: ExcelFunctionCategory.Bitwise,
@@ -405,6 +416,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Right shift",
+    commonNameNoSpaces: "Right_shift",
     syntacticalName: "BITRSHIFT",
     description: "Returns a value number shifted left by shift_amount bits",
     category: ExcelFunctionCategory.Bitwise,
@@ -425,6 +437,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Bitwise OR",
+    commonNameNoSpaces: "Bitwise_OR",
     syntacticalName: "BITOR",
     description: "Returns a Bitwise OR of 2 numbers",
     category: ExcelFunctionCategory.Bitwise,
@@ -445,6 +458,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Bitwise AND",
+    commonNameNoSpaces: "Bitwise_AND",
     syntacticalName: "BITOR",
     description: "Returns a Bitwise AND of 2 numbers",
     category: ExcelFunctionCategory.Bitwise,
@@ -465,6 +479,7 @@ const functions:Array<ExcelFunction> = [
   },
   {
     commonName: "Bitwise XOR",
+    commonNameNoSpaces: "Bitwise_XOR",
     syntacticalName: "BITXOR",
     description: "Returns a Bitwise AND of 2 numbers",
     category: ExcelFunctionCategory.Bitwise,
@@ -486,6 +501,7 @@ const functions:Array<ExcelFunction> = [
   // ==== Conversion ====
   {
     commonName: "Binary to octal",
+    commonNameNoSpaces: "binary_to_octal",
     syntacticalName: "BIN2OCT",
     description: "Converts a binary number to octal",
     category: ExcelFunctionCategory.Conversion,
@@ -494,7 +510,8 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   {
-    commonName: "Binary to decimal",
+    commonName: "binary to decimal",
+    commonNameNoSpaces: "binary_to_decimal",
     syntacticalName: "BIN2DEC",
     description: "Converts a binary number to decimal",
     category: ExcelFunctionCategory.Conversion,
@@ -503,7 +520,8 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
   },
   {
-    commonName: "Binary to hexcadecimal",
+    commonName: "binary to hexcadecimal",
+    commonNameNoSpaces: "binary_to_hexcadecimal",
     syntacticalName: "BIN2HEX",
     description: "Converts a binary number to hexadecimal",
     category: ExcelFunctionCategory.Conversion,
@@ -512,7 +530,8 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   {
-    commonName: "Octal to bin",
+    commonName: "octal to bin",
+    commonNameNoSpaces: "octal_to_bin",
     syntacticalName: "OCT2BIN",
     description: "Converts an octal number to binary",
     category: ExcelFunctionCategory.Conversion,
@@ -521,7 +540,8 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   {
-    commonName: "Octal to decimal",
+    commonName: "octal to decimal",
+    commonNameNoSpaces: "octal_to_decimal",
     syntacticalName: "OCT2DEC",
     description: "Converts an octal number to decimal",
     category: ExcelFunctionCategory.Conversion,
@@ -530,7 +550,8 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
   },
   {
-    commonName: "Octal to hexcadecimal",
+    commonName: "octal to hexcadecimal",
+    commonNameNoSpaces: "octal_to_hexcadecimal",
     syntacticalName: "OCT2HEX",
     description: "Converts an octal number to hexadecimal",
     category: ExcelFunctionCategory.Conversion,
@@ -539,7 +560,7 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   {
-    commonName: "Hexadecimal to binary",
+    commonName: "hexadecimal to binary",
     syntacticalName: "HEX2BIN",
     description: "Converts a hexadecimal number to binary",
     category: ExcelFunctionCategory.Conversion,
@@ -548,7 +569,8 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   {
-    commonName: "Hexadecimal to octal",
+    commonName: "hexadecimal to octal",
+    commonNameNoSpaces: "hexadecimal_to_octal",
     syntacticalName: "HEX2OCT",
     description: "Converts a hexadecimal number to octal",
     category: ExcelFunctionCategory.Conversion,
@@ -557,7 +579,8 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
   },
   {
-    commonName: "Hexadecimal to decimal",
+    commonName: "hexadecimal to decimal",
+    commonNameNoSpaces: "hexadecimal_to_decimal",
     syntacticalName: "HEX2DEC",
     description: "Converts a hexadecimal number to decimal",
     category: ExcelFunctionCategory.Conversion,
@@ -733,4 +756,5 @@ export { functions };
 //cos    acos     cosh    acosh
 //tan    atan     tanh    atahnh
 //cot    acot     coth    acoth
-//csc             csch    
+//csc             csch           
+//sec             sech

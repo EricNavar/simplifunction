@@ -24,7 +24,7 @@ function ConversionForm(props: ConversionFormProps) {
   const [to, setTo] = React.useState("");
   const [from, setFrom] = React.useState("");
   const [number, setNumber] = React.useState("");
-  const [places, setPlaces] = React.useState("");
+  //const [places, setPlaces] = React.useState("");
   const [valid, setValid] = React.useState(true);
   const [helperText, setHelperText] = React.useState("");
 
@@ -40,9 +40,9 @@ function ConversionForm(props: ConversionFormProps) {
     setNumber(e.target.value);
   }
 
-  const onChangePlaces = (e:any) => {
-    setPlaces(e.target.value);
-  }
+  // const onChangePlaces = (e:any) => {
+  //   setPlaces(e.target.value);
+  // }
 
   const handleDoneClick = () => {
     if (number === "") {
@@ -59,8 +59,8 @@ function ConversionForm(props: ConversionFormProps) {
     }
     else {
       let formula = `${from}_to_${to}( ${number}`;
-      if (places)
-      formula = formula + ', ' + places;
+      //if (places)
+      //formula = formula + ', ' + places;
       formula = formula + ' )';
       props.addToUserInput(formula, props.inputRef);
       closeDialog();
@@ -68,7 +68,6 @@ function ConversionForm(props: ConversionFormProps) {
   }
 
   const closeDialog = () => {
-    console.log("should be closing the dialog right about now...")
     props.setDialogOpen(false);
   };
 
@@ -121,6 +120,7 @@ function ConversionForm(props: ConversionFormProps) {
           error={!valid}
           helperText={valid?null:helperText}
         />
+        {/*
         <TextField
           size="small"
           type="text"
@@ -129,6 +129,7 @@ function ConversionForm(props: ConversionFormProps) {
           onChange={onChangePlaces}
           placeholder="Decimal places"
         />
+        */}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleDoneClick}>

@@ -8,7 +8,7 @@ function parse(userInput: string):string {
   while (userInputIndex < userInput.length) {
     // eslint-disable-next-line no-loop-func
     functions.forEach((excelFunction: ExcelFunction) => {
-      const f = excelFunction.commonName.replace(" ","_");
+      const f = excelFunction.commonNameNoSpaces ? excelFunction.commonNameNoSpaces : excelFunction.commonName;
       const substr = userInput.substr(userInputIndex, f.length);
       if (substr === f) {
         userInputIndex = userInputIndex + f.length

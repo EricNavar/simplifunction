@@ -26,7 +26,6 @@ function SingleParameterForm(props: SingleParameterFormProps) {
     const newValid = validateParameter(parameter, props.excelFunction.parameterType!);
     setValid(newValid);
     if (newValid) {
-      console.log('valid')
       const formula = `${props.excelFunction.commonName.replace(" ", "_")}(${parameter})`;
       props.addToUserInput(formula, props.inputRef);
       closeDialog();

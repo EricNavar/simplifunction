@@ -16,7 +16,7 @@ import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';
 import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
 import { NParameterFunctionButton } from './NParameterFunctionButton';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
-//import { ConversionButton } from './ConversionButton';
+import { ConversionButton } from './ConversionButton';
 
 type FunctionButtonContainerProps = {
   inputRef: HTMLInputElement,
@@ -125,7 +125,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
             </React.Fragment>
           )
         })}
-        {/*
         <SectionHeader>
           Number Base Conversion
         </SectionHeader>
@@ -135,6 +134,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           setDialogOpen={props.setDialogOpen}
           setForm={props.setForm}
         />
+          {/*
         */}
       </Grid>
     </Grid>

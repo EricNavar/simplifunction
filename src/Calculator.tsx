@@ -48,7 +48,7 @@ function Calculator() {
       <Button
         className="button small-button"
         variant="outlined"
-        onClick={e => addToUserInput(props.input, inputRef!)}
+        onClick={(e:any) => addToUserInput(props.input, inputRef!)}
         aria-label="open parentheses"
         disableRipple
       >
@@ -66,7 +66,7 @@ function Calculator() {
       <Button
         className="button small-button"
         variant="outlined"
-        onClick={e => backspace()}
+        onClick={(e:any) => backspace()}
         aria-label="backspace"
         disableRipple
       >

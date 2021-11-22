@@ -90,7 +90,6 @@ function ListParameteredForm(props: ListParameteredFormProps) {
     }
     else { // inputMode === "individual"
       const newValids = validateList(parameters, props.excelFunction.parameterType!);
-      console.log(newValids);
       setValids(newValids);
       if (!newValids.includes(false)) {
         props.addToUserInput(createFormulaFromParameters(), props.inputRef);
@@ -161,7 +160,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
                   helperText={valids[index] ? "" : "Enter cell or number"}
                 />
                 {parameters.length > 1 &&
-                  <Button onClick={e => onDeleteClick(index)} size='small' color='info'>
+                  <Button onClick={(e:any) => onDeleteClick(index)} size='small' color='info'>
                     REMOVE
                   </Button>
                 }
