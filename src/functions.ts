@@ -294,7 +294,7 @@ const functions:Array<ExcelFunction> = [
   // Statistics
   {
     commonName: "Average",
-    syntacticalName: "AVG",
+    syntacticalName: "AVERAGE",
     description: "Returns the average of its arguments",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,

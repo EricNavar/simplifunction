@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import FullStory from 'react-fullstory';
 import './styling/index.css';
 import { Calculator } from './Calculator';
-import reportWebVitals from './reportWebVitals';
+import { reportWebVitals } from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 //https://reacttraining.com/react-router/web/guides/quick-start

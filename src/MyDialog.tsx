@@ -1,5 +1,5 @@
 import React from 'react';
-import Dialog from '@mui/material/Dialog';
+import { Dialog } from '@mui/material';
 import './styling/Calculator.css';
 
 type MyDialogProps = {
