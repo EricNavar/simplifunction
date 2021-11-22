@@ -11,6 +11,7 @@ function parse(userInput: string):string {
       const f = excelFunction.commonNameNoSpaces ? excelFunction.commonNameNoSpaces : excelFunction.commonName;
       const substr = userInput.substr(userInputIndex, f.length);
       if (substr === f) {
+        console.log(f);
         userInputIndex = userInputIndex + f.length
         formula = formula + excelFunction.syntacticalName + "( ";
         userInputIndex = parseWhitespace(userInputIndex, userInput);

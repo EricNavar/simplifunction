@@ -17,6 +17,7 @@ import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
 import { NParameterFunctionButton } from './NParameterFunctionButton';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
 import { ConversionButton } from './ConversionButton';
+import { TrigonometryButton } from './TrigonometryButton';
 
 type FunctionButtonContainerProps = {
   inputRef: HTMLInputElement,
@@ -40,7 +41,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
 
   const ExcelFunctionTypeArray = [
     ExcelFunctionCategory.Math,
-    ExcelFunctionCategory.Trigonometry,
     ExcelFunctionCategory.Statistics,
     ExcelFunctionCategory.Bitwise,
     ExcelFunctionCategory.Text,
@@ -134,8 +134,15 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           setDialogOpen={props.setDialogOpen}
           setForm={props.setForm}
         />
-          {/*
-        */}
+        <SectionHeader>
+          Trigonometry functions
+        </SectionHeader>
+        <TrigonometryButton
+          inputRef={props.inputRef}
+          addToUserInput={props.addToUserInput}
+          setDialogOpen={props.setDialogOpen}
+          setForm={props.setForm}
+        />
       </Grid>
     </Grid>
   );

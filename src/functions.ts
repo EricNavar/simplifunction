@@ -1,6 +1,6 @@
 import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } from './commonTypes';
 
-const functions:Array<ExcelFunction> = [
+const functions: Array<ExcelFunction> = [
   // ==== Math ====
   { // add IMSUM
     commonName: "Summation",
@@ -31,7 +31,7 @@ const functions:Array<ExcelFunction> = [
       },
     ]
   },
-  { 
+  {
     commonName: "Minimum",
     syntacticalName: "MIN",
     description: "Returns the minimum value in a list of arguments",
@@ -190,6 +190,24 @@ const functions:Array<ExcelFunction> = [
   },
   // ==== Trigonometry ====
   {
+    commonName: "Sin⁻¹",
+    syntacticalName: "ASIN",
+    description: "Returns the arcsine of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Hyperbolic_Sin⁻¹",
+    syntacticalName: "ASINH",
+    description: "Returns the arcsine of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
     commonName: "Sin",
     syntacticalName: "SIN",
     description: "Returns the sine of the given angle",
@@ -199,18 +217,9 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   {
-    commonName: "Sin⁻¹",
-    syntacticalName: "ASIN",
-    description: "Returns the arcsine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {  
-    commonName: "Cos",
-    syntacticalName: "COS",
-    description: "Returns the cosine of a number",
+    commonName: "Hyperbolic_Sin",
+    syntacticalName: "SINH",
+    description: "Returns the hyperbolic sine of a number",
     category: ExcelFunctionCategory.Trigonometry,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
@@ -226,9 +235,28 @@ const functions:Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3'
   },
   {
-    commonName: "Tan",
-    syntacticalName: "TAN",
-    description: "Returns the tangent of a number",
+    commonName: "Hyperbolic_Cos⁻¹",
+    syntacticalName: "ACOSH",
+    description: "Returns the hyperbolic arccosine of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3'
+  },
+  {
+    commonName: "Cos",
+    syntacticalName: "COS",
+    description: "Returns the cosine of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+
+  {
+    commonName: "Cosh",
+    syntacticalName: "COSH",
+    description: "Returns the hyperbolic cosine of a number",
     category: ExcelFunctionCategory.Trigonometry,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
@@ -243,33 +271,69 @@ const functions:Array<ExcelFunction> = [
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
-  // {
-  //   commonName: "Sinh",
-  //   syntacticalName: "SINH",
-  //   description: "Returns the hyperbolic sine of a number",
-  //   category: ExcelFunctionCategory.Trigonometry,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  // },
-  // {
-  //   commonName: "Cosh",
-  //   syntacticalName: "COSH",
-  //   description: "Returns the hyperbolic cosine of a number",
-  //   category: ExcelFunctionCategory.Trigonometry,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  // },
-  // {
-  //   commonName: "Tanh",
-  //   syntacticalName: "TANH",
-  //   description: "Returns the hyperbolic tangent of a number",
-  //   category: ExcelFunctionCategory.Trigonometry,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  // },
+  {
+    commonName: "Hyperbolic_Tan⁻¹",
+    syntacticalName: "ATANH",
+    description: "Returns the hyperbolic arctangent of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Tan",
+    syntacticalName: "TAN",
+    description: "Returns the tangent of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Tanh",
+    syntacticalName: "TANH",
+    description: "Returns the hyperbolic tangent of a number",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
+  },
+  {
+    commonName: "Cot⁻¹",
+    syntacticalName: "ACOT",
+    description: "Returns the cotangent of an angle",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/acot-function-dc7e5008-fe6b-402e-bdd6-2eea8383d905'
+  },
+  {
+    commonName: "Hyperbolic_Cot⁻¹",
+    syntacticalName: "ACOTH",
+    description: "Returns the cotangent of an angle",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/acot-function-dc7e5008-fe6b-402e-bdd6-2eea8383d905'
+  },
+  {
+    commonName: "Cot",
+    syntacticalName: "COT",
+    description: "Returns the cotangent of an angle",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/cot-function-c446f34d-6fe4-40dc-84f8-cf59e5f5e31a'
+  },
+  {
+    commonName: "Hyperbolic_Cot",
+    syntacticalName: "COTH",
+    description: "Returns the cotangent of an angle",
+    category: ExcelFunctionCategory.Trigonometry,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/cot-function-c446f34d-6fe4-40dc-84f8-cf59e5f5e31a'
+  },
   // {
   //   commonName: "Csc",
   //   syntacticalName: "CSC",
@@ -278,24 +342,6 @@ const functions:Array<ExcelFunction> = [
   //   parameterFormat: ParameterFormat.SINGLE,
   //   parameterType: ParameterType.number,
   //   documentationLink: 'https://support.microsoft.com/en-us/office/csc-function-07379361-219a-4398-8675-07ddc4f135c1'
-  // },
-  // {
-  //   commonName: "Cot",
-  //   syntacticalName: "COT",
-  //   description: "Returns the cotangent of an angle",
-  //   category: ExcelFunctionCategory.Trigonometry,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/cot-function-c446f34d-6fe4-40dc-84f8-cf59e5f5e31a'
-  // },
-  // {
-  //   commonName: "Acot",
-  //   syntacticalName: "ACOT",
-  //   description: "Returns the cotangent of an angle",
-  //   category: ExcelFunctionCategory.Trigonometry,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/acot-function-dc7e5008-fe6b-402e-bdd6-2eea8383d905'
   // },
   // Statistics
   {
@@ -750,7 +796,18 @@ const functions:Array<ExcelFunction> = [
   // }
 ]
 
-export { functions };
+const trigonometricFunctions: Array<Array<Array<string>>> = [
+  [
+    ["SIN", "COS", "TAN", "COT"],
+    ["ASIN", "ACOS", "ATAN", "ACOT"],
+  ],
+  [
+    ["SINH", "COSH", "TANH", "COTH"],
+    ["ASINH", "ACOSH", "ATANH", "ACOTH"],
+  ]
+];
+
+export { functions, trigonometricFunctions };
 
 //sin    asin     sinh    asinh
 //cos    acos     cosh    acosh
