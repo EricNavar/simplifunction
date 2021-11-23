@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FullStory from 'react-fullstory';
 import './styling/index.css';
 import { Calculator } from './Calculator';
 import { reportWebVitals } from './reportWebVitals';
@@ -31,7 +30,6 @@ const myTheme = createTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <FullStory org={process.env.REACT_APP_ORG_ID} />
     <ThemeProvider theme={myTheme}>
       <Calculator />
     </ThemeProvider>

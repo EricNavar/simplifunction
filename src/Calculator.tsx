@@ -1,16 +1,43 @@
 import React from 'react';
-import { Typography, Grid, Button, TextField, useMediaQuery } from '@mui/material';
+import {
+  Typography,
+  Grid,
+  Button,
+  useMediaQuery,
+  FormControl,
+  FilledInput,
+  InputLabel,
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { FunctionButtons } from './FunctionButtons/FunctionButtons';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
 import './styling/Calculator.css';
 
+type InputButtonProps = {
+  input: string,
+  inputRef: HTMLInputElement,
+  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+}
+
+function InputButton(props: InputButtonProps) {
+  return (
+    <Button
+      className="button small-button"
+      variant="outlined"
+      onClick={(e:any) => props.addToUserInput(props.input, props.inputRef!)}
+      aria-label="open parentheses"
+      disableRipple
+    >
+      {props.input}
+    </Button>
+  );
+}
+
 function Calculator() {
   const [formula, setFormula] = React.useState('');
   const [userInput, setUserInput] = React.useState('');
-  let element: JSX.Element = <Grid></Grid>;
-  const [form, setForm] = React.useState(element);
+  const [form, setForm] = React.useState(<Grid></Grid>);
   const [inputRef, setInputRef] = React.useState(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
@@ -39,24 +66,6 @@ function Calculator() {
     setUserInput(event.target.value);
   };
 
-  type InputButtonProps = {
-    input: string
-  }
-
-  function InputButton(props: InputButtonProps) {
-    return (
-      <Button
-        className="button small-button"
-        variant="outlined"
-        onClick={(e:any) => addToUserInput(props.input, inputRef!)}
-        aria-label="open parentheses"
-        disableRipple
-      >
-        {props.input}
-      </Button>
-    );
-  }
-
   function backspace() {
     setUserInput(userInput.substring(0, userInput.length - 2));
   }
@@ -81,17 +90,16 @@ function Calculator() {
         <h1>SimpliFunction</h1>
       </header>
       <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
-        <TextField
-          autoFocus
-          fullWidth
-          type="text"
-          onChange={onType}
-          inputRef={ref => { setInputRef(ref); }}
-          value={userInput}
-          className="user-input-text-field"
-          placeholder="Enter your calculation"
-          variant='filled'
-        />
+        <FormControl variant="filled">
+          <InputLabel htmlFor="component-helper">Enter your calculation</InputLabel>
+          <FilledInput
+            value={userInput}
+            onChange={onType}
+            inputRef={ref => { setInputRef(ref); }}
+            fullWidth
+            type="text"
+          />
+        </FormControl>
         <div className="formula-container">
           {formula && <Typography component="span" variant='overline'>Result:</Typography>}
           <span className="formula">{formula}</span>
@@ -104,30 +112,30 @@ function Calculator() {
           inputRef={inputRef!}
         />
         <Grid
-          id="small-button-container"
-          className="small-button-container"
+          id='small-button-container'
+          className='small-button-container'
           item container
           xs={12} sm={6}
           component='section'
         >
           <Grid item xs={12}>
-            <InputButton input="( " />
-            <InputButton input=" )" />
+            <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input="( " />
+            <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input=" )" />
           </Grid>
           {mobile &&
             <Grid item container xs={9} className="number-button-container">
               {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].reverse().map((num) => // number buttons
-                <InputButton input={num.toString()} key={num} />
+                <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input={num.toString()} key={num} />
               )}
-              <InputButton input='.' />
+              <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input='.' />
               <BackspaceButton />
             </Grid>
           }
           <Grid item xs={3} sm={12}>
-            <InputButton input=" + " />
-            <InputButton input=" - " />
-            <InputButton input=" × " />
-            <InputButton input=" ÷ " />
+            <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input=" + " />
+            <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input=" - " />
+            <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input=" × " />
+            <InputButton addToUserInput={addToUserInput} inputRef={inputRef!} input=" ÷ " />
           </Grid>
           <Grid item xs={12}>
             <Button
