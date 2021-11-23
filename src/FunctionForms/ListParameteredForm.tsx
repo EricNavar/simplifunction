@@ -16,9 +16,8 @@ import { ExcelFunction } from '../commonTypes';
 
 type ListParameteredFormProps = {
   excelFunction: ExcelFunction,
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
-  inputRef: HTMLInputElement,
 }
 function ListParameteredForm(props: ListParameteredFormProps) {
   const [parameterCount, setParameterCount] = React.useState(2);
@@ -84,7 +83,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
       const endCellValid_ = isCell(startCell);
       setEndCellValid(endCellValid_);
       if (startCellValid_ && endCellValid_) {
-        props.addToUserInput(createFormulaFromRange(), props.inputRef);
+        props.addToUserInput(createFormulaFromRange());
         closeDialog();
       }
     }
@@ -92,7 +91,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
       const newValids = validateList(parameters, props.excelFunction.parameterType!);
       setValids(newValids);
       if (!newValids.includes(false)) {
-        props.addToUserInput(createFormulaFromParameters(), props.inputRef);
+        props.addToUserInput(createFormulaFromParameters());
         closeDialog();
       }
     }

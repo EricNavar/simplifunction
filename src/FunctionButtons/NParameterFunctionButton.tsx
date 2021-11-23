@@ -5,8 +5,7 @@ import { FunctionButton } from './FunctionButton';
 import { ExcelFunction } from '../commonTypes';
 
 type NParameterFunctionButtonProps = {
-  inputRef: HTMLInputElement,
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
   excelFunction: ExcelFunction
@@ -20,7 +19,6 @@ function NParameterFunctionButton(props: NParameterFunctionButtonProps) {
     form={
       <NParameterForm
         addToUserInput={props.addToUserInput}
-        inputRef={props.inputRef}
         setDialogOpen={props.setDialogOpen}
         excelFunction={props.excelFunction}
       />

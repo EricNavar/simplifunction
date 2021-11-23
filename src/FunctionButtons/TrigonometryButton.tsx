@@ -4,8 +4,7 @@ import { FunctionButton } from './FunctionButton';
 import '../styling/Calculator.css';
 
 type TrigonometryButtonProps = {
-  inputRef: HTMLInputElement,
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
@@ -18,7 +17,6 @@ function TrigonometryButton(props: TrigonometryButtonProps) {
     form={
       <TrigonometryForm
         addToUserInput={props.addToUserInput}
-        inputRef={props.inputRef}
         setDialogOpen={props.setDialogOpen}
         setForm={props.setForm}
       />

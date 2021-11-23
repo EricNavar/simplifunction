@@ -13,9 +13,8 @@ import { ExcelFunction } from '../commonTypes';
 import { validateNParameters } from '../util/validator';
 
 type NParameterFormProps = {
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
-  inputRef: HTMLInputElement,
   excelFunction: ExcelFunction
 };
 function NParameterForm(props: NParameterFormProps) {
@@ -46,7 +45,7 @@ function NParameterForm(props: NParameterFormProps) {
     setValids(newValids);
     if (!newValids.includes(false)) {
       const formula = createFormulaFromParameters();
-      props.addToUserInput(formula, props.inputRef);
+      props.addToUserInput(formula);
       closeDialog();
     }
   };

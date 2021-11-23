@@ -6,8 +6,7 @@ import { ExcelFunction } from '../commonTypes';
 
 type SingleParameterFunctionButtonProps = {
   excelFunction: ExcelFunction,
-  inputRef: HTMLInputElement,
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
@@ -20,7 +19,6 @@ function SingleParameterFunctionButton(props: SingleParameterFunctionButtonProps
     form={
       <SingleParameterForm
         addToUserInput={props.addToUserInput}
-        inputRef={props.inputRef}
         setDialogOpen={props.setDialogOpen}
         excelFunction={props.excelFunction}
       />

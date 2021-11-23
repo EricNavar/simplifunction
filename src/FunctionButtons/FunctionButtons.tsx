@@ -20,8 +20,7 @@ import { ConversionButton } from './ConversionButton';
 import { TrigonometryButton } from './TrigonometryButton';
 
 type FunctionButtonContainerProps = {
-  inputRef: HTMLInputElement,
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   mobile: boolean,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
@@ -93,7 +92,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
                 if (obj.parameterFormat === ParameterFormat.LIST) {
                   return (<ListParameteredFunctionButton
                     key={index}
-                    inputRef={props.inputRef}
                     addToUserInput={props.addToUserInput}
                     setForm={props.setForm}
                     setDialogOpen={props.setDialogOpen}
@@ -103,7 +101,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
                 else if (obj.parameterFormat === ParameterFormat.SINGLE) {
                   return (<SingleParameterFunctionButton
                     key={index}
-                    inputRef={props.inputRef}
                     addToUserInput={props.addToUserInput}
                     setDialogOpen={props.setDialogOpen}
                     setForm={props.setForm}
@@ -113,7 +110,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
                 else {
                   return (<NParameterFunctionButton
                     key={index}
-                    inputRef={props.inputRef}
                     addToUserInput={props.addToUserInput}
                     setDialogOpen={props.setDialogOpen}
                     setForm={props.setForm}
@@ -129,7 +125,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           Number Base Conversion
         </SectionHeader>
         <ConversionButton
-          inputRef={props.inputRef}
           addToUserInput={props.addToUserInput}
           setDialogOpen={props.setDialogOpen}
           setForm={props.setForm}
@@ -138,7 +133,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           Trigonometry functions
         </SectionHeader>
         <TrigonometryButton
-          inputRef={props.inputRef}
           addToUserInput={props.addToUserInput}
           setDialogOpen={props.setDialogOpen}
           setForm={props.setForm}
@@ -147,9 +141,6 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     </Grid>
   );
 }
-
-/*        
-        */
 
 type SectionHeaderProps = {
   children: React.ReactNode,
@@ -166,13 +157,12 @@ function SectionHeader(props: SectionHeaderProps) {
 
 type FunctionButtonsProps = {
   mobile: boolean,
-  inputRef: HTMLInputElement,
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (open: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
 function FunctionButtons(props: FunctionButtonsProps) {
-  const { mobile, inputRef, addToUserInput, setDialogOpen, setForm } = props;
+  const { mobile, addToUserInput, setDialogOpen, setForm } = props;
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = () => {
@@ -195,7 +185,6 @@ function FunctionButtons(props: FunctionButtonsProps) {
           <FunctionButtonContainer
             mobile={mobile}
             setDialogOpen={setDialogOpen}
-            inputRef={inputRef}
             addToUserInput={addToUserInput}
             setForm={setForm}
           />
@@ -208,7 +197,6 @@ function FunctionButtons(props: FunctionButtonsProps) {
       <FunctionButtonContainer
         mobile={mobile}
         setDialogOpen={setDialogOpen}
-        inputRef={inputRef}
         addToUserInput={addToUserInput}
         setForm={setForm}
       />

@@ -13,9 +13,8 @@ import { ExcelFunction } from '../commonTypes';
 import { validateParameter } from '../util/validator';
 
 type SingleParameterFormProps = {
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
-  inputRef: HTMLInputElement,
   excelFunction: ExcelFunction
 }
 function SingleParameterForm(props: SingleParameterFormProps) {
@@ -27,7 +26,7 @@ function SingleParameterForm(props: SingleParameterFormProps) {
     setValid(newValid);
     if (newValid) {
       const formula = `${props.excelFunction.commonName.replace(" ", "_")}(${parameter})`;
-      props.addToUserInput(formula, props.inputRef);
+      props.addToUserInput(formula);
       closeDialog();
     }
   };

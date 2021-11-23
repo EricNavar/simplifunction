@@ -7,8 +7,7 @@ import { ExcelFunction } from '../commonTypes';
 
 type ListParameteredFunctionButtonProps = {
   excelFunction: ExcelFunction,
-  inputRef: HTMLInputElement,
-  addToUserInput: (strToAdd: string, inputRef: HTMLInputElement) => Promise<void>,
+  addToUserInput: (strToAdd: string) => Promise<void>,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
@@ -23,7 +22,6 @@ function ListParameteredFunctionButton(props: ListParameteredFunctionButtonProps
     form={
       <ListParameteredForm
         addToUserInput={props.addToUserInput}
-        inputRef={props.inputRef}
         setDialogOpen={props.setDialogOpen}
         excelFunction={props.excelFunction}
       />
