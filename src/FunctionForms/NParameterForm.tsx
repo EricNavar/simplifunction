@@ -25,11 +25,11 @@ function NParameterForm(props: NParameterFormProps) {
     new Array(props.excelFunction.parameterSchema!.length).fill(true)
   );
 
-  const onChangeParameter = (event: any, index: number) => {
+  function onChangeParameter(event: any, index: number) {
     setParameters(parameters.map((param: string, iter: number) => (iter !== index ? param : event.target.value)));
   }
 
-  const createFormulaFromParameters = () => {
+  function createFormulaFromParameters() {
     let formula = props.excelFunction.commonName.replace(" ", "_") + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
@@ -40,7 +40,7 @@ function NParameterForm(props: NParameterFormProps) {
     return formula;
   };
 
-  const handleDoneClick = () => {
+  function handleDoneClick() {
     const newValids = validateNParameters(parameters, props.excelFunction.parameterSchema!);
     setValids(newValids);
     if (!newValids.includes(false)) {
@@ -50,7 +50,7 @@ function NParameterForm(props: NParameterFormProps) {
     }
   };
 
-  const closeDialog = () => {
+  function closeDialog() {
     props.setDialogOpen(false);
   };
 

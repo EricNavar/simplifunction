@@ -31,7 +31,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   const [endCell, setEndCell] = React.useState("A2");
   const [endCellValid, setEndCellValid] = React.useState(true);
 
-  const addParameter = () => {
+  function addParameter() {
     let newParameters = parameters;
     newParameters.push("");
     setParameters(newParameters);
@@ -42,17 +42,17 @@ function ListParameteredForm(props: ListParameteredFormProps) {
     setValids(newValids);
   }
 
-  const onChangeParameter = (event: any, index: number) => {
+  function onChangeParameter(event: any, index: number) {
     setParameters(parameters.map((param: string, iter: number) =>
       (iter !== index ? param : event.target.value)
     ));
   }
 
-  const createFormulaFromRange = () => {
+  function createFormulaFromRange() {
     return `${props.excelFunction.commonName.replace(" ", "_")}(${startCell}:${endCell})`;
   }
 
-  const createFormulaFromParameters = () => {
+  function createFormulaFromParameters() {
     let formula = props.excelFunction.syntacticalName + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
@@ -63,20 +63,20 @@ function ListParameteredForm(props: ListParameteredFormProps) {
     return formula;
   };
 
-  const handleModeChange = (event: any, newMode: string) => {
+  function handleModeChange(event: any, newMode: string) {
     if (newMode !== null)
       setInputMode(newMode);
   };
 
-  const onChangeStartCell = (event: any) => {
+  function onChangeStartCell(event: any) {
     setStartCell(event.target.value);
   };
 
-  const onChangeEndCell = (event: any) => {
+  function onChangeEndCell(event: any) {
     setEndCell(event.target.value);
   };
 
-  const handleDoneClick = () => {
+  function handleDoneClick() {
     if (inputMode === "range") {
       const startCellValid_ = isCell(startCell);
       setStartCellValid(startCellValid_);
@@ -98,7 +98,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   };
 
   // TODO: this is a terrible way of changing an array state. Fix this.
-  const onDeleteClick = (index: number) => {
+  function onDeleteClick(index: number) {
     parameters.splice(index, 1);
     setParameters(parameters);
     setParameterCount(parameterCount - 1);
@@ -107,7 +107,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
     setValids(valids);
   };
 
-  const closeDialog = () => {
+  function closeDialog() {
     props.setDialogOpen(false);
   };
 

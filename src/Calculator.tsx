@@ -24,7 +24,7 @@ function Calculator() {
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
-  const addToUserInput = (strToAdd: string, focus:boolean) => {
+  function addToUserInput(strToAdd: string, focus:boolean) {
     if (inputRef == null) {
       console.log("INPUTREF IS NULL");
       return;
@@ -38,12 +38,12 @@ function Calculator() {
     }
   };
 
-  const clearInput = () => {
+  function clearInput() {
     setUserInput("");
     setFormula("");
   };
 
-  const onEqualsClick = () => {
+  function onEqualsClick() {
     setFormula(createFormula(userInput));
   };
 
@@ -51,7 +51,7 @@ function Calculator() {
     setUserInput(userInput.substring(0, userInput.length - 2));
   }
 
-  const onType = (event: any) => {
+  function onType(event: any) {
     setUserInput(event.target.value);
   };
 
@@ -59,7 +59,7 @@ function Calculator() {
     <>
       <div className="App" >
         <header>
-          <h1>SimpliFunction</h1>
+          <Typography component='h1' variant='h4' style={{marginBottom:20}}>SimpliFunction</Typography>
         </header>
         <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
           <FormControl variant="filled">

@@ -11,7 +11,7 @@ type FunctionButtonProps = {
 
 function FunctionButton(props: FunctionButtonProps) {
   const { setForm, setDialogOpen, form } = props;
-  const onClick = () => {
+  function onClick() {
     setForm(form);
     setDialogOpen(true);
   }

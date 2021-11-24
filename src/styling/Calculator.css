@@ -110,10 +110,6 @@
   width: 100%;
 }
 
-.function-buttons {
-  margin-bottom: 20px;
-}
-
 .function-buttons-grid-container {
   max-height: calc(100vh - 322px);
   overflow-y: scroll;

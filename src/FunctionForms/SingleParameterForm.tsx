@@ -21,7 +21,7 @@ function SingleParameterForm(props: SingleParameterFormProps) {
   const [parameter, setParameter] = React.useState("");
   const [valid, setValid] = React.useState(true);
 
-  const handleDoneClick = () => {
+  function handleDoneClick() {
     const newValid = validateParameter(parameter, props.excelFunction.parameterType!);
     setValid(newValid);
     if (newValid) {
@@ -31,11 +31,11 @@ function SingleParameterForm(props: SingleParameterFormProps) {
     }
   };
 
-  const onChangeParameter = (e: any) => {
+  function onChangeParameter(e: any) {
     setParameter(e.target.value);
   };
 
-  const closeDialog = () => {
+  function closeDialog() {
     props.setDialogOpen(false);
   }
 

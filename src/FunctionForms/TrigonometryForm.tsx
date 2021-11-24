@@ -27,23 +27,23 @@ function TrigonometryForm(props: TrigonometryFormProps) {
   const [hyperbolic, setHyperbolic] = React.useState(false);
   const [valid, setValid] = React.useState(true);
 
-  const onChangeFunc = (e: any) => {
+  function onChangeFunc(e: any) {
     setFunc(e.target.value);
   }
 
-  const onChangeInverse = (e: any) => {
+  function onChangeInverse(e: any) {
     setInverse(e.target.value);
   }
 
-  const onChangeHyperbolic = (e: any) => {
+  function onChangeHyperbolic(e: any) {
     setHyperbolic(e.target.value);
   }
 
-  const onChangeNumber = (e: any) => {
+  function onChangeNumber(e: any) {
     setNumber(e.target.value);
   }
 
-  const handleDoneClick = () => {
+  function handleDoneClick() {
     const newValid = validateParameter(number, ParameterType.number);
     setValid(newValid);
     console.log(newValid);
@@ -60,7 +60,7 @@ function TrigonometryForm(props: TrigonometryFormProps) {
     }
   }
 
-  const closeDialog = () => {
+  function closeDialog() {
     props.setDialogOpen(false);
   };
 

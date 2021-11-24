@@ -27,23 +27,23 @@ function ConversionForm(props: ConversionFormProps) {
   const [valid, setValid] = React.useState(true);
   const [helperText, setHelperText] = React.useState("");
 
-  const onChangeTo = (e:any) => {
+  function onChangeTo(e:any) {
     setTo(e.target.value);
   }
 
-  const onChangeFrom = (e:any) => {
+  function onChangeFrom(e:any) {
     setFrom(e.target.value);
   }
 
-  const onChangeNumber = (e:any) => {
+  function onChangeNumber(e:any) {
     setNumber(e.target.value);
   }
 
-  // const onChangePlaces = (e:any) => {
+  // function onChangePlaces(e: any) {
   //   setPlaces(e.target.value);
   // }
 
-  const handleDoneClick = () => {
+  function handleDoneClick() {
     if (number === "") {
       setValid(false);
       setHelperText("Input number to convert");
@@ -66,7 +66,7 @@ function ConversionForm(props: ConversionFormProps) {
     }
   }
 
-  const closeDialog = () => {
+  function closeDialog() {
     props.setDialogOpen(false);
   };
 

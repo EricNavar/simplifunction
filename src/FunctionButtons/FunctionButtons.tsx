@@ -35,7 +35,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
 
-  const onChangeSearchInput = (e: any) => {
+  function onChangeSearchInput(e: any) {
     setSearchInput(e.target.value);
     if (e.target.value === '') {
       setSearchedFunctions(functions);
@@ -54,7 +54,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   ];
 
   return (
-    <Grid item container xs={12} sm={6} spacing={mobile ? 0 : 2} className="function-buttons" component='section'>
+    <Grid item container xs={12} sm={6} spacing={mobile ? 0 : 2} component='section'>
       {!mobile &&
         <Typography component="h2" variant='h4' style={{ width: '100%' }}>
           Excel Functions
@@ -172,7 +172,7 @@ function FunctionButtons(props: FunctionButtonsProps) {
   const { mobile, addToUserInput, setDialogOpen, setForm } = props;
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleChange = () => {
+  function handleChange() {
     setExpanded(!expanded);
   };
 
