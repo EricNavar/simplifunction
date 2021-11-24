@@ -15,7 +15,7 @@ SimpliFunction is a cool and epic solution for writing calculations in Excel wit
 	- ConversionButton.tsx
 		- spawns ConversionForm.tsx
 	- ListParameteredFunctionButton.tsx
-		- spawns ListParameteredForm.tsx
+		- spawns ListParameterForm.tsx
 	- NParameteredFunctionButton.tsx
 		- spawns NParameteredForm.tsx
 	- SingleParameterFunctionButton.tsx

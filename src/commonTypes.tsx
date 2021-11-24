@@ -44,3 +44,9 @@ export type ExcelFunction = {
   remarks?: Array<string>,
   documentationLink: string
 }
+
+export type FormProps = {
+  excelFunction: ExcelFunction,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
+  setDialogOpen: (value: boolean) => void,
+}

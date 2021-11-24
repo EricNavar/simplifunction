@@ -12,14 +12,9 @@ import {
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { isCell, validateList } from '../util/validator';
-import { ExcelFunction } from '../commonTypes';
+import { FormProps } from '../commonTypes';
 
-type ListParameteredFormProps = {
-  excelFunction: ExcelFunction,
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
-  setDialogOpen: (value: boolean) => void,
-}
-function ListParameteredForm(props: ListParameteredFormProps) {
+function ListParameterForm(props: FormProps) {
   const [parameterCount, setParameterCount] = React.useState(2);
   const [parameters, setParameters] = React.useState(["", ""]);
   // valids is an array with element n being a boolean indicating if parameter n is valid or not.
@@ -209,4 +204,4 @@ function ListParameteredForm(props: ListParameteredFormProps) {
   );
 }
 
-export { ListParameteredForm };
+export { ListParameterForm };

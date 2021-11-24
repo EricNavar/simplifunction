@@ -9,15 +9,10 @@ import {
   Link
 } from '@mui/material';
 import '../styling/Calculator.css';
-import { ExcelFunction } from '../commonTypes';
+import { FormProps } from '../commonTypes';
 import { validateParameter } from '../util/validator';
 
-type SingleParameterFormProps = {
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
-  setDialogOpen: (value: boolean) => void,
-  excelFunction: ExcelFunction
-}
-function SingleParameterForm(props: SingleParameterFormProps) {
+function SingleParameterForm(props: FormProps) {
   const [parameter, setParameter] = React.useState("");
   const [valid, setValid] = React.useState(true);
 

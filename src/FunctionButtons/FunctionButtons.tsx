@@ -12,12 +12,13 @@ import {
 import '../styling/Calculator.css';
 import { functions } from '../functions';
 import { SearchIcon } from '../assets/SearchIcon';
-import { ListParameteredFunctionButton } from './ListParameteredFunctionButton';
-import { SingleParameterFunctionButton } from './SingleParameterFunctionButton';
-import { NParameterFunctionButton } from './NParameterFunctionButton';
+import { ListParameterForm } from '../FunctionForms/ListParameterForm';
+import { SingleParameterForm } from '../FunctionForms/SingleParameterForm';
+import { NParameterForm } from '../FunctionForms/NParameterForm';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
 import { ConversionButton } from './ConversionButton';
 import { TrigonometryButton } from './TrigonometryButton';
+import { FunctionButtonWrapper } from './FunctionButtonWrapper';
 
 type FunctionButtonContainerProps = {
   addToUserInput: (strToAdd: string, focus:boolean) => void,
@@ -97,30 +98,35 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
               </SectionHeader>
               {categorizedFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
                 if (obj.parameterFormat === ParameterFormat.LIST) {
-                  return (<ListParameteredFunctionButton
-                    key={index}
-                    addToUserInput={addToUserInput}
-                    setForm={setForm}
-                    setDialogOpen={setDialogOpen}
-                    excelFunction={obj}
-                  />)
+                  return (
+                    <FunctionButtonWrapper
+                      key={index}
+                      addToUserInput={addToUserInput}
+                      setForm={setForm}
+                      setDialogOpen={setDialogOpen}
+                      excelFunction={obj}
+                      FormComponent={ListParameterForm}
+                    />
+                  )
                 }
                 else if (obj.parameterFormat === ParameterFormat.SINGLE) {
-                  return (<SingleParameterFunctionButton
+                  return (<FunctionButtonWrapper
                     key={index}
                     addToUserInput={addToUserInput}
-                    setDialogOpen={setDialogOpen}
                     setForm={setForm}
+                    setDialogOpen={setDialogOpen}
                     excelFunction={obj}
+                    FormComponent={SingleParameterForm}
                   />)
                 }
                 else {
-                  return (<NParameterFunctionButton
+                  return (<FunctionButtonWrapper
                     key={index}
                     addToUserInput={addToUserInput}
-                    setDialogOpen={setDialogOpen}
                     setForm={setForm}
+                    setDialogOpen={setDialogOpen}
                     excelFunction={obj}
+                    FormComponent={NParameterForm}
                   />)
                 }
               }

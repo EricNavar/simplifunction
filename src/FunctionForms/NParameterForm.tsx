@@ -9,15 +9,10 @@ import {
   Link
 } from '@mui/material';
 import '../styling/Calculator.css';
-import { ExcelFunction } from '../commonTypes';
+import { FormProps } from '../commonTypes';
 import { validateNParameters } from '../util/validator';
 
-type NParameterFormProps = {
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
-  setDialogOpen: (value: boolean) => void,
-  excelFunction: ExcelFunction
-};
-function NParameterForm(props: NParameterFormProps) {
+function NParameterForm(props: FormProps) {
   const [parameters, setParameters] = React.useState(
     new Array(props.excelFunction.parameterSchema!.length).fill("")
   );
