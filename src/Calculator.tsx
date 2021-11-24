@@ -12,6 +12,7 @@ import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
 import { BasicButtons } from './buttons/BasicButtons';
 import './styling/Calculator.css';
+import { ExcelFunction, FormProps } from './commonTypes';
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');
@@ -56,6 +57,17 @@ function Calculator() {
     setUserInput(event.target.value);
   };
 
+  const functionButtonOnClick = (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => {
+    setForm(
+      <FormComponent
+        addToUserInput={addToUserInput}
+        setDialogOpen={setDialogOpen}
+        excelFunction={excelFunction}
+      />
+    );
+    setDialogOpen(true);
+  }
+
   return (
     <>
       <div className="App" >
@@ -80,10 +92,8 @@ function Calculator() {
             <span className="formula">{formula}</span>
           </div>
           <FunctionButtonsWrapper
-            setDialogOpen={setDialogOpen}
-            setForm={setForm}
-            addToUserInput={addToUserInput}
             mobile={mobile}
+            functionButtonOnClick={functionButtonOnClick}
           />
           <BasicButtons
             addToUserInput={addToUserInput}

@@ -32,14 +32,12 @@ function SectionHeader(props: SectionHeaderProps) {
 }
 
 type FunctionButtonsProps = {
-  addToUserInput: (strToAdd: string, focus: boolean) => void,
-  setDialogOpen: (value: boolean) => void,
   mobile: boolean,
-  setForm: (form: React.SetStateAction<JSX.Element>) => void,
+  functionButtonOnClick: (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => void
 }
 
 function FunctionButtons(props: FunctionButtonsProps) {
-  const { addToUserInput, setDialogOpen, mobile, setForm } = props;
+  const { mobile, functionButtonOnClick } = props;
 
   React.useEffect(() => { }, [mobile]);
 
@@ -63,17 +61,6 @@ function FunctionButtons(props: FunctionButtonsProps) {
     ExcelFunctionCategory.Lookup,
     ExcelFunctionCategory.Web
   ];
-
-  const functionButtonOnClick = (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => {
-    setForm(
-      <FormComponent
-        addToUserInput={addToUserInput}
-        setDialogOpen={setDialogOpen}
-        excelFunction={excelFunction}
-      />
-    );
-    setDialogOpen(true);
-  }
 
   return (
     <Grid item container xs={12} sm={6} spacing={mobile ? 0 : 2} component='section'>
@@ -159,20 +146,16 @@ function FunctionButtons(props: FunctionButtonsProps) {
 
 type FunctionButtonsWrapperProps = {
   mobile: boolean,
-  addToUserInput: (strToAdd: string, focus: boolean) => void,
-  setDialogOpen: (open: boolean) => void,
-  setForm: (form: React.SetStateAction<JSX.Element>) => void,
+  functionButtonOnClick: (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => void
 }
 
 function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
-  const { mobile, addToUserInput, setDialogOpen, setForm } = props;
+  const { mobile, functionButtonOnClick } = props;
   React.useEffect(() => { /*console.log("FunctionButtonsWrapper useEffect()")*/ }, [mobile]);
 
   const content = (<FunctionButtons
     mobile={mobile}
-    setDialogOpen={setDialogOpen}
-    addToUserInput={addToUserInput}
-    setForm={setForm}
+    functionButtonOnClick={functionButtonOnClick}
   />);
 
   if (mobile) {
