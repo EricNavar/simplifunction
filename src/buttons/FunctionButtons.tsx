@@ -101,38 +101,29 @@ function FunctionButtons(props: FunctionButtonsProps) {
               <SectionHeader>
                 {functionType}
               </SectionHeader>
-              {categorizedFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
-                if (obj.parameterFormat === ParameterFormat.LIST) {
-                  return (<FunctionButton
-                    key={index}
-                    addToUserInput={addToUserInput}
-                    setForm={setForm}
-                    setDialogOpen={setDialogOpen}
-                    excelFunction={obj}
-                    FormComponent={ListParameterForm}
-                  />);
+              {categorizedFunctions.filter(
+                (f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
+                  let FormComponent = null;
+                  if (obj.parameterFormat === ParameterFormat.LIST) {
+                    FormComponent = ListParameterForm;
+                  }
+                  else if (obj.parameterFormat === ParameterFormat.SINGLE) {
+                    FormComponent = SingleParameterForm;
+                  }
+                  else {
+                    FormComponent = NParameterForm;
+                  }
+                  return (
+                    <FunctionButton
+                      key={index}
+                      addToUserInput={addToUserInput}
+                      setForm={setForm}
+                      setDialogOpen={setDialogOpen}
+                      excelFunction={obj}
+                      FormComponent={FormComponent}
+                    />
+                  );
                 }
-                else if (obj.parameterFormat === ParameterFormat.SINGLE) {
-                  return (<FunctionButton
-                    key={index}
-                    addToUserInput={addToUserInput}
-                    setForm={setForm}
-                    setDialogOpen={setDialogOpen}
-                    excelFunction={obj}
-                    FormComponent={SingleParameterForm}
-                  />);
-                }
-                else {
-                  return (<FunctionButton
-                    key={index}
-                    addToUserInput={addToUserInput}
-                    setForm={setForm}
-                    setDialogOpen={setDialogOpen}
-                    excelFunction={obj}
-                    FormComponent={NParameterForm}
-                  />);
-                }
-              }
               )}
             </React.Fragment>
           )
@@ -204,35 +195,29 @@ function FunctionButtonsAccordion(props: FunctionButtonsAccordionProps) {
 
 type FunctionButtonsWrapperProps = {
   mobile: boolean,
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
+  addToUserInput: (strToAdd: string, focus: boolean) => void,
   setDialogOpen: (open: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
 
 function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
   const { mobile, addToUserInput, setDialogOpen, setForm } = props;
+  React.useEffect(() => { }, [mobile]);
+
+  const content = (<FunctionButtons
+    mobile={mobile}
+    setDialogOpen={setDialogOpen}
+    addToUserInput={addToUserInput}
+    setForm={setForm}
+  />);
 
   if (mobile) {
-    return (
-      <FunctionButtonsAccordion>
-        <FunctionButtons
-          mobile={mobile}
-          setDialogOpen={setDialogOpen}
-          addToUserInput={addToUserInput}
-          setForm={setForm}
-        />
-      </FunctionButtonsAccordion>
-    )
+    return (<FunctionButtonsAccordion>
+      {content}
+    </FunctionButtonsAccordion>)
   }
   else {
-    return (
-      <FunctionButtons
-        mobile={mobile}
-        setDialogOpen={setDialogOpen}
-        addToUserInput={addToUserInput}
-        setForm={setForm}
-      />
-    )
+    return content;
   }
 };
 

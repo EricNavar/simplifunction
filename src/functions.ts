@@ -1,8 +1,56 @@
 import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } from './commonTypes';
 
+const functionTranslation: Record<string,string> = {
+  Summation: "SUM",
+  Power: "POWER",
+  Minimum: "MIN",
+  Maximum: "MAX",
+  Geometric_mean: "GEOMEAN",
+  Absolute_value: "ABS",
+  Round_up: "CEILING",
+  Round_down: "FLOOR",
+  Square_root: "SQRT",
+  Modulo: "MOD",
+  "Log₁₀": "LOG10",
+  Log: "LOG",
+  Choose_random_number: "CHOOSE",
+  // TRIG
+  "Hyperbolic_Sin⁻¹": "ASINH",
+  Hyperbolic_Sin: "SINH",
+  "Sin⁻¹": "ASIN",
+  Sin: "SIN",
+
+  "Hyperbolic_Tan⁻¹": "ATANH",
+  Hyperbolic_Tan: "TANH",
+  "Tan⁻¹": "ATAN",
+  Tan: "TAN",
+
+  "Hyperbolic_Cos⁻¹": "ACOSH",
+  Hyperbolic_Cos: "COSH",
+  "Cos⁻¹": "ACOS",
+  Cos: "COS",
+
+  "Hyperbolic_Cot⁻¹": "ACOTH",
+  Hyperbolic_Cot: "COTH",
+  "Cot⁻¹": "ACOT",
+  Cot: "COT",
+
+  Average: "AVERAGE",
+  Median: "MEDIAN",
+  Normal_distribution: "NORMDIST",
+  Harmonic_mean: "HARMEAN",
+  Standard_deviation: "STDEV",
+  Binomial_distribution: "BINOMDIST",
+  Mode: "MODE.SNGL",
+  Left_shift: "BITLSHIFT",
+  Right_shift: "BITRSHIFT",
+  Bitwise_OR: "BITOR",
+  Bitwise_AND: "BITAND",
+  Bitwise_XOR: "BITXOR",
+}
+
 const dummyFunction: ExcelFunction = {
   commonName: "",
-  syntacticalName: "",
   description: "",
   category: ExcelFunctionCategory.Dummy,
   parameterFormat: ParameterFormat.SINGLE,
@@ -14,7 +62,6 @@ const functions: Array<ExcelFunction> = [
   // ==== Math ====
   { // add IMSUM
     commonName: "Summation",
-    syntacticalName: "SUM",
     description: "Use this function to add the values in cells.",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
@@ -23,7 +70,6 @@ const functions: Array<ExcelFunction> = [
   },
   { // add IMPOWER
     commonName: "Power",
-    syntacticalName: "POWER",
     description: "Returns the result of a number raised to a power",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
@@ -43,7 +89,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Minimum",
-    syntacticalName: "MIN",
     description: "Returns the minimum value in a list of arguments",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
@@ -52,7 +97,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Maximum",
-    syntacticalName: "MAX",
     description: "Returns the maximum value in a list of arguments",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
@@ -61,8 +105,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Geometric mean",
-    commonNameNoSpaces: "Geometric_mean",
-    syntacticalName: "GEOMEAN",
     description: "Returns the geometric mean",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
@@ -71,8 +113,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Absolute value",
-    commonNameNoSpaces: "Absolute_value",
-    syntacticalName: "ABS",
     description: "Returns the absolute value of a number",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
@@ -81,8 +121,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Round up",
-    commonNameNoSpaces: "Round_up",
-    syntacticalName: "CEILING",
     description: "Rounds a number to the nearest integer or to the nearest multiple of significance",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
@@ -103,8 +141,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Round down",
-    commonNameNoSpaces: "Round_down",
-    syntacticalName: "FLOOR",
     description: "Rounds a number down, toward zero",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
@@ -131,8 +167,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Square root",
-    commonNameNoSpaces: "Square_root",
-    syntacticalName: "SQRT",
     description: "Returns a positive square root",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
@@ -141,7 +175,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Modulo",
-    syntacticalName: "MOD",
     description: "Returns the remainder from division",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
@@ -161,7 +194,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Log₁₀",
-    syntacticalName: "LOG10",
     description: "Returns the base-10 logarithm of a number",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
@@ -170,7 +202,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Log",
-    syntacticalName: "LOG",
     description: "Returns the logarithm of a number to a specified base",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
@@ -190,159 +221,11 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Choose random number",
-    commonNameNoSpaces: "Choose_random_number",
-    syntacticalName: "CHOOSE",
     description: "Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.",
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
-  },
-  // ==== Trigonometry ====
-  {
-    commonName: "Sin⁻¹",
-    syntacticalName: "ASIN",
-    description: "Returns the arcsine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Hyperbolic_Sin⁻¹",
-    syntacticalName: "ASINH",
-    description: "Returns the arcsine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Sin",
-    syntacticalName: "SIN",
-    description: "Returns the sine of the given angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Hyperbolic_Sin",
-    syntacticalName: "SINH",
-    description: "Returns the hyperbolic sine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Cos⁻¹",
-    syntacticalName: "ACOS",
-    description: "Returns the arccosine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3'
-  },
-  {
-    commonName: "Hyperbolic_Cos⁻¹",
-    syntacticalName: "ACOSH",
-    description: "Returns the hyperbolic arccosine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3'
-  },
-  {
-    commonName: "Cos",
-    syntacticalName: "COS",
-    description: "Returns the cosine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-
-  {
-    commonName: "Cosh",
-    syntacticalName: "COSH",
-    description: "Returns the hyperbolic cosine of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Tan⁻¹",
-    syntacticalName: "ATAN",
-    description: "Returns the arctangent of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Hyperbolic_Tan⁻¹",
-    syntacticalName: "ATANH",
-    description: "Returns the hyperbolic arctangent of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Tan",
-    syntacticalName: "TAN",
-    description: "Returns the tangent of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Tanh",
-    syntacticalName: "TANH",
-    description: "Returns the hyperbolic tangent of a number",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "Cot⁻¹",
-    syntacticalName: "ACOT",
-    description: "Returns the cotangent of an angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/acot-function-dc7e5008-fe6b-402e-bdd6-2eea8383d905'
-  },
-  {
-    commonName: "Hyperbolic_Cot⁻¹",
-    syntacticalName: "ACOTH",
-    description: "Returns the cotangent of an angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/acot-function-dc7e5008-fe6b-402e-bdd6-2eea8383d905'
-  },
-  {
-    commonName: "Cot",
-    syntacticalName: "COT",
-    description: "Returns the cotangent of an angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/cot-function-c446f34d-6fe4-40dc-84f8-cf59e5f5e31a'
-  },
-  {
-    commonName: "Hyperbolic_Cot",
-    syntacticalName: "COTH",
-    description: "Returns the cotangent of an angle",
-    category: ExcelFunctionCategory.Trigonometry,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/cot-function-c446f34d-6fe4-40dc-84f8-cf59e5f5e31a'
   },
   // {
   //   commonName: "Csc",
@@ -356,7 +239,6 @@ const functions: Array<ExcelFunction> = [
   // Statistics
   {
     commonName: "Average",
-    syntacticalName: "AVERAGE",
     description: "Returns the average of its arguments",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
@@ -366,7 +248,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Median",
-    syntacticalName: "MEDIAN",
     description: "Returns the median of the given numbers",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
@@ -375,8 +256,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Normal distribution",
-    commonNameNoSpaces: "Normal distribution",
-    syntacticalName: "NORMDIST",
     description: "Returns the normal cumulative distribution",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.N,
@@ -407,8 +286,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Harmonic mean",
-    commonNameNoSpaces: "Harmonic_mean",
-    syntacticalName: "HARMEAN",
     description: "Returns the harmonic mean",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
@@ -417,8 +294,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Standard deviation",
-    commonNameNoSpaces: "Standard_deviation",
-    syntacticalName: "STDEV",
     description: "Estimates standard deviation based on a sample",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
@@ -431,8 +306,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Binomial distribution",
-    commonNameNoSpaces: "Binomial_distribution",
-    syntacticalName: "BINOMDIST",
     description: "Returns the individual term binomial distribution probability",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
@@ -441,7 +314,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Mode",
-    syntacticalName: "MODE.SNGL",
     description: "Returns the most common value in a data set",
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
@@ -451,8 +323,6 @@ const functions: Array<ExcelFunction> = [
   // Bitwise operations
   {
     commonName: "Left shift",
-    commonNameNoSpaces: "Left_shift",
-    syntacticalName: "BITLSHIFT",
     description: "Returns a value number shifted left by shift_amount bits",
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
@@ -472,8 +342,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Right shift",
-    commonNameNoSpaces: "Right_shift",
-    syntacticalName: "BITRSHIFT",
     description: "Returns a value number shifted left by shift_amount bits",
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
@@ -493,8 +361,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Bitwise OR",
-    commonNameNoSpaces: "Bitwise_OR",
-    syntacticalName: "BITOR",
     description: "Returns a Bitwise OR of 2 numbers",
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
@@ -514,8 +380,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Bitwise AND",
-    commonNameNoSpaces: "Bitwise_AND",
-    syntacticalName: "BITOR",
     description: "Returns a Bitwise AND of 2 numbers",
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
@@ -535,8 +399,6 @@ const functions: Array<ExcelFunction> = [
   },
   {
     commonName: "Bitwise XOR",
-    commonNameNoSpaces: "Bitwise_XOR",
-    syntacticalName: "BITXOR",
     description: "Returns a Bitwise AND of 2 numbers",
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
@@ -553,96 +415,6 @@ const functions: Array<ExcelFunction> = [
         required: true
       }
     ]
-  },
-  // ==== Conversion ====
-  {
-    commonName: "Binary to octal",
-    commonNameNoSpaces: "binary_to_octal",
-    syntacticalName: "BIN2OCT",
-    description: "Converts a binary number to octal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "binary to decimal",
-    commonNameNoSpaces: "binary_to_decimal",
-    syntacticalName: "BIN2DEC",
-    description: "Converts a binary number to decimal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
-  },
-  {
-    commonName: "binary to hexcadecimal",
-    commonNameNoSpaces: "binary_to_hexcadecimal",
-    syntacticalName: "BIN2HEX",
-    description: "Converts a binary number to hexadecimal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "octal to bin",
-    commonNameNoSpaces: "octal_to_bin",
-    syntacticalName: "OCT2BIN",
-    description: "Converts an octal number to binary",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "octal to decimal",
-    commonNameNoSpaces: "octal_to_decimal",
-    syntacticalName: "OCT2DEC",
-    description: "Converts an octal number to decimal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
-  },
-  {
-    commonName: "octal to hexcadecimal",
-    commonNameNoSpaces: "octal_to_hexcadecimal",
-    syntacticalName: "OCT2HEX",
-    description: "Converts an octal number to hexadecimal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "hexadecimal to binary",
-    syntacticalName: "HEX2BIN",
-    description: "Converts a hexadecimal number to binary",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
-  },
-  {
-    commonName: "hexadecimal to octal",
-    commonNameNoSpaces: "hexadecimal_to_octal",
-    syntacticalName: "HEX2OCT",
-    description: "Converts a hexadecimal number to octal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/dec2bin-function-0f63dd0e-5d1a-42d8-b511-5bf5c6d43838'
-  },
-  {
-    commonName: "hexadecimal to decimal",
-    commonNameNoSpaces: "hexadecimal_to_decimal",
-    syntacticalName: "HEX2DEC",
-    description: "Converts a hexadecimal number to decimal",
-    category: ExcelFunctionCategory.Conversion,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
   },
   // ==== Text ====
   // {
@@ -806,18 +578,7 @@ const functions: Array<ExcelFunction> = [
   // }
 ]
 
-const trigonometricFunctions: Array<Array<Array<string>>> = [
-  [
-    ["SIN", "COS", "TAN", "COT"],
-    ["ASIN", "ACOS", "ATAN", "ACOT"],
-  ],
-  [
-    ["SINH", "COSH", "TANH", "COTH"],
-    ["ASINH", "ACOSH", "ATANH", "ACOTH"],
-  ]
-];
-
-export { dummyFunction, functions, trigonometricFunctions };
+export { dummyFunction, functions, functionTranslation };
 
 //sin    asin     sinh    asinh
 //cos    acos     cosh    acosh

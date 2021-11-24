@@ -40,7 +40,7 @@ function SingleParameterForm(props: FormProps) {
         {props.excelFunction.commonName}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
+        <DialogContentText id={`${props.excelFunction.commonName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
         <Link

@@ -48,7 +48,7 @@ function ListParameterForm(props: FormProps) {
   }
 
   function createFormulaFromParameters() {
-    let formula = props.excelFunction.syntacticalName + "(";
+    let formula = props.excelFunction.commonName + "(";
     parameters.forEach((parameter, index) => {
       if (index !== 0)
         formula = formula + ",";
@@ -108,11 +108,11 @@ function ListParameterForm(props: FormProps) {
 
   return (
     <>
-      <DialogTitle id={`${props.excelFunction.syntacticalName}-title`}>
+      <DialogTitle id={`${props.excelFunction.commonName}-title`}>
         <span>{props.excelFunction.commonName}</span>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText style={{color:"rgba(0,0,0,.8)"}} id={`${props.excelFunction.syntacticalName}-description`}>
+        <DialogContentText style={{color:"rgba(0,0,0,.8)"}} id={`${props.excelFunction.commonName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
         <Link

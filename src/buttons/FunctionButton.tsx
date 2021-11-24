@@ -14,6 +14,7 @@ type FunctionButtonProps = {
 // these functions take in a list as parameter. Either as a 
 // range or a comma separated list
 function FunctionButton(props: FunctionButtonProps) {
+  React.useEffect(()=>{},[]);
   const { excelFunction, addToUserInput, setDialogOpen, setForm, FormComponent } = props;
   function onClick() {
     setForm(

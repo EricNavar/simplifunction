@@ -51,11 +51,11 @@ function NParameterForm(props: FormProps) {
 
   return (
     <>
-      <DialogTitle id={`${props.excelFunction.syntacticalName}-title`}>
+      <DialogTitle id={`${props.excelFunction.commonName}-title`}>
         {props.excelFunction.commonName}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id={`${props.excelFunction.syntacticalName}-description`}>
+        <DialogContentText id={`${props.excelFunction.commonName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
         <Link

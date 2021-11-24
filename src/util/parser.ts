@@ -1,5 +1,5 @@
 import { ExcelFunction } from '../commonTypes';
-import { functions } from '../functions';
+import { functionTranslation } from '../functions';
 
 function parse(userInput: string):string {
   let userInputIndex = 0;
@@ -7,13 +7,12 @@ function parse(userInput: string):string {
   let formula: string = "=";
   while (userInputIndex < userInput.length) {
     // eslint-disable-next-line no-loop-func
-    functions.forEach((excelFunction: ExcelFunction) => {
-      const f = excelFunction.commonNameNoSpaces ? excelFunction.commonNameNoSpaces : excelFunction.commonName;
-      const substr = userInput.substr(userInputIndex, f.length);
-      if (substr === f) {
-        console.log(f);
-        userInputIndex = userInputIndex + f.length
-        formula = formula + excelFunction.syntacticalName + "( ";
+    Object.keys(functionTranslation).forEach((commonName: string) => {
+      const syntacticalName = functionTranslation[commonName];
+      const substr = userInput.substr(userInputIndex, commonName.length);
+      if (substr === commonName) {
+        userInputIndex = userInputIndex + commonName.length
+        formula = formula + syntacticalName + "( ";
         userInputIndex = parseWhitespace(userInputIndex, userInput);
         if (userInput.charAt(userInputIndex) !== "(") {
           userInput = "";

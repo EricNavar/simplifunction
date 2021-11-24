@@ -3,7 +3,6 @@ export enum ExcelFunctionCategory {
   Trigonometry = "Trigonometry",
   Statistics = "Statistics",
   Bitwise = "Bitwise",
-  Conversion = "Conversion",
   Text = "Text",
   Date = "Date",
   Lookup = "Lookup",
@@ -34,8 +33,6 @@ export type ExcelFunction = {
   commonName: string,
   // yes, this could easily be calculated, but I am favoring speed over memory usage.
   // only store this data for functions where the common name has spaces
-  commonNameNoSpaces?: string,
-  syntacticalName: string,
   description:  string,
   category: ExcelFunctionCategory,
   parameterFormat: ParameterFormat,
