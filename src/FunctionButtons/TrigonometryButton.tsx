@@ -10,17 +10,19 @@ type TrigonometryButtonProps = {
 }
 
 function TrigonometryButton(props: TrigonometryButtonProps) {
-  return <FunctionButton
-    label="Trigonometry"
-    setForm={props.setForm}
-    setDialogOpen={props.setDialogOpen}
-    form={
+  function onClick() {
+    props.setForm(
       <TrigonometryForm
         addToUserInput={props.addToUserInput}
         setDialogOpen={props.setDialogOpen}
         setForm={props.setForm}
       />
-    }
+    );
+    props.setDialogOpen(true);
+  }
+  return <FunctionButton
+    label="Trigonometry"
+    onClick={onClick}
   />
 }
 

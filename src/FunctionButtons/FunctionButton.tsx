@@ -3,18 +3,12 @@ import { Grid, Button } from '@mui/material';
 import '../styling/Calculator.css';
 
 type FunctionButtonProps = {
-  form: JSX.Element,
   label: string,
-  setDialogOpen: (value: boolean) => void,
-  setForm: (form: React.SetStateAction<JSX.Element>) => void,
+  onClick: ()=>void
 }
 
 function FunctionButton(props: FunctionButtonProps) {
-  const { setForm, setDialogOpen, form } = props;
-  function onClick() {
-    setForm(form);
-    setDialogOpen(true);
-  }
+  const { label, onClick } = props;
   return (
     <Grid item xs={6} className='function-buttons-grid-item'>
       <Button
@@ -24,7 +18,7 @@ function FunctionButton(props: FunctionButtonProps) {
         aria-label={props.label}
         disableRipple
       >
-        {props.label.trim()}
+        {label.trim()}
       </Button>
     </Grid>
   );

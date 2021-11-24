@@ -17,7 +17,6 @@ import '../styling/Calculator.css';
 type ConversionFormProps = {
   addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (value: boolean) => void,
-  setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
 function ConversionForm(props: ConversionFormProps) {
   const [to, setTo] = React.useState("");

@@ -10,17 +10,18 @@ type ConversionButtonProps = {
 }
 
 function ConversionButton(props: ConversionButtonProps) {
-  return <FunctionButton
-    label="Number Base Conversion"
-    setForm={props.setForm}
-    setDialogOpen={props.setDialogOpen}
-    form={
+  function onClick() {
+    props.setForm(
       <ConversionForm
         addToUserInput={props.addToUserInput}
         setDialogOpen={props.setDialogOpen}
-        setForm={props.setForm}
       />
-    }
+    );
+    props.setDialogOpen(true);
+  }
+  return <FunctionButton
+    label="Number Base Conversion"
+    onClick={onClick}
   />
 }
 

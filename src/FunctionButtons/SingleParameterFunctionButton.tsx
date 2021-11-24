@@ -12,17 +12,19 @@ type SingleParameterFunctionButtonProps = {
 }
 
 function SingleParameterFunctionButton(props: SingleParameterFunctionButtonProps) {
-  return <FunctionButton
-    label={props.excelFunction.commonName}
-    setForm={props.setForm}
-    setDialogOpen={props.setDialogOpen}
-    form={
+  function onClick() {
+    props.setForm(
       <SingleParameterForm
         addToUserInput={props.addToUserInput}
         setDialogOpen={props.setDialogOpen}
         excelFunction={props.excelFunction}
       />
-    }
+    );
+    props.setDialogOpen(true);
+  }
+  return <FunctionButton
+    label={props.excelFunction.commonName}
+    onClick={onClick}
   />
 }
 
