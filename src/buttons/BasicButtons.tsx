@@ -3,7 +3,7 @@ import {
   Grid,
   Button,
 } from '@mui/material';
-import './styling/Calculator.css';
+import '../styling/Calculator.css';
 
 type InputButtonProps = {
   input: string,

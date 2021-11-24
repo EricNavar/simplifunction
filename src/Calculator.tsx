@@ -8,10 +8,10 @@ import {
   InputLabel,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { FunctionButtonsWrapper } from './FunctionButtons/FunctionButtons';
+import { FunctionButtonsWrapper } from './buttons/FunctionButtons';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
-import { BasicButtons } from './BasicButtons';
+import { BasicButtons } from './buttons/BasicButtons';
 import './styling/Calculator.css';
 
 function Calculator() {

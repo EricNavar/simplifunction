@@ -12,11 +12,11 @@ import {
 import '../styling/Calculator.css';
 import { functions, dummyFunction } from '../functions';
 import { SearchIcon } from '../assets/SearchIcon';
-import { ListParameterForm } from '../FunctionForms/ListParameterForm';
-import { SingleParameterForm } from '../FunctionForms/SingleParameterForm';
-import { NParameterForm } from '../FunctionForms/NParameterForm';
-import { ConversionForm } from '../FunctionForms/ConversionForm';
-import { TrigonometryForm } from '../FunctionForms/TrigonometryForm';
+import { ListParameterForm } from '../forms/ListParameterForm';
+import { SingleParameterForm } from '../forms/SingleParameterForm';
+import { NParameterForm } from '../forms/NParameterForm';
+import { ConversionForm } from '../forms/ConversionForm';
+import { TrigonometryForm } from '../forms/TrigonometryForm';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
 
