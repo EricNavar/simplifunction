@@ -7,32 +7,37 @@ import '../styling/Calculator.css';
 
 type InputButtonProps = {
   input: string,
-  addToUserInput: (strToAdd: string, focus:boolean) => void
+  addToUserInput: (strToAdd: string, focus: boolean) => void
 }
 
 function InputButton(props: InputButtonProps) {
+  const {input, addToUserInput} = props;
+  React.useEffect(()=>{},[input]);
+  function onClick() {
+    addToUserInput(input, false);
+  }
   return (
     <Button
       className="button small-button"
       variant="outlined"
-      onClick={(e: any) => props.addToUserInput(props.input, false)}
+      onClick={onClick}
       aria-label="open parentheses"
       disableRipple
     >
-      {props.input}
+      {input}
     </Button>
   );
 }
 
 type BasicButtonsProps = {
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
+  addToUserInput: (strToAdd: string, focus: boolean) => void,
   onEqualsClick: () => void,
   backspace: () => void,
   clearInput: () => void,
   mobile: boolean
 }
 
-function BasicButtons(props:BasicButtonsProps) {
+function BasicButtons(props: BasicButtonsProps) {
   const { addToUserInput, onEqualsClick, backspace, clearInput, mobile } = props;
 
   function BackspaceButton() {
@@ -84,7 +89,7 @@ function BasicButtons(props:BasicButtonsProps) {
           aria-label="clear input"
           disableRipple
         >
-          clear
+          CLEAR
         </Button>
         <Button
           className="button utility-button equals-button"
@@ -93,7 +98,7 @@ function BasicButtons(props:BasicButtonsProps) {
           aria-label="equals"
           disableRipple
         >
-          equals
+          EQUALS
         </Button>
       </Grid>
     </Grid>

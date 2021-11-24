@@ -1,4 +1,3 @@
-import { ExcelFunction } from '../commonTypes';
 import { functionTranslation } from '../functions';
 
 function parse(userInput: string):string {

@@ -5,7 +5,6 @@ import {
   useMediaQuery,
   FormControl,
   FilledInput,
-  InputLabel,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { FunctionButtonsWrapper } from './buttons/FunctionButtons';
@@ -21,10 +20,12 @@ function Calculator() {
   const [inputRef, setInputRef] = React.useState<HTMLInputElement | null>(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
+  React.useEffect(() => { }, [formula, form, dialogOpen]);
+
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
-  function addToUserInput(strToAdd: string, focus:boolean) {
+  function addToUserInput(strToAdd: string, focus: boolean) {
     if (inputRef == null) {
       console.log("INPUTREF IS NULL");
       return;
@@ -59,21 +60,23 @@ function Calculator() {
     <>
       <div className="App" >
         <header>
-          <Typography component='h1' variant='h4' style={{marginBottom:20}}>SimpliFunction</Typography>
+          <Typography component='h1' variant='h4' style={{ marginBottom: 20 }}>SimpliFunction</Typography>
         </header>
         <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
           <FormControl variant="filled">
-            <InputLabel htmlFor="component-helper">Enter your calculation</InputLabel>
             <FilledInput
               value={userInput}
               onChange={onType}
               inputRef={ref => { setInputRef(ref); }}
               fullWidth
               type="text"
+              placeholder="Enter your calculation"
             />
           </FormControl>
           <div className="formula-container">
-            {formula && <Typography component="span" variant='overline'>Result:</Typography>}
+            {formula && 
+              <Typography component="span" variant='overline'>Result:</Typography>
+            }
             <span className="formula">{formula}</span>
           </div>
           <FunctionButtonsWrapper

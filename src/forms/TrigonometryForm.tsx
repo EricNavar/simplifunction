@@ -111,9 +111,9 @@ function TrigonometryForm(props: FormProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleDoneClick}>
-          Done
+          DONE
         </Button>
-        <Button id='close-button' onClick={closeDialog}>Cancel</Button>
+        <Button id='close-button' onClick={closeDialog}>CANCEL</Button>
       </DialogActions>
     </>
   );

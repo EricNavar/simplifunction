@@ -26,7 +26,7 @@ function validateSingleStringParameter(parameter: string): boolean {
   return isString(parameter) || isCell(parameter);
 }
 
-function validateNumberParameter(parameter: string):boolean {
+function validateNumberParameter(parameter: string): boolean {
   return isNumber(parameter) || isCell(parameter);
 }
 

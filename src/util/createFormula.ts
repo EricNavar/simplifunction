@@ -5,7 +5,7 @@
 
 import { parse } from '../util/parser';
 
-const createFormula = (userInput: string) => {
+function createFormula(userInput: string):string {
   userInput = formatUserInput(userInput);
   if (userInput === "") {
     return "No input";
@@ -13,7 +13,7 @@ const createFormula = (userInput: string) => {
   return parse(userInput);
 };
 
-const keywords:Record<string,string> = {
+const keywords: Record<string, string> = {
   "+": " + ",
   "-": " - ",
   "×": " * ",
@@ -22,7 +22,7 @@ const keywords:Record<string,string> = {
   ")": " )"
 };
 
-const formatUserInput = (userInput: string) => {
+function formatUserInput(userInput: string):string {
   Object.keys(keywords).forEach(keyword => {
     userInput = userInput.replace(keyword, " " + keywords[keyword] + " ");
   });

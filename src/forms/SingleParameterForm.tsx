@@ -63,9 +63,9 @@ function SingleParameterForm(props: FormProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleDoneClick} autoFocus>
-          Done
+          DONE
         </Button>
-        <Button onClick={closeDialog}>Cancel</Button>
+        <Button onClick={closeDialog}>CANCEL</Button>
       </DialogActions>
     </>
   );

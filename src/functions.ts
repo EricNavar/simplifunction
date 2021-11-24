@@ -1,6 +1,6 @@
 import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } from './commonTypes';
 
-const functionTranslation: Record<string,string> = {
+const functionTranslation: Record<string, string> = {
   Summation: "SUM",
   Power: "POWER",
   Minimum: "MIN",

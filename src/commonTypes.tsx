@@ -33,7 +33,7 @@ export type ExcelFunction = {
   commonName: string,
   // yes, this could easily be calculated, but I am favoring speed over memory usage.
   // only store this data for functions where the common name has spaces
-  description:  string,
+  description: string,
   category: ExcelFunctionCategory,
   parameterFormat: ParameterFormat,
   parameterSchema?: Array<Parameter>,
@@ -45,6 +45,6 @@ export type ExcelFunction = {
 
 export type FormProps = {
   excelFunction: ExcelFunction,
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
+  addToUserInput: (strToAdd: string, focus: boolean) => void,
   setDialogOpen: (value: boolean) => void,
 }
