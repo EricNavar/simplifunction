@@ -2,9 +2,6 @@ import React from 'react';
 import {
   Typography,
   Grid,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   TextField,
   InputAdornment,
   ListSubheader
@@ -19,6 +16,20 @@ import { ConversionForm } from '../forms/ConversionForm';
 import { TrigonometryForm } from '../forms/TrigonometryForm';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat, FormProps } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
+import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
+
+type SectionHeaderProps = {
+  children: React.ReactNode,
+}
+function SectionHeader(props: SectionHeaderProps) {
+  return (
+    <ListSubheader className="section-header">
+      <Typography component="p" variant="h5">
+        {props.children}
+      </Typography>
+    </ListSubheader>
+  );
+}
 
 type FunctionButtonsProps = {
   addToUserInput: (strToAdd: string, focus: boolean) => void,
@@ -30,7 +41,7 @@ type FunctionButtonsProps = {
 function FunctionButtons(props: FunctionButtonsProps) {
   const { addToUserInput, setDialogOpen, mobile, setForm } = props;
 
-  React.useEffect(() => {}, [mobile]);
+  React.useEffect(() => { }, [mobile]);
 
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
@@ -53,25 +64,12 @@ function FunctionButtons(props: FunctionButtonsProps) {
     ExcelFunctionCategory.Web
   ];
 
-  const conversionOnClick = () => {
+  const functionButtonOnClick = (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => {
     setForm(
-      <ConversionForm
+      <FormComponent
         addToUserInput={addToUserInput}
         setDialogOpen={setDialogOpen}
-        // the excel function passed in here isn't considered, so it can be anything
-        excelFunction={functions[0]}
-      />
-    );
-    setDialogOpen(true);
-  }
-
-  const trigonometryOnClick = () => {
-    setForm(
-      <TrigonometryForm
-        addToUserInput={addToUserInput}
-        setDialogOpen={setDialogOpen}
-        // the excel function passed in here isn't considered, so it can be anything
-        excelFunction={functions[0]}
+        excelFunction={excelFunction}
       />
     );
     setDialogOpen(true);
@@ -121,32 +119,22 @@ function FunctionButtons(props: FunctionButtonsProps) {
               </SectionHeader>
               {categorizedFunctions.filter(
                 (f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index2: number) => {
-                  let FormComponent:(props:FormProps)=>JSX.Element = NParameterForm;
+                  let FormComponent: (props: FormProps) => JSX.Element = NParameterForm;
                   if (obj.parameterFormat === ParameterFormat.LIST) {
                     FormComponent = ListParameterForm;
                   }
                   else if (obj.parameterFormat === ParameterFormat.SINGLE) {
                     FormComponent = SingleParameterForm;
                   }
-                  const onClick = () => {
-                    setForm(
-                      <FormComponent
-                        addToUserInput={addToUserInput}
-                        setDialogOpen={setDialogOpen}
-                        excelFunction={obj}
-                      />
-                    );
-                    setDialogOpen(true);
-                  }
                   return (
                     <FunctionButton
                       key={index2}
                       label={obj.commonName}
-                      onClick={onClick}
+                      onClick={ ()=> { functionButtonOnClick(functions[0],FormComponent) } }
                     />
                   );
                 }
-              )}
+                )}
             </React.Fragment>
           )
         })}
@@ -155,58 +143,18 @@ function FunctionButtons(props: FunctionButtonsProps) {
         </SectionHeader>
         <FunctionButton
           label="Conversion functions"
-          onClick={conversionOnClick}
+          onClick={() => { functionButtonOnClick(functions[0], ConversionForm) }}
         />
         <SectionHeader>
           Trigonometry functions
         </SectionHeader>
         <FunctionButton
           label="Trigonometry functions"
-          onClick={trigonometryOnClick}
+          onClick={() => { functionButtonOnClick(functions[0], TrigonometryForm) }}
         />
       </Grid>
     </Grid>
   );
-}
-
-type SectionHeaderProps = {
-  children: React.ReactNode,
-}
-function SectionHeader(props: SectionHeaderProps) {
-  return (
-    <ListSubheader className="section-header">
-      <Typography component="p" variant="h5">
-        {props.children}
-      </Typography>
-    </ListSubheader>
-  );
-}
-
-type FunctionButtonsAccordionProps = {
-  children: React.ReactNode
-}
-function FunctionButtonsAccordion(props: FunctionButtonsAccordionProps) {
-  const [expanded, setExpanded] = React.useState(false);
-  function handleChange() {
-    setExpanded(!expanded);
-  };
-
-  return (
-    <Accordion expanded={expanded} onChange={handleChange} className="accordion" >
-      <AccordionSummary
-        expandIcon={<div>{expanded ? "-" : "+"}</div>}
-        aria-controls="panel1bh-content"
-        id="panel1bh-header"
-      >
-        <Typography component='h2' variant='body1' sx={{ width: '100%', flexShrink: 0 }}>
-          Excel Functions
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        {props.children}
-      </AccordionDetails>
-    </Accordion>
-  )
 }
 
 type FunctionButtonsWrapperProps = {
