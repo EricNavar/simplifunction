@@ -13,14 +13,9 @@ import {
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { validateParameter } from '../util/validator';
-import { ParameterType } from '../commonTypes';
+import { ParameterType, FormProps } from '../commonTypes';
 
-type TrigonometryFormProps = {
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
-  setDialogOpen: (value: boolean) => void,
-  setForm: (form: React.SetStateAction<JSX.Element>) => void,
-}
-function TrigonometryForm(props: TrigonometryFormProps) {
+function TrigonometryForm(props: FormProps) {
   const [number, setNumber] = React.useState("");
   const [func, setFunc] = React.useState("Sin");
   const [inverse, setInverse] = React.useState(false);

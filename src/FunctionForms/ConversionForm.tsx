@@ -13,12 +13,9 @@ import {
   FormLabel
 } from '@mui/material';
 import '../styling/Calculator.css';
+import { FormProps } from '../commonTypes';
 
-type ConversionFormProps = {
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
-  setDialogOpen: (value: boolean) => void,
-}
-function ConversionForm(props: ConversionFormProps) {
+function ConversionForm(props: FormProps) {
   const [to, setTo] = React.useState("");
   const [from, setFrom] = React.useState("");
   const [number, setNumber] = React.useState("");

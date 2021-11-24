@@ -1,5 +1,15 @@
 import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } from './commonTypes';
 
+const dummyFunction: ExcelFunction = {
+  commonName: "",
+  syntacticalName: "",
+  description: "",
+  category: ExcelFunctionCategory.Dummy,
+  parameterFormat: ParameterFormat.SINGLE,
+  parameterType: ParameterType.number,
+  documentationLink: ''
+};
+
 const functions: Array<ExcelFunction> = [
   // ==== Math ====
   { // add IMSUM
@@ -807,7 +817,7 @@ const trigonometricFunctions: Array<Array<Array<string>>> = [
   ]
 ];
 
-export { functions, trigonometricFunctions };
+export { dummyFunction, functions, trigonometricFunctions };
 
 //sin    asin     sinh    asinh
 //cos    acos     cosh    acosh

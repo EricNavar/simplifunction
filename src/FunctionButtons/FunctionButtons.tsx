@@ -10,15 +10,15 @@ import {
   ListSubheader
 } from '@mui/material';
 import '../styling/Calculator.css';
-import { functions } from '../functions';
+import { functions, dummyFunction } from '../functions';
 import { SearchIcon } from '../assets/SearchIcon';
 import { ListParameterForm } from '../FunctionForms/ListParameterForm';
 import { SingleParameterForm } from '../FunctionForms/SingleParameterForm';
 import { NParameterForm } from '../FunctionForms/NParameterForm';
+import { ConversionForm } from '../FunctionForms/ConversionForm';
+import { TrigonometryForm } from '../FunctionForms/TrigonometryForm';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
-import { ConversionButton } from './ConversionButton';
-import { TrigonometryButton } from './TrigonometryButton';
-import { FunctionButtonWrapper } from './FunctionButtonWrapper';
+import { FunctionButton } from './FunctionButton';
 
 type FunctionButtonContainerProps = {
   addToUserInput: (strToAdd: string, focus:boolean) => void,
@@ -98,36 +98,34 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
               </SectionHeader>
               {categorizedFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
                 if (obj.parameterFormat === ParameterFormat.LIST) {
-                  return (
-                    <FunctionButtonWrapper
-                      key={index}
-                      addToUserInput={addToUserInput}
-                      setForm={setForm}
-                      setDialogOpen={setDialogOpen}
-                      excelFunction={obj}
-                      FormComponent={ListParameterForm}
-                    />
-                  )
+                  return (<FunctionButton
+                    key={index}
+                    addToUserInput={addToUserInput}
+                    setForm={setForm}
+                    setDialogOpen={setDialogOpen}
+                    excelFunction={obj}
+                    FormComponent={ListParameterForm}
+                  />);
                 }
                 else if (obj.parameterFormat === ParameterFormat.SINGLE) {
-                  return (<FunctionButtonWrapper
+                  return (<FunctionButton
                     key={index}
                     addToUserInput={addToUserInput}
                     setForm={setForm}
                     setDialogOpen={setDialogOpen}
                     excelFunction={obj}
                     FormComponent={SingleParameterForm}
-                  />)
+                  />);
                 }
                 else {
-                  return (<FunctionButtonWrapper
+                  return (<FunctionButton
                     key={index}
                     addToUserInput={addToUserInput}
                     setForm={setForm}
                     setDialogOpen={setDialogOpen}
                     excelFunction={obj}
                     FormComponent={NParameterForm}
-                  />)
+                  />);
                 }
               }
               )}
@@ -137,18 +135,22 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
         <SectionHeader>
           Number Base Conversion
         </SectionHeader>
-        <ConversionButton
+        <FunctionButton
+          excelFunction={dummyFunction}
           addToUserInput={addToUserInput}
           setDialogOpen={setDialogOpen}
           setForm={setForm}
+          FormComponent={ConversionForm}
         />
         <SectionHeader>
           Trigonometry functions
         </SectionHeader>
-        <TrigonometryButton
+        <FunctionButton
+          excelFunction={dummyFunction}
           addToUserInput={addToUserInput}
           setDialogOpen={setDialogOpen}
           setForm={setForm}
+          FormComponent={TrigonometryForm}
         />
       </Grid>
     </Grid>
