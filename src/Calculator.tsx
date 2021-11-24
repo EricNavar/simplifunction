@@ -8,7 +8,7 @@ import {
   InputLabel,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { FunctionButtons } from './FunctionButtons/FunctionButtons';
+import { FunctionButtonsWrapper } from './FunctionButtons/FunctionButtons';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
 import { BasicButtons } from './BasicButtons';
@@ -76,7 +76,7 @@ function Calculator() {
             {formula && <Typography component="span" variant='overline'>Result:</Typography>}
             <span className="formula">{formula}</span>
           </div>
-          <FunctionButtons
+          <FunctionButtonsWrapper
             setDialogOpen={setDialogOpen}
             setForm={setForm}
             addToUserInput={addToUserInput}

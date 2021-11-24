@@ -20,18 +20,18 @@ import { TrigonometryForm } from '../FunctionForms/TrigonometryForm';
 import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
 
-type FunctionButtonContainerProps = {
-  addToUserInput: (strToAdd: string, focus:boolean) => void,
+type FunctionButtonsProps = {
+  addToUserInput: (strToAdd: string, focus: boolean) => void,
   setDialogOpen: (value: boolean) => void,
   mobile: boolean,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
 
-function FunctionButtonContainer(props: FunctionButtonContainerProps) {
+function FunctionButtons(props: FunctionButtonsProps) {
   const { addToUserInput, setDialogOpen, mobile, setForm } = props;
 
   React.useEffect(() => {
-  },[mobile]);
+  }, [mobile]);
 
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
@@ -53,6 +53,11 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
     ExcelFunctionCategory.Lookup,
     ExcelFunctionCategory.Web
   ];
+
+  const conversionFunction = Object.assign({}, dummyFunction);
+  conversionFunction.commonName = "Conversion";
+  const trigonometryFunction = Object.assign({}, dummyFunction);
+  trigonometryFunction.commonName = "Trigonometry";
 
   return (
     <Grid item container xs={12} sm={6} spacing={mobile ? 0 : 2} component='section'>
@@ -85,7 +90,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
       </div>
       <Grid item container spacing={2} className="function-buttons-grid-container">
         {ExcelFunctionTypeArray.map((functionType: any, index: number) => {
-          const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) => 
+          const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) =>
             func.category === functionType
           );
           if (categorizedFunctions.length === 0) {
@@ -136,7 +141,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           Number Base Conversion
         </SectionHeader>
         <FunctionButton
-          excelFunction={dummyFunction}
+          excelFunction={conversionFunction}
           addToUserInput={addToUserInput}
           setDialogOpen={setDialogOpen}
           setForm={setForm}
@@ -146,7 +151,7 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           Trigonometry functions
         </SectionHeader>
         <FunctionButton
-          excelFunction={dummyFunction}
+          excelFunction={trigonometryFunction}
           addToUserInput={addToUserInput}
           setDialogOpen={setDialogOpen}
           setForm={setForm}
@@ -170,46 +175,58 @@ function SectionHeader(props: SectionHeaderProps) {
   );
 }
 
-type FunctionButtonsProps = {
+type FunctionButtonsAccordionProps = {
+  children: React.ReactNode
+}
+function FunctionButtonsAccordion(props: FunctionButtonsAccordionProps) {
+  const [expanded, setExpanded] = React.useState(false);
+  function handleChange() {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <Accordion expanded={expanded} onChange={handleChange} className="accordion" >
+      <AccordionSummary
+        expandIcon={<div>{expanded ? "-" : "+"}</div>}
+        aria-controls="panel1bh-content"
+        id="panel1bh-header"
+      >
+        <Typography component='h2' variant='body1' sx={{ width: '100%', flexShrink: 0 }}>
+          Excel Functions
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        {props.children}
+      </AccordionDetails>
+    </Accordion>
+  )
+}
+
+type FunctionButtonsWrapperProps = {
   mobile: boolean,
   addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (open: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
-function FunctionButtons(props: FunctionButtonsProps) {
-  const { mobile, addToUserInput, setDialogOpen, setForm } = props;
-  const [expanded, setExpanded] = React.useState(false);
 
-  function handleChange() {
-    setExpanded(!expanded);
-  };
+function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
+  const { mobile, addToUserInput, setDialogOpen, setForm } = props;
 
   if (mobile) {
     return (
-      <Accordion expanded={expanded} onChange={handleChange} className="accordion" >
-        <AccordionSummary
-          expandIcon={<div>{expanded ? "-" : "+"}</div>}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography component='h2' variant='body1' sx={{ width: '100%', flexShrink: 0 }}>
-            Excel Functions
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <FunctionButtonContainer
-            mobile={mobile}
-            setDialogOpen={setDialogOpen}
-            addToUserInput={addToUserInput}
-            setForm={setForm}
-          />
-        </AccordionDetails>
-      </Accordion>
+      <FunctionButtonsAccordion>
+        <FunctionButtons
+          mobile={mobile}
+          setDialogOpen={setDialogOpen}
+          addToUserInput={addToUserInput}
+          setForm={setForm}
+        />
+      </FunctionButtonsAccordion>
     )
   }
   else {
     return (
-      <FunctionButtonContainer
+      <FunctionButtons
         mobile={mobile}
         setDialogOpen={setDialogOpen}
         addToUserInput={addToUserInput}
@@ -219,4 +236,4 @@ function FunctionButtons(props: FunctionButtonsProps) {
   }
 };
 
-export { FunctionButtons };
+export { FunctionButtonsWrapper };
