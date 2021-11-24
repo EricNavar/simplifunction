@@ -16,7 +16,7 @@ import { validateParameter } from '../util/validator';
 import { ParameterType } from '../commonTypes';
 
 type TrigonometryFormProps = {
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
@@ -55,7 +55,7 @@ function TrigonometryForm(props: TrigonometryFormProps) {
       if (hyperbolic) {
         formula = "Hyperbolic_" + formula;
       }
-      props.addToUserInput(formula);
+      props.addToUserInput(formula, true);
       closeDialog();
     }
   }

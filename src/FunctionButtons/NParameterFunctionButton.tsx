@@ -5,7 +5,7 @@ import { FunctionButton } from './FunctionButton';
 import { ExcelFunction } from '../commonTypes';
 
 type NParameterFunctionButtonProps = {
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
   excelFunction: ExcelFunction

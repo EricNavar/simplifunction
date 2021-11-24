@@ -7,14 +7,15 @@ import './styling/Calculator.css';
 
 type InputButtonProps = {
   input: string,
-  addToUserInput: (strToAdd: string) => Promise<void>,}
+  addToUserInput: (strToAdd: string, focus:boolean) => void
+}
 
 function InputButton(props: InputButtonProps) {
   return (
     <Button
       className="button small-button"
       variant="outlined"
-      onClick={(e: any) => props.addToUserInput(props.input)}
+      onClick={(e: any) => props.addToUserInput(props.input, false)}
       aria-label="open parentheses"
       disableRipple
     >
@@ -24,7 +25,7 @@ function InputButton(props: InputButtonProps) {
 }
 
 type BasicButtonsProps = {
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   onEqualsClick: () => void,
   backspace: () => void,
   clearInput: () => void,

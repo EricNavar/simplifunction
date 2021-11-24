@@ -16,7 +16,7 @@ import { ExcelFunction } from '../commonTypes';
 
 type ListParameteredFormProps = {
   excelFunction: ExcelFunction,
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (value: boolean) => void,
 }
 function ListParameteredForm(props: ListParameteredFormProps) {
@@ -83,7 +83,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
       const endCellValid_ = isCell(startCell);
       setEndCellValid(endCellValid_);
       if (startCellValid_ && endCellValid_) {
-        props.addToUserInput(createFormulaFromRange());
+        props.addToUserInput(createFormulaFromRange(), true);
         closeDialog();
       }
     }
@@ -91,7 +91,7 @@ function ListParameteredForm(props: ListParameteredFormProps) {
       const newValids = validateList(parameters, props.excelFunction.parameterType!);
       setValids(newValids);
       if (!newValids.includes(false)) {
-        props.addToUserInput(createFormulaFromParameters());
+        props.addToUserInput(createFormulaFromParameters(), true);
         closeDialog();
       }
     }

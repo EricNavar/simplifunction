@@ -7,7 +7,7 @@ import { ExcelFunction } from '../commonTypes';
 
 type ListParameteredFunctionButtonProps = {
   excelFunction: ExcelFunction,
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }

@@ -15,7 +15,7 @@ import {
 import '../styling/Calculator.css';
 
 type ConversionFormProps = {
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (value: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
@@ -61,7 +61,7 @@ function ConversionForm(props: ConversionFormProps) {
       //if (places)
       //formula = formula + ', ' + places;
       formula = formula + ' )';
-      props.addToUserInput(formula);
+      props.addToUserInput(formula, true);
       closeDialog();
     }
   }

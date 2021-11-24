@@ -20,13 +20,18 @@ import { ConversionButton } from './ConversionButton';
 import { TrigonometryButton } from './TrigonometryButton';
 
 type FunctionButtonContainerProps = {
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (value: boolean) => void,
   mobile: boolean,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }
 
 function FunctionButtonContainer(props: FunctionButtonContainerProps) {
+  const { addToUserInput, setDialogOpen, mobile, setForm } = props;
+
+  React.useEffect(() => {
+  },[mobile]);
+
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
 
@@ -49,8 +54,8 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
   ];
 
   return (
-    <Grid item container xs={12} sm={6} spacing={props.mobile ? 0 : 2} className="function-buttons" component='section'>
-      {!props.mobile &&
+    <Grid item container xs={12} sm={6} spacing={mobile ? 0 : 2} className="function-buttons" component='section'>
+      {!mobile &&
         <Typography component="h2" variant='h4' style={{ width: '100%' }}>
           Excel Functions
         </Typography>
@@ -79,7 +84,9 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
       </div>
       <Grid item container spacing={2} className="function-buttons-grid-container">
         {ExcelFunctionTypeArray.map((functionType: any, index: number) => {
-          const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) => func.category === functionType);
+          const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) => 
+            func.category === functionType
+          );
           if (categorizedFunctions.length === 0) {
             return <></>
           }
@@ -92,27 +99,27 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
                 if (obj.parameterFormat === ParameterFormat.LIST) {
                   return (<ListParameteredFunctionButton
                     key={index}
-                    addToUserInput={props.addToUserInput}
-                    setForm={props.setForm}
-                    setDialogOpen={props.setDialogOpen}
+                    addToUserInput={addToUserInput}
+                    setForm={setForm}
+                    setDialogOpen={setDialogOpen}
                     excelFunction={obj}
                   />)
                 }
                 else if (obj.parameterFormat === ParameterFormat.SINGLE) {
                   return (<SingleParameterFunctionButton
                     key={index}
-                    addToUserInput={props.addToUserInput}
-                    setDialogOpen={props.setDialogOpen}
-                    setForm={props.setForm}
+                    addToUserInput={addToUserInput}
+                    setDialogOpen={setDialogOpen}
+                    setForm={setForm}
                     excelFunction={obj}
                   />)
                 }
                 else {
                   return (<NParameterFunctionButton
                     key={index}
-                    addToUserInput={props.addToUserInput}
-                    setDialogOpen={props.setDialogOpen}
-                    setForm={props.setForm}
+                    addToUserInput={addToUserInput}
+                    setDialogOpen={setDialogOpen}
+                    setForm={setForm}
                     excelFunction={obj}
                   />)
                 }
@@ -125,17 +132,17 @@ function FunctionButtonContainer(props: FunctionButtonContainerProps) {
           Number Base Conversion
         </SectionHeader>
         <ConversionButton
-          addToUserInput={props.addToUserInput}
-          setDialogOpen={props.setDialogOpen}
-          setForm={props.setForm}
+          addToUserInput={addToUserInput}
+          setDialogOpen={setDialogOpen}
+          setForm={setForm}
         />
         <SectionHeader>
           Trigonometry functions
         </SectionHeader>
         <TrigonometryButton
-          addToUserInput={props.addToUserInput}
-          setDialogOpen={props.setDialogOpen}
-          setForm={props.setForm}
+          addToUserInput={addToUserInput}
+          setDialogOpen={setDialogOpen}
+          setForm={setForm}
         />
       </Grid>
     </Grid>
@@ -157,7 +164,7 @@ function SectionHeader(props: SectionHeaderProps) {
 
 type FunctionButtonsProps = {
   mobile: boolean,
-  addToUserInput: (strToAdd: string) => Promise<void>,
+  addToUserInput: (strToAdd: string, focus:boolean) => void,
   setDialogOpen: (open: boolean) => void,
   setForm: (form: React.SetStateAction<JSX.Element>) => void,
 }

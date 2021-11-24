@@ -24,7 +24,7 @@ function Calculator() {
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
-  const addToUserInput = async (strToAdd: string) => {
+  const addToUserInput = (strToAdd: string, focus:boolean) => {
     if (inputRef == null) {
       console.log("INPUTREF IS NULL");
       return;
@@ -32,9 +32,10 @@ function Calculator() {
     const selectionStart = inputRef.selectionStart ? inputRef.selectionStart : inputRef.size;
     const selectionEnd = inputRef.selectionEnd ? inputRef.selectionEnd : inputRef.size;
     const newUserInput = userInput.substring(0, selectionStart!) + strToAdd + userInput.substring(selectionEnd!);
-    inputRef.focus();
-
     setUserInput(newUserInput);
+    if (focus) {
+      inputRef.focus();
+    }
   };
 
   const clearInput = () => {
