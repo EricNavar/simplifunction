@@ -12,7 +12,7 @@ type InputButtonProps = {
 
 function InputButton(props: InputButtonProps) {
   const {input, addToUserInput} = props;
-  React.useEffect(()=>{},[input]);
+  React.useEffect(()=>{ console.log("InputButton useEffect()") },[input]);
   function onClick() {
     addToUserInput(input, false);
   }
@@ -40,7 +40,7 @@ type BasicButtonsProps = {
 function BasicButtons(props: BasicButtonsProps) {
   const { addToUserInput, onEqualsClick, backspace, clearInput, mobile } = props;
 
-  React.useEffect(() => { /*console.log("BasicButtons useEffect");*/ }, [mobile]);
+  React.useEffect(() => { console.log("BasicButtons useEffect"); }, [mobile]);
 
   function BackspaceButton() {
     return (

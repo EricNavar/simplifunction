@@ -11,7 +11,7 @@ type FunctionButtonProps = {
 // range or a comma separated list
 function FunctionButton(props: FunctionButtonProps) {
   const { label, onClick } = props;
-  React.useEffect(() => { /*console.log("FunctionButton useEffect()")*/ }, []);
+  React.useEffect(() => { console.log("FunctionButton useEffect()") }, []);
   return (
     <Grid item xs={6} className='function-buttons-grid-item'>
       <Button

@@ -1,5 +1,23 @@
 import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } from './commonTypes';
 
+const conversionFunction = {
+  commonName: "",
+  description: "",
+  category: ExcelFunctionCategory.Math,
+  parameterFormat: ParameterFormat.CONVERSION,
+  parameterType: ParameterType.number,
+  documentationLink: ''
+}
+
+const trigonometryFunction = {
+  commonName: "",
+  description: "",
+  category: ExcelFunctionCategory.Math,
+  parameterFormat: ParameterFormat.TRIGONOMETRY,
+  parameterType: ParameterType.number,
+  documentationLink: ''
+}
+
 const functionTranslation: Record<string, string> = {
   Summation: "SUM",
   Power: "POWER",
@@ -569,7 +587,7 @@ const functions: Array<ExcelFunction> = [
   // }
 ]
 
-export { functions, functionTranslation };
+export { functions, functionTranslation, conversionFunction, trigonometryFunction };
 
 //sin    asin     sinh    asinh
 //cos    acos     cosh    acosh

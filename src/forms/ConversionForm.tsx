@@ -23,7 +23,7 @@ function ConversionForm(props: FormProps) {
   const [valid, setValid] = React.useState(true);
   const [helperText, setHelperText] = React.useState("");
 
-  React.useEffect(() => { /*console.log("ConversionForm useEffect");*/ }, [to,from,number,valid,helperText]);
+  React.useEffect(() => { console.log("ConversionForm useEffect"); }, [to,from,number,valid,helperText]);
 
   function onChangeTo(e:any) {
     setTo(e.target.value);

@@ -7,14 +7,9 @@ import {
   ListSubheader
 } from '@mui/material';
 import '../styling/Calculator.css';
-import { functions } from '../functions';
+import { functions, conversionFunction, trigonometryFunction } from '../functions';
 import { SearchIcon } from '../assets/SearchIcon';
-import { ListParameterForm } from '../forms/ListParameterForm';
-import { SingleParameterForm } from '../forms/SingleParameterForm';
-import { NParameterForm } from '../forms/NParameterForm';
-import { ConversionForm } from '../forms/ConversionForm';
-import { TrigonometryForm } from '../forms/TrigonometryForm';
-import { ExcelFunctionCategory, ExcelFunction, ParameterFormat, FormProps } from '../commonTypes';
+import { ExcelFunctionCategory, ExcelFunction } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
 import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
 
@@ -33,7 +28,7 @@ function SectionHeader(props: SectionHeaderProps) {
 
 type FunctionButtonsProps = {
   mobile: boolean,
-  functionButtonOnClick: (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => void
+  functionButtonOnClick: (excelFunction: ExcelFunction) => void
 }
 
 function FunctionButtons(props: FunctionButtonsProps) {
@@ -106,18 +101,11 @@ function FunctionButtons(props: FunctionButtonsProps) {
               </SectionHeader>
               {categorizedFunctions.filter(
                 (f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index2: number) => {
-                  let FormComponent: (props: FormProps) => JSX.Element = NParameterForm;
-                  if (obj.parameterFormat === ParameterFormat.LIST) {
-                    FormComponent = ListParameterForm;
-                  }
-                  else if (obj.parameterFormat === ParameterFormat.SINGLE) {
-                    FormComponent = SingleParameterForm;
-                  }
                   return (
                     <FunctionButton
                       key={index2}
                       label={obj.commonName}
-                      onClick={ ()=> { functionButtonOnClick(functions[0],FormComponent) } }
+                      onClick={ ()=> { functionButtonOnClick(obj) } }
                     />
                   );
                 }
@@ -130,14 +118,14 @@ function FunctionButtons(props: FunctionButtonsProps) {
         </SectionHeader>
         <FunctionButton
           label="Conversion functions"
-          onClick={() => { functionButtonOnClick(functions[0], ConversionForm) }}
+          onClick={() => { functionButtonOnClick(conversionFunction) }}
         />
         <SectionHeader>
           Trigonometry functions
         </SectionHeader>
         <FunctionButton
           label="Trigonometry functions"
-          onClick={() => { functionButtonOnClick(functions[0], TrigonometryForm) }}
+          onClick={() => { functionButtonOnClick(trigonometryFunction) }}
         />
       </Grid>
     </Grid>
@@ -146,12 +134,12 @@ function FunctionButtons(props: FunctionButtonsProps) {
 
 type FunctionButtonsWrapperProps = {
   mobile: boolean,
-  functionButtonOnClick: (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => void
+  functionButtonOnClick: (excelFunction: ExcelFunction) => void
 }
 
 function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
   const { mobile, functionButtonOnClick } = props;
-  React.useEffect(() => { /*console.log("FunctionButtonsWrapper useEffect()")*/ }, [mobile]);
+  React.useEffect(() => { console.log("FunctionButtonsWrapper useEffect()") }, [mobile]);
 
   const content = (<FunctionButtons
     mobile={mobile}

@@ -1,6 +1,5 @@
 export enum ExcelFunctionCategory {
   Math = "Math",
-  Trigonometry = "Trigonometry",
   Statistics = "Statistics",
   Bitwise = "Bitwise",
   Text = "Text",
@@ -12,7 +11,9 @@ export enum ExcelFunctionCategory {
 export enum ParameterFormat {
   SINGLE,
   N,
-  LIST
+  LIST,
+  TRIGONOMETRY,
+  CONVERSION
 }
 
 export enum ParameterType {

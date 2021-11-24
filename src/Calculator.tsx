@@ -7,12 +7,17 @@ import {
   FilledInput,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import './styling/Calculator.css';
 import { FunctionButtonsWrapper } from './buttons/FunctionButtons';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
 import { BasicButtons } from './buttons/BasicButtons';
-import './styling/Calculator.css';
-import { ExcelFunction, FormProps } from './commonTypes';
+import { ExcelFunction, FormProps, ParameterFormat } from './commonTypes';
+import { ListParameterForm } from './forms/ListParameterForm';
+import { SingleParameterForm } from './forms/SingleParameterForm';
+import { NParameterForm } from './forms/NParameterForm';
+import { ConversionForm } from './forms/ConversionForm';
+import { TrigonometryForm } from './forms/TrigonometryForm';
 
 function Calculator() {
   const [formula, setFormula] = React.useState('');
@@ -21,12 +26,12 @@ function Calculator() {
   const [inputRef, setInputRef] = React.useState<HTMLInputElement | null>(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
-  React.useEffect(() => { }, [formula, form, dialogOpen]);
+  React.useEffect(() => { console.log("Calculator useEffect()") }, []);
 
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
-  function addToUserInput(strToAdd: string, focus: boolean) {
+  function addToUserInput(strToAdd: string, focus: boolean):void {
     if (inputRef == null) {
       console.log("INPUTREF IS NULL");
       return;
@@ -40,16 +45,16 @@ function Calculator() {
     }
   };
 
-  function clearInput() {
+  function clearInput():void {
     setUserInput("");
     setFormula("");
   };
 
-  function onEqualsClick() {
+  function onEqualsClick():void {
     setFormula(createFormula(userInput));
   };
 
-  function backspace() {
+  function backspace():void {
     setUserInput(userInput.substring(0, userInput.length - 2));
   }
 
@@ -57,7 +62,20 @@ function Calculator() {
     setUserInput(event.target.value);
   };
 
-  const functionButtonOnClick = (excelFunction: ExcelFunction, FormComponent: (props: FormProps) => JSX.Element) => {
+  const functionButtonOnClick = (excelFunction: ExcelFunction) => {
+    let FormComponent: (props: FormProps) => JSX.Element = ConversionForm;
+    if (excelFunction.parameterFormat === ParameterFormat.LIST) {
+      FormComponent = ListParameterForm;
+    }
+    else if (excelFunction.parameterFormat === ParameterFormat.SINGLE) {
+      FormComponent = SingleParameterForm;
+    }
+    else if (excelFunction.parameterFormat === ParameterFormat.N) {
+      FormComponent = NParameterForm;
+    }
+    else if (excelFunction.parameterFormat === ParameterFormat.TRIGONOMETRY) {
+      FormComponent = TrigonometryForm;
+    }
     setForm(
       <FormComponent
         addToUserInput={addToUserInput}
