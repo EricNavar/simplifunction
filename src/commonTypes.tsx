@@ -7,7 +7,6 @@ export enum ExcelFunctionCategory {
   Date = "Date",
   Lookup = "Lookup",
   Web = "Web",
-  Dummy = "Dummy"
 }
 
 export enum ParameterFormat {

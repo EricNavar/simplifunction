@@ -49,15 +49,6 @@ const functionTranslation: Record<string, string> = {
   Bitwise_XOR: "BITXOR",
 }
 
-const dummyFunction: ExcelFunction = {
-  commonName: "",
-  description: "",
-  category: ExcelFunctionCategory.Dummy,
-  parameterFormat: ParameterFormat.SINGLE,
-  parameterType: ParameterType.number,
-  documentationLink: ''
-};
-
 const functions: Array<ExcelFunction> = [
   // ==== Math ====
   { // add IMSUM
@@ -578,7 +569,7 @@ const functions: Array<ExcelFunction> = [
   // }
 ]
 
-export { dummyFunction, functions, functionTranslation };
+export { functions, functionTranslation };
 
 //sin    asin     sinh    asinh
 //cos    acos     cosh    acosh

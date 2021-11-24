@@ -10,14 +10,14 @@ import {
   ListSubheader
 } from '@mui/material';
 import '../styling/Calculator.css';
-import { functions, dummyFunction } from '../functions';
+import { functions } from '../functions';
 import { SearchIcon } from '../assets/SearchIcon';
 import { ListParameterForm } from '../forms/ListParameterForm';
 import { SingleParameterForm } from '../forms/SingleParameterForm';
 import { NParameterForm } from '../forms/NParameterForm';
 import { ConversionForm } from '../forms/ConversionForm';
 import { TrigonometryForm } from '../forms/TrigonometryForm';
-import { ExcelFunctionCategory, ExcelFunction, ParameterFormat } from '../commonTypes';
+import { ExcelFunctionCategory, ExcelFunction, ParameterFormat, FormProps } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
 
 type FunctionButtonsProps = {
@@ -30,8 +30,7 @@ type FunctionButtonsProps = {
 function FunctionButtons(props: FunctionButtonsProps) {
   const { addToUserInput, setDialogOpen, mobile, setForm } = props;
 
-  React.useEffect(() => {
-  }, [mobile]);
+  React.useEffect(() => {}, [mobile]);
 
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
@@ -54,10 +53,29 @@ function FunctionButtons(props: FunctionButtonsProps) {
     ExcelFunctionCategory.Web
   ];
 
-  const conversionFunction = Object.assign({}, dummyFunction);
-  conversionFunction.commonName = "Conversion";
-  const trigonometryFunction = Object.assign({}, dummyFunction);
-  trigonometryFunction.commonName = "Trigonometry";
+  const conversionOnClick = () => {
+    setForm(
+      <ConversionForm
+        addToUserInput={addToUserInput}
+        setDialogOpen={setDialogOpen}
+        // the excel function passed in here isn't considered, so it can be anything
+        excelFunction={functions[0]}
+      />
+    );
+    setDialogOpen(true);
+  }
+
+  const trigonometryOnClick = () => {
+    setForm(
+      <TrigonometryForm
+        addToUserInput={addToUserInput}
+        setDialogOpen={setDialogOpen}
+        // the excel function passed in here isn't considered, so it can be anything
+        excelFunction={functions[0]}
+      />
+    );
+    setDialogOpen(true);
+  }
 
   return (
     <Grid item container xs={12} sm={6} spacing={mobile ? 0 : 2} component='section'>
@@ -89,7 +107,7 @@ function FunctionButtons(props: FunctionButtonsProps) {
         </div>
       </div>
       <Grid item container spacing={2} className="function-buttons-grid-container">
-        {ExcelFunctionTypeArray.map((functionType: any, index: number) => {
+        {ExcelFunctionTypeArray.map((functionType: any, index1: number) => {
           const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) =>
             func.category === functionType
           );
@@ -97,30 +115,34 @@ function FunctionButtons(props: FunctionButtonsProps) {
             return <></>
           }
           return (
-            <React.Fragment key={index}>
+            <React.Fragment>
               <SectionHeader>
                 {functionType}
               </SectionHeader>
               {categorizedFunctions.filter(
-                (f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index: number) => {
-                  let FormComponent = null;
+                (f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index2: number) => {
+                  let FormComponent:(props:FormProps)=>JSX.Element = NParameterForm;
                   if (obj.parameterFormat === ParameterFormat.LIST) {
                     FormComponent = ListParameterForm;
                   }
                   else if (obj.parameterFormat === ParameterFormat.SINGLE) {
                     FormComponent = SingleParameterForm;
                   }
-                  else {
-                    FormComponent = NParameterForm;
+                  const onClick = () => {
+                    setForm(
+                      <FormComponent
+                        addToUserInput={addToUserInput}
+                        setDialogOpen={setDialogOpen}
+                        excelFunction={obj}
+                      />
+                    );
+                    setDialogOpen(true);
                   }
                   return (
                     <FunctionButton
-                      key={index}
-                      addToUserInput={addToUserInput}
-                      setForm={setForm}
-                      setDialogOpen={setDialogOpen}
-                      excelFunction={obj}
-                      FormComponent={FormComponent}
+                      key={index2}
+                      label={obj.commonName}
+                      onClick={onClick}
                     />
                   );
                 }
@@ -132,21 +154,15 @@ function FunctionButtons(props: FunctionButtonsProps) {
           Number Base Conversion
         </SectionHeader>
         <FunctionButton
-          excelFunction={conversionFunction}
-          addToUserInput={addToUserInput}
-          setDialogOpen={setDialogOpen}
-          setForm={setForm}
-          FormComponent={ConversionForm}
+          label="Conversion functions"
+          onClick={conversionOnClick}
         />
         <SectionHeader>
           Trigonometry functions
         </SectionHeader>
         <FunctionButton
-          excelFunction={trigonometryFunction}
-          addToUserInput={addToUserInput}
-          setDialogOpen={setDialogOpen}
-          setForm={setForm}
-          FormComponent={TrigonometryForm}
+          label="Trigonometry functions"
+          onClick={trigonometryOnClick}
         />
       </Grid>
     </Grid>
@@ -202,7 +218,7 @@ type FunctionButtonsWrapperProps = {
 
 function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
   const { mobile, addToUserInput, setDialogOpen, setForm } = props;
-  React.useEffect(() => { }, [mobile]);
+  React.useEffect(() => { /*console.log("FunctionButtonsWrapper useEffect()")*/ }, [mobile]);
 
   const content = (<FunctionButtons
     mobile={mobile}

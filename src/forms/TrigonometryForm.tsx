@@ -41,7 +41,6 @@ function TrigonometryForm(props: FormProps) {
   function handleDoneClick() {
     const newValid = validateParameter(number, ParameterType.number);
     setValid(newValid);
-    console.log(newValid);
     if (newValid) {
       let formula = func;
       if (inverse) {

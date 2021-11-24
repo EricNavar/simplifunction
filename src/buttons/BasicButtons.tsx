@@ -40,6 +40,8 @@ type BasicButtonsProps = {
 function BasicButtons(props: BasicButtonsProps) {
   const { addToUserInput, onEqualsClick, backspace, clearInput, mobile } = props;
 
+  React.useEffect(() => { /*console.log("BasicButtons useEffect");*/ }, [mobile]);
+
   function BackspaceButton() {
     return (
       <Button

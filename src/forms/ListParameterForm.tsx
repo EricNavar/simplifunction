@@ -26,6 +26,11 @@ function ListParameterForm(props: FormProps) {
   const [endCell, setEndCell] = React.useState("A2");
   const [endCellValid, setEndCellValid] = React.useState(true);
 
+  React.useEffect(
+    () => { /*console.log("ListParameterForm");*/ },
+    [parameterCount, parameters, valids, inputMode, startCell, startCellValid, endCell, endCellValid]
+  );
+
   function addParameter() {
     let newParameters = parameters;
     newParameters.push("");
@@ -112,7 +117,7 @@ function ListParameterForm(props: FormProps) {
         <span>{props.excelFunction.commonName}</span>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText style={{color:"rgba(0,0,0,.8)"}} id={`${props.excelFunction.commonName}-description`}>
+        <DialogContentText style={{ color: "rgba(0,0,0,.8)" }} id={`${props.excelFunction.commonName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
         <Link
@@ -154,7 +159,7 @@ function ListParameterForm(props: FormProps) {
                   helperText={valids[index] ? "" : "Enter cell or number"}
                 />
                 {parameters.length > 1 &&
-                  <Button onClick={(e:any) => onDeleteClick(index)} size='small' color='info'>
+                  <Button onClick={(e: any) => onDeleteClick(index)} size='small' color='info'>
                     REMOVE
                   </Button>
                 }
