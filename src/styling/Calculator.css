@@ -1,9 +1,11 @@
+/* only used once */
 .App {
   margin-top: 32px;
   margin-left: 5%;
   margin-right: 5%;
 }
 
+/* only used once */
 .function-button-container {
   width: 600px;
   max-width: 600px;
@@ -12,12 +14,14 @@
   margin-bottom: 8px;
 }
 
+/* only used once */
 .function-button {
   width: 100%;
 }
 
+/*box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;*/
 .button {
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  box-shadow: none !important;
   text-align: center;
   align-items: center;
 }
@@ -26,12 +30,17 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
 }
 
+.button:hover {
+  box-shadow: none !important;
+}
+
 .small-button-container {
   margin-top: 16px;
   width: 304px;
   align-content: start;
 }
 
+/* only used once */
 .small-button {
   width: 64px;
   height: 64px;
@@ -167,13 +176,16 @@
 }
 
 .formula-container {
-  width: 100%;
+  width: max-content;
   margin-bottom: 12px;
   margin-left: 16px;
+  margin-top: 8px;
+  border-radius: 3px;
+  padding: 5px;
 	animation: alternate 1.5s flash ease-in-out;
 }
 
 @keyframes flash {
-  from { background: #f2dfd7; }
+  from { background: #f0e28b; }
   to   { background: default; }
 }

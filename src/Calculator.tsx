@@ -3,6 +3,8 @@ import {
   Typography,
   Grid,
   useMediaQuery,
+  IconButton,
+  Snackbar
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { FunctionButtonsWrapper } from './buttons/FunctionButtonsWrapper';
@@ -16,6 +18,7 @@ import { NParameterForm } from './forms/NParameterForm';
 import { ConversionForm } from './forms/ConversionForm';
 import { TrigonometryForm } from './forms/TrigonometryForm';
 import { UserInput } from './UserInput';
+import { CopyIcon } from './assets/CopyIcon';
 import './styling/Calculator.css';
 
 export const Calculator = function Calculator() {
@@ -25,6 +28,7 @@ export const Calculator = function Calculator() {
   const [form, setForm] = React.useState(<Grid></Grid>);
   const [inputRef, setInputRef] = React.useState<HTMLInputElement | null>(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
   React.useEffect(() => { }, []);
 
@@ -83,6 +87,15 @@ export const Calculator = function Calculator() {
     setDialogOpen(true);
   }
 
+  function copyFormula() {
+    navigator.clipboard.writeText(formula);
+    setSnackbarOpen(true);
+  }
+
+  function handleCloseSnackbar() {
+    setSnackbarOpen(false);
+  }
+
   return (
     <>
       <div className="App" >
@@ -93,13 +106,18 @@ export const Calculator = function Calculator() {
         </header>
         <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
           <UserInput setUserInput={setUserInput} setInputRef={setInputRef} userInput={userInput} />
-          <div style={{height:60,width:'100%'}}>
-          {formulaRevealed &&
-            <div className="formula-container">
-              <Typography component="span" variant='body1'>Result:</Typography>
-              <span className="formula">{formula}</span>
-            </div>
-          }
+          <div style={{ height: 60, width: '100%' }}>
+            {formulaRevealed &&
+              <div className="formula-container">
+                <Typography component="span" variant='body1'>Result:</Typography>
+                <span className="formula">{formula}</span>
+                {formula !== "" && formula !== "No input" &&
+                  <IconButton onClick={copyFormula}>
+                    <CopyIcon />
+                  </IconButton>
+                }
+              </div>
+            }
           </div>
           <FunctionButtonsWrapper
             mobile={mobile}
@@ -115,6 +133,12 @@ export const Calculator = function Calculator() {
         </Grid>
       </div>
       <MyDialog open={dialogOpen} setDialogOpen={setDialogOpen} form={form} />
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2500}
+        onClose={handleCloseSnackbar}
+        message="Formula copied"
+      />
     </>
   );
 };

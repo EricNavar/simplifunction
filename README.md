@@ -3,6 +3,10 @@
 
 SimpliFunction is a cool and epic solution for writing calculations in Excel without needing to know the stupid Visual Basic syntax.
 
+## Theme
+
+https://coolors.co/f2dfd7-fef9ff-d4c1ec-9f9fed-736ced
+
 ## Files
 
 - **assets/ directory**
