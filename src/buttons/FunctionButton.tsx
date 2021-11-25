@@ -9,7 +9,7 @@ type FunctionButtonProps = {
 
 // these functions take in a list as parameter. Either as a 
 // range or a comma separated list
-const FunctionButton = React.memo(function FunctionButton(props: FunctionButtonProps) {
+function FunctionButton(props: FunctionButtonProps) {
   const { label, onClick } = props;
   React.useEffect(() => { }, []);
   return (
@@ -25,6 +25,6 @@ const FunctionButton = React.memo(function FunctionButton(props: FunctionButtonP
       </Button>
     </Grid>
   );
-});
+};
 
 export { FunctionButton }

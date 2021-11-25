@@ -31,7 +31,6 @@ export const Calculator = function Calculator() {
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
   function addToUserInput(strToAdd: string, focus: boolean): void {
-    console.log("addToUserInput");
     if (inputRef == null) {
       console.log("INPUTREF IS NULL");
       return;
@@ -81,8 +80,6 @@ export const Calculator = function Calculator() {
     );
     setDialogOpen(true);
   }
-
-  console.log(setInputRef);
 
   return (
     <>

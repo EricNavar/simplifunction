@@ -16,9 +16,9 @@ type FunctionButtonsWrapperProps = {
   functionButtonOnClick: (excelFunction: ExcelFunction) => void
 }
 
-function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
+const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
   const { mobile, functionButtonOnClick } = props;
-  React.useEffect(() => { console.log("FunctionButtonsWrapper useEffect()") }, [mobile]);
+  React.useEffect(() => { }, [mobile]);
 
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
@@ -78,6 +78,6 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
   else {
     return content;
   }
-};
+});
 
 export { FunctionButtonsWrapper };

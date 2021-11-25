@@ -28,7 +28,7 @@ type FunctionButtonsProps = {
   searchedFunctions: Array<ExcelFunction>
 }
 
-export const FunctionButtons = React.memo(function FunctionButtons(props: FunctionButtonsProps) {
+export function FunctionButtons(props: FunctionButtonsProps) {
   const { mobile, functionButtonOnClick, searchedFunctions } = props;
 
   React.useEffect(() => { }, [mobile, searchedFunctions]);
@@ -87,4 +87,4 @@ export const FunctionButtons = React.memo(function FunctionButtons(props: Functi
       />
     </Grid>
   );
-});
+};
