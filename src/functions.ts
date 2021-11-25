@@ -32,7 +32,7 @@ const functionTranslation: Record<string, string> = {
   "Log₁₀": "LOG10",
   Log: "LOG",
   Choose_random_number: "CHOOSE",
-  // TRIG
+
   "Hyperbolic_Sin⁻¹": "ASINH",
   Hyperbolic_Sin: "SINH",
   "Sin⁻¹": "ASIN",

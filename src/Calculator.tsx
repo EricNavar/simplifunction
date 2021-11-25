@@ -19,7 +19,7 @@ import { NParameterForm } from './forms/NParameterForm';
 import { ConversionForm } from './forms/ConversionForm';
 import { TrigonometryForm } from './forms/TrigonometryForm';
 
-export const Calculator = React.memo(function Calculator() {
+export const Calculator = function Calculator() {
   const [formula, setFormula] = React.useState('');
   const [userInput, setUserInput] = React.useState('');
   const [form, setForm] = React.useState(<Grid></Grid>);
@@ -129,4 +129,4 @@ export const Calculator = React.memo(function Calculator() {
       <MyDialog open={dialogOpen} setDialogOpen={setDialogOpen} form={form} />
     </>
   );
-});
+};

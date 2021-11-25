@@ -28,10 +28,10 @@ type FunctionButtonsProps = {
   searchedFunctions: Array<ExcelFunction>
 }
 
-export function FunctionButtons(props: FunctionButtonsProps) {
+export const FunctionButtons = React.memo(function FunctionButtons(props: FunctionButtonsProps) {
   const { mobile, functionButtonOnClick, searchedFunctions } = props;
 
-  React.useEffect(() => { }, [mobile]);
+  React.useEffect(() => { }, [mobile, searchedFunctions]);
 
   const ExcelFunctionTypeArray = [
     ExcelFunctionCategory.Math,
@@ -87,4 +87,4 @@ export function FunctionButtons(props: FunctionButtonsProps) {
       />
     </Grid>
   );
-}
+});
