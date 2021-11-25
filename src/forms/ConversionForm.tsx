@@ -23,21 +23,21 @@ function ConversionForm(props: FormProps) {
   const [valid, setValid] = React.useState(true);
   const [helperText, setHelperText] = React.useState("");
 
-  React.useEffect(() => { console.log("ConversionForm useEffect"); }, [to,from,number,valid,helperText]);
+  React.useEffect(() => { console.log("ConversionForm useEffect"); }, [to, from, number, valid, helperText]);
 
-  function onChangeTo(e:any) {
+  function onChangeTo(e: React.ChangeEvent<HTMLInputElement>) {
     setTo(e.target.value);
   }
 
-  function onChangeFrom(e:any) {
+  function onChangeFrom(e: React.ChangeEvent<HTMLInputElement>) {
     setFrom(e.target.value);
   }
 
-  function onChangeNumber(e:any) {
+  function onChangeNumber(e: React.ChangeEvent<HTMLInputElement>) {
     setNumber(e.target.value);
   }
 
-  // function onChangePlaces(e: any) {
+  // function onChangePlaces(e: React.ChangeEvent<HTMLInputElement>) {
   //   setPlaces(e.target.value);
   // }
 
@@ -74,11 +74,11 @@ function ConversionForm(props: FormProps) {
         Number Base Conversion
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id={`conversion-description`} style={{marginBottom:20}}>
+        <DialogContentText id={`conversion-description`} style={{ marginBottom: 20 }}>
           Convert a number to a different base
         </DialogContentText>
-        <FormControl component="fieldset" style={{marginRight:50}}>
-          <FormLabel component="legend" style={{color:'rgb(95, 87, 242)'}}>Converting from</FormLabel>
+        <FormControl component="fieldset" style={{ marginRight: 50 }}>
+          <FormLabel component="legend" style={{ color: 'rgb(95, 87, 242)' }}>Converting from</FormLabel>
           <RadioGroup
             aria-label="convert from"
             defaultValue="decimal"
@@ -93,7 +93,7 @@ function ConversionForm(props: FormProps) {
           </RadioGroup>
         </FormControl>
         <FormControl component="fieldset">
-          <FormLabel component="legend" style={{color:'rgb(95, 87, 242)'}}>Converting to</FormLabel>
+          <FormLabel component="legend" style={{ color: 'rgb(95, 87, 242)' }}>Converting to</FormLabel>
           <RadioGroup
             aria-label="convert to"
             defaultValue="binary"
@@ -115,7 +115,7 @@ function ConversionForm(props: FormProps) {
           onChange={onChangeNumber}
           placeholder="Enter number or cell to convert"
           error={!valid}
-          helperText={valid?null:helperText}
+          helperText={valid ? null : helperText}
         />
         {/*
         <TextField

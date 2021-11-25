@@ -39,7 +39,7 @@ function FunctionButtons(props: FunctionButtonsProps) {
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
 
-  function onChangeSearchInput(e: any) {
+  function onChangeSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchInput(e.target.value);
     if (e.target.value === '') {
       setSearchedFunctions(functions);
@@ -87,7 +87,7 @@ function FunctionButtons(props: FunctionButtonsProps) {
         </div>
       </div>
       <Grid item container spacing={2} className="function-buttons-grid-container">
-        {ExcelFunctionTypeArray.map((functionType: any, index1: number) => {
+        {ExcelFunctionTypeArray.map((functionType: ExcelFunctionCategory, index1: number) => {
           const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) =>
             func.category === functionType
           );

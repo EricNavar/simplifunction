@@ -22,19 +22,19 @@ function TrigonometryForm(props: FormProps) {
   const [hyperbolic, setHyperbolic] = React.useState(false);
   const [valid, setValid] = React.useState(true);
 
-  function onChangeFunc(e: any) {
+  function onChangeFunc(e: React.ChangeEvent<HTMLInputElement>) {
     setFunc(e.target.value);
   }
 
-  function onChangeInverse(e: any) {
-    setInverse(e.target.value);
+  function onChangeInverse(e: React.ChangeEvent<HTMLInputElement>) {
+    setInverse(e.target.value === "true");
   }
 
-  function onChangeHyperbolic(e: any) {
-    setHyperbolic(e.target.value);
+  function onChangeHyperbolic(e: React.ChangeEvent<HTMLInputElement>) {
+    setHyperbolic(e.target.value === "true");
   }
 
-  function onChangeNumber(e: any) {
+  function onChangeNumber(e: React.ChangeEvent<HTMLInputElement>) {
     setNumber(e.target.value);
   }
 

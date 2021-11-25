@@ -47,7 +47,7 @@ function BasicButtons(props: BasicButtonsProps) {
       <Button
         className="button small-button"
         variant="outlined"
-        onClick={(e: any) => backspace()}
+        onClick={backspace}
         aria-label="backspace"
         disableRipple
       >

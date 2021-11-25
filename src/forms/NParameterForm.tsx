@@ -20,7 +20,7 @@ function NParameterForm(props: FormProps) {
     new Array(props.excelFunction.parameterSchema!.length).fill(true)
   );
 
-  function onChangeParameter(event: any, index: number) {
+  function onChangeParameter(event: React.ChangeEvent<HTMLInputElement>, index: number) {
     setParameters(parameters.map((param: string, iter: number) => (iter !== index ? param : event.target.value)));
   }
 
@@ -73,7 +73,7 @@ function NParameterForm(props: FormProps) {
               label={props.excelFunction.parameterSchema![index].name}
               size="small"
               type="text"
-              onChange={e => onChangeParameter(e, index)}
+              onChange={(e:React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index)}
               className="text-field"
               helperText={props.excelFunction.parameterSchema![index].helperText}
               value={parameter}

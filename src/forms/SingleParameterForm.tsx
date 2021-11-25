@@ -26,7 +26,7 @@ function SingleParameterForm(props: FormProps) {
     }
   };
 
-  function onChangeParameter(e: any) {
+  function onChangeParameter(e: React.ChangeEvent<HTMLInputElement>) {
     setParameter(e.target.value);
   };
 

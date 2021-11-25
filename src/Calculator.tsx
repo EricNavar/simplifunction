@@ -31,7 +31,12 @@ function Calculator() {
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
+  function onType(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInput(event.target.value);
+  };
+
   function addToUserInput(strToAdd: string, focus: boolean):void {
+    console.log("addToUserInput");
     if (inputRef == null) {
       console.log("INPUTREF IS NULL");
       return;
@@ -57,10 +62,6 @@ function Calculator() {
   function backspace():void {
     setUserInput(userInput.substring(0, userInput.length - 2));
   }
-
-  function onType(event: any) {
-    setUserInput(event.target.value);
-  };
 
   const functionButtonOnClick = (excelFunction: ExcelFunction) => {
     let FormComponent: (props: FormProps) => JSX.Element = ConversionForm;

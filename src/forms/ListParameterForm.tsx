@@ -42,7 +42,7 @@ function ListParameterForm(props: FormProps) {
     setValids(newValids);
   }
 
-  function onChangeParameter(event: any, index: number) {
+  function onChangeParameter(event: React.ChangeEvent<HTMLInputElement>, index: number) {
     setParameters(parameters.map((param: string, iter: number) =>
       (iter !== index ? param : event.target.value)
     ));
@@ -63,16 +63,16 @@ function ListParameterForm(props: FormProps) {
     return formula;
   };
 
-  function handleModeChange(event: any, newMode: string) {
+  function handleModeChange(event: React.MouseEvent<HTMLElement>, newMode: string) {
     if (newMode !== null)
       setInputMode(newMode);
   };
 
-  function onChangeStartCell(event: any) {
+  function onChangeStartCell(event: React.ChangeEvent<HTMLInputElement>) {
     setStartCell(event.target.value);
   };
 
-  function onChangeEndCell(event: any) {
+  function onChangeEndCell(event: React.ChangeEvent<HTMLInputElement>) {
     setEndCell(event.target.value);
   };
 
@@ -152,14 +152,14 @@ function ListParameterForm(props: FormProps) {
                   label={`Value ${index + 1}`}
                   size="small"
                   type="text"
-                  onChange={e => onChangeParameter(e, index)}
+                  onChange={(e:React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index)}
                   className="text-field"
                   error={!valids[index]}
                   placeholder="Enter cell or number"
                   helperText={valids[index] ? "" : "Enter cell or number"}
                 />
                 {parameters.length > 1 &&
-                  <Button onClick={(e: any) => onDeleteClick(index)} size='small' color='info'>
+                  <Button onClick={() => onDeleteClick(index)} size='small' color='info'>
                     REMOVE
                   </Button>
                 }
