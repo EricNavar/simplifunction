@@ -116,7 +116,7 @@
 }
 
 .function-buttons-grid-container {
-  max-height: calc(100vh - 302px);
+  max-height: calc(100vh - 262px);
   overflow-y: scroll;
   border-top-color: gray;
   border-top-width: 1px;

@@ -63,7 +63,7 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
       id='small-button-container'
       className='small-button-container'
       item container
-      xs={12} sm={6}
+      xs={12} sm={4}
       component='section'
     >
       <Grid item xs={12}>
