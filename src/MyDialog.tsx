@@ -7,7 +7,7 @@ type MyDialogProps = {
   form: JSX.Element,
   open: boolean
 }
-function MyDialog(props: MyDialogProps) {
+function MyDialog(props: MyDialogProps):JSX.Element {
   function onClose() {
     props.setDialogOpen(false);
   }

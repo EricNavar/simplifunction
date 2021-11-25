@@ -4,6 +4,7 @@ import {
   Button,
 } from '@mui/material';
 import '../styling/Calculator.css';
+import { noop } from '../util/util';
 
 type InputButtonProps = {
   input: string,
@@ -11,9 +12,9 @@ type InputButtonProps = {
 }
 
 // no state
-const InputButton = React.memo(function InputButton(props: InputButtonProps) {
+const InputButton = React.memo(function InputButton(props: InputButtonProps):JSX.Element {
   const { input, addToUserInput } = props;
-  React.useEffect(() => { }, [input]);
+  React.useEffect(noop, [input]);
   function onClick() {
     addToUserInput(input, false);
   }
@@ -42,7 +43,7 @@ type BasicButtonsProps = {
 const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) {
   const { addToUserInput, onEqualsClick, backspace, clearInput, mobile } = props;
 
-  React.useEffect(() => { }, [mobile]);
+  React.useEffect(noop, [mobile]);
 
   function BackspaceButton() {
     return (

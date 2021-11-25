@@ -1,236 +1,236 @@
 import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } from './commonTypes';
 
 const conversionFunction = {
-  commonName: "",
-  description: "",
+  commonName: '',
+  description: '',
   category: ExcelFunctionCategory.Math,
   parameterFormat: ParameterFormat.CONVERSION,
   parameterType: ParameterType.number,
   documentationLink: ''
-}
+};
 
 const trigonometryFunction = {
-  commonName: "",
-  description: "",
+  commonName: '',
+  description: '',
   category: ExcelFunctionCategory.Math,
   parameterFormat: ParameterFormat.TRIGONOMETRY,
   parameterType: ParameterType.number,
   documentationLink: ''
-}
+};
 
 const functionTranslation: Record<string, string> = {
-  Summation: "SUM",
-  Power: "POWER",
-  Minimum: "MIN",
-  Maximum: "MAX",
-  Geometric_mean: "GEOMEAN",
-  Absolute_value: "ABS",
-  Round_up: "CEILING",
-  Round_down: "FLOOR",
-  Square_root: "SQRT",
-  Modulo: "MOD",
-  "Log₁₀": "LOG10",
-  Log: "LOG",
-  Choose_random_number: "CHOOSE",
+  Summation: 'SUM',
+  Power: 'POWER',
+  Minimum: 'MIN',
+  Maximum: 'MAX',
+  Geometric_mean: 'GEOMEAN',
+  Absolute_value: 'ABS',
+  Round_up: 'CEILING',
+  Round_down: 'FLOOR',
+  Square_root: 'SQRT',
+  Modulo: 'MOD',
+  'Log₁₀': 'LOG10',
+  Log: 'LOG',
+  Choose_random_number: 'CHOOSE',
 
-  "Hyperbolic_Sin⁻¹": "ASINH",
-  Hyperbolic_Sin: "SINH",
-  "Sin⁻¹": "ASIN",
-  Sin: "SIN",
+  'Hyperbolic_Sin⁻¹': 'ASINH',
+  Hyperbolic_Sin: 'SINH',
+  'Sin⁻¹': 'ASIN',
+  Sin: 'SIN',
 
-  "Hyperbolic_Tan⁻¹": "ATANH",
-  Hyperbolic_Tan: "TANH",
-  "Tan⁻¹": "ATAN",
-  Tan: "TAN",
+  'Hyperbolic_Tan⁻¹': 'ATANH',
+  Hyperbolic_Tan: 'TANH',
+  'Tan⁻¹': 'ATAN',
+  Tan: 'TAN',
 
-  "Hyperbolic_Cos⁻¹": "ACOSH",
-  Hyperbolic_Cos: "COSH",
-  "Cos⁻¹": "ACOS",
-  Cos: "COS",
+  'Hyperbolic_Cos⁻¹': 'ACOSH',
+  Hyperbolic_Cos: 'COSH',
+  'Cos⁻¹': 'ACOS',
+  Cos: 'COS',
 
-  "Hyperbolic_Cot⁻¹": "ACOTH",
-  Hyperbolic_Cot: "COTH",
-  "Cot⁻¹": "ACOT",
-  Cot: "COT",
+  'Hyperbolic_Cot⁻¹': 'ACOTH',
+  Hyperbolic_Cot: 'COTH',
+  'Cot⁻¹': 'ACOT',
+  Cot: 'COT',
 
-  Average: "AVERAGE",
-  Median: "MEDIAN",
-  Normal_distribution: "NORMDIST",
-  Harmonic_mean: "HARMEAN",
-  Standard_deviation: "STDEV",
-  Binomial_distribution: "BINOMDIST",
-  Mode: "MODE.SNGL",
-  Left_shift: "BITLSHIFT",
-  Right_shift: "BITRSHIFT",
-  Bitwise_OR: "BITOR",
-  Bitwise_AND: "BITAND",
-  Bitwise_XOR: "BITXOR",
-}
+  Average: 'AVERAGE',
+  Median: 'MEDIAN',
+  Normal_distribution: 'NORMDIST',
+  Harmonic_mean: 'HARMEAN',
+  Standard_deviation: 'STDEV',
+  Binomial_distribution: 'BINOMDIST',
+  Mode: 'MODE.SNGL',
+  Left_shift: 'BITLSHIFT',
+  Right_shift: 'BITRSHIFT',
+  Bitwise_OR: 'BITOR',
+  Bitwise_AND: 'BITAND',
+  Bitwise_XOR: 'BITXOR',
+};
 
 const functions: Array<ExcelFunction> = [
   // ==== Math ====
   { // add IMSUM
-    commonName: "Summation",
-    description: "Use this function to add the values in cells.",
+    commonName: 'Summation',
+    description: 'Use this function to add the values in cells.',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89'
   },
   { // add IMPOWER
-    commonName: "Power",
-    description: "Returns the result of a number raised to a power",
+    commonName: 'Power',
+    description: 'Returns the result of a number raised to a power',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/power-function-d3f2908b-56f4-4c3f-895a-07fb519c362a',
     parameterSchema: [
       {
-        name: "Base",
+        name: 'Base',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Exponent",
+        name: 'Exponent',
         type: ParameterType.number,
         required: true
       },
     ]
   },
   {
-    commonName: "Minimum",
-    description: "Returns the minimum value in a list of arguments",
+    commonName: 'Minimum',
+    description: 'Returns the minimum value in a list of arguments',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/min-function-61635d12-920f-4ce2-a70f-96f202dcc152'
   },
   {
-    commonName: "Maximum",
-    description: "Returns the maximum value in a list of arguments",
+    commonName: 'Maximum',
+    description: 'Returns the maximum value in a list of arguments',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/max-function-e0012414-9ac8-4b34-9a47-73e662c08098'
   },
   {
-    commonName: "Geometric mean",
-    description: "Returns the geometric mean",
+    commonName: 'Geometric mean',
+    description: 'Returns the geometric mean',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/geomean-function-db1ac48d-25a5-40a0-ab83-0b38980e40d5'
   },
   {
-    commonName: "Absolute value",
-    description: "Returns the absolute value of a number",
+    commonName: 'Absolute value',
+    description: 'Returns the absolute value of a number',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/abs-function-3420200f-5628-4e8c-99da-c99d7c87713c'
   },
   {
-    commonName: "Round up",
-    description: "Rounds a number to the nearest integer or to the nearest multiple of significance",
+    commonName: 'Round up',
+    description: 'Rounds a number to the nearest integer or to the nearest multiple of significance',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/ceiling-function-0a5cd7c8-0720-4f0a-bd2c-c943e510899f',
     parameterSchema: [
       {
-        name: "number to round",
+        name: 'number to round',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Significant decimals",
-        helperText: "The number of digits to which you want to round number",
+        name: 'Significant decimals',
+        helperText: 'The number of digits to which you want to round number',
         type: ParameterType.number,
         required: false
       },
     ]
   },
   {
-    commonName: "Round down",
-    description: "Rounds a number down, toward zero",
+    commonName: 'Round down',
+    description: 'Rounds a number down, toward zero',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/floor-function-14bb497c-24f2-4e04-b327-b0b4de5a8886',
     remarks: [
-      "ROUNDUP behaves like ROUND, except that it always rounds a number up.",
-      "If num_digits is greater than 0 (zero), then number is rounded up to the specified number of decimal places.",
-      "If num_digits is 0, then number is rounded up to the nearest integer.",
-      "If num_digits is less than 0, then number is rounded up to the left of the decimal point."
+      'ROUNDUP behaves like ROUND, except that it always rounds a number up.',
+      'If num_digits is greater than 0 (zero), then number is rounded up to the specified number of decimal places.',
+      'If num_digits is 0, then number is rounded up to the nearest integer.',
+      'If num_digits is less than 0, then number is rounded up to the left of the decimal point.'
     ],
     parameterSchema: [
       {
-        name: "number to round",
+        name: 'number to round',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "step",
+        name: 'step',
         type: ParameterType.number,
-        helperText: "The number of digits to which you want to round number",
+        helperText: 'The number of digits to which you want to round number',
         required: false
       },
     ]
   },
   {
-    commonName: "Square root",
-    description: "Returns a positive square root",
+    commonName: 'Square root',
+    description: 'Returns a positive square root',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/sqrt-function-654975c2-05c4-4831-9a24-2c65e4040fdf',
   },
   {
-    commonName: "Modulo",
-    description: "Returns the remainder from division",
+    commonName: 'Modulo',
+    description: 'Returns the remainder from division',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3',
     parameterSchema: [
       {
-        name: "",
+        name: '',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "",
+        name: '',
         type: ParameterType.number,
         required: true
       },
     ]
   },
   {
-    commonName: "Log₁₀",
-    description: "Returns the base-10 logarithm of a number",
+    commonName: 'Log₁₀',
+    description: 'Returns the base-10 logarithm of a number',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/log10-function-c75b881b-49dd-44fb-b6f4-37e3486a0211',
   },
   {
-    commonName: "Log",
-    description: "Returns the logarithm of a number to a specified base",
+    commonName: 'Log',
+    description: 'Returns the logarithm of a number to a specified base',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/log-function-4e82f196-1ca9-4747-8fb0-6c4a3abb3280',
     parameterSchema: [
       {
-        name: "Number",
+        name: 'Number',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Base",
+        name: 'Base',
         type: ParameterType.number,
         required: true
       },
     ]
   },
   {
-    commonName: "Choose random number",
-    description: "Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.",
+    commonName: 'Choose random number',
+    description: 'Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.',
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.SINGLE,
     parameterType: ParameterType.number,
@@ -247,8 +247,8 @@ const functions: Array<ExcelFunction> = [
   // },
   // Statistics
   {
-    commonName: "Average",
-    description: "Returns the average of its arguments",
+    commonName: 'Average',
+    description: 'Returns the average of its arguments',
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
@@ -256,74 +256,74 @@ const functions: Array<ExcelFunction> = [
     remarks: ['Arguments that are error values or text that cannot be translated into numbers cause errors.']
   },
   {
-    commonName: "Median",
-    description: "Returns the median of the given numbers",
+    commonName: 'Median',
+    description: 'Returns the median of the given numbers',
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/median-function-d0916313-4753-414c-8537-ce85bdd967d2'
   },
   {
-    commonName: "Normal distribution",
-    description: "Returns the normal cumulative distribution",
+    commonName: 'Normal distribution',
+    description: 'Returns the normal cumulative distribution',
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/normdist-function-126db625-c53e-4591-9a22-c9ff422d6d58',
     parameterSchema: [
       {
-        name: "X",
-        helperText: "The value for which you want the distribution.",
+        name: 'X',
+        helperText: 'The value for which you want the distribution.',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Mean",
+        name: 'Mean',
         type: ParameterType.number,
         required: false
       },
       {
-        name: "Standard dev",
+        name: 'Standard dev',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Cumulative",
+        name: 'Cumulative',
         type: ParameterType.number,
         required: true
       }
     ]
   },
   {
-    commonName: "Harmonic mean",
-    description: "Returns the harmonic mean",
+    commonName: 'Harmonic mean',
+    description: 'Returns the harmonic mean',
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/harmean-function-5efd9184-fab5-42f9-b1d3-57883a1d3bc6'
   },
   {
-    commonName: "Standard deviation",
-    description: "Estimates standard deviation based on a sample",
+    commonName: 'Standard deviation',
+    description: 'Estimates standard deviation based on a sample',
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     remarks: [
-      "STDEV assumes that its arguments are a sample of the population. If your data represents the entire population, then compute the standard deviation using STDEVP.",
-      "The standard deviation is calculated using the \"n-1\" method."
+      'STDEV assumes that its arguments are a sample of the population. If your data represents the entire population, then compute the standard deviation using STDEVP.',
+      'The standard deviation is calculated using the "n-1" method.'
     ],
     documentationLink: 'https://support.microsoft.com/en-us/office/stdev-function-51fecaaa-231e-4bbb-9230-33650a72c9b0'
   },
   {
-    commonName: "Binomial distribution",
-    description: "Returns the individual term binomial distribution probability",
+    commonName: 'Binomial distribution',
+    description: 'Returns the individual term binomial distribution probability',
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/binomdist-function-506a663e-c4ca-428d-b9a8-05583d68789c'
   },
   {
-    commonName: "Mode",
-    description: "Returns the most common value in a data set",
+    commonName: 'Mode',
+    description: 'Returns the most common value in a data set',
     category: ExcelFunctionCategory.Statistics,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
@@ -331,95 +331,95 @@ const functions: Array<ExcelFunction> = [
   },
   // Bitwise operations
   {
-    commonName: "Left shift",
-    description: "Returns a value number shifted left by shift_amount bits",
+    commonName: 'Left shift',
+    description: 'Returns a value number shifted left by shift_amount bits',
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/bitlshift-function-c55bb27e-cacd-4c7c-b258-d80861a03c9c',
     parameterSchema: [
       {
-        name: "Number",
+        name: 'Number',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Places to shift",
+        name: 'Places to shift',
         type: ParameterType.number,
         required: true
       }
     ]
   },
   {
-    commonName: "Right shift",
-    description: "Returns a value number shifted left by shift_amount bits",
+    commonName: 'Right shift',
+    description: 'Returns a value number shifted left by shift_amount bits',
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/bitrshift-function-274d6996-f42c-4743-abdb-4ff95351222c',
     parameterSchema: [
       {
-        name: "Number",
+        name: 'Number',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Places to shift",
+        name: 'Places to shift',
         type: ParameterType.number,
         required: true
       }
     ]
   },
   {
-    commonName: "Bitwise OR",
-    description: "Returns a Bitwise OR of 2 numbers",
+    commonName: 'Bitwise OR',
+    description: 'Returns a Bitwise OR of 2 numbers',
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
     parameterSchema: [
       {
-        name: "Operand 1",
+        name: 'Operand 1',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Operand 2",
+        name: 'Operand 2',
         type: ParameterType.number,
         required: true
       }
     ]
   },
   {
-    commonName: "Bitwise AND",
-    description: "Returns a Bitwise AND of 2 numbers",
+    commonName: 'Bitwise AND',
+    description: 'Returns a Bitwise AND of 2 numbers',
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
     parameterSchema: [
       {
-        name: "Operand 1",
+        name: 'Operand 1',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Operand 2",
+        name: 'Operand 2',
         type: ParameterType.number,
         required: true
       }
     ]
   },
   {
-    commonName: "Bitwise XOR",
-    description: "Returns a Bitwise AND of 2 numbers",
+    commonName: 'Bitwise XOR',
+    description: 'Returns a Bitwise AND of 2 numbers',
     category: ExcelFunctionCategory.Bitwise,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/bitor-function-f6ead5c8-5b98-4c9e-9053-8ad5234919b2',
     parameterSchema: [
       {
-        name: "Operand 1",
+        name: 'Operand 1',
         type: ParameterType.number,
         required: true
       },
       {
-        name: "Operand 2",
+        name: 'Operand 2',
         type: ParameterType.number,
         required: true
       }
@@ -585,7 +585,7 @@ const functions: Array<ExcelFunction> = [
   //   parameterType: ParameterType.string,
   //   documentationLink: 'https://support.microsoft.com/en-us/office/encodeurl-function-07c7fb90-7c60-4bff-8687-fac50fe33d0e'
   // }
-]
+];
 
 export { functions, functionTranslation, conversionFunction, trigonometryFunction };
 

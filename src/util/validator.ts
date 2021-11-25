@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ParameterType, Parameter } from '../commonTypes';
 
 export function validateList(parameters: Array<string>, type: ParameterType): Array<boolean> {
@@ -8,7 +9,7 @@ export function validateList(parameters: Array<string>, type: ParameterType): Ar
 // This website can't tell if the cell would be of the correct type, so there's
 // that uncertainty.
 export function validateParameter(parameter: string, type: ParameterType): boolean {
-  if (parameter === "") {
+  if (parameter === '') {
     return false;
   }
   else if (type === ParameterType.string) {
@@ -18,7 +19,7 @@ export function validateParameter(parameter: string, type: ParameterType): boole
     return validateNumberParameter(parameter);
   }
   else { //else type is date
-    return true // TODO: implement correct logic
+    return true; // TODO: implement correct logic
   }
 }
 
@@ -30,6 +31,7 @@ function validateNumberParameter(parameter: string): boolean {
   return isNumber(parameter) || isCell(parameter);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isString(parameter: string): boolean {
   return true; //TODO
 }
@@ -37,7 +39,7 @@ function isString(parameter: string): boolean {
 export function validateNParameters(parameterValues: Array<string>, parameterSchema: Array<Parameter>): Array<boolean> {
   return parameterValues!.map((parameter: string, index: number) => {
     return validateParameter(parameter, parameterSchema![index].type);
-  })
+  });
 }
 
 // Javascript is so dumb like why do I have to do this stupid roundabout logic?

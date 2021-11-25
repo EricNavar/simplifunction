@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import {
   DialogActions,
@@ -13,28 +14,29 @@ import {
 import '../styling/Calculator.css';
 import { isCell, validateList } from '../util/validator';
 import { FormProps } from '../commonTypes';
+import { noop } from '../util/util';
 
 const ListParameterForm = React.memo(function ListParameterForm(props: FormProps) {
   const [parameterCount, setParameterCount] = React.useState(2);
-  const [parameters, setParameters] = React.useState(["", ""]);
+  const [parameters, setParameters] = React.useState(['', '']);
   // valids is an array with element n being a boolean indicating if parameter n is valid or not.
   const [valids, setValids] = React.useState([true, true]);
-  const [inputMode, setInputMode] = React.useState("range");
+  const [inputMode, setInputMode] = React.useState('range');
 
-  const [startCell, setStartCell] = React.useState("A1");
+  const [startCell, setStartCell] = React.useState('A1');
   const [startCellValid, setStartCellValid] = React.useState(true);
-  const [endCell, setEndCell] = React.useState("A2");
+  const [endCell, setEndCell] = React.useState('A2');
   const [endCellValid, setEndCellValid] = React.useState(true);
 
-  React.useEffect(() => { }, []);
+  React.useEffect(noop, []);
 
   function addParameter() {
-    let newParameters = parameters;
-    newParameters.push("");
+    const newParameters = parameters;
+    newParameters.push('');
     setParameters(newParameters);
     setParameterCount(parameterCount + 1);
 
-    let newValids = valids;
+    const newValids = valids;
     newValids.push(true);
     setValids(newValids);
   }
@@ -46,35 +48,35 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
   }
 
   function createFormulaFromRange() {
-    return `${props.excelFunction.commonName.replace(" ", "_")}(${startCell}:${endCell})`;
+    return `${props.excelFunction.commonName.replace(' ', '_')}(${startCell}:${endCell})`;
   }
 
   function createFormulaFromParameters() {
-    let formula = props.excelFunction.commonName + "(";
+    let formula = props.excelFunction.commonName + '(';
     parameters.forEach((parameter, index) => {
       if (index !== 0)
-        formula = formula + ",";
-      formula = formula + parameter
+        formula = formula + ',';
+      formula = formula + parameter;
     });
-    formula = formula + ")";
+    formula = formula + ')';
     return formula;
-  };
+  }
 
   function handleModeChange(event: React.MouseEvent<HTMLElement>, newMode: string) {
     if (newMode !== null)
       setInputMode(newMode);
-  };
+  }
 
   function onChangeStartCell(event: React.ChangeEvent<HTMLInputElement>) {
     setStartCell(event.target.value);
-  };
+  }
 
   function onChangeEndCell(event: React.ChangeEvent<HTMLInputElement>) {
     setEndCell(event.target.value);
-  };
+  }
 
   function handleDoneClick() {
-    if (inputMode === "range") {
+    if (inputMode === 'range') {
       const startCellValid_ = isCell(startCell);
       setStartCellValid(startCellValid_);
       const endCellValid_ = isCell(startCell);
@@ -92,7 +94,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
         closeDialog();
       }
     }
-  };
+  }
 
   // TODO: this is a terrible way of changing an array state. Fix this.
   function onDeleteClick(index: number) {
@@ -102,11 +104,11 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
 
     valids.splice(index, 1);
     setValids(valids);
-  };
+  }
 
   function closeDialog() {
     props.setDialogOpen(false);
-  };
+  }
 
   return (
     <>
@@ -114,7 +116,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
         <span>{props.excelFunction.commonName}</span>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText style={{ color: "rgba(0,0,0,.8)" }} id={`${props.excelFunction.commonName}-description`}>
+        <DialogContentText style={{ color: 'rgba(0,0,0,.8)' }} id={`${props.excelFunction.commonName}-description`}>
           {props.excelFunction.description}
         </DialogContentText>
         <Link
@@ -141,7 +143,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
           </ToggleButton>
         </ToggleButtonGroup>
 
-        {inputMode === "individual" &&
+        {inputMode === 'individual' &&
           <>
             {parameters.map((parameter: string, index: number) =>
               <div key={`${props.excelFunction.commonName}-form-${index}`}>
@@ -153,7 +155,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
                   className="text-field"
                   error={!valids[index]}
                   placeholder="Enter cell or number"
-                  helperText={valids[index] ? "" : "Enter cell or number"}
+                  helperText={valids[index] ? '' : 'Enter cell or number'}
                 />
                 {parameters.length > 1 &&
                   <Button onClick={() => onDeleteClick(index)} size='small' color='info'>
@@ -167,7 +169,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
             </Button>
           </>
         }
-        {inputMode === "range" && (
+        {inputMode === 'range' && (
           <>
             <div style={{ display: 'flex' }}>
               <span className="from-to-button">From</span>
@@ -178,7 +180,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
                 onChange={onChangeStartCell}
                 className="text-field"
                 error={!startCellValid}
-                helperText={startCellValid ? "" : "Enter cell"}
+                helperText={startCellValid ? '' : 'Enter cell'}
               />
             </div>
             <div style={{ display: 'flex' }}>
@@ -190,7 +192,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
                 onChange={onChangeEndCell}
                 className="text-field"
                 error={!endCellValid}
-                helperText={endCellValid ? "" : "Enter cell"}
+                helperText={endCellValid ? '' : 'Enter cell'}
               />
             </div>
           </>

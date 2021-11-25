@@ -1,11 +1,11 @@
 export enum ExcelFunctionCategory {
-  Math = "Math",
-  Statistics = "Statistics",
-  Bitwise = "Bitwise",
-  Text = "Text",
-  Date = "Date",
-  Lookup = "Lookup",
-  Web = "Web",
+  Math = 'Math',
+  Statistics = 'Statistics',
+  Bitwise = 'Bitwise',
+  Text = 'Text',
+  Date = 'Date',
+  Lookup = 'Lookup',
+  Web = 'Web',
 }
 
 export enum ParameterFormat {

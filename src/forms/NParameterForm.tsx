@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import {
   DialogActions,
@@ -13,8 +14,8 @@ import { FormProps } from '../commonTypes';
 import { validateNParameters } from '../util/validator';
 
 const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
-  const [parameters, setParameters] = React.useState(
-    new Array(props.excelFunction.parameterSchema!.length).fill("")
+  const [parameters, setParameters] = React.useState<Array<string>>(
+    new Array(props.excelFunction.parameterSchema!.length).fill('')
   );
   const [valids, setValids] = React.useState(
     new Array(props.excelFunction.parameterSchema!.length).fill(true)
@@ -25,15 +26,15 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
   }
 
   function createFormulaFromParameters() {
-    let formula = props.excelFunction.commonName.replace(" ", "_") + "(";
-    parameters.forEach((parameter, index) => {
+    let formula = props.excelFunction.commonName.replace(' ', '_') + '(';
+    parameters.forEach((parameter:string, index:number) => {
       if (index !== 0)
-        formula = formula + ",";
-      formula = formula + parameter
+        formula = formula + ',';
+      formula = formula + parameter;
     });
-    formula = formula + ")";
+    formula = formula + ')';
     return formula;
-  };
+  }
 
   function handleDoneClick() {
     const newValids = validateNParameters(parameters, props.excelFunction.parameterSchema!);
@@ -43,14 +44,14 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
       props.addToUserInput(formula, true);
       closeDialog();
     }
-  };
+  }
 
   function closeDialog() {
     props.setDialogOpen(false);
-  };
+  }
 
   return (
-    <>
+    <React.Fragment>
       <DialogTitle id={`${props.excelFunction.commonName}-title`}>
         {props.excelFunction.commonName}
       </DialogTitle>
@@ -67,8 +68,8 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
         >
           DOCS
         </Link>
-        {parameters.map((parameter, index) =>
-          <div key={`${props.excelFunction.commonName.replace(" ", "_")}-form-${index}`}>
+        {parameters.map((parameter:string, index:number) =>
+          <div key={`${props.excelFunction.commonName.replace(' ', '_')}-form-${index}`}>
             <TextField
               label={props.excelFunction.parameterSchema![index].name}
               size="small"
@@ -90,7 +91,7 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
         </Button>
         <Button onClick={closeDialog}>CANCEL</Button>
       </DialogActions>
-    </>
+    </React.Fragment>
   );
 });
 

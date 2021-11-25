@@ -14,18 +14,19 @@ import {
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { FormProps } from '../commonTypes';
+import { noop } from '../util/util';
 
 const ConversionForm = React.memo(function ConversionForm(props: FormProps) {
   const { excelFunction, addToUserInput, setDialogOpen } = props;
 
-  const [to, setTo] = React.useState("");
-  const [from, setFrom] = React.useState("");
-  const [number, setNumber] = React.useState("");
+  const [to, setTo] = React.useState('');
+  const [from, setFrom] = React.useState('');
+  const [number, setNumber] = React.useState('');
   //const [places, setPlaces] = React.useState("");
   const [valid, setValid] = React.useState(true);
-  const [helperText, setHelperText] = React.useState("");
+  const [helperText, setHelperText] = React.useState('');
 
-  React.useEffect(() => { }, [excelFunction]);
+  React.useEffect(noop, [excelFunction]);
 
   function onChangeTo(e: React.ChangeEvent<HTMLInputElement>) {
     setTo(e.target.value);
@@ -44,17 +45,17 @@ const ConversionForm = React.memo(function ConversionForm(props: FormProps) {
   // }
 
   function handleDoneClick() {
-    if (number === "") {
+    if (number === '') {
       setValid(false);
-      setHelperText("Input number to convert");
+      setHelperText('Input number to convert');
     }
-    else if (from === "" || to === "") {
+    else if (from === '' || to === '') {
       setValid(false);
-      setHelperText("Select base converting both TO and FROM");
+      setHelperText('Select base converting both TO and FROM');
     }
     else if (from === to) {
       setValid(false);
-      setHelperText("Base converting TO and FROM must be different");
+      setHelperText('Base converting TO and FROM must be different');
     }
     else {
       let formula = `${from}_to_${to}( ${number}`;
@@ -68,7 +69,7 @@ const ConversionForm = React.memo(function ConversionForm(props: FormProps) {
 
   function closeDialog() {
     setDialogOpen(false);
-  };
+  }
 
   return (
     <>
@@ -76,7 +77,7 @@ const ConversionForm = React.memo(function ConversionForm(props: FormProps) {
         Number Base Conversion
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id={`conversion-description`} style={{ marginBottom: 20 }}>
+        <DialogContentText id={'conversion-description'} style={{ marginBottom: 20 }}>
           Convert a number to a different base
         </DialogContentText>
         <FormControl component="fieldset" style={{ marginRight: 50 }}>

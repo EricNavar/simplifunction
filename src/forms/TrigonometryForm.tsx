@@ -16,8 +16,8 @@ import { validateParameter } from '../util/validator';
 import { ParameterType, FormProps } from '../commonTypes';
 
 const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) {
-  const [number, setNumber] = React.useState("");
-  const [func, setFunc] = React.useState("Sin");
+  const [number, setNumber] = React.useState('');
+  const [func, setFunc] = React.useState('Sin');
   const [inverse, setInverse] = React.useState(false);
   const [hyperbolic, setHyperbolic] = React.useState(false);
   const [valid, setValid] = React.useState(true);
@@ -27,11 +27,11 @@ const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) 
   }
 
   function onChangeInverse(e: React.ChangeEvent<HTMLInputElement>) {
-    setInverse(e.target.value === "true");
+    setInverse(e.target.value === 'true');
   }
 
   function onChangeHyperbolic(e: React.ChangeEvent<HTMLInputElement>) {
-    setHyperbolic(e.target.value === "true");
+    setHyperbolic(e.target.value === 'true');
   }
 
   function onChangeNumber(e: React.ChangeEvent<HTMLInputElement>) {
@@ -44,10 +44,10 @@ const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) 
     if (newValid) {
       let formula = func;
       if (inverse) {
-        formula += "⁻¹";
+        formula += '⁻¹';
       }
       if (hyperbolic) {
-        formula = "Hyperbolic_" + formula;
+        formula = 'Hyperbolic_' + formula;
       }
       props.addToUserInput(formula, true);
       closeDialog();
@@ -56,7 +56,7 @@ const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) 
 
   function closeDialog() {
     props.setDialogOpen(false);
-  };
+  }
 
   return (
     <>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import {
   Typography,
@@ -19,9 +20,10 @@ import { ConversionForm } from './forms/ConversionForm';
 import { TrigonometryForm } from './forms/TrigonometryForm';
 import { UserInput } from './UserInput';
 import { CopyIcon } from './assets/CopyIcon';
+import { noop } from './util/util';
 import './styling/Calculator.css';
 
-export const Calculator = function Calculator() {
+export const Calculator = function Calculator():JSX.Element {
   const [formula, setFormula] = React.useState('');
   const [formulaRevealed, setFormulaRevealed] = React.useState(false);
   const [form, setForm] = React.useState(<Grid></Grid>);
@@ -34,14 +36,14 @@ export const Calculator = function Calculator() {
       inputRef.value = input;
   }
 
-  React.useEffect(() => { }, []);
+  React.useEffect(noop, []);
 
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
   function addToUserInput(strToAdd: string, focus: boolean): void {
     if (inputRef == null) {
-      console.log("INPUTREF IS NULL");
+      console.log('INPUTREF IS NULL');
       return;
     }
     const selectionStart = inputRef.selectionStart ? inputRef.selectionStart : inputRef.size;
@@ -51,17 +53,17 @@ export const Calculator = function Calculator() {
     if (focus) {
       inputRef.focus();
     }
-  };
+  }
 
   function clearInput(): void {
-    setUserInput("");
-    setFormula("");
-  };
+    setUserInput('');
+    setFormula('');
+  }
 
   function onEqualsClick(): void {
     setFormula(createFormula(inputRef!.value));
     setFormulaRevealed(true);
-  };
+  }
 
   function backspace(): void {
     setUserInput(inputRef!.value.substring(0, inputRef!.value.length - 2));
@@ -89,7 +91,7 @@ export const Calculator = function Calculator() {
       />
     );
     setDialogOpen(true);
-  }
+  };
 
   function copyFormula() {
     navigator.clipboard.writeText(formula);
@@ -101,21 +103,21 @@ export const Calculator = function Calculator() {
   }
 
   return (
-    <>
+    <React.Fragment>
       <div className="App" >
         <header>
           <Typography component='h1' variant='h4' style={{ marginBottom: 20, letterSpacing:1 }} >
             SimpliFunction
           </Typography>
         </header>
-        <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
+        <Grid container component='main' spacing={2} className={mobile ? '' : 'input-containers'}>
           <UserInput setUserInput={setUserInput} setInputRef={setInputRef} />
           <div style={{ height: 60, width: '100%' }}>
             {formulaRevealed &&
               <div className="formula-container">
                 <Typography component="span" variant='body1'>Result:</Typography>
                 <span className="formula">{formula}</span>
-                {formula !== "" && formula !== "No input" &&
+                {formula !== '' && formula !== 'No input' &&
                   <IconButton onClick={copyFormula}>
                     <CopyIcon />
                   </IconButton>
@@ -143,6 +145,6 @@ export const Calculator = function Calculator() {
         onClose={handleCloseSnackbar}
         message="Formula copied"
       />
-    </>
+    </React.Fragment>
   );
 };

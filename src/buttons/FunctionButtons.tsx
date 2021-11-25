@@ -8,6 +8,7 @@ import '../styling/Calculator.css';
 import { conversionFunction, trigonometryFunction } from '../functions';
 import { ExcelFunctionCategory, ExcelFunction } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
+import { noop } from '../util/util';
 
 type SectionHeaderProps = {
   children: React.ReactNode,
@@ -28,10 +29,10 @@ type FunctionButtonsProps = {
   searchedFunctions: Array<ExcelFunction>
 }
 
-export function FunctionButtons(props: FunctionButtonsProps) {
+export function FunctionButtons(props: FunctionButtonsProps):JSX.Element {
   const { mobile, functionButtonOnClick, searchedFunctions } = props;
 
-  React.useEffect(() => { }, [mobile, searchedFunctions]);
+  React.useEffect(noop, [mobile, searchedFunctions]);
 
   const ExcelFunctionTypeArray = [
     ExcelFunctionCategory.Math,
@@ -50,41 +51,36 @@ export function FunctionButtons(props: FunctionButtonsProps) {
           func.category === functionType
         );
         if (categorizedFunctions.length === 0) {
-          return <></>
+          return <></>;
         }
         return (
-          <React.Fragment>
+          <React.Fragment key={index1}>
             <SectionHeader>
               {functionType}
             </SectionHeader>
-            {categorizedFunctions.filter(
-              (f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index2: number) => {
-                return (
-                  <FunctionButton
-                    key={index2}
-                    label={obj.commonName}
-                    onClick={() => { functionButtonOnClick(obj) }}
-                  />
-                );
-              }
-              )}
+            {categorizedFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index2: number) => (
+              <FunctionButton
+                key={index2}
+                label={obj.commonName}
+                onClick={() => { functionButtonOnClick(obj); } } />
+            ))}
           </React.Fragment>
-        )
+        );
       })}
       <SectionHeader>
         Number Base Conversion
       </SectionHeader>
       <FunctionButton
-        label="Conversion functions"
-        onClick={() => { functionButtonOnClick(conversionFunction) }}
+        label='Conversion functions'
+        onClick={() => { functionButtonOnClick(conversionFunction); }}
       />
       <SectionHeader>
         Trigonometry functions
       </SectionHeader>
       <FunctionButton
-        label="Trigonometry functions"
-        onClick={() => { functionButtonOnClick(trigonometryFunction) }}
+        label='Trigonometry functions'
+        onClick={() => { functionButtonOnClick(trigonometryFunction); }}
       />
     </Grid>
   );
-};
+}

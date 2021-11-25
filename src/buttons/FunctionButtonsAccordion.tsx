@@ -10,16 +10,16 @@ import '../styling/Calculator.css';
 type FunctionButtonsAccordionProps = {
   children: React.ReactNode
 }
-function FunctionButtonsAccordion(props: FunctionButtonsAccordionProps) {
+function FunctionButtonsAccordion(props: FunctionButtonsAccordionProps):JSX.Element {
   const [expanded, setExpanded] = React.useState(false);
   function handleChange() {
     setExpanded(!expanded);
-  };
+  }
 
   return (
     <Accordion expanded={expanded} onChange={handleChange} className="accordion" >
       <AccordionSummary
-        expandIcon={<div>{expanded ? "-" : "+"}</div>}
+        expandIcon={<div>{expanded ? '-' : '+'}</div>}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
@@ -31,7 +31,7 @@ function FunctionButtonsAccordion(props: FunctionButtonsAccordionProps) {
         {props.children}
       </AccordionDetails>
     </Accordion>
-  )
+  );
 }
 
-export { FunctionButtonsAccordion }
+export { FunctionButtonsAccordion };

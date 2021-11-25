@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import {
   DialogActions,
@@ -13,29 +14,29 @@ import { FormProps } from '../commonTypes';
 import { validateParameter } from '../util/validator';
 
 const SingleParameterForm = React.memo(function SingleParameterForm(props: FormProps) {
-  const [parameter, setParameter] = React.useState("");
+  const [parameter, setParameter] = React.useState('');
   const [valid, setValid] = React.useState(true);
 
   function handleDoneClick() {
     const newValid = validateParameter(parameter, props.excelFunction.parameterType!);
     setValid(newValid);
     if (newValid) {
-      const formula = `${props.excelFunction.commonName.replace(" ", "_")}(${parameter})`;
+      const formula = `${props.excelFunction.commonName.replace(' ', '_')}(${parameter})`;
       props.addToUserInput(formula, true);
       closeDialog();
     }
-  };
+  }
 
   function onChangeParameter(e: React.ChangeEvent<HTMLInputElement>) {
     setParameter(e.target.value);
-  };
+  }
 
   function closeDialog() {
     props.setDialogOpen(false);
   }
 
   return (
-    <>
+    <React.Fragment>
       <DialogTitle id="alert-dialog-title">
         {props.excelFunction.commonName}
       </DialogTitle>
@@ -67,7 +68,7 @@ const SingleParameterForm = React.memo(function SingleParameterForm(props: FormP
         </Button>
         <Button onClick={closeDialog}>CANCEL</Button>
       </DialogActions>
-    </>
+    </React.Fragment>
   );
 });
 

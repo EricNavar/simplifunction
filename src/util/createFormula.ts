@@ -7,26 +7,26 @@ import { parse } from '../util/parser';
 
 function createFormula(userInput: string):string {
   userInput = formatUserInput(userInput);
-  if (userInput === "") {
-    return "No input";
+  if (userInput === '') {
+    return 'No input';
   }
   return parse(userInput);
-};
+}
 
 const keywords: Record<string, string> = {
-  "+": " + ",
-  "-": " - ",
-  "×": " * ",
-  "÷": " / ",
-  "(": "( ",
-  ")": " )"
+  '+': ' + ',
+  '-': ' - ',
+  '×': ' * ',
+  '÷': ' / ',
+  '(': '( ',
+  ')': ' )'
 };
 
 function formatUserInput(userInput: string):string {
   Object.keys(keywords).forEach(keyword => {
-    userInput = userInput.replace(keyword, " " + keywords[keyword] + " ");
+    userInput = userInput.replace(keyword, ' ' + keywords[keyword] + ' ');
   });
   return userInput.trim();
-};
+}
 
-export { createFormula }
+export { createFormula };

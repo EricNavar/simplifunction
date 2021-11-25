@@ -12,11 +12,11 @@ type UserInputProps = {
   setInputRef: (ref: HTMLInputElement | null) => void,
 }
 
-function UserInput(props: UserInputProps) {
+function UserInput(props: UserInputProps):JSX.Element {
   const { setUserInput, setInputRef } = props;
   function onType(event: React.ChangeEvent<HTMLInputElement>) {
     setUserInput(event.target.value);
-  };
+  }
   function clearInput() {
     setUserInput('');
   }
@@ -45,4 +45,4 @@ function UserInput(props: UserInputProps) {
   );
 }
 
-export { UserInput }
+export { UserInput };

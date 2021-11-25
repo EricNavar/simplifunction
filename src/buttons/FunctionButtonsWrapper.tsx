@@ -11,16 +11,17 @@ import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
 import { ExcelFunction } from '../commonTypes';
 import { SearchIcon } from '../assets/SearchIcon';
 import { functions } from '../functions';
+import { noop } from '../util/util';
 
 type FunctionButtonsWrapperProps = {
   mobile: boolean,
   functionButtonOnClick: (excelFunction: ExcelFunction) => void
 }
 
-const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
+function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element {
   const { mobile, functionButtonOnClick } = props;
   const [open, setOpen] = React.useState(false);
-  React.useEffect(() => { }, [mobile]);
+  React.useEffect(noop, [mobile]);
 
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
@@ -31,7 +32,7 @@ const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props:
       setSearchedFunctions(functions);
     }
     setSearchedFunctions(functions.filter((f: ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value)));
-  };
+  }
 
   const content = (
     <Grid item container xs={12} md={8} spacing={mobile ? 0 : 2} component='section'>
@@ -40,7 +41,7 @@ const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props:
           Excel Functions
         </Typography>
       }
-      <div style={{ display: 'flex', marginBottom: 20, marginLeft: 8, height: "max-content" }}>
+      <div style={{ display: 'flex', marginBottom: 20, marginLeft: 8, height: 'max-content' }}>
         <div className='function-textfield'>
           <TextField
             id="function-search"
@@ -49,11 +50,11 @@ const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props:
             onChange={onChangeSearchInput}
             variant="outlined"
             size='small'
-            style={{width:open?"100%":"46px", transition: "width .2s ease-in-out .2s"}}
+            style={{width:open?'100%':'46px', transition: 'width .2s ease-in-out .2s'}}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <IconButton onClick={()=>{setOpen(!open)}}>
+                  <IconButton onClick={()=>{setOpen(!open);}}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -80,11 +81,11 @@ const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props:
       <FunctionButtonsAccordion>
         {content}
       </FunctionButtonsAccordion>
-    )
+    );
   }
   else {
     return content;
   }
-});
+}
 
 export { FunctionButtonsWrapper };
