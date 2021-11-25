@@ -22,8 +22,9 @@ function UserInput(props: UserInputProps) {
     setUserInput('');
   }
   return (
-    <FormControl variant="filled" style={{width:'100%'}}>
+    <FormControl variant="filled" style={{ width: '100%' }}>
       <FilledInput
+        style={{ width: 'max-content' }}
         value={userInput}
         onChange={onType}
         inputRef={ref => { setInputRef(ref); }}

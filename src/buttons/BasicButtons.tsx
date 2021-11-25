@@ -69,6 +69,7 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
       <Grid item xs={12}>
         <InputButton addToUserInput={addToUserInput} input="( " />
         <InputButton addToUserInput={addToUserInput} input=" )" />
+        <InputButton addToUserInput={addToUserInput} input=" × " />
       </Grid>
       {mobile &&
         <Grid item container xs={9} className="number-button-container">
@@ -82,7 +83,6 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
       <Grid item xs={3} sm={12}>
         <InputButton addToUserInput={addToUserInput} input=" + " />
         <InputButton addToUserInput={addToUserInput} input=" - " />
-        <InputButton addToUserInput={addToUserInput} input=" × " />
         <InputButton addToUserInput={addToUserInput} input=" ÷ " />
       </Grid>
       <Grid item xs={12}>

@@ -16,7 +16,7 @@ const myTheme = createTheme({
       main: '#736ced',
     },
     secondary: {
-      main: '#9f9fed',
+      main: '#9F9FED',
     },
     itemContainer: 'rgba(215,218,225,1)',
     backgroundColor1: 'rgba(66,179,245,1)',

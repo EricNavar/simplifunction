@@ -17,6 +17,7 @@ function FunctionButton(props: FunctionButtonProps) {
       <Button
         className="button function-button"
         variant='contained'
+        color='secondary'
         onClick={onClick}
         aria-label={label}
         disableRipple

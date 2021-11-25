@@ -36,7 +36,7 @@ const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props:
   const content = (
     <Grid item container xs={12} md={8} spacing={mobile ? 0 : 2} component='section'>
       {!mobile &&
-        <Typography component="h2" variant='h4'>
+        <Typography component="h2" variant='h4' style={{lineHeight:'3.5rem', height:'max-content'}}>
           Excel Functions
         </Typography>
       }
@@ -60,7 +60,8 @@ const FunctionButtonsWrapper = React.memo(function FunctionButtonsWrapper(props:
               ),
               style: {
                 borderRadius: 23,
-                paddingLeft: 0
+                paddingLeft: 0,
+                height:46
               }
             }}
           />

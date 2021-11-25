@@ -100,7 +100,7 @@ export const Calculator = function Calculator() {
     <>
       <div className="App" >
         <header>
-          <Typography component='h1' variant='h4' style={{ marginBottom: 20 }} >
+          <Typography component='h1' variant='h4' style={{ marginBottom: 20, letterSpacing:1 }} >
             SimpliFunction
           </Typography>
         </header>
