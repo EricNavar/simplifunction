@@ -15,7 +15,7 @@ import {
 import '../styling/Calculator.css';
 import { FormProps } from '../commonTypes';
 
-function ConversionForm(props: FormProps) {
+const ConversionForm = React.memo(function ConversionForm(props: FormProps) {
   const { excelFunction, addToUserInput, setDialogOpen } = props;
 
   const [to, setTo] = React.useState("");
@@ -138,6 +138,6 @@ function ConversionForm(props: FormProps) {
       </DialogActions>
     </>
   );
-}
+});
 
 export { ConversionForm };

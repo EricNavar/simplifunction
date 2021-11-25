@@ -12,7 +12,7 @@ import '../styling/Calculator.css';
 import { FormProps } from '../commonTypes';
 import { validateParameter } from '../util/validator';
 
-function SingleParameterForm(props: FormProps) {
+const SingleParameterForm = React.memo(function SingleParameterForm(props: FormProps) {
   const [parameter, setParameter] = React.useState("");
   const [valid, setValid] = React.useState(true);
 
@@ -69,6 +69,6 @@ function SingleParameterForm(props: FormProps) {
       </DialogActions>
     </>
   );
-}
+});
 
 export { SingleParameterForm };

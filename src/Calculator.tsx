@@ -3,11 +3,8 @@ import {
   Typography,
   Grid,
   useMediaQuery,
-  FormControl,
-  FilledInput,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import './styling/Calculator.css';
 import { FunctionButtonsWrapper } from './buttons/FunctionButtonsWrapper';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
@@ -18,6 +15,8 @@ import { SingleParameterForm } from './forms/SingleParameterForm';
 import { NParameterForm } from './forms/NParameterForm';
 import { ConversionForm } from './forms/ConversionForm';
 import { TrigonometryForm } from './forms/TrigonometryForm';
+import { UserInput } from './UserInput';
+import './styling/Calculator.css';
 
 export const Calculator = function Calculator() {
   const [formula, setFormula] = React.useState('');
@@ -30,11 +29,6 @@ export const Calculator = function Calculator() {
 
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
-
-  function onType(event: React.ChangeEvent<HTMLInputElement>) {
-    console.log("onType")
-    setUserInput(event.target.value);
-  };
 
   function addToUserInput(strToAdd: string, focus: boolean): void {
     console.log("addToUserInput");
@@ -65,7 +59,7 @@ export const Calculator = function Calculator() {
   }
 
   const functionButtonOnClick = (excelFunction: ExcelFunction) => {
-    let FormComponent: (props: FormProps) => JSX.Element = ConversionForm;
+    let FormComponent: React.NamedExoticComponent<FormProps> = ConversionForm;
     if (excelFunction.parameterFormat === ParameterFormat.LIST) {
       FormComponent = ListParameterForm;
     }
@@ -88,7 +82,7 @@ export const Calculator = function Calculator() {
     setDialogOpen(true);
   }
 
-  console.log("hi");
+  console.log(setInputRef);
 
   return (
     <>
@@ -97,16 +91,7 @@ export const Calculator = function Calculator() {
           <Typography component='h1' variant='h4' style={{ marginBottom: 20 }}>SimpliFunction</Typography>
         </header>
         <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
-          <FormControl variant="filled">
-            <FilledInput
-              value={userInput}
-              onChange={onType}
-              inputRef={ref => { setInputRef(ref); }}
-              fullWidth
-              type="text"
-              placeholder="Enter your calculation"
-            />
-          </FormControl>
+          <UserInput setUserInput={setUserInput} setInputRef={setInputRef} userInput={userInput} />
           <div className="formula-container">
             {formula &&
               <Typography component="span" variant='overline'>Result:</Typography>

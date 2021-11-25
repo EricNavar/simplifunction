@@ -11,7 +11,7 @@ type FunctionButtonProps = {
 // range or a comma separated list
 const FunctionButton = React.memo(function FunctionButton(props: FunctionButtonProps) {
   const { label, onClick } = props;
-  React.useEffect(() => { console.log("FunctionButton useEffect()") }, []);
+  React.useEffect(() => { }, []);
   return (
     <Grid item xs={6} className='function-buttons-grid-item'>
       <Button

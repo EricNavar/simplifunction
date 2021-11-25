@@ -12,7 +12,7 @@ import '../styling/Calculator.css';
 import { FormProps } from '../commonTypes';
 import { validateNParameters } from '../util/validator';
 
-function NParameterForm(props: FormProps) {
+const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
   const [parameters, setParameters] = React.useState(
     new Array(props.excelFunction.parameterSchema!.length).fill("")
   );
@@ -92,6 +92,6 @@ function NParameterForm(props: FormProps) {
       </DialogActions>
     </>
   );
-}
+});
 
 export { NParameterForm };

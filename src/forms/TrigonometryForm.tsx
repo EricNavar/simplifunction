@@ -15,7 +15,7 @@ import '../styling/Calculator.css';
 import { validateParameter } from '../util/validator';
 import { ParameterType, FormProps } from '../commonTypes';
 
-function TrigonometryForm(props: FormProps) {
+const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) {
   const [number, setNumber] = React.useState("");
   const [func, setFunc] = React.useState("Sin");
   const [inverse, setInverse] = React.useState(false);
@@ -116,6 +116,6 @@ function TrigonometryForm(props: FormProps) {
       </DialogActions>
     </>
   );
-}
+});
 
 export { TrigonometryForm };

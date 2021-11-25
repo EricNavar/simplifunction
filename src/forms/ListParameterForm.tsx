@@ -14,7 +14,7 @@ import '../styling/Calculator.css';
 import { isCell, validateList } from '../util/validator';
 import { FormProps } from '../commonTypes';
 
-function ListParameterForm(props: FormProps) {
+const ListParameterForm = React.memo(function ListParameterForm(props: FormProps) {
   const [parameterCount, setParameterCount] = React.useState(2);
   const [parameters, setParameters] = React.useState(["", ""]);
   // valids is an array with element n being a boolean indicating if parameter n is valid or not.
@@ -26,10 +26,7 @@ function ListParameterForm(props: FormProps) {
   const [endCell, setEndCell] = React.useState("A2");
   const [endCellValid, setEndCellValid] = React.useState(true);
 
-  React.useEffect(
-    () => { },
-    [parameterCount, parameters, valids, inputMode, startCell, startCellValid, endCell, endCellValid]
-  );
+  React.useEffect(() => { }, []);
 
   function addParameter() {
     let newParameters = parameters;
@@ -207,6 +204,6 @@ function ListParameterForm(props: FormProps) {
       </DialogActions>
     </>
   );
-}
+});
 
 export { ListParameterForm };
