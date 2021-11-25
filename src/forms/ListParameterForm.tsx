@@ -27,7 +27,7 @@ function ListParameterForm(props: FormProps) {
   const [endCellValid, setEndCellValid] = React.useState(true);
 
   React.useEffect(
-    () => { console.log("ListParameterForm useEffect()"); },
+    () => { },
     [parameterCount, parameters, valids, inputMode, startCell, startCellValid, endCell, endCellValid]
   );
 

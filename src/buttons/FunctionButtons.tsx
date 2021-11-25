@@ -11,7 +11,6 @@ import { functions, conversionFunction, trigonometryFunction } from '../function
 import { SearchIcon } from '../assets/SearchIcon';
 import { ExcelFunctionCategory, ExcelFunction } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
-import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
 
 type SectionHeaderProps = {
   children: React.ReactNode,
@@ -31,7 +30,7 @@ type FunctionButtonsProps = {
   functionButtonOnClick: (excelFunction: ExcelFunction) => void
 }
 
-function FunctionButtons(props: FunctionButtonsProps) {
+export function FunctionButtons(props: FunctionButtonsProps) {
   const { mobile, functionButtonOnClick } = props;
 
   React.useEffect(() => { }, [mobile]);
@@ -131,29 +130,3 @@ function FunctionButtons(props: FunctionButtonsProps) {
     </Grid>
   );
 }
-
-type FunctionButtonsWrapperProps = {
-  mobile: boolean,
-  functionButtonOnClick: (excelFunction: ExcelFunction) => void
-}
-
-function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps) {
-  const { mobile, functionButtonOnClick } = props;
-  React.useEffect(() => { console.log("FunctionButtonsWrapper useEffect()") }, [mobile]);
-
-  const content = (<FunctionButtons
-    mobile={mobile}
-    functionButtonOnClick={functionButtonOnClick}
-  />);
-
-  if (mobile) {
-    return (<FunctionButtonsAccordion>
-      {content}
-    </FunctionButtonsAccordion>)
-  }
-  else {
-    return content;
-  }
-};
-
-export { FunctionButtonsWrapper };

@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import './styling/Calculator.css';
-import { FunctionButtonsWrapper } from './buttons/FunctionButtons';
+import { FunctionButtonsWrapper } from './buttons/FunctionButtonsWrapper';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
 import { BasicButtons } from './buttons/BasicButtons';
@@ -19,23 +19,24 @@ import { NParameterForm } from './forms/NParameterForm';
 import { ConversionForm } from './forms/ConversionForm';
 import { TrigonometryForm } from './forms/TrigonometryForm';
 
-function Calculator() {
+export const Calculator = React.memo(function Calculator() {
   const [formula, setFormula] = React.useState('');
   const [userInput, setUserInput] = React.useState('');
   const [form, setForm] = React.useState(<Grid></Grid>);
   const [inputRef, setInputRef] = React.useState<HTMLInputElement | null>(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
-  React.useEffect(() => { console.log("Calculator useEffect()") }, []);
+  React.useEffect(() => { }, []);
 
   const theme = useTheme();
   const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
 
   function onType(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log("onType")
     setUserInput(event.target.value);
   };
 
-  function addToUserInput(strToAdd: string, focus: boolean):void {
+  function addToUserInput(strToAdd: string, focus: boolean): void {
     console.log("addToUserInput");
     if (inputRef == null) {
       console.log("INPUTREF IS NULL");
@@ -50,16 +51,16 @@ function Calculator() {
     }
   };
 
-  function clearInput():void {
+  function clearInput(): void {
     setUserInput("");
     setFormula("");
   };
 
-  function onEqualsClick():void {
+  function onEqualsClick(): void {
     setFormula(createFormula(userInput));
   };
 
-  function backspace():void {
+  function backspace(): void {
     setUserInput(userInput.substring(0, userInput.length - 2));
   }
 
@@ -87,6 +88,8 @@ function Calculator() {
     setDialogOpen(true);
   }
 
+  console.log("hi");
+
   return (
     <>
       <div className="App" >
@@ -105,7 +108,7 @@ function Calculator() {
             />
           </FormControl>
           <div className="formula-container">
-            {formula && 
+            {formula &&
               <Typography component="span" variant='overline'>Result:</Typography>
             }
             <span className="formula">{formula}</span>
@@ -126,6 +129,4 @@ function Calculator() {
       <MyDialog open={dialogOpen} setDialogOpen={setDialogOpen} form={form} />
     </>
   );
-};
-
-export { Calculator };
+});

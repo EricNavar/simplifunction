@@ -16,6 +16,8 @@ import '../styling/Calculator.css';
 import { FormProps } from '../commonTypes';
 
 function ConversionForm(props: FormProps) {
+  const { excelFunction, addToUserInput, setDialogOpen } = props;
+
   const [to, setTo] = React.useState("");
   const [from, setFrom] = React.useState("");
   const [number, setNumber] = React.useState("");
@@ -23,7 +25,7 @@ function ConversionForm(props: FormProps) {
   const [valid, setValid] = React.useState(true);
   const [helperText, setHelperText] = React.useState("");
 
-  React.useEffect(() => { console.log("ConversionForm useEffect"); }, [to, from, number, valid, helperText]);
+  React.useEffect(() => { }, [excelFunction]);
 
   function onChangeTo(e: React.ChangeEvent<HTMLInputElement>) {
     setTo(e.target.value);
@@ -59,13 +61,13 @@ function ConversionForm(props: FormProps) {
       //if (places)
       //formula = formula + ', ' + places;
       formula = formula + ' )';
-      props.addToUserInput(formula, true);
+      addToUserInput(formula, true);
       closeDialog();
     }
   }
 
   function closeDialog() {
-    props.setDialogOpen(false);
+    setDialogOpen(false);
   };
 
   return (

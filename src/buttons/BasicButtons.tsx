@@ -10,9 +10,10 @@ type InputButtonProps = {
   addToUserInput: (strToAdd: string, focus: boolean) => void
 }
 
-function InputButton(props: InputButtonProps) {
-  const {input, addToUserInput} = props;
-  React.useEffect(()=>{ console.log("InputButton useEffect()") },[input]);
+// no state
+const InputButton = React.memo(function InputButton(props: InputButtonProps) {
+  const { input, addToUserInput } = props;
+  React.useEffect(() => { }, [input]);
   function onClick() {
     addToUserInput(input, false);
   }
@@ -27,7 +28,8 @@ function InputButton(props: InputButtonProps) {
       {input}
     </Button>
   );
-}
+});
+
 
 type BasicButtonsProps = {
   addToUserInput: (strToAdd: string, focus: boolean) => void,
@@ -37,10 +39,10 @@ type BasicButtonsProps = {
   mobile: boolean
 }
 
-function BasicButtons(props: BasicButtonsProps) {
+const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) {
   const { addToUserInput, onEqualsClick, backspace, clearInput, mobile } = props;
 
-  React.useEffect(() => { console.log("BasicButtons useEffect"); }, [mobile]);
+  React.useEffect(() => { }, [mobile]);
 
   function BackspaceButton() {
     return (
@@ -105,6 +107,6 @@ function BasicButtons(props: BasicButtonsProps) {
       </Grid>
     </Grid>
   );
-};
+});
 
 export { BasicButtons };
