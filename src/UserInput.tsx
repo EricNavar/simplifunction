@@ -10,11 +10,10 @@ import { ClearIcon } from './assets/ClearIcon';
 type UserInputProps = {
   setUserInput: (input: string) => void,
   setInputRef: (ref: HTMLInputElement | null) => void,
-  userInput: string
 }
 
 function UserInput(props: UserInputProps) {
-  const { setUserInput, setInputRef, userInput } = props;
+  const { setUserInput, setInputRef } = props;
   function onType(event: React.ChangeEvent<HTMLInputElement>) {
     setUserInput(event.target.value);
   };
@@ -25,13 +24,12 @@ function UserInput(props: UserInputProps) {
     <FormControl variant="filled" style={{ width: '100%' }}>
       <FilledInput
         style={{ width: 'max-content' }}
-        value={userInput}
         onChange={onType}
         inputRef={ref => { setInputRef(ref); }}
         fullWidth
         type="text"
         placeholder="Enter your calculation"
-        endAdornment={userInput === "" ? <></> :
+        endAdornment={
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"

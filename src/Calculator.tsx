@@ -24,11 +24,15 @@ import './styling/Calculator.css';
 export const Calculator = function Calculator() {
   const [formula, setFormula] = React.useState('');
   const [formulaRevealed, setFormulaRevealed] = React.useState(false);
-  const [userInput, setUserInput] = React.useState('');
   const [form, setForm] = React.useState(<Grid></Grid>);
   const [inputRef, setInputRef] = React.useState<HTMLInputElement | null>(null);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+
+  function setUserInput(input:string) {
+    if (inputRef)
+      inputRef.value = input;
+  }
 
   React.useEffect(() => { }, []);
 
@@ -42,7 +46,7 @@ export const Calculator = function Calculator() {
     }
     const selectionStart = inputRef.selectionStart ? inputRef.selectionStart : inputRef.size;
     const selectionEnd = inputRef.selectionEnd ? inputRef.selectionEnd : inputRef.size;
-    const newUserInput = userInput.substring(0, selectionStart!) + strToAdd + userInput.substring(selectionEnd!);
+    const newUserInput = inputRef!.value.substring(0, selectionStart!) + strToAdd + inputRef!.value.substring(selectionEnd!);
     setUserInput(newUserInput);
     if (focus) {
       inputRef.focus();
@@ -55,12 +59,12 @@ export const Calculator = function Calculator() {
   };
 
   function onEqualsClick(): void {
-    setFormula(createFormula(userInput));
+    setFormula(createFormula(inputRef!.value));
     setFormulaRevealed(true);
   };
 
   function backspace(): void {
-    setUserInput(userInput.substring(0, userInput.length - 2));
+    setUserInput(inputRef!.value.substring(0, inputRef!.value.length - 2));
   }
 
   const functionButtonOnClick = (excelFunction: ExcelFunction) => {
@@ -105,7 +109,7 @@ export const Calculator = function Calculator() {
           </Typography>
         </header>
         <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
-          <UserInput setUserInput={setUserInput} setInputRef={setInputRef} userInput={userInput} />
+          <UserInput setUserInput={setUserInput} setInputRef={setInputRef} />
           <div style={{ height: 60, width: '100%' }}>
             {formulaRevealed &&
               <div className="formula-container">
