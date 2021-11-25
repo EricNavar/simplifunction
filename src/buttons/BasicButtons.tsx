@@ -101,6 +101,7 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
           onClick={onEqualsClick}
           aria-label="equals"
           disableRipple
+          id="equals"
         >
           EQUALS
         </Button>

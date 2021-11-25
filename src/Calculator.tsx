@@ -20,6 +20,7 @@ import './styling/Calculator.css';
 
 export const Calculator = function Calculator() {
   const [formula, setFormula] = React.useState('');
+  const [formulaRevealed, setFormulaRevealed] = React.useState(false);
   const [userInput, setUserInput] = React.useState('');
   const [form, setForm] = React.useState(<Grid></Grid>);
   const [inputRef, setInputRef] = React.useState<HTMLInputElement | null>(null);
@@ -51,6 +52,7 @@ export const Calculator = function Calculator() {
 
   function onEqualsClick(): void {
     setFormula(createFormula(userInput));
+    setFormulaRevealed(true);
   };
 
   function backspace(): void {
@@ -85,15 +87,19 @@ export const Calculator = function Calculator() {
     <>
       <div className="App" >
         <header>
-          <Typography component='h1' variant='h4' style={{ marginBottom: 20 }}>SimpliFunction</Typography>
+          <Typography component='h1' variant='h4' style={{ marginBottom: 20 }} >
+            SimpliFunction
+          </Typography>
         </header>
         <Grid container component='main' spacing={2} className={mobile ? "" : "input-containers"}>
           <UserInput setUserInput={setUserInput} setInputRef={setInputRef} userInput={userInput} />
-          <div className="formula-container">
-            {formula &&
-              <Typography component="span" variant='overline'>Result:</Typography>
-            }
-            <span className="formula">{formula}</span>
+          <div style={{height:60,width:'100%'}}>
+          {formulaRevealed &&
+            <div className="formula-container">
+              <Typography component="span" variant='body1'>Result:</Typography>
+              <span className="formula">{formula}</span>
+            </div>
+          }
           </div>
           <FunctionButtonsWrapper
             mobile={mobile}

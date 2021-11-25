@@ -16,11 +16,6 @@
   width: 100%;
 }
 
-.formula {
-  color: #055;
-  margin-left: 12px;
-}
-
 .button {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   text-align: center;
@@ -93,8 +88,9 @@
 .formula {
   font-size: 1.5rem !important;
   color: green;
-  font-family: "Source Code Pro", courier;
   margin-top: 1rem;
+  margin-left: 1rem;
+  font-family: 'Poppins,'Lato',sans-serif';
 }
 
 .user-input-text-field {
@@ -153,11 +149,6 @@
   align-content: start;
 }
 
-.formula-container {
-  width: 100%;
-  margin-bottom: 12px;
-  margin-left: 16px;
-}
 
 .accordion {
   margin-left: 16px !important;
@@ -173,4 +164,16 @@
 .docs-link {
   width: 100%;
   display: inline-block;
+}
+
+.formula-container {
+  width: 100%;
+  margin-bottom: 12px;
+  margin-left: 16px;
+	animation: alternate 1.5s flash ease-in-out;
+}
+
+@keyframes flash {
+  from { background: #f2dfd7; }
+  to   { background: default; }
 }

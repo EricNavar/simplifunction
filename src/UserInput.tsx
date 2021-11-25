@@ -22,7 +22,7 @@ function UserInput(props: UserInputProps) {
     setUserInput('');
   }
   return (
-    <FormControl variant="filled">
+    <FormControl variant="filled" style={{width:'100%'}}>
       <FilledInput
         value={userInput}
         onChange={onType}
