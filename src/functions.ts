@@ -111,7 +111,7 @@ const functions: Array<ExcelFunction> = [
     category: ExcelFunctionCategory.Math,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/min-function-61635d12-920f-4ce2-a70f-96f202dcc152'
+    documentationLink: 'https://support.microsoft.com/en-us/office/min-function-61635d12-920f-4ce2-a70f-96f202dcc152',
   },
   {
     commonName: 'Maximum',
@@ -133,9 +133,15 @@ const functions: Array<ExcelFunction> = [
     commonName: 'Absolute value',
     description: 'Returns the absolute value of a number',
     category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/abs-function-3420200f-5628-4e8c-99da-c99d7c87713c'
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/abs-function-3420200f-5628-4e8c-99da-c99d7c87713c',
+    parameterSchema: [
+      {
+        name: 'Number or cell',
+        type: ParameterType.number,
+        required: true
+      }
+    ]
   },
   {
     commonName: 'Round up',
@@ -187,8 +193,14 @@ const functions: Array<ExcelFunction> = [
     commonName: 'Square root',
     description: 'Returns a positive square root',
     category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Number or cell',
+        type: ParameterType.number,
+        required: true
+      }
+    ],
     documentationLink: 'https://support.microsoft.com/en-us/office/sqrt-function-654975c2-05c4-4831-9a24-2c65e4040fdf',
   },
   {
@@ -214,8 +226,14 @@ const functions: Array<ExcelFunction> = [
     commonName: 'Log₁₀',
     description: 'Returns the base-10 logarithm of a number',
     category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.number,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Number or cell',
+        type: ParameterType.number,
+        required: true
+      }
+    ],
     documentationLink: 'https://support.microsoft.com/en-us/office/log10-function-c75b881b-49dd-44fb-b6f4-37e3486a0211',
   },
   {
@@ -241,7 +259,14 @@ const functions: Array<ExcelFunction> = [
     commonName: 'Choose random number',
     description: 'Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.',
     category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.SINGLE,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Number or cell',
+        type: ParameterType.number,
+        required: true
+      }
+    ],
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
   },
@@ -473,7 +498,14 @@ const functions: Array<ExcelFunction> = [
     commonName: 'To lowercase',
     description: 'Converts Text to lowercase',
     category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.SINGLE,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'String or cell',
+        type: ParameterType.string,
+        required: true
+      }
+    ],
     parameterType: ParameterType.string,
     documentationLink: 'https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4'
   },
@@ -481,7 +513,14 @@ const functions: Array<ExcelFunction> = [
     commonName: 'To uppercase',
     description: 'Converts Text to uppercase',
     category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.SINGLE,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'String or cell',
+        type: ParameterType.string,
+        required: true
+      }
+    ],
     parameterType: ParameterType.string,
     documentationLink: 'https://support.microsoft.com/en-us/office/upper-function-c11f29b3-d1a3-4537-8df6-04d0049963d6',
   },
@@ -489,7 +528,14 @@ const functions: Array<ExcelFunction> = [
     commonName: 'Trim',
     description: 'Removes spaces from text',
     category: ExcelFunctionCategory.Text,
-    parameterFormat: ParameterFormat.SINGLE,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'string or cell',
+        type: ParameterType.number,
+        required: true
+      }
+    ],
     parameterType: ParameterType.string,
     documentationLink: 'https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9',
   },
@@ -546,8 +592,14 @@ const functions: Array<ExcelFunction> = [
     commonName: 'Sort',
     description: 'Sorts the contents of a range or array',
     category: ExcelFunctionCategory.Lookup,
-    parameterFormat: ParameterFormat.SINGLE,
-    parameterType: ParameterType.string,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Number or cell',
+        type: ParameterType.string,
+        required: true
+      }
+    ],
     documentationLink: 'https://support.microsoft.com/en-us/office/sort-function-22f63bd0-ccc8-492f-953d-c20e8e44b86c'
   },
   {

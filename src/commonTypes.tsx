@@ -9,7 +9,6 @@ export enum ExcelFunctionCategory {
 }
 
 export enum ParameterFormat {
-  SINGLE,
   N,
   LIST,
   TRIGONOMETRY,

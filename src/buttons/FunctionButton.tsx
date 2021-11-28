@@ -17,8 +17,7 @@ function FunctionButton(props: FunctionButtonProps):JSX.Element {
     <Grid item xs={6} className='function-buttons-grid-item'>
       <Button
         className="button function-button"
-        variant='contained'
-        color='secondary'
+        variant='outlined'
         onClick={onClick}
         aria-label={label}
         disableRipple

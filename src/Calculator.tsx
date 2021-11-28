@@ -14,7 +14,6 @@ import { MyDialog } from './MyDialog';
 import { BasicButtons } from './buttons/BasicButtons';
 import { ExcelFunction, FormProps, ParameterFormat } from './commonTypes';
 import { ListParameterForm } from './forms/ListParameterForm';
-import { SingleParameterForm } from './forms/SingleParameterForm';
 import { NParameterForm } from './forms/NParameterForm';
 import { ConversionForm } from './forms/ConversionForm';
 import { TrigonometryForm } from './forms/TrigonometryForm';
@@ -73,9 +72,6 @@ export const Calculator = function Calculator():JSX.Element {
     let FormComponent: React.NamedExoticComponent<FormProps> = ConversionForm;
     if (excelFunction.parameterFormat === ParameterFormat.LIST) {
       FormComponent = ListParameterForm;
-    }
-    else if (excelFunction.parameterFormat === ParameterFormat.SINGLE) {
-      FormComponent = SingleParameterForm;
     }
     else if (excelFunction.parameterFormat === ParameterFormat.N) {
       FormComponent = NParameterForm;
