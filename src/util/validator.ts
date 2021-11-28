@@ -36,9 +36,13 @@ function isString(parameter: string): boolean {
   return true; //TODO
 }
 
-export function validateNParameters(parameterValues: Array<string>, parameterSchema: Array<Parameter>): Array<boolean> {
-  return parameterValues!.map((parameter: string, index: number) => {
-    return validateParameter(parameter, parameterSchema![index].type);
+export function validateNParameters(parameterValues: Array<Array<string>>, parameterSchema: Array<Parameter>): Array<boolean> {
+  return parameterValues!.map((parameter: Array<string>, index: number) => {
+    const type:ParameterType = parameterSchema![index].type;
+    if (type == ParameterType.range) {
+      return isCell(parameter[0]) && isCell(parameter[1]);
+    }
+    return validateParameter(parameter[0], type);
   });
 }
 

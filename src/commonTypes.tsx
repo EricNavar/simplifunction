@@ -19,8 +19,10 @@ export enum ParameterFormat {
 export enum ParameterType {
   string,
   number,
-  date
+  date,
+  range
 }
+// a range is a range of cells
 
 export type Parameter = {
   name: string,

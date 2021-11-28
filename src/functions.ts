@@ -65,6 +65,15 @@ const functionTranslation: Record<string, string> = {
   Bitwise_OR: 'BITOR',
   Bitwise_AND: 'BITAND',
   Bitwise_XOR: 'BITXOR',
+
+  Text_concatenation: 'CONCAT',
+  Text_Substitution: 'SUBSTITUTE',
+  To_lowercase: 'LOWER',
+  To_uppercase: 'UPPER',
+  Trim: 'TRIM',
+  Price_format: 'DOLLAR',
+  Sort: 'SORT',
+  Index: 'INDEX'
 };
 
 const functions: Array<ExcelFunction> = [
@@ -96,7 +105,7 @@ const functions: Array<ExcelFunction> = [
       },
     ]
   },
-  {
+  { // DMIN
     commonName: 'Minimum',
     description: 'Returns the minimum value in a list of arguments',
     category: ExcelFunctionCategory.Math,
@@ -120,7 +129,7 @@ const functions: Array<ExcelFunction> = [
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/geomean-function-db1ac48d-25a5-40a0-ab83-0b38980e40d5'
   },
-  {
+  { //IMABS
     commonName: 'Absolute value',
     description: 'Returns the absolute value of a number',
     category: ExcelFunctionCategory.Math,
@@ -174,7 +183,7 @@ const functions: Array<ExcelFunction> = [
       },
     ]
   },
-  {
+  { // IMSQRT
     commonName: 'Square root',
     description: 'Returns a positive square root',
     category: ExcelFunctionCategory.Math,
@@ -236,15 +245,6 @@ const functions: Array<ExcelFunction> = [
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
   },
-  // {
-  //   commonName: "Csc",
-  //   syntacticalName: "CSC",
-  //   description: "Returns the cosecant of an angle",
-  //   category: ExcelFunctionCategory.Trigonometry,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.number,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/csc-function-07379361-219a-4398-8675-07ddc4f135c1'
-  // },
   // Statistics
   {
     commonName: 'Average',
@@ -426,100 +426,94 @@ const functions: Array<ExcelFunction> = [
     ]
   },
   // ==== Text ====
-  // {
-  //   commonName: "Text concatenation",
-  //   syntacticalName: "CONCAT",
-  //   description: "Combines the Text from multiple ranges and/or strings, but it doesn't provide the delimiter or IgnoreEmpty arguments.",
-  //   category: ExcelFunctionCategory.Text,
-  //   parameterFormat: ParameterFormat.N,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/concatenate-function-8f8ae884-2ca8-4f7a-b093-75d702bea31d',
-  //   parameterSchema: [
-  //     {
-  //       name: "Text 1",
-  //       type: ParameterType.string,
-  //       required: true
-  //     },
-  //     {
-  //       name: "Text 2",
-  //       type: ParameterType.string,
-  //       required: true
-  //     },
-  //   ]
-  // },
-  // {
-  //   commonName: "Text Substitution",
-  //   syntacticalName: "SUBSTITUTE",
-  //   description: "Substitutes new text for old text in a text string",
-  //   category: ExcelFunctionCategory.Text,
-  //   parameterFormat: ParameterFormat.N,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/substitute-function-6434944e-a904-4336-a9b0-1e58df3bc332',
-  //   parameterSchema: [
-  //     {
-  //       name: "Text",
-  //       type: ParameterType.string,
-  //       required: true
-  //     },
-  //     {
-  //       name: "Old text",
-  //       type: ParameterType.string,
-  //       required: true
-  //     },
-  //     {
-  //       name: "New text",
-  //       type: ParameterType.string,
-  //       required: true
-  //     },
-  //   ]
-  // },
-  // {
-  //   commonName: "To lowercase",
-  //   syntacticalName: "LOWER",
-  //   description: "Converts Text to lowercase",
-  //   category: ExcelFunctionCategory.Text,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.string,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4'
-  // },
-  // {
-  //   commonName: "To uppercase",
-  //   syntacticalName: "UPPER",
-  //   description: "Converts Text to uppercase",
-  //   category: ExcelFunctionCategory.Text,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.string,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/upper-function-c11f29b3-d1a3-4537-8df6-04d0049963d6',
-  // },
-  // {
-  //   commonName: "Trim",
-  //   syntacticalName: "TRIM",
-  //   description: "Removes spaces from text",
-  //   category: ExcelFunctionCategory.Text,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.string,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9',
-  // },
-  // {
-  //   commonName: "Price format",
-  //   syntacticalName: "DOLLAR",
-  //   description: "Converts a number to Text, using the $ (dollar) currency format",
-  //   category: ExcelFunctionCategory.Text,
-  //   parameterFormat: ParameterFormat.N,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/dollar-function-a6cd05d9-9740-4ad3-a469-8109d18ff611',
-  //   remarks: ['Generally, you should use the Format Cells dialog (Ctrl+1) or Home > Number > Accounting Number Format option to apply a currency formatting to a cell. This is because the DOLLAR function returns the number provided as text. Numbers stored as text are a common cause of spreadsheet errors, because many functions ignore them, such as SUM, AVERAGE, MIN, MAX, etc.'],
-  //   parameterSchema: [
-  //     {
-  //       name: "Number",
-  //       type: ParameterType.number,
-  //       required: true
-  //     },
-  //     {
-  //       name: "Decimals",
-  //       helperText: "The number of digits to the right of the decimal point. If this is negative, the number is rounded to the left of the decimal point. If you omit decimals, it is assumed to be 2.",
-  //       type: ParameterType.number,
-  //       required: true
-  //     },
-  //   ]
-  // },
+  {
+    commonName: 'Text concatenation',
+    description: 'Combines the Text from multiple ranges and/or strings, but it doesn\'t provide the delimiter or IgnoreEmpty arguments.',
+    category: ExcelFunctionCategory.Text,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/concatenate-function-8f8ae884-2ca8-4f7a-b093-75d702bea31d',
+    parameterSchema: [
+      {
+        name: 'Text 1',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'Text 2',
+        type: ParameterType.string,
+        required: true
+      },
+    ]
+  },
+  {
+    commonName: 'Text Substitution',
+    description: 'Substitutes new text for old text in a text string',
+    category: ExcelFunctionCategory.Text,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/substitute-function-6434944e-a904-4336-a9b0-1e58df3bc332',
+    parameterSchema: [
+      {
+        name: 'Text',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'Old text',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'New text',
+        type: ParameterType.string,
+        required: true
+      },
+    ]
+  },
+  {
+    commonName: 'To lowercase',
+    description: 'Converts Text to lowercase',
+    category: ExcelFunctionCategory.Text,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.string,
+    documentationLink: 'https://support.microsoft.com/en-us/office/lower-function-3f21df02-a80c-44b2-afaf-81358f9fdeb4'
+  },
+  {
+    commonName: 'To uppercase',
+    description: 'Converts Text to uppercase',
+    category: ExcelFunctionCategory.Text,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.string,
+    documentationLink: 'https://support.microsoft.com/en-us/office/upper-function-c11f29b3-d1a3-4537-8df6-04d0049963d6',
+  },
+  {
+    commonName: 'Trim',
+    description: 'Removes spaces from text',
+    category: ExcelFunctionCategory.Text,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.string,
+    documentationLink: 'https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9',
+  },
+  {
+    commonName: 'Price format',
+    description: 'Converts a number to Text, using the $ (dollar) currency format',
+    category: ExcelFunctionCategory.Text,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/dollar-function-a6cd05d9-9740-4ad3-a469-8109d18ff611',
+    remarks: ['Generally, you should use the Format Cells dialog (Ctrl+1) or Home > Number > Accounting Number Format option to apply a currency formatting to a cell. This is because the DOLLAR function returns the number provided as text. Numbers stored as text are a common cause of spreadsheet errors, because many functions ignore them, such as SUM, AVERAGE, MIN, MAX, etc.'],
+    parameterSchema: [
+      {
+        name: 'Number',
+        type: ParameterType.number,
+        required: true
+      },
+      {
+        name: 'Decimals',
+        helperText: 'The number of digits to the right of the decimal point. If this is negative, the number is rounded to the left of the decimal point. If you omit decimals, it is assumed to be 2.',
+        type: ParameterType.number,
+        required: true
+      },
+    ]
+  },
   // // ==== Date ====
   // {
   //   commonName: "Date",
@@ -547,16 +541,42 @@ const functions: Array<ExcelFunction> = [
   //     }
   //   ]
   // },
-  // // ==== LOOKUP AND REFERENCE ====
-  // {
-  //   commonName: "Sort",
-  //   syntacticalName: "SORT",
-  //   description: "Sorts the contents of a range or array",
-  //   category: ExcelFunctionCategory.Lookup,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.string,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/sort-function-22f63bd0-ccc8-492f-953d-c20e8e44b86c'
-  // },
+  // ==== LOOKUP AND REFERENCE ====
+  {
+    commonName: 'Sort',
+    description: 'Sorts the contents of a range or array',
+    category: ExcelFunctionCategory.Lookup,
+    parameterFormat: ParameterFormat.SINGLE,
+    parameterType: ParameterType.string,
+    documentationLink: 'https://support.microsoft.com/en-us/office/sort-function-22f63bd0-ccc8-492f-953d-c20e8e44b86c'
+  },
+  {
+    commonName: 'Index',
+    description: 'Returns the value of an element in a table or an array, selected by the row and column number indexes. Use the array form if the first argument to INDEX is an array constant.',
+    category: ExcelFunctionCategory.Lookup,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
+    parameterSchema: [
+      {
+        name: 'Array',
+        helperText: 'array to search',
+        type: ParameterType.range,
+        required: true
+      },
+      {
+        name: 'Row',
+        type: ParameterType.string,
+        helperText: 'column to index',
+        required: true
+      },
+      {
+        name: 'Col',
+        type: ParameterType.string,
+        helperText: 'row to index',
+        required: true
+      }
+    ]
+  },
   // // ==== WEB ====
   // {
   //   commonName: "Use web service",
