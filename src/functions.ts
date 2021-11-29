@@ -3,7 +3,7 @@ import { ExcelFunction, ExcelFunctionCategory, ParameterType, ParameterFormat } 
 const conversionFunction = {
   commonName: '',
   description: '',
-  category: ExcelFunctionCategory.Math,
+  category: ExcelFunctionCategory.Algebra,
   parameterFormat: ParameterFormat.CONVERSION,
   parameterType: ParameterType.number,
   documentationLink: ''
@@ -12,7 +12,7 @@ const conversionFunction = {
 const trigonometryFunction = {
   commonName: '',
   description: '',
-  category: ExcelFunctionCategory.Math,
+  category: ExcelFunctionCategory.Algebra,
   parameterFormat: ParameterFormat.TRIGONOMETRY,
   parameterType: ParameterType.number,
   documentationLink: ''
@@ -73,23 +73,28 @@ const functionTranslation: Record<string, string> = {
   Trim: 'TRIM',
   Price_format: 'DOLLAR',
   Sort: 'SORT',
-  Index: 'INDEX'
+  Index: 'INDEX',
+  Vertical_Lookup: 'VLOOKUP',
+  MATCH: 'Match',
+  'Chi-squared_test': 'CHISQ.TEST',
+  Nth_smallest: 'SMALL',
+  Nth_largest: 'LARGE',
+  Linear_regression_line_slope: 'SLOPE',
+  Use_web_service: 'WEBSERVICE',
+  Filter_XML: 'FILTERXML',
+  Encode_string_as_URL: 'ENCODEURL',
+  Substring_search: 'FIND',
+  Power_imaginary: 'IMPOWER',
+  Substring_search_case_insenstive: 'SEARCH',
+  Date: 'DATE'
 };
 
 const functions: Array<ExcelFunction> = [
   // ==== Math ====
-  { // add IMSUM
-    commonName: 'Summation',
-    description: 'Use this function to add the values in cells.',
-    category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.LIST,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89'
-  },
   { // add IMPOWER
     commonName: 'Power',
     description: 'Returns the result of a number raised to a power',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/power-function-d3f2908b-56f4-4c3f-895a-07fb519c362a',
     parameterSchema: [
@@ -103,12 +108,16 @@ const functions: Array<ExcelFunction> = [
         type: ParameterType.number,
         required: true
       },
-    ]
+    ],
+    variant: {
+      alternativeName: 'Power_imaginary',
+      condition: 'Support imaginary numbers?'
+    }
   },
   { // DMIN
     commonName: 'Minimum',
     description: 'Returns the minimum value in a list of arguments',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/min-function-61635d12-920f-4ce2-a70f-96f202dcc152',
@@ -116,23 +125,15 @@ const functions: Array<ExcelFunction> = [
   {
     commonName: 'Maximum',
     description: 'Returns the maximum value in a list of arguments',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/max-function-e0012414-9ac8-4b34-9a47-73e662c08098'
   },
-  {
-    commonName: 'Geometric mean',
-    description: 'Returns the geometric mean',
-    category: ExcelFunctionCategory.Math,
-    parameterFormat: ParameterFormat.LIST,
-    parameterType: ParameterType.number,
-    documentationLink: 'https://support.microsoft.com/en-us/office/geomean-function-db1ac48d-25a5-40a0-ab83-0b38980e40d5'
-  },
   { //IMABS
     commonName: 'Absolute value',
     description: 'Returns the absolute value of a number',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/abs-function-3420200f-5628-4e8c-99da-c99d7c87713c',
     parameterSchema: [
@@ -146,7 +147,7 @@ const functions: Array<ExcelFunction> = [
   {
     commonName: 'Round up',
     description: 'Rounds a number to the nearest integer or to the nearest multiple of significance',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/ceiling-function-0a5cd7c8-0720-4f0a-bd2c-c943e510899f',
     parameterSchema: [
@@ -166,7 +167,7 @@ const functions: Array<ExcelFunction> = [
   {
     commonName: 'Round down',
     description: 'Rounds a number down, toward zero',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/floor-function-14bb497c-24f2-4e04-b327-b0b4de5a8886',
     remarks: [
@@ -192,7 +193,7 @@ const functions: Array<ExcelFunction> = [
   { // IMSQRT
     commonName: 'Square root',
     description: 'Returns a positive square root',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     parameterSchema: [
       {
@@ -206,7 +207,7 @@ const functions: Array<ExcelFunction> = [
   {
     commonName: 'Modulo',
     description: 'Returns the remainder from division',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/mod-function-9b6cd169-b6ee-406a-a97b-edf2a9dc24f3',
     parameterSchema: [
@@ -225,7 +226,7 @@ const functions: Array<ExcelFunction> = [
   {
     commonName: 'Log₁₀',
     description: 'Returns the base-10 logarithm of a number',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     parameterSchema: [
       {
@@ -239,7 +240,7 @@ const functions: Array<ExcelFunction> = [
   {
     commonName: 'Log',
     description: 'Returns the logarithm of a number to a specified base',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.BasicMath,
     parameterFormat: ParameterFormat.N,
     documentationLink: 'https://support.microsoft.com/en-us/office/log-function-4e82f196-1ca9-4747-8fb0-6c4a3abb3280',
     parameterSchema: [
@@ -255,10 +256,65 @@ const functions: Array<ExcelFunction> = [
       },
     ]
   },
+  // Algebra
+  {
+    commonName: 'Geometric mean',
+    description: 'Returns the geometric mean',
+    category: ExcelFunctionCategory.Algebra,
+    parameterFormat: ParameterFormat.LIST,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/geomean-function-db1ac48d-25a5-40a0-ab83-0b38980e40d5'
+  },
+  { // add IMSUM
+    commonName: 'Summation',
+    description: 'Use this function to add the values in cells.',
+    category: ExcelFunctionCategory.Algebra,
+    parameterFormat: ParameterFormat.LIST,
+    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/sum-function-043e1c7d-7726-4e80-8f32-07b23e057f89'
+  },
+  {
+    commonName: 'Nth smallest',
+    description: 'Returns the n-th smallest value in a data set. Use this function to return values with a particular relative standing in a data set.',
+    category: ExcelFunctionCategory.Algebra,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Range of cells to search',
+        type: ParameterType.range,
+        required: true
+      },
+      {
+        name: 'N',
+        type: ParameterType.number,
+        required: true
+      }
+    ],
+    documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
+  },
+  {
+    commonName: 'Nth largest',
+    description: 'Returns the n-th largest value in a data set. Use this function to return values with a particular relative standing in a data set.',
+    category: ExcelFunctionCategory.Algebra,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Range of cells to search',
+        type: ParameterType.range,
+        required: true
+      },
+      {
+        name: 'N',
+        type: ParameterType.number,
+        required: true
+      }
+    ],
+    documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
+  },
   {
     commonName: 'Choose random number',
     description: 'Use this function to select one of up to 254 values based on the index number. For example, if value1 through value7 are the days of the week, CHOOSE returns one of the days when a number between 1 and 7 is used as index_num.',
-    category: ExcelFunctionCategory.Math,
+    category: ExcelFunctionCategory.Algebra,
     parameterFormat: ParameterFormat.N,
     parameterSchema: [
       {
@@ -267,7 +323,25 @@ const functions: Array<ExcelFunction> = [
         required: true
       }
     ],
-    parameterType: ParameterType.number,
+    documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
+  },
+  {
+    commonName: 'Linear regression line slope',
+    description: 'Returns the slope of the linear regression line through data points in known_y\'s and known_x\'s. The slope is the vertical distance divided by the horizontal distance between any two points on the line, which is the rate of change along the regression line.',
+    category: ExcelFunctionCategory.Algebra,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Range of cells containing known x values',
+        type: ParameterType.range,
+        required: true
+      },
+      {
+        name: 'Range of cells containing known y values',
+        type: ParameterType.range,
+        required: true
+      }
+    ],
     documentationLink: 'https://support.microsoft.com/en-us/office/choose-function-fc5c184f-cb62-4ec7-a46e-38653b98f5bc'
   },
   // Statistics
@@ -353,6 +427,44 @@ const functions: Array<ExcelFunction> = [
     parameterFormat: ParameterFormat.LIST,
     parameterType: ParameterType.number,
     documentationLink: 'https://support.microsoft.com/en-us/office/mode-sngl-function-f1267c16-66c6-4386-959f-8fba5f8bb7f8'
+  },
+  {
+    commonName: 'Quartile',
+    description: 'Returns the quartile of a data set. Quartiles often are used in sales and survey data to divide populations into groups. For example, you can use QUARTILE to find the top 25 percent of incomes in a population.',
+    category: ExcelFunctionCategory.Statistics,
+    parameterFormat: ParameterFormat.N,
+    parameterSchema: [
+      {
+        name: 'Array of data',
+        type: ParameterType.range,
+        required: true
+      },
+      {
+        name: 'Nth quartile (0-4)',
+        type: ParameterType.number,
+        required: true
+      }
+    ],
+    documentationLink: 'https://support.microsoft.com/en-us/office/mode-sngl-function-f1267c16-66c6-4386-959f-8fba5f8bb7f8'
+  },
+  {
+    commonName: 'Chi-squared test',
+    description: 'Returns the test for independence. CHISQ.TEST returns the value from the chi-squared (χ2) distribution for the statistic and the appropriate degrees of freedom. You can use χ2 tests to determine whether hypothesized results are verified by an experiment.',
+    category: ExcelFunctionCategory.Bitwise,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/bitlshift-function-c55bb27e-cacd-4c7c-b258-d80861a03c9c',
+    parameterSchema: [
+      {
+        name: 'Actual range',
+        type: ParameterType.range,
+        required: true
+      },
+      {
+        name: 'Expected range',
+        type: ParameterType.range,
+        required: true
+      }
+    ]
   },
   // Bitwise operations
   {
@@ -560,33 +672,55 @@ const functions: Array<ExcelFunction> = [
       },
     ]
   },
-  // // ==== Date ====
-  // {
-  //   commonName: "Date",
-  //   syntacticalName: "DATE",
-  //   description: "",
-  //   category: ExcelFunctionCategory.Date,
-  //   parameterFormat: ParameterFormat.N,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
-  //   parameterSchema: [
-  //     {
-  //       name: "Year",
-  //       helperText: "4 digits",
-  //       type: ParameterType.string,
-  //       required: true
-  //     },
-  //     {
-  //       name: "Month",
-  //       type: ParameterType.string,
-  //       required: true
-  //     },
-  //     {
-  //       name: "Day",
-  //       type: ParameterType.string,
-  //       required: true
-  //     }
-  //   ]
-  // },
+  {
+    commonName: 'Substring search',
+    description: 'Locates one text string within a second text string. Return the number of the starting position of the first text string from the first character of the second text string.',
+    category: ExcelFunctionCategory.Text,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/dollar-function-a6cd05d9-9740-4ad3-a469-8109d18ff611',
+    parameterSchema: [
+      {
+        name: 'Substring to search for',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'Original string to search within',
+        type: ParameterType.string,
+        required: true
+      },
+    ],
+    variant: {
+      alternativeName: 'Substring_search_case_insensitive',
+      condition: 'Case sensitive?'
+    }
+  },
+  // ==== Date ====
+  {
+    commonName: 'Date',
+    description: '',
+    category: ExcelFunctionCategory.Date,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
+    parameterSchema: [
+      {
+        name: 'Year',
+        helperText: '4 digits',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'Month',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'Day',
+        type: ParameterType.string,
+        required: true
+      }
+    ]
+  },
   // ==== LOOKUP AND REFERENCE ====
   {
     commonName: 'Sort',
@@ -626,34 +760,83 @@ const functions: Array<ExcelFunction> = [
       }
     ]
   },
-  // // ==== WEB ====
-  // {
-  //   commonName: "Use web service",
-  //   syntacticalName: "WEBSERVICE",
-  //   description: "Returns data from a web service",
-  //   category: ExcelFunctionCategory.Web,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.string,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/webservice-function-0546a35a-ecc6-4739-aed7-c0b7ce1562c4'
-  // },
-  // {
-  //   commonName: "Filter XML",
-  //   syntacticalName: "FILTERXML",
-  //   description: "Returns specific data from the XML content by using the specified XPath",
-  //   category: ExcelFunctionCategory.Web,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.string,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/filterxml-function-4df72efc-11ec-4951-86f5-c1374812f5b7'
-  // },
-  // {
-  //   commonName: "Encode string as URL",
-  //   syntacticalName: "ENCODEURL",
-  //   description: "Returns specific data ",
-  //   category: ExcelFunctionCategory.Web,
-  //   parameterFormat: ParameterFormat.SINGLE,
-  //   parameterType: ParameterType.string,
-  //   documentationLink: 'https://support.microsoft.com/en-us/office/encodeurl-function-07c7fb90-7c60-4bff-8687-fac50fe33d0e'
-  // }
+  {
+    commonName: 'Vertical Lookup',
+    description: 'Use this function when you need to find things in a table or a range by row. For example, look up an employee\'s last name by her employee number, or find her phone number by looking up her last name (just like a telephone book).',
+    category: ExcelFunctionCategory.Lookup,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
+    parameterSchema: [
+      {
+        name: 'Lookup value',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'Table array',
+        type: ParameterType.range,
+        required: true
+      },
+      {
+        name: 'Column index',
+        type: ParameterType.number,
+        required: true
+      }
+    ]
+  },
+  {
+    commonName: 'Match',
+    description: 'Use this function to search for an item in a range of cells, and then return the relative position of that item in the range. For example, if the range A1:A3 contains the values 5, 7, and 38, then the formula =MATCH(7,A1:A3,0) returns the number 2, because 7 is the second item in the range.',
+    category: ExcelFunctionCategory.Lookup,
+    parameterFormat: ParameterFormat.N,
+    documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
+    parameterSchema: [
+      {
+        name: 'Lookup value',
+        type: ParameterType.string,
+        required: true
+      },
+      {
+        name: 'Lookup array',
+        type: ParameterType.range,
+        required: true
+      }
+    ]
+  },
+  // ==== WEB ====
+  {
+    commonName: 'Use web service',
+    description: 'Windows only. Returns data from a web service',
+    category: ExcelFunctionCategory.Web,
+    parameterFormat: ParameterFormat.N,
+    parameterType: ParameterType.string,
+    documentationLink: 'https://support.microsoft.com/en-us/office/webservice-function-0546a35a-ecc6-4739-aed7-c0b7ce1562c4',
+    parameterSchema: [
+      {
+        name: '',
+        type: ParameterType.string,
+        helperText: 'The URL of the web service to be called',
+        required: true
+      }
+    ]
+  },
+  {
+    commonName: 'Filter XML',
+    description: 'Returns specific data from the XML content by using the specified XPath',
+    category: ExcelFunctionCategory.Web,
+    parameterFormat: ParameterFormat.N,
+    parameterType: ParameterType.string,
+    documentationLink: 'https://support.microsoft.com/en-us/office/filterxml-function-4df72efc-11ec-4951-86f5-c1374812f5b7'
+  },
+  {
+    commonName: 'Encode string as URL',
+    description: 'Returns specific data',
+    category: ExcelFunctionCategory.Web,
+    parameterFormat: ParameterFormat.N,
+
+    parameterType: ParameterType.string,
+    documentationLink: 'https://support.microsoft.com/en-us/office/encodeurl-function-07c7fb90-7c60-4bff-8687-fac50fe33d0e'
+  }
 ];
 
 export { functions, functionTranslation, conversionFunction, trigonometryFunction };

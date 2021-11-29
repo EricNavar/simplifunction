@@ -93,16 +93,18 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
           onClick={clearInput}
           aria-label="clear input"
           disableRipple
+          disableElevation
         >
           CLEAR
         </Button>
         <Button
+          id="equals"
           className="button utility-button equals-button"
           variant="outlined"
           onClick={onEqualsClick}
           aria-label="equals"
           disableRipple
-          id="equals"
+          disableElevation
         >
           EQUALS
         </Button>

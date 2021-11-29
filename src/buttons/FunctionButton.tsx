@@ -21,6 +21,7 @@ function FunctionButton(props: FunctionButtonProps):JSX.Element {
         onClick={onClick}
         aria-label={label}
         disableRipple
+        disableElevation
       >
         {label.trim()}
       </Button>

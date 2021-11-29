@@ -102,7 +102,7 @@ export const Calculator = function Calculator():JSX.Element {
     <React.Fragment>
       <div className="App" >
         <header>
-          <Typography component='h1' variant='h4' style={{ marginBottom: 20, letterSpacing:1 }} >
+          <Typography component='h1' variant='h4' style={{ marginBottom: 26, letterSpacing:1 }} >
             SimpliFunction
           </Typography>
         </header>

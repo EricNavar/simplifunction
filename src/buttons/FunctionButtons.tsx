@@ -35,12 +35,13 @@ export function FunctionButtons(props: FunctionButtonsProps):JSX.Element {
   React.useEffect(noop, [mobile, searchedFunctions]);
 
   const ExcelFunctionTypeArray = [
-    ExcelFunctionCategory.Math,
-    ExcelFunctionCategory.Statistics,
-    ExcelFunctionCategory.Bitwise,
+    ExcelFunctionCategory.BasicMath,
+    ExcelFunctionCategory.Algebra,
     ExcelFunctionCategory.Text,
-    ExcelFunctionCategory.Date,
     ExcelFunctionCategory.Lookup,
+    ExcelFunctionCategory.Statistics,
+    ExcelFunctionCategory.Date,
+    ExcelFunctionCategory.Bitwise,
     ExcelFunctionCategory.Web
   ];
 

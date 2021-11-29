@@ -1,5 +1,6 @@
 export enum ExcelFunctionCategory {
-  Math = 'Math',
+  BasicMath = 'Basic Math',
+  Algebra = 'Algebra',
   Statistics = 'Statistics',
   Bitwise = 'Bitwise',
   Text = 'Text',
@@ -30,6 +31,11 @@ export type Parameter = {
   type: ParameterType
 };
 
+export type Variant = {
+  alternativeName: string,
+  condition: string
+}
+
 export type ExcelFunction = {
   commonName: string,
   // yes, this could easily be calculated, but I am favoring speed over memory usage.
@@ -41,7 +47,8 @@ export type ExcelFunction = {
   // this is for single parameter and list parameters because all they all have parameters of the same type
   parameterType?: ParameterType,
   remarks?: Array<string>,
-  documentationLink: string
+  documentationLink: string,
+  variant?: Variant
 }
 
 export type FormProps = {

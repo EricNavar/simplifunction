@@ -21,19 +21,14 @@
   border-color: #4b4699 !important
 }
 
-/*box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;*/
 .button {
-  box-shadow: none !important;
   text-align: center;
   align-items: center;
+  transition-duration: 100ms, 100ms, 100ms, 100ms !important;
 }
 
 .button:active {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
-}
-
-.button:hover {
-  box-shadow: none !important;
 }
 
 .small-button-container {
@@ -114,7 +109,7 @@
 }
 
 .function-buttons-grid-container {
-  max-height: calc(100vh - 262px);
+  max-height: calc(100vh - 266px);
   overflow-y: scroll;
   border-top-color: #b8b8b8;
   border-top-width: 1px;
