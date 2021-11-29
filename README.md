@@ -4,6 +4,15 @@
 
 SimpliFunction is a cool and epic solution for writing calculations in Excel without needing to know the stupid Visual Basic syntax.
 
+## What's changed since the last report
+
+- I added support for more excel functions, including the more popular ones.
+- What you're supposed to copy is more obvious. The output is highlighted temporarily so that it's visible. There is also now a copy button next to the output
+- The website is now much faster, with respect to generating output and also typing/backspacing in the input field
+- It's more obvious how to clear the input because I added an X button in the field
+- Input validation for like half of the functions is broken at the moment
+- visual changes
+
 ## Theme
 
 https://coolors.co/f2dfd7-fef9ff-d4c1ec-9f9fed-736ced
