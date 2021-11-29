@@ -7,7 +7,8 @@ import {
   Button,
   TextField,
   DialogContentText,
-  Link
+  Link,
+  Typography
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { FormProps, Parameter, ParameterType } from '../commonTypes';
@@ -27,7 +28,6 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
 
   function onChangeParameter(event: React.ChangeEvent<HTMLInputElement>, parameterIndex: number, textfieldIndex: number) {
     setParameters(parameters.map((param: Array<string>, iter: number) => {
-      console.log('param: ', param);
       if (iter === parameterIndex) {
         param[textfieldIndex] = event.target.value;
       }
@@ -38,9 +38,16 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
   function createFormulaFromParameters() {
     let formula = props.excelFunction.commonName.replace(' ', '_') + '(';
     parameters.forEach((parameter: Array<string>, index: number) => {
-      if (index !== 0)
+      if (index !== 0) {
         formula = formula + ',';
-      formula = formula + parameter;
+      }
+      if (parameterTypes[index] == ParameterType.range) {
+        console.log(parameter);
+        formula = formula + ' from ' + parameter[0] + ' to ' + parameter[1];
+      }
+      else {
+        formula = formula + parameter;
+      }
     });
     formula = formula + ')';
     return formula;
@@ -90,12 +97,49 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index, 0)}
                   className="text-field"
                   helperText={props.excelFunction.parameterSchema![index].helperText}
-                  value={parameter}
+                  value={parameter[0]}
                   required={props.excelFunction.parameterSchema![index].required}
                   error={!valids[index]}
                   placeholder="Enter cell or number"
                 />
               </div>
+            );
+          }
+          else {
+            return (
+              <React.Fragment key={`${props.excelFunction.commonName.replace(' ', '_')}-form-${index}`}>
+                <Typography variant='body2' style={{marginTop: 8, marginBottom: 8}}>
+                  {props.excelFunction.parameterSchema![index].name}
+                </Typography>
+                <span style={{display:'flex'}}>
+                  <span className="from-to-button" style={{marginRight: 12, marginBottom: 6}}>From</span>
+                  <TextField
+                    label="Start cell"
+                    size="small"
+                    type="text"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index, 0)}
+                    className="text-field cell-text-field"
+                    helperText={props.excelFunction.parameterSchema![index].helperText}
+                    value={parameter[0]}
+                    required={props.excelFunction.parameterSchema![index].required}
+                    error={!valids[index]}
+                    placeholder="Enter cell or number"
+                  />
+                  <span className="from-to-button" style={{marginRight: 12, marginLeft: 12, marginBottom: 6}}>to</span>
+                  <TextField
+                    label="End cell"
+                    size="small"
+                    type="text"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index, 1)}
+                    className="text-field cell-text-field"
+                    helperText={props.excelFunction.parameterSchema![index].helperText}
+                    value={parameter[1]}
+                    required={props.excelFunction.parameterSchema![index].required}
+                    error={!valids[index]}
+                    placeholder="Enter cell or number"
+                  />
+                </span>
+              </React.Fragment>
             );
           }
         })}

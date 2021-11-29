@@ -35,7 +35,7 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
   }
 
   const content = (
-    <Grid item container xs={12} md={8} spacing={mobile ? 0 : 2} component='section'>
+    <Grid item container xs={12} md={8} lg={6} spacing={mobile ? 0 : 2} component='section'>
       {!mobile &&
         <Typography component="h2" variant='h4' style={{lineHeight:'3.5rem', height:'max-content'}}>
           Excel Functions

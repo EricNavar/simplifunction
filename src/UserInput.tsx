@@ -3,7 +3,8 @@ import {
   FormControl,
   FilledInput,
   InputAdornment,
-  IconButton
+  IconButton,
+  InputLabel
 } from '@mui/material';
 import { ClearIcon } from './assets/ClearIcon';
 
@@ -22,13 +23,13 @@ function UserInput(props: UserInputProps):JSX.Element {
   }
   return (
     <FormControl variant="filled" style={{ width: '100%' }}>
+      <InputLabel shrink>Your input</InputLabel>
       <FilledInput
         style={{ width: 'max-content' }}
         onChange={onType}
         inputRef={ref => { setInputRef(ref); }}
         fullWidth
         type="text"
-        placeholder="Enter your calculation"
         endAdornment={
           <InputAdornment position="end">
             <IconButton

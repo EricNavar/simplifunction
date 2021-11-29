@@ -610,21 +610,18 @@ const functions: Array<ExcelFunction> = [
     documentationLink: 'https://support.microsoft.com/en-us/office/date-function-e36c0c8c-4104-49da-ab83-82328b832349',
     parameterSchema: [
       {
-        name: 'Array',
-        helperText: 'array to search',
+        name: 'Array to search',
         type: ParameterType.range,
         required: true
       },
       {
-        name: 'Row',
+        name: 'Row to index',
         type: ParameterType.string,
-        helperText: 'column to index',
         required: true
       },
       {
-        name: 'Col',
+        name: 'Col to index',
         type: ParameterType.string,
-        helperText: 'row to index',
         required: true
       }
     ]

@@ -17,6 +17,8 @@
 /* only used once */
 .function-button {
   width: 100%;
+  color: #4b4699 !important;
+  border-color: #4b4699 !important
 }
 
 /*box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;*/
@@ -59,10 +61,6 @@
   margin-bottom: 6px !important;
   margin-right: 6px !important;
   margin-left: 6px !important;
-}
-
-.from-to-button {
-  color: cornflowerblue !important;
 }
 
 .clear-button {
@@ -118,7 +116,7 @@
 .function-buttons-grid-container {
   max-height: calc(100vh - 262px);
   overflow-y: scroll;
-  border-top-color: gray;
+  border-top-color: #b8b8b8;
   border-top-width: 1px;
   border-top-style: solid;
   padding: 0px !important;
@@ -167,7 +165,8 @@
   display: inline-flex;
   align-items: center;
   margin-right: 8px;
-  width: 56px;
+  width: 36px;
+  color: cornflowerblue !important;
 }
 
 .docs-link {
@@ -188,4 +187,8 @@
 @keyframes flash {
   from { background: #f0e28b; }
   to   { background: default; }
+}
+
+.cell-text-field {
+  width: 120px;
 }

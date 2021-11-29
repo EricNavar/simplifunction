@@ -48,7 +48,7 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
   }
 
   function createFormulaFromRange() {
-    return `${props.excelFunction.commonName.replace(' ', '_')}(${startCell}:${endCell})`;
+    return `${props.excelFunction.commonName.replace(' ', '_')}(from ${startCell} to ${endCell})`;
   }
 
   function createFormulaFromParameters() {

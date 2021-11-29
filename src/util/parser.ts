@@ -15,6 +15,7 @@ function parse(userInput: string):string {
         userInputIndex = parseWhitespace(userInputIndex, userInput);
         if (userInput.charAt(userInputIndex) !== '(') {
           userInput = '';
+          console.log('Function name must be followed by an opening parentheses');
           return;
         }
         else {
@@ -35,7 +36,7 @@ function parse(userInput: string):string {
     formula = formula + userInput.substr(userInputIndex, 1);
     userInputIndex = userInputIndex + 1;
   }
-  return formula;
+  return formula + ' )';
 }
 
 //the index is right after the "from"
@@ -61,7 +62,7 @@ const parseRange = (index: number, userInput: string, formula: string): ParsedRa
   index = parseWhitespace(index, userInput);
   index = index + 1; // consume the closing parentheses
   index = parseWhitespace(index, userInput);
-  formula = formula + from + ':' + to + ')';
+  formula = formula + from + ':' + to;
   return ({formula, index});
 };
 
