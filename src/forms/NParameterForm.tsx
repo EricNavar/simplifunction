@@ -63,8 +63,6 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
       const formula = createFormulaFromParameters();
       props.addToUserInput(formula, true);
       closeDialog();
-    } else {
-      console.log('validation errors found!');
     }
   }
 

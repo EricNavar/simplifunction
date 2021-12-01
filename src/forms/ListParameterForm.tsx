@@ -81,7 +81,6 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
       setStartCellError(startCellError_);
       const endCellError_ = isCell(endCell);
       setEndCellError(endCellError_);
-      console.log('set end cell error', endCellError_, endCellError);
       if (startCellError_ === null && endCellError_ === null) {
         props.addToUserInput(createFormulaFromRange(), true);
         closeDialog();
@@ -95,8 +94,6 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
       if (newErrors.filter((err) => typeof err === 'string').length === 0) {
         props.addToUserInput(createFormulaFromParameters(), true);
         closeDialog();
-      } else {
-        console.log('validation errors found!');
       }
     }
   }
