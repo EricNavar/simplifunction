@@ -19,14 +19,14 @@ import { noop } from '../util/util';
 const ListParameterForm = React.memo(function ListParameterForm(props: FormProps) {
   const [parameterCount, setParameterCount] = React.useState(2);
   const [parameters, setParameters] = React.useState(['', '']);
-  // valids is an array with element n being a boolean indicating if parameter n is valid or not.
-  const [valids, setValids] = React.useState([true, true]);
+  // errors is an array with element n being a boolean indicating if parameter n is valid or not.
+  const [errors, setErrors] = React.useState<(string | null)[]>([null, null]);
   const [inputMode, setInputMode] = React.useState('range');
 
   const [startCell, setStartCell] = React.useState('A1');
-  const [startCellValid, setStartCellValid] = React.useState(true);
+  const [startCellError, setStartCellError] = React.useState<string | null>(null);
   const [endCell, setEndCell] = React.useState('A2');
-  const [endCellValid, setEndCellValid] = React.useState(true);
+  const [endCellError, setEndCellError] = React.useState<string | null>(null);
 
   React.useEffect(noop, []);
 
@@ -36,9 +36,9 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
     setParameters(newParameters);
     setParameterCount(parameterCount + 1);
 
-    const newValids = valids;
-    newValids.push(true);
-    setValids(newValids);
+    const newErrors = errors;
+    newErrors.push(null);
+    setErrors(newErrors);
   }
 
   function onChangeParameter(event: React.ChangeEvent<HTMLInputElement>, index: number) {
@@ -77,21 +77,26 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
 
   function handleDoneClick() {
     if (inputMode === 'range') {
-      const startCellValid_ = isCell(startCell);
-      setStartCellValid(startCellValid_);
-      const endCellValid_ = isCell(startCell);
-      setEndCellValid(endCellValid_);
-      if (startCellValid_ && endCellValid_) {
+      const startCellError_ = isCell(startCell);
+      setStartCellError(startCellError_);
+      const endCellError_ = isCell(endCell);
+      setEndCellError(endCellError_);
+      console.log('set end cell error', endCellError_, endCellError);
+      if (startCellError_ === null && endCellError_ === null) {
         props.addToUserInput(createFormulaFromRange(), true);
         closeDialog();
       }
     }
     else { // inputMode === "individual"
-      const newValids = validateList(parameters, props.excelFunction.parameterType!);
-      setValids(newValids);
-      if (!newValids.includes(false)) {
+      const newErrors = validateList(parameters, props.excelFunction.parameterType!);
+      setErrors(newErrors);
+
+      // Check to see if our errors array contains any strings. If it does, those are validation errors
+      if (newErrors.filter((err) => typeof err === 'string').length === 0) {
         props.addToUserInput(createFormulaFromParameters(), true);
         closeDialog();
+      } else {
+        console.log('validation errors found!');
       }
     }
   }
@@ -102,8 +107,8 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
     setParameters(parameters);
     setParameterCount(parameterCount - 1);
 
-    valids.splice(index, 1);
-    setValids(valids);
+    errors.splice(index, 1);
+    setErrors(errors);
   }
 
   function closeDialog() {
@@ -153,9 +158,9 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
                   type="text"
                   onChange={(e:React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index)}
                   className="text-field"
-                  error={!valids[index]}
+                  error={errors[index] !== null}
                   placeholder="Enter cell or number"
-                  helperText={valids[index] ? '' : 'Enter cell or number'}
+                  helperText={errors[index] !== null ? errors[index] : 'Enter cell or number'}
                 />
                 {parameters.length > 1 &&
                   <Button onClick={() => onDeleteClick(index)} size='small' color='info'>
@@ -179,8 +184,8 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
                 label="Start cell"
                 onChange={onChangeStartCell}
                 className="text-field"
-                error={!startCellValid}
-                helperText={startCellValid ? '' : 'Enter cell'}
+                error={startCellError !== null}
+                helperText={startCellError !== null ? startCellError : 'Enter cell'}
               />
             </div>
             <div style={{ display: 'flex' }}>
@@ -191,8 +196,8 @@ const ListParameterForm = React.memo(function ListParameterForm(props: FormProps
                 label="End cell"
                 onChange={onChangeEndCell}
                 className="text-field"
-                error={!endCellValid}
-                helperText={endCellValid ? '' : 'Enter cell'}
+                error={endCellError !== null}
+                helperText={endCellError !== null ? endCellError : 'Enter cell'}
               />
             </div>
           </>

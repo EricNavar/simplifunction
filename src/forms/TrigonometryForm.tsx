@@ -20,7 +20,7 @@ const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) 
   const [func, setFunc] = React.useState('Sin');
   const [inverse, setInverse] = React.useState(false);
   const [hyperbolic, setHyperbolic] = React.useState(false);
-  const [valid, setValid] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
 
   function onChangeFunc(e: React.ChangeEvent<HTMLInputElement>) {
     setFunc(e.target.value);
@@ -39,9 +39,9 @@ const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) 
   }
 
   function handleDoneClick() {
-    const newValid = validateParameter(number, ParameterType.number);
-    setValid(newValid);
-    if (newValid) {
+    const newError = validateParameter(number, ParameterType.number);
+    setError(newError);
+    if (typeof newError !== 'string') {
       let formula = func;
       if (inverse) {
         formula += '⁻¹';
@@ -88,15 +88,17 @@ const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) 
             label="Hyperbolic"
           />
         </div>
-        <TextField
-          size="small"
-          type="text"
-          className="text-field"
-          value={number}
-          onChange={onChangeNumber}
-          placeholder="Enter number or cell"
-          error={!valid}
-        />
+        <div className="text-field">
+          <TextField
+            size="small"
+            type="text"
+            value={number}
+            onChange={onChangeNumber}
+            placeholder="Enter number or cell"
+            error={!!error}
+          />
+          {error && <p style={{color: 'red'}}>{error}</p>}
+        </div>
         {/*
         <TextField
           size="small"
