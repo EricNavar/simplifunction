@@ -31,7 +31,7 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
     if (e.target.value === '') {
       setSearchedFunctions(functions);
     }
-    setSearchedFunctions(functions.filter((f: ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value)));
+    setSearchedFunctions(functions.filter((f: ExcelFunction) => f.commonName.toLowerCase().includes(e.target.value.toLowerCase())));
   }
 
   const content = (
