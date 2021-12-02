@@ -88,17 +88,16 @@ const TrigonometryForm = React.memo(function TrigonometryForm(props: FormProps) 
             label="Hyperbolic"
           />
         </div>
-        <div className="text-field">
-          <TextField
-            size="small"
-            type="text"
-            value={number}
-            onChange={onChangeNumber}
-            placeholder="Enter number or cell"
-            error={!!error}
-          />
-          {error && <p style={{color: 'red'}}>{error}</p>}
-        </div>
+        <TextField
+          size="small"
+          type="text"
+          className="text-field"
+          value={number}
+          onChange={onChangeNumber}
+          placeholder="Enter number or cell"
+          error={!!error}
+          helperText={error ? error : undefined}
+        />
         {/*
         <TextField
           size="small"
