@@ -59,7 +59,8 @@ export function FunctionButtons(props: FunctionButtonsProps):JSX.Element {
                 <FunctionButton
                   key={index2}
                   label={obj.commonName}
-                  onClick={() => { functionButtonOnClick(obj); } } />
+                  onClick={() => { functionButtonOnClick(obj); } }
+                />
               ))}
             </div>
           </div>

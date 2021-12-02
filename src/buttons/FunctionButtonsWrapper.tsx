@@ -6,7 +6,7 @@ import {
   IconButton
 } from '@mui/material';
 import { FunctionButtons } from './FunctionButtons';
-import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
+// import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
 import { ExcelFunction } from '../commonTypes';
 import { SearchIcon } from '../assets/SearchIcon';
 import { functions } from '../functions';
@@ -32,7 +32,7 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
   }
 
   const content = (
-    <div className="flex flex-col">
+    <div className="flex flex-col right-col-break-mobile">
       <Typography component="h2" variant='h4' style={{lineHeight:'3.5rem', height:'max-content', paddingLeft: '16px' }}>
         Excel Functions
       </Typography>

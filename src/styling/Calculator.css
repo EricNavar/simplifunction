@@ -17,7 +17,8 @@
   border-color: #4b4699 !important;
   margin: 4px 8px !important;
   flex-basis: calc(50% - 16px);
-  flex-shrink: auto;
+  max-width: calc(50% - 16px);
+  flex-shrink: 5;
   display: inline-block;
 }
 
@@ -41,10 +42,30 @@
 
 .basic-button-container {
   margin-top: 16px;
-  width: 304px;
+  width: 30%;
   align-content: start;
   padding-left: 0 !important;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 900px) {
+  .basic-button-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* This is such a bad thing to do
+and I don't have a better name for this...
+sorryt */
+.right-col-break-mobile {
+  width: 70%;
+}
+
+@media only screen and (max-width: 900px) {
+  .right-col-break-mobile {
+    width: 100%;
+  }
 }
 
 .basic-button-row {
