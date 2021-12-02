@@ -121,16 +121,16 @@ export const Calculator = function Calculator():JSX.Element {
               </div>
             }
           </div>
-          <FunctionButtonsWrapper
-            mobile={mobile}
-            functionButtonOnClick={functionButtonOnClick}
-          />
           <BasicButtons
             addToUserInput={addToUserInput}
             backspace={backspace}
             onEqualsClick={onEqualsClick}
             clearInput={clearInput}
             mobile={mobile}
+          />
+          <FunctionButtonsWrapper
+            mobile={mobile}
+            functionButtonOnClick={functionButtonOnClick}
           />
         </Grid>
       </div>

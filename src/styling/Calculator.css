@@ -35,6 +35,7 @@
   margin-top: 16px;
   width: 304px;
   align-content: start;
+  padding-left: 0 !important;
 }
 
 /* only used once */
