@@ -22,6 +22,7 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
   const { mobile, functionButtonOnClick } = props;
   const [open, setOpen] = React.useState(false);
   React.useEffect(noop, [mobile]);
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
 
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
@@ -50,11 +51,16 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
             onChange={onChangeSearchInput}
             variant="outlined"
             size='small'
+            inputRef={searchInputRef}
             style={{width:open?'100%':'46px', transition: 'width .2s ease-in-out .2s'}}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <IconButton onClick={()=>{setOpen(!open);}}>
+                  <IconButton onClick={()=>{
+                    setOpen(!open);
+                    // open not updated here yet, so check if it was false before
+                    if (!open) searchInputRef.current?.focus();
+                  }}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
