@@ -107,7 +107,7 @@ export const Calculator = function Calculator():JSX.Element {
           </Typography>
         </header>
         <Grid container component='main' spacing={2} className={mobile ? '' : 'input-containers'}>
-          <UserInput setUserInput={setUserInput} setInputRef={setInputRef} />
+          <UserInput setUserInput={setUserInput} inputRef={inputRef} setInputRef={setInputRef} />
           <div style={{ height: 60, width: '100%' }}>
             {formulaRevealed &&
               <div className="formula-container">
