@@ -8,7 +8,6 @@ import '../styling/Calculator.css';
 import { conversionFunction, trigonometryFunction } from '../functions';
 import { ExcelFunctionCategory, ExcelFunction } from '../commonTypes';
 import { FunctionButton } from './FunctionButton';
-import { noop } from '../util/util';
 
 type SectionHeaderProps = {
   children: React.ReactNode,
@@ -24,15 +23,12 @@ function SectionHeader(props: SectionHeaderProps) {
 }
 
 type FunctionButtonsProps = {
-  mobile: boolean,
   functionButtonOnClick: (excelFunction: ExcelFunction) => void,
-  searchedFunctions: Array<ExcelFunction>
+  searchedFunctions: Array<ExcelFunction>,
 }
 
 export function FunctionButtons(props: FunctionButtonsProps):JSX.Element {
-  const { mobile, functionButtonOnClick, searchedFunctions } = props;
-
-  React.useEffect(noop, [mobile, searchedFunctions]);
+  const { functionButtonOnClick, searchedFunctions } = props;
 
   const ExcelFunctionTypeArray = [
     ExcelFunctionCategory.BasicMath,
@@ -46,7 +42,7 @@ export function FunctionButtons(props: FunctionButtonsProps):JSX.Element {
   ];
 
   return (
-    <Grid item container spacing={2} className="function-buttons-grid-container">
+    <div className="function-buttons-grid-container">
       {ExcelFunctionTypeArray.map((functionType: ExcelFunctionCategory, index1: number) => {
         const categorizedFunctions = searchedFunctions.filter((func: ExcelFunction) =>
           func.category === functionType
@@ -55,17 +51,19 @@ export function FunctionButtons(props: FunctionButtonsProps):JSX.Element {
           return <></>;
         }
         return (
-          <React.Fragment key={index1}>
+          <div className="flex flex-col" key={index1}>
             <SectionHeader>
               {functionType}
             </SectionHeader>
-            {categorizedFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index2: number) => (
-              <FunctionButton
-                key={index2}
-                label={obj.commonName}
-                onClick={() => { functionButtonOnClick(obj); } } />
-            ))}
-          </React.Fragment>
+            <div className="function-button-container">
+              {categorizedFunctions.filter((f: ExcelFunction) => f.category === functionType).map((obj: ExcelFunction, index2: number) => (
+                <FunctionButton
+                  key={index2}
+                  label={obj.commonName}
+                  onClick={() => { functionButtonOnClick(obj); } } />
+              ))}
+            </div>
+          </div>
         );
       })}
       <SectionHeader>
@@ -82,6 +80,6 @@ export function FunctionButtons(props: FunctionButtonsProps):JSX.Element {
         label='Trigonometry functions'
         onClick={() => { functionButtonOnClick(trigonometryFunction); }}
       />
-    </Grid>
+    </div>
   );
 }

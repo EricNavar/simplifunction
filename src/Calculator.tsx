@@ -37,9 +37,6 @@ export const Calculator = function Calculator():JSX.Element {
 
   React.useEffect(noop, []);
 
-  const theme = useTheme();
-  const mobile = !useMediaQuery(theme.breakpoints.up('sm'));
-
   function addToUserInput(strToAdd: string, focus: boolean): void {
     if (inputRef == null) {
       console.log('INPUTREF IS NULL');
@@ -106,33 +103,35 @@ export const Calculator = function Calculator():JSX.Element {
             SimpliFunction
           </Typography>
         </header>
-        <Grid container component='main' spacing={2} className={mobile ? '' : 'input-containers'}>
-          <UserInput setUserInput={setUserInput} inputRef={inputRef} setInputRef={setInputRef} />
-          <div style={{ height: 60, width: '100%' }}>
+        <div className="calculator-container">
+          <div>
+            <UserInput setUserInput={setUserInput} inputRef={inputRef} setInputRef={setInputRef} />
             {formulaRevealed &&
-              <div className="formula-container">
-                <Typography component="span" variant='body1'>Result:</Typography>
-                <span className="formula">{formula}</span>
-                {formula !== '' && formula !== 'No input' &&
-                  <IconButton onClick={copyFormula}>
-                    <CopyIcon />
-                  </IconButton>
-                }
+              <div style={{ height: 60, width: '100%' }}>
+                <div className="formula-container">
+                  <Typography component="span" variant='body1'>Result:</Typography>
+                  <span className="formula">{formula}</span>
+                  {formula !== '' && formula !== 'No input' &&
+                    <IconButton onClick={copyFormula}>
+                      <CopyIcon />
+                    </IconButton>
+                  }
+                </div>
               </div>
             }
           </div>
-          <BasicButtons
-            addToUserInput={addToUserInput}
-            backspace={backspace}
-            onEqualsClick={onEqualsClick}
-            clearInput={clearInput}
-            mobile={mobile}
-          />
-          <FunctionButtonsWrapper
-            mobile={mobile}
-            functionButtonOnClick={functionButtonOnClick}
-          />
-        </Grid>
+          <div className="calculator-buttons">
+            <BasicButtons
+              addToUserInput={addToUserInput}
+              backspace={backspace}
+              onEqualsClick={onEqualsClick}
+              clearInput={clearInput}
+            />
+            <FunctionButtonsWrapper
+              functionButtonOnClick={functionButtonOnClick}
+            />
+          </div>
+        </div>
       </div>
       <MyDialog open={dialogOpen} setDialogOpen={setDialogOpen} form={form} />
       <Snackbar

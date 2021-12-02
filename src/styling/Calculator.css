@@ -7,18 +7,18 @@
 
 /* only used once */
 .function-button-container {
-  width: 600px;
-  max-width: 600px;
   display: flex;
-  flex-flow: wrap;
-  margin-bottom: 8px;
+  flex-wrap: wrap;
 }
 
 /* only used once */
 .function-button {
-  width: 100%;
   color: #4b4699 !important;
-  border-color: #4b4699 !important
+  border-color: #4b4699 !important;
+  margin: 4px 8px !important;
+  flex-basis: calc(50% - 16px);
+  flex-shrink: auto;
+  display: inline-block;
 }
 
 .button {
@@ -31,11 +31,24 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
 }
 
-.small-button-container {
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.basic-button-container {
   margin-top: 16px;
   width: 304px;
   align-content: start;
   padding-left: 0 !important;
+  flex-direction: column;
+}
+
+.basic-button-row {
+  flex-wrap: nowrap;
 }
 
 /* only used once */
@@ -45,6 +58,13 @@
   margin: 6px !important;
   color: black !important;
   font-size: 1.25rem !important;
+}
+
+@media only screen and (max-width: 599px) {
+  .small-button {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .utility-button {
@@ -65,6 +85,16 @@
 
 .equals-button {
   color: #008140 !important;
+}
+
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.calculator-buttons {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .input-container {
@@ -110,6 +140,8 @@
 }
 
 .function-buttons-grid-container {
+  display: flex;
+  flex-direction: column;
   max-height: calc(100vh - 266px);
   overflow-y: scroll;
   border-top-color: #b8b8b8;
@@ -118,6 +150,7 @@
   padding: 0px !important;
   margin-top: 16px;
   margin-left: 16px;
+  margin-bottom: 60px;
 }
 
 .function-buttons-grid-item {
@@ -141,10 +174,8 @@
 
 .function-textfield {
   transition: all 0.1s ease-in-out;
-  width: 300px;
   overflow: hidden;
-  margin-bottom: 12px;
-  margin-top: 4px;
+  padding-left: 16px; /* to match style */
 }
 
 .number-button-container {
