@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Typography,
-  Grid,
   TextField,
   InputAdornment,
   IconButton
@@ -11,7 +10,6 @@ import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
 import { ExcelFunction } from '../commonTypes';
 import { SearchIcon } from '../assets/SearchIcon';
 import { functions } from '../functions';
-import { noop } from '../util/util';
 
 type FunctionButtonsWrapperProps = {
   functionButtonOnClick: (excelFunction: ExcelFunction) => void,

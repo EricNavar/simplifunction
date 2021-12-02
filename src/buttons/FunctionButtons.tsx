@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Typography,
-  Grid,
   ListSubheader
 } from '@mui/material';
 import '../styling/Calculator.css';

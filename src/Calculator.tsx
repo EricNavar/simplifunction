@@ -3,11 +3,9 @@ import React from 'react';
 import {
   Typography,
   Grid,
-  useMediaQuery,
   IconButton,
   Snackbar
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import { FunctionButtonsWrapper } from './buttons/FunctionButtonsWrapper';
 import { createFormula } from './util/createFormula';
 import { MyDialog } from './MyDialog';
