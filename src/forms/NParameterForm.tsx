@@ -22,8 +22,8 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
   const [parameterTypes] = React.useState<Array<ParameterType>>(
     props.excelFunction.parameterSchema!.map((param: Parameter) => param.type)
   );
-  const [valids, setValids] = React.useState(
-    new Array(props.excelFunction.parameterSchema!.length).fill(true)
+  const [errors, setErrors] = React.useState<(string | null)[]>(
+    new Array(props.excelFunction.parameterSchema!.length).fill(null)
   );
 
   function onChangeParameter(event: React.ChangeEvent<HTMLInputElement>, parameterIndex: number, textfieldIndex: number) {
@@ -54,10 +54,12 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
   }
 
   function handleDoneClick() {
-    const newValids = validateNParameters(parameters, props.excelFunction.parameterSchema!);
-    setValids(newValids);
-    setValids(valids);
-    if (!newValids.includes(false)) {
+    const newErrors = validateNParameters(parameters, props.excelFunction.parameterSchema!);
+    setErrors(newErrors);
+    // setErrors(errors);
+
+    // Check to see if our errors array contains any strings. If it does, those are validation errors
+    if (newErrors.filter((err) => typeof err === 'string').length === 0) {
       const formula = createFormulaFromParameters();
       props.addToUserInput(formula, true);
       closeDialog();
@@ -87,6 +89,9 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
           DOCS
         </Link>
         {parameters.map((parameter: Array<string>, index: number) => {
+          const error = errors[index];
+          const hasError = error !== null;
+
           if (parameterTypes[index] != ParameterType.range) {
             return (
               <div key={`${props.excelFunction.commonName.replace(' ', '_')}-form-${index}`}>
@@ -96,10 +101,10 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
                   type="text"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index, 0)}
                   className="text-field"
-                  helperText={props.excelFunction.parameterSchema![index].helperText}
+                  helperText={hasError ? error : props.excelFunction.parameterSchema![index].helperText}
                   value={parameter[0]}
                   required={props.excelFunction.parameterSchema![index].required}
-                  error={!valids[index]}
+                  error={hasError}
                   placeholder="Enter cell or number"
                 />
               </div>
@@ -119,10 +124,10 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
                     type="text"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index, 0)}
                     className="text-field cell-text-field"
-                    helperText={props.excelFunction.parameterSchema![index].helperText}
+                    helperText={hasError ? error : props.excelFunction.parameterSchema![index].helperText}
                     value={parameter[0]}
                     required={props.excelFunction.parameterSchema![index].required}
-                    error={!valids[index]}
+                    error={hasError}
                     placeholder="Enter cell or number"
                   />
                   <span className="from-to-button" style={{marginRight: 12, marginLeft: 12, marginBottom: 6}}>to</span>
@@ -132,10 +137,10 @@ const NParameterForm = React.memo(function NParameterForm(props: FormProps) {
                     type="text"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeParameter(e, index, 1)}
                     className="text-field cell-text-field"
-                    helperText={props.excelFunction.parameterSchema![index].helperText}
+                    helperText={hasError ? error : props.excelFunction.parameterSchema![index].helperText}
                     value={parameter[1]}
                     required={props.excelFunction.parameterSchema![index].required}
-                    error={!valids[index]}
+                    error={hasError}
                     placeholder="Enter cell or number"
                   />
                 </span>
