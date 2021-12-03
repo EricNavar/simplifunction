@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Button,
+  Grid,
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { noop } from '../util/util';
@@ -65,7 +66,7 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
         <InputButton addToUserInput={addToUserInput} input=" )" />
         <InputButton addToUserInput={addToUserInput} input=" × " />
       </div>
-      {/* {mobile &&
+      <div className="basic-button-row">
         <Grid item container xs={9} className="number-button-container">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].reverse().map((num) => // number buttons
             <InputButton addToUserInput={addToUserInput} input={num.toString()} key={num} />
@@ -73,7 +74,7 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
           <InputButton addToUserInput={addToUserInput} input='.' />
           <BackspaceButton />
         </Grid>
-      } */}
+      </div>
       <div className="basic-button-row">
         <InputButton addToUserInput={addToUserInput} input=" + " />
         <InputButton addToUserInput={addToUserInput} input=" - " />

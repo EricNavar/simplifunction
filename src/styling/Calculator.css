@@ -202,7 +202,15 @@ sorryt */
 .number-button-container {
   max-width: 304px !important;
   align-content: start;
+  display: none !important;
 }
+
+@media only screen and (max-width: 599px) {
+  .number-button-container {
+    display: block !important;
+  }
+}
+
 
 
 .accordion {
