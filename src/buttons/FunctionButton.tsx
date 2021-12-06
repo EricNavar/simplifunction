@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styling/Calculator.css';
-import { Grid, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { noop } from '../util/util';
 
 type FunctionButtonProps = {
@@ -14,18 +14,16 @@ function FunctionButton(props: FunctionButtonProps):JSX.Element {
   const { label, onClick } = props;
   React.useEffect(noop, []);
   return (
-    <Grid item xs={6} className='function-buttons-grid-item'>
-      <Button
-        className="button function-button"
-        variant='outlined'
-        onClick={onClick}
-        aria-label={label}
-        disableRipple
-        disableElevation
-      >
-        {label.trim()}
-      </Button>
-    </Grid>
+    <Button
+      className="button function-button"
+      variant='outlined'
+      onClick={onClick}
+      aria-label={label}
+      disableRipple
+      disableElevation
+    >
+      {label.trim()}
+    </Button>
   );
 }
 

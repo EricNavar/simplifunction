@@ -1,27 +1,24 @@
 import React from 'react';
 import {
   Typography,
-  Grid,
   TextField,
   InputAdornment,
   IconButton
 } from '@mui/material';
 import { FunctionButtons } from './FunctionButtons';
-import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
+// import { FunctionButtonsAccordion } from './FunctionButtonsAccordion';
 import { ExcelFunction } from '../commonTypes';
 import { SearchIcon } from '../assets/SearchIcon';
 import { functions } from '../functions';
-import { noop } from '../util/util';
 
 type FunctionButtonsWrapperProps = {
-  mobile: boolean,
-  functionButtonOnClick: (excelFunction: ExcelFunction) => void
+  functionButtonOnClick: (excelFunction: ExcelFunction) => void,
 }
 
 function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element {
-  const { mobile, functionButtonOnClick } = props;
+  const { functionButtonOnClick } = props;
   const [open, setOpen] = React.useState(false);
-  React.useEffect(noop, [mobile]);
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
 
   const [searchInput, setSearchInput] = React.useState('');
   const [searchedFunctions, setSearchedFunctions] = React.useState(functions);
@@ -35,13 +32,11 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
   }
 
   const content = (
-    <Grid item container xs={12} md={8} lg={6} spacing={mobile ? 0 : 2} component='section'>
-      {!mobile &&
-        <Typography component="h2" variant='h4' style={{lineHeight:'3.5rem', height:'max-content'}}>
-          Excel Functions
-        </Typography>
-      }
-      <div style={{ display: 'flex', marginBottom: 20, marginLeft: 8, height: 'max-content' }}>
+    <div className="flex flex-col right-col-break-mobile">
+      <Typography component="h2" variant='h4' style={{lineHeight:'3.5rem', height:'max-content', paddingLeft: '16px' }}>
+        Excel Functions
+      </Typography>
+      <div style={{ display: 'flex', marginLeft: 8, height: 'max-content' }}>
         <div className='function-textfield'>
           <TextField
             id="function-search"
@@ -50,11 +45,16 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
             onChange={onChangeSearchInput}
             variant="outlined"
             size='small'
+            inputRef={searchInputRef}
             style={{width:open?'100%':'46px', transition: 'width .2s ease-in-out .2s'}}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <IconButton onClick={()=>{setOpen(!open);}}>
+                  <IconButton onClick={()=>{
+                    setOpen(!open);
+                    // open not updated here yet, so check if it was false before
+                    if (!open) searchInputRef.current?.focus();
+                  }}>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
@@ -69,23 +69,23 @@ function FunctionButtonsWrapper(props: FunctionButtonsWrapperProps):JSX.Element 
         </div>
       </div>
       <FunctionButtons
-        mobile={mobile}
         functionButtonOnClick={functionButtonOnClick}
         searchedFunctions={searchedFunctions}
       />
-    </Grid>
+    </div>
   );
 
-  if (mobile) {
-    return (
-      <FunctionButtonsAccordion>
-        {content}
-      </FunctionButtonsAccordion>
-    );
-  }
-  else {
-    return content;
-  }
+  // if (mobile) {
+  //   return (
+  //     <FunctionButtonsAccordion>
+  //       {content}
+  //     </FunctionButtonsAccordion>
+  //   );
+  // }
+  // else {
+  //   return content;
+  // }
+  return content;
 }
 
 export { FunctionButtonsWrapper };

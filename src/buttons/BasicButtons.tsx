@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  Grid,
   Button,
+  Grid,
 } from '@mui/material';
 import '../styling/Calculator.css';
 import { noop } from '../util/util';
@@ -36,14 +36,11 @@ type BasicButtonsProps = {
   addToUserInput: (strToAdd: string, focus: boolean) => void,
   onEqualsClick: () => void,
   backspace: () => void,
-  clearInput: () => void,
-  mobile: boolean
+  clearInput: () => void
 }
 
 const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) {
-  const { addToUserInput, onEqualsClick, backspace, clearInput, mobile } = props;
-
-  React.useEffect(noop, [mobile]);
+  const { addToUserInput, onEqualsClick, backspace, clearInput } = props;
 
   function BackspaceButton() {
     return (
@@ -60,19 +57,16 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
   }
 
   return (
-    <Grid
+    <div
       id='small-button-container'
-      className='small-button-container'
-      item container
-      xs={12} sm={4} xl={6}
-      component='section'
+      className='basic-button-container flex'
     >
-      <Grid item xs={12}>
+      <div className="basic-button-row">
         <InputButton addToUserInput={addToUserInput} input="( " />
         <InputButton addToUserInput={addToUserInput} input=" )" />
         <InputButton addToUserInput={addToUserInput} input=" × " />
-      </Grid>
-      {mobile &&
+      </div>
+      <div className="basic-button-row">
         <Grid item container xs={9} className="number-button-container">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].reverse().map((num) => // number buttons
             <InputButton addToUserInput={addToUserInput} input={num.toString()} key={num} />
@@ -80,13 +74,13 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
           <InputButton addToUserInput={addToUserInput} input='.' />
           <BackspaceButton />
         </Grid>
-      }
-      <Grid item xs={3} sm={12}>
+      </div>
+      <div className="basic-button-row">
         <InputButton addToUserInput={addToUserInput} input=" + " />
         <InputButton addToUserInput={addToUserInput} input=" - " />
         <InputButton addToUserInput={addToUserInput} input=" ÷ " />
-      </Grid>
-      <Grid item xs={12}>
+      </div>
+      <div className="basic-button-row">
         <Button
           className="button utility-button clear-button"
           variant="outlined"
@@ -108,8 +102,8 @@ const BasicButtons = React.memo(function BasicButtons(props: BasicButtonsProps) 
         >
           EQUALS
         </Button>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 });
 
