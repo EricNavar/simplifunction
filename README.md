@@ -63,30 +63,6 @@ https://coolors.co/f2dfd7-fef9ff-d4c1ec-9f9fed-736ced
 	- The starting point of the website
 - **commonTypes.ts**
 	- Common types that are reused
-## About React
+## Other tools like this
 
-### `yarn start`
-  
-
-Runs the app in the development mode.
-
-
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-
-You will also see any lint errors in the console.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- https://calcforme.com/loan-calculator
